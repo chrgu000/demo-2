@@ -6314,10 +6314,14 @@ em表示元素的font-size属性的计算值，如果用于font-size属性本身
              }
         });
 ====================================================================================
-        优化myEclipse速度?
+        优化MyEclipse速度?[优化MyEclipse][MyEclipse优化]
+        一;
         1.打开【.project】文件
         2,删除<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
         3.sava保存
+
+        二:
+        【 窗口(W) -- 首选项(P) -- MyEclipse -- 验证】执行验证时将运行指定的验证程序,将【构建】的√都去掉.
 ====================================================================================
         【MyEclipse设置主题】[MyEclipse主题][MyEclipse更换主题]
         http://www.eclipsecolorthemes.org/
