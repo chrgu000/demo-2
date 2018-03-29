@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<!--
+    saved from url=(0060)https://jakearchibald.com/2015/anatomy-of-responsive-images/
+-->
+<html class=" js">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title>
+            响应图像的解剖jakearchibald.com
+        </title>
+        <meta name="viewport" content="width=device-width, minimum-scale=1.0"/>
+        <script async="" src="./响应图像的解剖jakearchibald.com_files/analytics.js">
+        </script>
+        <script>
+            var ready = [];
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            s.documentElement.className+=' js';
+            ga('create', 'UA-13180254-2', 'jakearchibald.com');
+            ga('send', 'pageview');
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        </script>
+        <script src="./响应图像的解剖jakearchibald.com_files/main.6e994df71e3d.js" async="">
+        </script>
+        <link rel="stylesheet" href="./响应图像的解剖jakearchibald.com_files/all.aa2a0cc8a18d.css"/>
+        <link rel="alternate" type="application/rss+xml" title="Jake Archibald&#39;s Blog" href="https://jakearchibald.com/posts.rss"/>
+        <meta name="twitter:card" content="summary"/>
+        <meta property="og:image" content="https://jakearchibald.com/static/imgs/icon.e36785a43208.png"/>
+        <meta name="twitter:site" content="@jaffathecake"/>
+        <meta property="og:url" content="https://jakearchibald.com/2015/anatomy-of-responsive-images"/>
+        <meta property="og:title" content="The anatomy of responsive images"/>
+        <meta property="og:description" content="I just had my responsive images epiphany and I&#39;m writing it all down before I forget everything. This is what I know…"/>
+        <style type="text/css" adt="123">
+        </style>
+        <script type="text/javascript" async="" src="https://jakearchibald.disqus.com/embed.js">
+        </script>
+        <script>
+            //console.log('a')
+        </script>
+        <script>
+            doAdblock();
+            function doAdblock(){
+            (function() {
+            function A() {}
+            A.prototype = {
+            rules: {
+            'pps_pps': {
+            'find': /^http:\/\/www\.iqiyi\.com\/player\/cupid\/common\/pps_flvplay_s\.swf/,
+            'replace': 'http://swf.adtchrome.com/pps_20140420.swf'
+            },
+            '17173_in':{
+            'find':/http:\/\/f\.v\.17173cdn\.com\/(\d+\/)?flash\/PreloaderFile(Customer)?\.swf/,
+            'replace':"http://swf.adtchrome.com/17173_in_20150522.swf"
+            },
+            '17173_out':{
+            'find':/http:\/\/f\.v\.17173cdn\.com\/(\d+\/)?flash\/PreloaderFileFirstpage\.swf/,
+            'replace':"http://swf.adtchrome.com/17173_out_20150522.swf"
+            },
+            '17173_live':{
+            'find':/http:\/\/f\.v\.17173cdn\.com\/(\d+\/)?flash\/Player_stream(_firstpage)?\.swf/,
+            'replace':"http://swf.adtchrome.com/17173_stream_20150522.swf"
+            },
+            '17173_live_out':{
+            'find':/http:\/\/f\.v\.17173cdn\.com\/(\d+\/)?flash\/Player_stream_(custom)?Out\.swf/,
+            'replace':"http://swf.adtchrome.com/17173.out.Live.swf"
+            }
+            },
+            _done: null,
+            get done() {
+            if(!this._done) {
+            this._done = new Array();
+            }
+            return this._done;
+            },
+            addAnimations: function() {
+            var style = document.createElement('style');
+            style.type = 'text/css';
+            style.innerHTML = 'object,embed{\
+            -webkit-animation-duration:.001s;-webkit-animation-name:playerInserted;\
+            -ms-animation-duration:.001s;-ms-animation-name:playerInserted;\
+            -o-animation-duration:.001s;-o-animation-name:playerInserted;\
+            animation-duration:.001s;animation-name:playerInserted;}\
+            @-webkit-keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}\
+            @-ms-keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}\
+            @-o-keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}\
+            @keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}';
+            document.getElementsByTagName('head')[0].appendChild(style);
+            },
+            animationsHandler: function(e) {
+            if(e.animationName === 'playerInserted') {
+            this.replace(e.target);
+            }
+            },
+            replace: function(elem) {
+            if (/http:\/\/v.youku.com\/v_show\/.*/.test(window.location.href)){
+            var tag = document.getElementById("playerBox").getAttribute("player")
+            if (tag == "adt"){
+            console.log("adt adv")
+            return;
+            }
+            }
+            if(this.done.indexOf(elem) != -1) return;
+            this.done.push(elem);
+            var player = elem.data || elem.src;
+            if(!player) return;
+            var i, find, replace = false;
+            for(i in this.rules) {
+            find = this.rules[i]['find'];
+            if(find.test(player)) {
+            replace = this.rules[i]['replace'];
+            if('function' === typeof this.rules[i]['preHandle']) {
+            this.rules[i]['preHandle'].bind(this, elem, find, replace, player)();
+            }else{
+            this.reallyReplace.bind(this, elem, find, replace)();
+            }
+            break;
+            }
+            }
+            },
+            reallyReplace: function(elem, find, replace) {
+            elem.data && (elem.data = elem.data.replace(find, replace)) || elem.src && ((elem.src = elem.src.replace(find, replace)) && (elem.style.display = 'block'));
+            var b = elem.querySelector("param[name='movie']");
+            this.reloadPlugin(elem);
+            },
+            reloadPlugin: function(elem) {
+            var nextSibling = elem.nextSibling;
+            var parentNode = elem.parentNode;
+            parentNode.removeChild(elem);
+            var newElem = elem.cloneNode(true);
+            this.done.push(newElem);
+            if(nextSibling) {
+            parentNode.insertBefore(newElem, nextSibling);
+            } else {
+            parentNode.appendChild(newElem);
+            }
+            },
+            init: function() {
+            var handler = this.animationsHandler.bind(this);
+            document.body.addEventListener('webkitAnimationStart', handler, false);
+            document.body.addEventListener('msAnimationStart', handler, false);
+            document.body.addEventListener('oAnimationStart', handler, false);
+            document.body.addEventListener('animationstart', handler, false);
+            this.addAnimations();
+            }
+            };
+            new A().init();
+            })();
+            }
+            // 20140730
+            (function cnbeta() {
+            if (document.URL.indexOf('cnbeta.com') >
+            = 0) {
+            var elms = document.body.querySelectorAll("p>embed");
+            Array.prototype.forEach.call(elms, function(elm) {
+            elm.style.marginLeft = "0px";
+            });
+            }
+            })();
+            //baidu
+            if(document.URL.indexOf('www.baidu.com') >
+            = 0){
+            if(document && document.getElementsByTagName && document.getElementById && document.body){
+            var aa = function(){
+            var all = document.body.querySelectorAll("#content_left div,#content_left table");
+            for(var i = 0; i < all.length; i++){
+            if(/display:\s?(table|block)\s!important/.test(all[i].getAttribute("style"))){all[i].style.display= "none";all[i].style.visibility='hidden';}
+            }
+            all = document.body.querySelectorAll('.result.c-container[id="1"]');
+            for(var i = 0; i < all.length; i++){
+            var dataClick = all[i].getAttribute('data-click');
+            if(dataClick.indexOf('rsv_cd')>
+            -1) continue;
+            all[i].style.display= "none";all[i].style.visibility='hidden';
+            }
+            }
+            aa();
+            document.getElementById('wrapper_wrapper').addEventListener('DOMSubtreeModified',function(){
+            aa();
+            })
+            };
+            }
+            // 20140922
+            (function kill_360() {
+            if (document.URL.indexOf('so.com') >
+            = 0) {
+            document.getElementById("e_idea_pp").style.display = none;
+            }
+            })();
+            //解决腾讯视频列表点击无效
+            if(document.URL.indexOf("v.qq.com") >
+            = 0){
+            if (document.getElementById("mod_videolist")){
+            var listBox = document.getElementById("mod_videolist")
+            var list = listBox.getElementsByClassName("list_item")
+            for (i = 0;i < list.length;i++){
+            list[i].addEventListener("click", function() {
+            var url = this.getElementsByTagName("a")[0]
+            url = url.getAttribute("href")
+            var host = window.location.href
+            url = host.replace(/cover\/.*/,url)
+            window.location.href = url
+            })
+            }
+            }
+            }
+            if (document.URL.indexOf("tv.sohu.com") >
+            = 0){
+            if (document.cookie.indexOf("fee_status=true")==-1){document.cookie='fee_status=true'};
+            }
+            if (document.URL.indexOf("56.com") >
+            = 0){
+            if (document.cookie.indexOf("fee_status=true")==-1){document.cookie='fee_status=true'};
+            }
+        </script>
+        <style type="text/css">
+            object,embed{                -webkit-animation-duration:.001s;-webkit-animation-name:playerInserted;                -ms-animation-duration:.001s;-ms-animation-name:playerInserted;                -o-animation-duration:.001s;-o-animation-name:playerInserted;                animation-duration:.001s;animation-name:playerInserted;}                @-webkit-keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}                @-ms-keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}                @-o-keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}                @keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}
+        </style>
+    </head>
+    <div class="head-bar" id="translate-head" style="z-index: 99999 !important; font-size: 12px !important; color: rgb(51, 51, 51) !important; position: fixed; width: 100%; height: 36px; border-bottom: 1px solid rgb(193, 193, 193); border-top: 1px solid rgb(255, 255, 255); background-color: rgb(240, 240, 240) !important;">
+        <img id="baidu_fanyi_logo" src="chrome-extension://ikkbfngojljohpekonpldkamedehakni/imgs/map/logo.png" style="position: absolute; left: 15px; top: 6px; height: 21px; width: 66px;"/>
+        <div id="select-translate-box" style="position: absolute; width: 238px; height: 23px; left: 110px; top: 6px; border-radius: 3px; background-color: rgb(255, 255, 255);">
+            <div id="translate-head-from" class="translate-head-retranslate" style="line-height: 23px !important; cursor: pointer !important; width: 97px; height: 23px; position: absolute; border-radius: 3px; margin-right: 12px; box-sizing: border-box; display: flex; justify-content: center; align-items: center; padding-left: 0px; background-color: rgb(255, 255, 255);" data-click="no-click">
+                <span id="detect-from" value="en" style="cursor: pointer !important; font-size: 12px !important; white-space: nowrap !important; color: rgb(51, 51, 51) !important; position: relative; width: auto; max-width: 73px; overflow: hidden; text-overflow: ellipsis; background: initial;">
+                    检测到英语
+                </span>
+                <img id="select-icon-img" src="chrome-extension://ikkbfngojljohpekonpldkamedehakni/imgs/map/arrow_down_nomal.png" style="cursor: pointer !important; position: relative; left: 5px; width: 9px; height: 5px;"/>
+                <div class="select-inner-box" id="select-inner-from" style="position: absolute; left: 1px; top: 23px; width: 97px; height: 300px; overflow: auto; border-top: none; border-right: 1px solid rgb(240, 240, 240); border-bottom: 1px solid rgb(240, 240, 240); border-left: 1px solid rgb(240, 240, 240); border-radius: 0px 0px 3px 3px; display: none; box-sizing: border-box;">
+                    <div value="zh" style="cursor: pointer !important; line-height: 25px !important; font-size: 12px !important; color: rgb(51, 51, 51) !important; box-sizing: border-box; padding-left: 11px; height: 25px; background-color: rgb(255, 255, 255);">
+                        中文
+                    </div>
+                    <div value="en" style="cursor: pointer !important; line-height: 25px !important; font-size: 12px !important; color: rgb(67, 149, 255) !important; box-sizing: border-box; padding-left: 11px; height: 25px; background-color: rgb(255, 255, 255);">
+                        英语
+                    </div>
+                    <div value="jp" style="cursor: pointer !important; line-height: 25px !important; font-size: 12px !important; color: rgb(51, 51, 51) !important; box-sizing: border-box; padding-left: 11px; height: 25px; background-color: rgb(255, 255, 255);">
+                        日语
+                    </div>
+                    <div value="ara" style="cursor: pointer !important; line-height: 25px !important; font-size: 12px !important; color: rgb(51, 51, 51) !important; box-sizing: border-box; padding-left: 11px; height: 25px; background-color: rgb(255, 255, 255);">
+                        阿拉伯语
+                    </div>
+                    <div value="est" style="cursor: pointer !important; line-height: 25px !important; font-size: 12px !important; color: rgb(51, 51, 51) !important; box-sizing: border-box; padding-left: 11px; height: 25px; background-color: rgb(255, 255, 255);">
+                        爱沙尼亚语
+                    </div>
+                    <div value="bul" style="cursor: pointer !important; line-height: 25px !important; font-size: 12px !important; color: rgb(51, 51, 51) !important; box-sizing: border-box; padding-left: 11px; height: 25px; background-color: rgb(255, 255, 255);">
+                        保加利亚语
+                    </div>
+                    <div value="pl" style="cursor: pointer !important; line-height: 25px !important; font-size: 12px !important; color: rgb(51, 51, 51) !important; box-sizing: border-box; padding-left: 11px; height: 25px; background-color: rgb(255, 255, 255);">
+                        波兰语
+                    </div>
+                    <div value="dan" style="cursor: pointer !important; line-height: 25px !important; font-size: 12px !important; color: rgb(51, 51, 51) !important; box-sizing: border-box; padding-left: 11px; height: 25px; background-color: rgb(255, 255, 255);">
+                        丹麦语
+                    </div>
+                    <div value="de" style="cursor: pointer !important; line-height: 25px !important; font-size: 12px !important; color: rgb(51, 51, 51) !important; box-sizing: border-box; padding-left: 11px; height: 25px; background-color: rgb(255, 255, 255);">
+                        德语
+                    </div>
+                    <div value="ru" style="cursor: pointer !important; line-height: 25px !important; font-size: 12px !important; color: rgb(51, 51, 51) !important; box-sizing: border-box; padding-left: 11px; height: 25px; background-color: rgb(255, 255, 255);">
+                        俄语
+                    </div>
+                    <div value="fra" style="cursor: pointer !important; line-height: 25px !important; font-size: 12px !important; color: rgb(51, 51, 51) !important; box-sizing: border-box; padding-left: 11px; height: 25px; background-color: rgb(255, 255, 255);">
+                        法语
+                    </div>
+                    <div value="fin" style="cursor: pointer !important; line-height: 25px !important; font-size: 12px !important; color: rgb(51, 51, 51) !important; box-sizing: border-box; padding-left: 11px; height: 25px; background-color: rgb(255, 255, 255);">
+                        芬兰语
+                    </div>
+                    <div value="kor" style="cursor: pointer !important; line-height: 25px !important; font-size: 12px !important; color: rgb(51, 51, 51) !important; box-sizing: border-box; padding-left: 11px; height: 25px; background-color: rgb(255, 255, 255);">
+                        韩语
+                    </div>
+                    <div value="nl" style="cursor: pointer !important; line-height: 25px !important; font-size: 12px !important; color: rgb(51, 51, 51) !important; box-sizing: border-box; padding-left: 11px; height: 25px; background-color: rgb(255, 255, 255);">
+                        荷兰语
+                    </div>
+                    <div value="cs" style="cursor: pointer !important; line-height: 25px !important; font-size: 12px !important; color: rgb(51, 51, 51) !important; box-sizing: border-box; padding-left: 11px; height: 25px; background-color: rgb(255, 255, 255);">
+                        捷克语
+                    </div>
+                    <div value="rom" style="cursor: pointer !important; line-height: 25px !important; font-size: 12px !important; color: rgb(51, 51, 51) !important; box-sizing: border-box; padding-left: 11px; height: 25px; background-color: rgb(255, 255, 255);">
+                        罗马尼亚语
+                    </div>
+                    <div value="pt" style="cursor: pointer !important; line-height: 25px !important; font-size: 12px !important; color: rgb(51, 51, 51) !important; box-sizing: border-box; padding-left: 11px; height: 25px; background-color: rgb(255, 255, 255);">
+                        葡萄牙语
+                    </div>
+                    <div value="swe" style="cursor: pointer !important; line-height: 25px !important; font-size: 12px !important; color: rgb(51, 51, 51) !important; box-sizing: border-box; padding-left: 11px; height: 25px; background-color: rgb(255, 255, 255);">
+                        瑞典语
+                    </div>
+                    <div value="slo" style="cursor: pointer !important; line-height: 25px !important; font-size: 12px !important; color: rgb(51, 51, 51) !important; box-sizing: border-box; padding-left: 11px; height: 25px; background-color: rgb(255, 255, 255);">
+                        斯洛文尼亚
+                    </div>
+                    <div value="th" style="cursor: pointer !important; line-height: 25px !important; font-size: 12px !important; color: rgb(51, 51, 51) !important; box-sizing: border-box; padding-left: 11px; height: 25px; background-color: rgb(255, 255, 255);">
+                        泰语
+                    </div>
+                    <div value="wyw" style="cursor: pointer !important; line-height: 25px !important; font-size: 12px !important; color: rgb(51, 51, 51) !important; box-sizing: border-box; padding-left: 11px; height: 25px; background-color: rgb(255, 255, 255);">
+                        文言文
+                    </div>
+                    <div value="spa" style="cursor: pointer !important; line-height: 25px !important; font-size: 12px !important; color: rgb(51, 51, 51) !important; box-sizing: border-box; padding-left: 11px; height: 25px; background-color: rgb(255, 255, 255);">
+                        西班牙语
+                    </div>
+                    <div value="el" style="cursor: pointer !important; line-height: 25px !important; font-size: 12px !important; color: rgb(51, 51, 51) !important; box-sizing: border-box; padding-left: 11px; height: 25px; background-color: rgb(255, 255, 255);">
+                        希腊语
+                    </div>
+                    <div value="hu" style="cursor: pointer !important; line-height: 25px !important; font-size: 12px !important; color: rgb(51, 51, 51) !important; box-sizing: border-box; padding-left: 11px; height: 25px; background-color: rgb(255, 255, 255);">
+                        匈牙利语
+                    </div>
+                    <div value="it" style="cursor: pointer !important; line-height: 25px !important; font-size: 12px !important; color: rgb(51, 51, 51) !important; box-sizing: border-box; padding-left: 11px; height: 25px; background-color: rgb(255, 255, 255);">
+                        意大利语
+                    </div>
+                    <div value="yue" style="cursor: pointer !important; line-height: 25px !important; font-size: 12px !important; color: rgb(51, 51, 51) !important; box-sizing: border-box; padding-left: 11px; height: 25px; background-color: rgb(255, 255, 255);">
+                        粤语
+                    </div>
+                    <div value="cht" style="cursor: pointer !important; line-height: 25px !important; font-size: 12px !important; color: rgb(51, 51, 51) !important; box-sizing: border-box; padding-left: 11px; height: 25px; background-color: rgb(255, 255, 255);">
+                        中文繁体
+                    </div>
+                </div>
+            </div>
+            <div id="select-change" style="width: 8px; height: 100%; position: absolute; left: 50%; display: flex; justify-content: center; align-items: center;">
+                <img id="translate-icon" src="chrome-extension://ikkbfngojljohpekonpldkamedehakni/imgs/map/right-arrow.png"/>
+            </div>
+            <div id="translate-head-to" class="translate-head-retranslate" style="line-height: 23px !important; cursor: pointer !important; width: 97px; height: 23px; position: absolute; border-radius: 3px; right: 0px; box-sizing: border-box; display: flex; justify-content: center; align-items: center; padding-left: 0px; background-color: rgb(255, 255, 255);" data-click="no-click">
+                <span id="detect-to" value="zh" style="cursor: pointer !important; font-size: 12px !important; color: rgb(51, 51, 51) !important; position: relative; background: initial;">
+                    中文
+                </span>
+                <img id="select-icon-img" src="chrome-extension://ikkbfngojljohpekonpldkamedehakni/imgs/map/arrow_down_nomal.png" style="cursor: pointer !important; position: relative; left: 5px; width: 9px; height: 5px;"/>
+                <div class="select-inner-box" id="select-inner-to" style="position: absolute; left: 1px; top: 23px; width: 97px; height: 300px; overflow: auto; border-top: none; border-right: 1px solid rgb(240, 240, 240); border-bottom: 1px solid rgb(240, 240, 240); border-left: 1px solid rgb(240, 240, 240); border-radius: 0px 0px 3px 3px; display: none; box-sizing: border-box;">
+                    <div value="zh" style="cursor: pointer !important; line-height: 25px !important; font-size: 12px !important; color: rgb(67, 149, 255) !important; box-sizing: border-box; padding-left: 11px; height: 25px; background-color: rgb(255, 255, 255);">
+                        中文
+                    </div>
+                    <div value="en" style="cursor: pointer !important; line-height: 25px !important; font-size: 12px !important; color: rgb(51, 51, 51) !important; box-sizing: border-box; padding-left: 11px; height: 25px; background-color: rgb(255, 255, 255);">
+                        英语
+                    </div>
+                    <div value="jp" style="cursor: pointer !important; line-height: 25px !important; font-size: 12px !important; color: rgb(51, 51, 51) !important; box-sizing: border-box; padding-left: 11px; height: 25px; background-color: rgb(255, 255, 255);">
+                        日语
+                    </div>
+                    <div value="ara" style="cursor: pointer !important; line-height: 25px !important; font-size: 12px !important; color: rgb(51, 51, 51) !important; box-sizing: border-box; padding-left: 11px; height: 25px; background-color: rgb(255, 255, 255);">
+                        阿拉伯语
+                    </div>
+                    <div value="est" style="cursor: pointer !important; line-height: 25px !important; font-size: 12px !important; color: rgb(51, 51, 51) !important; box-sizing: border-box; padding-left: 11px; height: 25px; background-color: rgb(255, 255, 255);">
+                        爱沙尼亚语
+                    </div>
+                    <div value="bul" style="cursor: pointer !important; line-height: 25px !important; font-size: 12px !important; color: rgb(51, 51, 51) !important; box-sizing: border-box; padding-left: 11px; height: 25px; background-color: rgb(255, 255, 255);">
+                        保加利亚语
+                    </div>
+                    <div value="pl" style="cursor: pointer !important; line-height: 25px !important; font-size: 12px !important; color: rgb(51, 51, 51) !important; box-sizing: border-box; padding-left: 11px; height: 25px; background-color: rgb(255, 255, 255);">
+                        波兰语
+                    </div>
+                    <div value="dan" style="cursor: pointer !important; line-height: 25px !important; font-size: 12px !important; color: rgb(51, 51, 51) !important; box-sizing: border-box; padding-left: 11px; height: 25px; background-color: rgb(255, 255, 255);">
+                        丹麦语
+                    </div>
+                    <div value="de" style="cursor: pointer !important; line-height: 25px !important; font-size: 12px !important; color: rgb(51, 51, 51) !important; box-sizing: border-box; padding-left: 11px; height: 25px; background-color: rgb(255, 255, 255);">
+                        德语
+                    </div>
+                    <div value="ru" style="cursor: pointer !important; line-height: 25px !important; font-size: 12px !important; color: rgb(51, 51, 51) !important; box-sizing: border-box; padding-left: 11px; height: 25px; background-color: rgb(255, 255, 255);">
+                        俄语
+                    </div>
+                    <div value="fra" style="cursor: pointer !important; line-height: 25px !important; font-size: 12px !important; color: rgb(51, 51, 51) !important; box-sizing: border-box; padding-left: 11px; height: 25px; background-color: rgb(255, 255, 255);">
+                        法语
+                    </div>
+                    <div value="fin" style="cursor: pointer !important; line-height: 25px !important; font-size: 12px !important; color: rgb(51, 51, 51) !important; box-sizing: border-box; padding-left: 11px; height: 25px; background-color: rgb(255, 255, 255);">
+                        芬兰语
+                    </div>
+                    <div value="kor" style="cursor: pointer !important; line-height: 25px !important; font-size: 12px !important; color: rgb(51, 51, 51) !important; box-sizing: border-box; padding-left: 11px; height: 25px; background-color: rgb(255, 255, 255);">
+                        韩语
+                    </div>
+                    <div value="nl" style="cursor: pointer !important; line-height: 25px !important; font-size: 12px !important; color: rgb(51, 51, 51) !important; box-sizing: border-box; padding-left: 11px; height: 25px; background-color: rgb(255, 255, 255);">
+                        荷兰语
+                    </div>
+                    <div value="cs" style="cursor: pointer !important; line-height: 25px !important; font-size: 12px !important; color: rgb(51, 51, 51) !important; box-sizing: border-box; padding-left: 11px; height: 25px; background-color: rgb(255, 255, 255);">
+                        捷克语
+                    </div>
+                    <div value="rom" style="cursor: pointer !important; line-height: 25px !important; font-size: 12px !important; color: rgb(51, 51, 51) !important; box-sizing: border-box; padding-left: 11px; height: 25px; background-color: rgb(255, 255, 255);">
+                        罗马尼亚语
+                    </div>
+                    <div value="pt" style="cursor: pointer !important; line-height: 25px !important; font-size: 12px !important; color: rgb(51, 51, 51) !important; box-sizing: border-box; padding-left: 11px; height: 25px; background-color: rgb(255, 255, 255);">
+                        葡萄牙语
+                    </div>
+                    <div value="swe" style="cursor: pointer !important; line-height: 25px !important; font-size: 12px !important; color: rgb(51, 51, 51) !important; box-sizing: border-box; padding-left: 11px; height: 25px; background-color: rgb(255, 255, 255);">
+                        瑞典语
+                    </div>
+                    <div value="slo" style="cursor: pointer !important; line-height: 25px !important; font-size: 12px !important; color: rgb(51, 51, 51) !important; box-sizing: border-box; padding-left: 11px; height: 25px; background-color: rgb(255, 255, 255);">
+                        斯洛文尼亚
+                    </div>
+                    <div value="th" style="cursor: pointer !important; line-height: 25px !important; font-size: 12px !important; color: rgb(51, 51, 51) !important; box-sizing: border-box; padding-left: 11px; height: 25px; background-color: rgb(255, 255, 255);">
+                        泰语
+                    </div>
+                    <div value="wyw" style="cursor: pointer !important; line-height: 25px !important; font-size: 12px !important; color: rgb(51, 51, 51) !important; box-sizing: border-box; padding-left: 11px; height: 25px; background-color: rgb(255, 255, 255);">
+                        文言文
+                    </div>
+                    <div value="spa" style="cursor: pointer !important; line-height: 25px !important; font-size: 12px !important; color: rgb(51, 51, 51) !important; box-sizing: border-box; padding-left: 11px; height: 25px; background-color: rgb(255, 255, 255);">
+                        西班牙语
+                    </div>
+                    <div value="el" style="cursor: pointer !important; line-height: 25px !important; font-size: 12px !important; color: rgb(51, 51, 51) !important; box-sizing: border-box; padding-left: 11px; height: 25px; background-color: rgb(255, 255, 255);">
+                        希腊语
+                    </div>
+                    <div value="hu" style="cursor: pointer !important; line-height: 25px !important; font-size: 12px !important; color: rgb(51, 51, 51) !important; box-sizing: border-box; padding-left: 11px; height: 25px; background-color: rgb(255, 255, 255);">
+                        匈牙利语
+                    </div>
+                    <div value="it" style="cursor: pointer !important; line-height: 25px !important; font-size: 12px !important; color: rgb(51, 51, 51) !important; box-sizing: border-box; padding-left: 11px; height: 25px; background-color: rgb(255, 255, 255);">
+                        意大利语
+                    </div>
+                    <div value="yue" style="cursor: pointer !important; line-height: 25px !important; font-size: 12px !important; color: rgb(51, 51, 51) !important; box-sizing: border-box; padding-left: 11px; height: 25px; background-color: rgb(255, 255, 255);">
+                        粤语
+                    </div>
+                    <div value="cht" style="cursor: pointer !important; line-height: 25px !important; font-size: 12px !important; color: rgb(51, 51, 51) !important; box-sizing: border-box; padding-left: 11px; height: 25px; background-color: rgb(255, 255, 255);">
+                        中文繁体
+                    </div>
+                </div>
+            </div>
+        </div>
+        <pt id="translate-head-ing" style="font-size: 12px !important; color: rgb(51, 51, 51) !important; position: fixed; left: 370px; top: 12px;">
+            翻译中...
+        </pt>
+        <pt id="translate-head-timeout" style="font-size: 12px !important; color: rgb(51, 51, 51) !important; position: fixed; left: 370px; top: 12px; display: none;">
+            翻译超时，请稍后
+            <a id="translate-head-retry" href="javascript:void(0)" style="color:#4395FF !important">
+                重试
+            </a>
+        </pt>
+        <div id="src-reload" style="cursor: pointer !important; color: white !important; text-align: center !important; border-radius: 3px !important; font-size: 12px !important; line-height: 23px !important; position: fixed; left: 350px; top: 7px; height: 23px; border: none; width: 100px; margin: 0px 0px 0px 19px; background-color: rgb(67, 149, 255);">
+            显示原文
+        </div>
+        <div id="translate-head-cross">
+            <img id="translate-head-cross-img" style="cursor: pointer !important; float: right; margin-right: 20px; margin-top: 8px; width: 18px;" src="chrome-extension://ikkbfngojljohpekonpldkamedehakni/imgs/map/close.png"/>
+        </div>
+        <a id="fanyi_baidu_com" href="javascript:void(0)" style="float:right;margin-right:15px;margin-top:11px;text-decoration: none;font-size:12px !important;color:#333 !important">
+            进入百度翻译
+        </a>
+        <a id="tousu_baidu_com_fanyi_add" href="javascript:void(0)" style="float:right;margin-right:15px;margin-top:11px;text-decoration: none;font-size:12px !important;color:#333 !important">
+            提交建议与反馈
+        </a>
+    </div>
+    <body style="position: relative; margin-top: 36px !important;">
+        <header class="site-header">
+            <div class="inner page-width">
+                <a href="https://jakearchibald.com/" class="title">
+                    <trans data-src="Jake Archibald" data-dst="杰克阿奇博尔德">
+                        杰克阿奇博尔德
+                    </trans>
+                    <span class="js-action">
+                        <trans data-src="wrote..." data-dst="写的...">
+                            写的...
+                        </trans>
+                    </span>
+                </a>
+                <a href="https://jakearchibald.com/who/" class="who">
+                    <trans data-src="who?" data-dst="谁？">
+                        谁？
+                    </trans>
+                </a>
+            </div>
+        </header>
+        <div class="container">
+            <div class="content-n-side">
+                <div class="content">
+                    <div class="article-content">
+                        <h1>
+                            <trans data-src="The anatomy of responsive images" data-dst="响应图像的解剖">
+                                响应图像的解剖
+                            </trans>
+                        </h1>
+                        <time class="article-date" datetime="2015-09-03">
+                            <trans data-src="Posted 03 September 2015" data-dst="03 2015年9月发布">
+                                03 2015年9月发布
+                            </trans>
+                        </time>
+                        <p>
+                            <trans data-src="I just had my responsive images epiphany and I&#39;m writing it all down before I forget everything. This is what I know…" data-dst="我只是有我的响应图像的顿悟和我写下来之前，我忘记了一切。这是我所知道的…">
+                                我只是有我的响应图像的顿悟和我写下来之前，我忘记了一切。这是我所知道的…
+                            </trans>
+                        </p>
+                        <h2 id="fixed-size-varying-density">
+                            <trans data-src="Fixed size, varying density" data-dst="固定大小，不同密度">
+                                固定大小，不同密度
+                            </trans>
+                        </h2>
+                        <p>
+                            <trans data-src="If your image is a fixed size in pixels, but you want to cater for screens of different density, here&#39;s the solution:" data-dst="如果你的图像是以像素为单位的固定大小的，但是你要满足不同密度的屏幕，这里的解决方案：" style="background: transparent;">
+                                如果你的图像是以像素为单位的固定大小的，但是你要满足不同密度的屏幕，这里的解决方案：
+                            </trans>
+                        </p>
+                        <p>
+                            <link href="./响应图像的解剖jakearchibald.com_files/css" rel="stylesheet" type="text/css"/>
+                            <style>
+                                .img-diagram-figure {
+                                position: relative;
+                                }
+                                .img-diagram-figure svg {
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                width: 100%;
+                                height: 100%;
+                                }
+                            </style>
+                        </p>
+                        <figure class="img-diagram-figure">
+                            <div style="padding-top: 53%">
+                            </div>
+                            <svg viewBox="0 0 679 363" class="img-d-1">
+                                <style>
+                                    .img-d-1 .st0{fill:#5F6464;} .img-d-1 .st1{font-family:Inconsolata; font-weight: bold;} .img-d-1 .st2{font-size:26.9775px;} .img-d-1 .st3{fill:#C92C2C;} .img-d-1 .st4{fill:#309D47;} .img-d-1 .st5{fill:#1990B8;} .img-d-1 .st6{font-family:'Just Another Hand';} .img-d-1 .st7{font-size:42.9124px;} .img-d-1 .st8{fill:none;stroke:#ED1F24;stroke-width:3;stroke-miterlimit:10;} .img-d-1 .st9{fill:#ED1F24;} .img-d-1 .st10{fill:none;} .img-d-1 .st11{font-size:42.9091px;} .img-d-1 .st12{font-size:42.9092px;}
+                                </style>
+                                <text transform="matrix(.998 -.069 .069 .998 20.354 82.914)">
+                                    <tspan x="0" y="0" class="st0 st1 st2">
+                                        &lt;
+                                    </tspan>
+                                    <tspan x="13.5" y="0" class="st3 st1 st2">
+                                        <trans data-src="img" data-dst="IMG">
+                                            IMG
+                                        </trans>
+                                    </tspan>
+                                    <tspan x="54" y="0" class="st1 st2">
+                                    </tspan>
+                                    <tspan x="67.4" y="0" class="st4 st1 st2">
+                                        <trans data-src="alt" data-dst="中高音">
+                                            中高音
+                                        </trans>
+                                    </tspan>
+                                    <tspan x="107.9" y="0" class="st0 st1 st2">
+                                        ="</tspan><tspan x="134.9" y="0" class="st5 st1 st2"><trans data-src="A cat" data-dst="一只猫">一只猫</trans></tspan><tspan x="202.3" y="0" class="st0 st1 st2"><trans data-src="&quot;" data-dst="“">“</trans></tspan><tspan x="0" y="32.4" class="st1 st2"></tspan><tspan x="67.4" y="32.4" class="st4 st1 st2"><trans data-src="width" data-dst="宽度">宽度</trans></tspan><tspan x="134.9" y="32.4" class="st0 st1 st2">="
+                                    </tspan>
+                                    <tspan x="161.9" y="32.4" class="st5 st1 st2">
+                                        <trans data-src="320" data-dst="三百二十">
+                                            三百二十
+                                        </trans>
+                                    </tspan>
+                                    <tspan x="202.3" y="32.4" class="st0 st1 st2">
+                                        <trans data-src="&quot;" data-dst="“">
+                                            “
+                                        </trans>
+                                    </tspan>
+                                    <tspan x="215.8" y="32.4" class="st1 st2">
+                                    </tspan>
+                                    <tspan x="229.3" y="32.4" class="st4 st1 st2">
+                                        <trans data-src="height" data-dst="高度">
+                                            高度
+                                        </trans>
+                                    </tspan>
+                                    <tspan x="310.2" y="32.4" class="st0 st1 st2">
+                                        ="</tspan><tspan x="337.2" y="32.4" class="st5 st1 st2"><trans data-src="213" data-dst="二百一十三">二百一十三</trans></tspan><tspan x="377.7" y="32.4" class="st0 st1 st2"><trans data-src="&quot;" data-dst="“">“</trans></tspan><tspan x="0" y="64.7" class="st1 st2"></tspan><tspan x="67.4" y="64.7" class="st4 st1 st2"><trans data-src="src" data-dst="SRC">SRC</trans></tspan><tspan x="107.9" y="64.7" class="st0 st1 st2">="
+                                    </tspan>
+                                    <tspan x="134.9" y="64.7" class="st5 st1 st2">
+                                        <trans data-src="cat.jpg" data-dst="cat.jpg">
+                                            cat.jpg
+                                        </trans>
+                                    </tspan>
+                                    <tspan x="229.3" y="64.7" class="st0 st1 st2">
+                                        <trans data-src="&quot;" data-dst="“">
+                                            “
+                                        </trans>
+                                    </tspan>
+                                    <tspan x="0" y="97.1" class="st1 st2">
+                                    </tspan>
+                                    <tspan x="67.4" y="97.1" class="st4 st1 st2">
+                                        <trans data-src="srcset" data-dst="srcset">
+                                            srcset
+                                        </trans>
+                                    </tspan>
+                                    <tspan x="148.4" y="97.1" class="st0 st1 st2">
+                                        ="</tspan><tspan x="175.4" y="97.1" class="st5 st1 st2"><trans data-src="cat-2x.jpg 2x, cat-3x.jpg 3x" data-dst="cat-3x.jpg cat-2x.jpg 2x，3x">cat-3x.jpg cat-2x.jpg 2x，3x</trans></tspan><tspan x="553" y="97.1" class="st0 st1 st2"><trans data-src="&quot;&gt;" data-dst="“&amp;#62;">“&amp;#62;</trans></tspan></text><text transform="matrix(.994 .106 -.106 .994 432.694 31.916)" class="st6 st7"><trans data-src="Fixed size, here or in CSS" data-dst="固定的尺寸，在这里或CSS">固定的尺寸，在这里或CSS</trans></text><path class="st8" d="M428.4 79.3c45-.4 106.5-4 109.2-28.2"></path><path class="st9" d="M434 86.5l-3.2-7.2 3-7.3-17 7.4z"></path><path class="st10" d="M332.6 365.2L5 374.7 2 268.5l327.5-9.5z"></path><text transform="matrix(1 -.029 .029 1 3.153 304.998)"><tspan x="0" y="0" class="st6 st11"><trans data-src="This is used as the 1x src &amp; by" data-dst="这是作为1x SRC的">这是作为1x SRC的</trans></tspan><tspan x="0" y="41.9" class="st6 st11"><trans data-src="browsers that don’t support srcset" data-dst="浏览器不支持srcset">浏览器不支持srcset</trans></tspan></text><path class="st8" d="M76.6 138.6c-39 9-54.7 64.5-54.7 129"></path><path class="st9" d="M70.2 132.4l4 6.7-2 8 16-9.3z"></path><text transform="matrix(.999 -.052 .052 .999 158.013 230.768)" class="st6 st12"><trans data-src="Image url" data-dst="图像的URL">图像的URL</trans></text><text transform="matrix(.998 -.057 .057 .998 403.769 220.199)" class="st6 st12"><trans data-src="Pixel density of screen" data-dst="屏幕像素密度">屏幕像素密度</trans></text><path class="st8" d="M292 181.4c-1.3 15.8-8.8 29.6-30.4 31.6"></path><path class="st9" d="M284.6 186.7l7.3-3 7 3.3-7-17.3z"></path><path class="st8" d="M365 177.2c3 22 12.4 30 34.7 30"></path><path class="st9" d="M358.4 183.2l7-3.6 7.4 2.4-8.7-16.4z"></path></svg></figure><p></p><p><trans data-src="This" data-dst="这">这</trans><a href="http://caniuse.com/#search=srcset"><trans data-src="works in all modern browsers" data-dst="在所有的现代浏览器的作品">在所有的现代浏览器的作品</trans></a><trans data-src=", and falls back to" data-dst="，落回">，落回</trans><code>src</code><trans data-src="in older browsers." data-dst="在旧的浏览器。">在旧的浏览器</trans></p><p><trans data-src="A few more rules, not covered in the image above:" data-dst="更多的规则，上面的图像不是盖的：">更多的规则，上面的图像不是盖的：</trans></p><ul><li><trans data-src="Each item within" data-dst="每一项内">每一项内</trans><code>srcset</code><trans data-src="is" data-dst="是">是</trans><code>&lt;url&gt; &lt;density&gt;x</code><trans data-src=", eg" data-dst="，如">，如</trans><code>cat-2x.jpg 2x</code></li><li><trans data-src="The order of items within the" data-dst="在项目的顺序">在项目的顺序</trans><code>srcset</code><trans data-src="doesn&#39;t matter" data-dst="没关系">没关系</trans></li><li><trans data-src="If you don&#39;t specify width/height, the browser will display the image at its native width/height divided by the density. Eg if the 2x resource is picked, it&#39;ll be rendered at 50% of the resources width/height" data-dst="如果你不指定宽度/高度，浏览器将在其本土的宽度/高度显示图像除以密度。如果2X资源采摘，它会在资源的宽度/高度50%呈现">如果你不指定宽度/高度，浏览器将在其本土的宽度/高度显示图像除以密度。如果2X资源采摘，它会在资源的宽度/高度50%呈现</trans></li><li><trans data-src="This is only a hint, even on a 3x device the browser may use the 1x image, perhaps due to poor connectivity" data-dst="这只是一个暗示，甚至在3倍设备的浏览器可以使用1X的形象，或许是由于连通性差" style="background: transparent;">这只是一个暗示，甚至在3倍设备的浏览器可以使用1X的形象，或许是由于连通性差</trans></li></ul><h3 id="live-example"><trans data-src="Live example" data-dst="活生生的例子">活生生的例子</trans></h3><figure class="full-figure"><img alt="A cat" width="320" height="213" src="./响应图像的解剖jakearchibald.com_files/cat-1x.b3b4dfd8b1a9.jpg" srcset="/static/posts/responsive-images/cat-2x.bf14e0862bb8.jpg 2x, /static/posts/responsive-images/cat-3x.jpg 3x"/></figure><h2 id="varying-size-and-density"><trans data-src="Varying size and density" data-dst="不同的大小和密度">不同的大小和密度</trans></h2><p><trans data-src="Images of varying width are commonly used as part of the content on responsive sites. On this blog, content imagery takes up 100% of the article width, but the article isn&#39;t always 100% of the window." data-dst="不同宽度的图像通常被用来作为对响应的网站内容的一部分。在这个博客上，内容意象占据了文章的宽度100%，但本文并不总是100%的窗口。" style="background: transparent;">不同宽度的图像通常被用来作为对响应的网站内容的一部分。在这个博客上，内容意象占据了文章的宽度100%，但本文并不总是100%的窗口。</trans></p><p><trans data-src="In order for the browser to pick the right image, it needs to know:" data-dst="为了选择合适的图像浏览器，它需要知道：">为了选择合适的图像浏览器，它需要知道：</trans></p><ul><li><trans data-src="URLs for the image at various sizes" data-dst="在不同大小的图像的URL">在不同大小的图像的URL</trans></li><li><trans data-src="The decoded width of each of those image resources" data-dst="解码宽度各图像资源">解码宽度各图像资源</trans></li><li><trans data-src="The width of the" data-dst="的宽度">的宽度</trans><code>&lt;img&gt;</code></li></ul><p><trans data-src="That last one is particularly tricky, as images start downloading before CSS is ready, so the width of the" data-dst="最后一个是特别棘手的，图像开始下载之前，CSS是现成的，这样的宽度" style="background: transparent;">最后一个是特别棘手的，图像开始下载之前，CSS是现成的，这样的宽度</trans><code>&lt;img&gt;</code><trans data-src="cannot be detected from the page layout." data-dst="不能从网页布局的检测。">不能从网页布局的检测。</trans></p><p><trans data-src="The key to understanding this syntax is knowing which of these values refer to the window width, the decoded image width, and the" data-dst="要理解这一语法的关键是知道这些价值观指窗宽，解码图像的宽度，和" style="background: transparent;">要理解这一语法的关键是知道这些价值观指窗宽，解码图像的宽度，和</trans><code>&lt;img&gt;</code><trans data-src="width." data-dst="宽度" style="background: transparent;">宽度</trans></p><figure class="img-diagram-figure"><div style="padding-top: 77%"></div><svg viewBox="0 0 679 524" class="img-d-2"><style>.img-d-2 .st0{fill:#5F6464;} .img-d-2 .st1{font-family:Inconsolata; font-weight: bold;} .img-d-2 .st2{font-size:25.7772px;} .img-d-2 .st3{fill:#C92C2C;} .img-d-2 .st4{fill:#309D47;} .img-d-2 .st5{fill:#1990B8; white-space: pre;} .img-d-2 .st6{fill:#309D48;} .img-d-2 .st7{fill:none;} .img-d-2 .st8{font-family:'Just Another Hand'} .img-d-2 .st9{font-size:41px;} .img-d-2 .st10{fill:none;stroke:#ED1F24;stroke-width:3;stroke-miterlimit:10;} .img-d-2 .st11{fill:#ED1F24;}</style><text transform="matrix(1 -.026 .026 1 1.971 35.909)"><tspan x="0" y="0" class="st0 st1 st2">&lt;</tspan><tspan x="12.9" y="0" class="st3 st1 st2"><trans data-src="img" data-dst="IMG">IMG</trans></tspan><tspan x="51.6" y="0" class="st1 st2"></tspan><tspan x="64.4" y="0" class="st4 st1 st2"><trans data-src="alt" data-dst="中高音">中高音</trans></tspan><tspan x="103.1" y="0" class="st0 st1 st2">="
+                                    </tspan>
+                                    <tspan x="128.9" y="0" class="st5 st1 st2">
+                                        <trans data-src="A red panda eating leaves" data-dst="一只熊猫吃树叶">
+                                            一只熊猫吃树叶
+                                        </trans>
+                                    </tspan>
+                                    <tspan x="451.1" y="0" class="st0 st1 st2">
+                                        <trans data-src="&quot;" data-dst="“">
+                                            “
+                                        </trans>
+                                    </tspan>
+                                    <tspan x="0" y="30.9" class="st1 st2">
+                                    </tspan>
+                                    <tspan x="64.4" y="30.9" class="st4 st1 st2">
+                                        <trans data-src="src" data-dst="SRC">
+                                            SRC
+                                        </trans>
+                                    </tspan>
+                                    <tspan x="103.1" y="30.9" class="st0 st1 st2">
+                                        ="</tspan><tspan x="128.9" y="30.9" class="st5 st1 st2"><trans data-src="panda-689.jpg" data-dst="panda-689.jpg">panda-689.jpg</trans></tspan><tspan x="296.4" y="30.9" class="st0 st1 st2"><trans data-src="&quot;" data-dst="“">“</trans></tspan><tspan x="0" y="61.9" class="st1 st2"></tspan><tspan x="64.4" y="61.9" class="st4 st1 st2"><trans data-src="srcset" data-dst="srcset">srcset</trans></tspan><tspan x="141.8" y="61.9" class="st0 st1 st2">="
+                                    </tspan>
+                                    <tspan x="167.6" y="61.9" class="st5 st1 st2">
+                                        <trans data-src="panda-689.jpg 689w," data-dst="panda-689.jpg 689w，">
+                                            panda-689.jpg 689w，
+                                        </trans>
+                                    </tspan>
+                                    <tspan x="0" y="92.8" class="st5 st1 st2">
+                                        <trans data-src="panda-1378.jpg 1378w," data-dst="panda-1378.jpg 1378w，">
+                                            panda-1378.jpg 1378w，
+                                        </trans>
+                                    </tspan>
+                                    <tspan x="0" y="123.7" class="st5 st1 st2">
+                                        <trans data-src="panda-500.jpg 500w," data-dst="panda-500.jpg 500w，">
+                                            panda-500.jpg 500w，
+                                        </trans>
+                                    </tspan>
+                                    <tspan x="0" y="154.7" class="st5 st1 st2">
+                                        <trans data-src="panda-1000.jpg 1000w" data-dst="panda-1000.jpg 1000w">
+                                            panda-1000.jpg 1000w
+                                        </trans>
+                                    </tspan>
+                                    <tspan x="425.3" y="154.7" class="st0 st1 st2">
+                                        <trans data-src="&quot;" data-dst="“">
+                                            “
+                                        </trans>
+                                    </tspan>
+                                    <tspan x="0" y="247.5" class="st0 st1 st2">
+                                    </tspan>
+                                    <tspan x="64.4" y="247.5" class="st6 st1 st2">
+                                        <trans data-src="sizes" data-dst="尺寸">
+                                            尺寸
+                                        </trans>
+                                    </tspan>
+                                    <tspan x="128.9" y="247.5" class="st0 st1 st2">
+                                        ="</tspan><tspan x="154.7" y="247.5" class="st5 st1 st2"><trans data-src="(min-width: 1066px) 689px," data-dst="（最小宽度：1066px）689px，">（最小宽度：1066px）689px，</trans></tspan><tspan x="0" y="278.4" class="st5 st1 st2"><trans data-src="(min-width: 800px) calc(75vw - 137px)," data-dst="（最小宽度：为钙（-），75vw 137px）">（最小宽度：为钙（-），75vw 137px）</trans></tspan><tspan x="0" y="309.3" class="st5 st1 st2"><trans data-src="(min-width: 530px) calc(100vw - 96px)," data-dst="（最小宽度：530px），钙（100vw - 96px）">（最小宽度：530px），钙（100vw - 96px）</trans></tspan><tspan x="0" y="340.3" class="st5 st1 st2"><trans data-src="100vw" data-dst="100vw">100vw</trans></tspan><tspan x="219.1" y="340.3" class="st0 st1 st2"><trans data-src="&quot;&gt;" data-dst="“&amp;#62;">“&amp;#62;</trans></tspan></text><path class="st7" d="M697.2 153.5L459.8 126l11-95.3 237.5 27.5z"></path><text transform="matrix(.993 .115 -.115 .993 466.83 65.475)"><tspan x="0" y="0" class="st8 st9"><trans data-src="Only for browsers that" data-dst="只有浏览器">只有浏览器</trans></tspan><tspan x="0" y="40" class="st8 st9"><trans data-src="don’t support srcset" data-dst="不支持srcset">不支持srcset</trans></tspan></text><g><g><path class="st10" d="M329.8 50c73.8-2 94.6 13.3 128 14.8"></path><g><path class="st11" d="M335.5 57l-3.3-7.2 2.8-7.3-17 7.8z"></path></g></g></g><text transform="matrix(.994 -.108 .108 .994 65.622 254.292)" class="st8 st9"><trans data-src="Image url" data-dst="图像的URL">图像的URL</trans></text><text transform="matrix(.993 -.122 .122 .993 416.958 245.847)" class="st8 st9"><trans data-src="Width of the image data" data-dst="图像数据的宽度">图像数据的宽度</trans></text><g><g><path class="st10" d="M196 203.3c-1.8 19.4-14.4 33.3-36 34.3"></path><g><path class="st11" d="M188.6 208.7l7.3-3 7 3-7-17z"></path></g></g></g><g><g><path class="st10" d="M384.7 199c1 26.7 11 41 28.2 41"></path><g><path class="st11" d="M377.6 204.7l7.2-3.2 7.3 3-7-17z"></path></g></g></g><text transform="matrix(1 .027 -.027 1 165.881 415.307)" class="st8 st9"><trans data-src="Width of the window" data-dst="窗口的宽度">窗口的宽度</trans></text><text transform="matrix(.999 -.05 .05 .999 447.409 407.548)"><tspan x="0" y="0" class="st8 st9"><trans data-src="Width of the img element" data-dst="img元素的宽度">img元素的宽度</trans></tspan><tspan x="-15" y="40" class="st8 st9"><trans data-src="when the condition matches" data-dst="当满足条件">当满足条件</trans></tspan></text><g><g><path class="st10" d="M356.5 357.6c1 19.7-1.4 39-23 40"></path><g><path class="st11" d="M349.6 363.5l7-3.5 7.4 2.6-8.3-16.6z"></path></g></g></g><g><g><path class="st10" d="M427.6 354c-3.7 22-8.4 67 17.7 65.3"></path><g><path class="st11" d="M419.5 358l7.7-1.5 6.5 4.3-4-18z"></path></g></g></g><path class="st7" d="M31.4 428h257v109h-257z"></path><text transform="translate(31.431 463)"><tspan x="0" y="0" class="st8 st9"><trans data-src="Fallback width, when no" data-dst="回退的宽度，当没有">回退的宽度，当没有</trans></tspan><tspan x="0" y="40" class="st8 st9"><trans data-src="media conditions match" data-dst="媒体的比赛条件">媒体的比赛条件</trans></tspan></text><g><g><path class="st10" d="M148.3 368C100 375.2 94 428 94 428"></path><g><path class="st11" d="M142.2 361.3l3.7 7-2.7 7.4L160 367z"></path></g></g></g></svg></figure><p><trans data-src="Via" data-dst="通过">通过</trans><code>srcset</code><trans data-src=", the browser knows the resources available and their widths. Via" data-dst="，浏览器知道可用的资源和它们的宽度。通过" style="background: transparent;">，浏览器知道可用的资源和它们的宽度。通过</trans><code><trans data-src="sizes" data-dst="尺寸" style="background: transparent;">尺寸</trans></code><trans data-src="it knows the width of the" data-dst="它知道的宽度">它知道的宽度</trans><code>&lt;img&gt;</code><trans data-src="for a given window width. It can now pick the best resource to load." data-dst="对于一个给定的窗口宽度。它现在可以挑选最好的资源加载。">对于一个给定的窗口宽度。它现在可以挑选最好的资源加载。</trans></p><p><trans data-src="You don&#39;t need to specify density, the browser figure that out itself. If the window is" data-dst="你不需要指定密度，浏览器发现本身。如果窗口">你不需要指定密度，浏览器发现本身。如果窗口</trans><code>1066px</code><trans data-src="wide or greater, we&#39;ve signalled that the" data-dst="宽或更大，我们暗示" style="background: transparent;">宽或更大，我们暗示</trans><code>&lt;img&gt;</code><trans data-src="will be" data-dst="将" style="background: transparent;">将</trans><code>689px</code><trans data-src="wide. On a 1x device the browser may download" data-dst="宽在1X设备的浏览器可以下载">宽在1X设备的浏览器可以下载</trans><code><trans data-src="panda-689.jpg" data-dst="panda-689.jpg">panda-689.jpg</trans></code><trans data-src=", but on a 2x device the browser may download" data-dst="但是，在一个2倍的浏览器可以下载装置">但是，在一个2倍的浏览器可以下载装置</trans><code>panda-1378.jpg</code><trans data-src="." data-dst="。"></trans></p><p><trans data-src="A few more rules, not covered in the image above:" data-dst="更多的规则，上面的图像不是盖的：">更多的规则，上面的图像不是盖的：</trans></p><ul><li><trans data-src="Each item within" data-dst="每一项内">每一项内</trans><code>srcset</code><trans data-src="is" data-dst="是">是</trans><code>&lt;url&gt; &lt;width-descriptor&gt;w</code><trans data-src=", eg" data-dst="，如">，如</trans><code>panda-689.jpg 689w</code></li><li><trans data-src="The order of items within the" data-dst="在项目的顺序">在项目的顺序</trans><code>srcset</code><trans data-src="doesn&#39;t matter" data-dst="没关系">没关系</trans></li><li><trans data-src="If" data-dst="如果">如果</trans><code>srcset</code><trans data-src="contains a width descriptor, the" data-dst="包含一个宽的描述符，">包含一个宽的描述符，</trans><code><trans data-src="src" data-dst="SRC">SRC</trans></code><trans data-src="is ignored by browsers that support" data-dst="通过浏览器支持的忽视">通过浏览器支持的忽视</trans><code>srcset</code></li><li><trans data-src="Each item within" data-dst="每一项内">每一项内</trans><code>sizes</code><trans data-src="is" data-dst="是">是</trans><code>&lt;media-condition&gt; &lt;image-element-width&gt;</code><trans data-src=", except for the last entry which is just" data-dst="最后，除了which is just for the entry">最后，除了which is just for the entry</trans><code>&lt;image-element-width&gt;</code></li><li><trans data-src="Both of the widths in" data-dst="两者的宽度">两者的宽度</trans><code>sizes</code><trans data-src="are in CSS pixels" data-dst="在CSS像素">在CSS像素</trans></li><li><trans data-src="The browser uses the" data-dst="浏览器使用">浏览器使用</trans><em><trans data-src="first" data-dst="第一">第一</trans></em><trans data-src="media condition match in" data-dst="媒体条件匹配">媒体条件匹配</trans><code>sizes</code><trans data-src=", so the order matters" data-dst="，所以订单事宜" style="background: transparent;">，所以订单事宜</trans></li><li><trans data-src="As before, the browser may download a lower resolution image due to other factors such as poor connectivity" data-dst="之前，浏览器可以下载一个低分辨率的图像由于其他因素如连通性差">之前，浏览器可以下载一个低分辨率的图像由于其他因素如连通性差</trans></li></ul><p><trans data-src="Picking which" data-dst="采摘">采摘</trans><code>sizes</code><trans data-src="to list is pretty straight forward. Start with your window at its narrowest, and as you increase its size, create a new rule whenever the" data-dst="列表是很直截了当的。从你的窗口，其最窄处，当你增加它的大小，创建一个新的规则时，">列表是很直截了当的。从你的窗口，其最窄处，当你增加它的大小，创建一个新的规则时，</trans><code>&lt;img&gt;</code><trans data-src="size vs window size changes formula." data-dst="的大小随窗口大小变化的公式。">的大小随窗口大小变化的公式。</trans></p><p><trans data-src="When this window is at its narrowest, the" data-dst="当这个窗口是最窄的">当这个窗口是最窄的</trans><code>&lt;img&gt;</code><trans data-src="is full width, or" data-dst="全宽度，或">全宽度，或</trans><code><trans data-src="100vw" data-dst="100vw">100vw</trans></code><trans data-src=". When the window goes beyond" data-dst="。当窗口的超越">。当窗口的超越</trans><code>530px</code><trans data-src="the content area on this page gets" data-dst="本页内容区域获取">本页内容区域获取</trans><code><trans data-src="32px" data-dst="32px">32px</trans></code><trans data-src="padding on the left and" data-dst="左边的填充和">左边的填充和</trans><code>64px</code><trans data-src="on the right, so the" data-dst="在右边，所以">在右边，所以</trans><code>&lt;img&gt;</code><trans data-src="is now" data-dst="现在是">现在是</trans><code>calc(100vw - 96px)</code><trans data-src="." data-dst="。"></trans></p><p><trans data-src="The browser won&#39;t call the police if it finds out you lied about the" data-dst="浏览器不会叫警察如果发现你撒谎">浏览器不会叫警察如果发现你撒谎</trans><code>&lt;img&gt;</code><trans data-src="width. I&#39;ve been accurate with my" data-dst="宽度我是准确的和我的">宽度我是准确的和我的</trans><code><trans data-src="sizes" data-dst="尺寸">尺寸</trans></code><trans data-src=", but a rough answer can be good enough, eg" data-dst="，但粗略的回答可以是足够好的，如">，但粗略的回答可以是足够好的，如</trans><code>sizes="(min-width: 1066px) 689px, (min-width: 800px) 75vw, 100vw"</code><trans data-src="." data-dst="。"></trans></p><p><trans data-src="Picking which resources to create and include in" data-dst="挑选哪些资源来创造和包括">挑选哪些资源来创造和包括</trans><code>srcset</code><trans data-src="is much harder, and I don&#39;t think I&#39;ve mastered it. In the above example I include the maximum size the" data-dst="太难了，我不认为我已经掌握了它。在上面的例子中包括我的最大大小">太难了，我不认为我已经掌握了它。在上面的例子中包括我的最大大小</trans><code>&lt;img&gt;</code><trans data-src="can be (" data-dst="可以（">可以（</trans><code>689px</code><trans data-src=") and double that for 2x devices (" data-dst="）和双倍的设备（" style="background: transparent;">）和双倍的设备（</trans><code><trans data-src="1378px" data-dst="1378px">1378px</trans></code><trans data-src="). The other two are rough in-between values. I didn&#39;t include smaller widths such as" data-dst="）。其他两个值之间，是粗糙的。我不包括更小的宽度等">）。其他两个值之间，是粗糙的。我不包括更小的宽度等</trans><code>320px</code><trans data-src=", under the assumption that screens of that size will be 2x density or greater." data-dst="，假定，规模将达到2密度或更大的屏幕下。">，假定，规模将达到2密度或更大的屏幕下。</trans></p><p><code>srcset</code><trans data-src="+" data-dst=" "></trans><code><trans data-src="sizes" data-dst="尺寸">尺寸</trans></code><a href="http://caniuse.com/#search=srcset"><trans data-src="works in Chrome, Firefox, and Opera" data-dst="在Chrome，Firefox，Opera">在Chrome，Firefox，Opera</trans></a><trans data-src=". For other browsers, it&#39;ll safely fall back to" data-dst="。对于其他浏览器，它会安全地回到">。对于其他浏览器，它会安全地回到</trans><code>src</code><trans data-src=". You don&#39;t have to wait long for better support here, it&#39;s in WebKit nightly &amp; will appear in the next stable version of Edge." data-dst="。你不需要等待太长时间更好的支持，它在WebKit的夜间和将出现在边缘的下一个稳定版本。" style="background: transparent;">。你不需要等待太长时间更好的支持，它在WebKit的夜间和将出现在边缘的下一个稳定版本。</trans></p><h3 id="live-example_1"><trans data-src="Live example" data-dst="活生生的例子">活生生的例子</trans></h3><figure class="full-figure"><img style="width:100%" alt="A red panda eating leaves" src="./响应图像的解剖jakearchibald.com_files/panda-689.6adaf8a7c694.jpg" srcset="/static/posts/responsive-images/panda-689.6adaf8a7c694.jpg 689w,
+                                        /static/posts/responsive-images/panda-1378.jpg 1378w,
+                                        /static/posts/responsive-images/panda-500.jpg 500w,
+                                        /static/posts/responsive-images/panda-1000.jpg 1000w" sizes="(min-width: 1066px) 689px,
+                                        (min-width: 800px) calc(75vw - 137px),
+                                        (min-width: 530px) calc(100vw - 96px),
+                                        100vw"/></figure><h2 id="varying-width-density-and-art-direction"><trans data-src="Varying width, density, and art direction" data-dst="不同宽度、密度、和艺术方向">不同宽度、密度、和艺术方向</trans></h2><p><trans data-src="Similar to the previous example, but the framing changes at different widths. This allows you to focus in on the subject at smaller widths." data-dst="类似于前面的例子，但框架在不同宽度的变化。这可以让你专注于主体在较小的宽度。">类似于前面的例子，但框架在不同宽度的变化。这可以让你专注于主体在较小的宽度。</trans></p><figure class="img-diagram-figure"><div style="padding-top: 82%"></div><svg class="img-d-3" viewBox="0 0 679 555"><style>.img-d-3 .st0{fill:#5F6464; white-space: pre;} .img-d-3 .st1{font-family:Inconsolata; font-weight: bold;} .img-d-3 .st2{font-size:24.2164px;} .img-d-3 .st3{fill:#C92C2C;} .img-d-3 .st4{fill:#309D47;} .img-d-3 .st5{fill:#1990B8; white-space: pre;} .img-d-3 .st6{fill:none;} .img-d-3 .st7{font-family:'Just Another Hand'} .img-d-3 .st8{font-size:41px;} .img-d-3 .st9{fill:none;stroke:#ED1F24;stroke-width:3;stroke-miterlimit:10;} .img-d-3 .st10{fill:#ED1F24;}</style><text transform="matrix(1 -.018 .018 1 3.572 23.804)"><tspan x="0" y="0" class="st0 st1 st2">&lt;</tspan><tspan x="12.1" y="0" class="st3 st1 st2"><trans data-src="picture" data-dst="图片">图片</trans></tspan><tspan x="96.9" y="0" class="st0 st1 st2"><trans data-src="&gt;" data-dst="&amp;#62;">&amp;#62;</trans></tspan><tspan x="0" y="29.1" class="st0 st1 st2">&lt;</tspan><tspan x="36.3" y="29.1" class="st3 st1 st2"><trans data-src="source" data-dst="来源">来源</trans></tspan><tspan x="109" y="29.1" class="st0 st1 st2"></tspan><tspan x="121.1" y="29.1" class="st4 st1 st2"><trans data-src="media" data-dst="媒体">媒体</trans></tspan><tspan x="181.6" y="29.1" class="st0 st1 st2">="
+                                    </tspan>
+                                    <tspan x="205.8" y="29.1" class="st5 st1 st2">
+                                        <trans data-src="(max-width: 800px)" data-dst="（最大宽度：800px）">
+                                            （最大宽度：800px）
+                                        </trans>
+                                    </tspan>
+                                    <tspan x="423.8" y="29.1" class="st0 st1 st2">
+                                        <trans data-src="&quot;" data-dst="“">
+                                            “
+                                        </trans>
+                                    </tspan>
+                                    <tspan x="0" y="174.4" class="st0 st1 st2">
+                                    </tspan>
+                                    <tspan x="121.1" y="174.4" class="st4 st1 st2">
+                                        <trans data-src="srcset" data-dst="srcset">
+                                            srcset
+                                        </trans>
+                                    </tspan>
+                                    <tspan x="193.7" y="174.4" class="st0 st1 st2">
+                                        ="</tspan><tspan x="217.9" y="174.4" class="st5 st1 st2"><trans data-src="f1-focused-800.jpg 800w," data-dst="f1-focused-800.jpg 800w，">f1-focused-800.jpg 800w，</trans></tspan><tspan x="0" y="203.4" class="st5 st1 st2"><trans data-src="f1-focused-1406.jpg 1406w" data-dst="f1-focused-1406.jpg 1406w">f1-focused-1406.jpg 1406w</trans></tspan><tspan x="520.7" y="203.4" class="st0 st1 st2"><trans data-src="&quot;" data-dst="“">“</trans></tspan><tspan x="0" y="232.5" class="st0 st1 st2"></tspan><tspan x="121.1" y="232.5" class="st4 st1 st2"><trans data-src="sizes" data-dst="尺寸">尺寸</trans></tspan><tspan x="181.6" y="232.5" class="st0 st1 st2">="
+                                    </tspan>
+                                    <tspan x="205.8" y="232.5" class="st5 st1 st2">
+                                        <trans data-src="(min-width: 530px) calc(100vw - 96px)," data-dst="（最小宽度：530px），钙（100vw - 96px）">
+                                            （最小宽度：530px），钙（100vw - 96px）
+                                        </trans>
+                                    </tspan>
+                                    <tspan x="0" y="261.5" class="st5 st1 st2">
+                                        <trans data-src="100vw" data-dst="100vw">
+                                            100vw
+                                        </trans>
+                                    </tspan>
+                                    <tspan x="266.4" y="261.5" class="st0 st1 st2">
+                                        <trans data-src="&quot;&gt;" data-dst="“&amp;#62;">
+                                            “&amp;#62;
+                                        </trans>
+                                    </tspan>
+                                    <tspan x="0" y="290.6" class="st0 st1 st2">
+                                        &lt;
+                                    </tspan>
+                                    <tspan x="36.3" y="290.6" class="st3 st1 st2">
+                                        <trans data-src="img" data-dst="IMG">
+                                            IMG
+                                        </trans>
+                                    </tspan>
+                                    <tspan x="72.6" y="290.6" class="st0 st1 st2">
+                                    </tspan>
+                                    <tspan x="84.8" y="290.6" class="st4 st1 st2">
+                                        <trans data-src="alt" data-dst="中高音">
+                                            中高音
+                                        </trans>
+                                    </tspan>
+                                    <tspan x="121.1" y="290.6" class="st0 st1 st2">
+                                        ="</tspan><tspan x="145.3" y="290.6" class="st5 st1 st2"><trans data-src="F1 car in the gravel" data-dst="在砾石的F1赛车">在砾石的F1赛车</trans></tspan><tspan x="387.5" y="290.6" class="st0 st1 st2"><trans data-src="&quot;" data-dst="“">“</trans></tspan><tspan x="0" y="319.7" class="st0 st1 st2"></tspan><tspan x="84.8" y="319.7" class="st4 st1 st2"><trans data-src="src" data-dst="SRC">SRC</trans></tspan><tspan x="121.1" y="319.7" class="st0 st1 st2">="
+                                    </tspan>
+                                    <tspan x="145.3" y="319.7" class="st5 st1 st2">
+                                        <trans data-src="f1-689.jpg" data-dst="f1-689.jpg">
+                                            f1-689.jpg
+                                        </trans>
+                                    </tspan>
+                                    <tspan x="266.4" y="319.7" class="st0 st1 st2">
+                                        <trans data-src="&quot;" data-dst="“">
+                                            “
+                                        </trans>
+                                    </tspan>
+                                    <tspan x="0" y="348.7" class="st0 st1 st2">
+                                    </tspan>
+                                    <tspan x="84.8" y="348.7" class="st4 st1 st2">
+                                        <trans data-src="srcset" data-dst="srcset">
+                                            srcset
+                                        </trans>
+                                    </tspan>
+                                    <tspan x="157.4" y="348.7" class="st0 st1 st2">
+                                        ="</tspan><tspan x="181.6" y="348.7" class="st5 st1 st2"><trans data-src="f1-689.jpg 689w," data-dst="f1-689.jpg 689w，">f1-689.jpg 689w，</trans></tspan><tspan x="0" y="377.8" class="st5 st1 st2"><trans data-src="f1-1378.jpg 1378w," data-dst="f1-1378.jpg 1378w，">f1-1378.jpg 1378w，</trans></tspan><tspan x="0" y="406.8" class="st5 st1 st2"><trans data-src="f1-500.jpg 500w," data-dst="f1-500.jpg 500w，">f1-500.jpg 500w，</trans></tspan><tspan x="0" y="435.9" class="st5 st1 st2"><trans data-src="f1-1000.jpg 1000w" data-dst="f1-1000.jpg 1000w">f1-1000.jpg 1000w</trans></tspan><tspan x="387.5" y="435.9" class="st0 st1 st2"><trans data-src="&quot;" data-dst="“">“</trans></tspan><tspan x="0" y="465" class="st0 st1 st2"></tspan><tspan x="84.8" y="465" class="st4 st1 st2"><trans data-src="sizes" data-dst="尺寸">尺寸</trans></tspan><tspan x="145.3" y="465" class="st0 st1 st2">="
+                                    </tspan>
+                                    <tspan x="169.5" y="465" class="st5 st1 st2">
+                                        <trans data-src="(min-width: 1066px) 689px," data-dst="（最小宽度：1066px）689px，">
+                                            （最小宽度：1066px）689px，
+                                        </trans>
+                                    </tspan>
+                                    <tspan x="0" y="494" class="st5 st1 st2">
+                                        <trans data-src="calc(75vw - 137px)" data-dst="钙（75vw - 137px）">
+                                            钙（75vw - 137px）
+                                        </trans>
+                                    </tspan>
+                                    <tspan x="387.5" y="494" class="st0 st1 st2">
+                                        <trans data-src="&quot;&gt;" data-dst="“&amp;#62;">
+                                            “&amp;#62;
+                                        </trans>
+                                    </tspan>
+                                    <tspan x="0" y="523.1" class="st0 st1 st2">
+                                        &lt;/
+                                    </tspan>
+                                    <tspan x="24.2" y="523.1" class="st3 st1 st2">
+                                        <trans data-src="picture" data-dst="图片">
+                                            图片
+                                        </trans>
+                                    </tspan>
+                                    <tspan x="109" y="523.1" class="st0 st1 st2">
+                                        <trans data-src="&gt;" data-dst="&amp;#62;">
+                                            &amp;#62;
+                                        </trans>
+                                    </tspan>
+                                </text>
+                                <path class="st6" d="M336.5 166.3l-305 2.5-1-98 305-2.4z">
+                                </path>
+                                <text transform="matrix(1 -.008 .008 1 30.88 105.816)">
+                                    <tspan x="0" y="0" class="st7 st8">
+                                        <trans data-src="If this query matches the window," data-dst="如果这个查询匹配窗口，">
+                                            如果这个查询匹配窗口，
+                                        </trans>
+                                    </tspan>
+                                    <tspan x="0" y="40" class="st7 st8">
+                                        <trans data-src="use these to select the src" data-dst="使用这些选择SRC">
+                                            使用这些选择SRC
+                                        </trans>
+                                    </tspan>
+                                </text>
+                                <path class="st9" d="M387.2 68.6c-6 44.8-47.7 41-47.7 41">
+                                </path>
+                                <path class="st10" d="M379.5 73.5L387 71l7 3.6-6-17.6z">
+                                </path>
+                                <path class="st9" d="M102.5 213C74.8 202.5 82 153.6 82 153.6">
+                                </path>
+                                <path class="st10" d="M98.6 204.5l1.6 7.7-4.4 6.4L114 215z">
+                                </path>
+                                <text transform="translate(462 349)" class="st7 st8">
+                                    <trans data-src="…else use these" data-dst="其他人使用这些…">
+                                        其他人使用这些…
+                                    </trans>
+                                </text>
+                                <path class="st9" d="M450.6 425.2C505.8 420 533 396.5 533 360">
+                                </path>
+                                <path class="st10" d="M456.6 432l-3.6-7 2.5-7.5L439 426z">
+                                </path>
+                            </svg>
+                        </figure>
+                        <ul>
+                            <li>
+                                <trans data-src="You can have as many" data-dst="你可以有很多的">
+                                    你可以有很多的
+                                </trans>
+                                <code>
+                                    &lt;source&gt;
+                                </code>
+                                <trans data-src="s as you want" data-dst="为你想要的">
+                                    为你想要的
+                                </trans>
+                            </li>
+                            <li>
+                                <trans data-src="You" data-dst="你">
+                                    你
+                                </trans>
+                                <em>
+                                    <trans data-src="must" data-dst="必须">
+                                        必须
+                                    </trans>
+                                </em>
+                                <trans data-src="include an" data-dst="包括一个">
+                                    包括一个
+                                </trans>
+                                <code>
+                                    &lt;img&gt;
+                                </code>
+                            </li>
+                            <li>
+                                <trans data-src="The media query on" data-dst="媒体查询">
+                                    媒体查询
+                                </trans>
+                                <code>
+                                    &lt;source&gt;
+                                </code>
+                                <trans data-src="will always be obeyed, it&#39;s not just a hint" data-dst="永远遵守，它不只是一个暗示">
+                                    永远遵守，它不只是一个暗示
+                                </trans>
+                            </li>
+                            <li>
+                                <trans data-src="The media query is based on the window&#39;s width, not the" data-dst="媒体查询是基于窗口的宽度，不">
+                                    媒体查询是基于窗口的宽度，不
+                                </trans>
+                                <code>
+                                    &lt;img&gt;
+                                </code>
+                            </li>
+                            <li>
+                                <trans data-src="The first matching" data-dst="第一个匹配的">
+                                    第一个匹配的
+                                </trans>
+                                <code>
+                                    &lt;source&gt;
+                                </code>
+                                <trans data-src="will be used, so the order matters" data-dst="将被使用，所以订单事宜" style="background: transparent;">
+                                    将被使用，所以订单事宜
+                                </trans>
+                            </li>
+                            <li>
+                                <trans data-src="If no matching" data-dst="如果没有匹配的" style="background: transparent;">
+                                    如果没有匹配的
+                                </trans>
+                                <code>
+                                    &lt;source&gt;
+                                </code>
+                                <trans data-src="is found, the" data-dst="被发现的" style="background: transparent;">
+                                    被发现的
+                                </trans>
+                                <code>
+                                    &lt;img&gt;
+                                </code>
+                                <trans data-src="is used" data-dst="使用">
+                                    使用
+                                </trans>
+                            </li>
+                            <li>
+                                <trans data-src="The" data-dst="这个">
+                                    这个
+                                </trans>
+                                <code>
+                                    &lt;img&gt;
+                                </code>
+                                <trans data-src="must appear after all" data-dst="必须出现在所有">
+                                    必须出现在所有
+                                </trans>
+                                <code>
+                                    &lt;source&gt;
+                                </code>
+                                <trans data-src="s" data-dst="S">
+                                    S
+                                </trans>
+                            </li>
+                            <li>
+                                <code>
+                                    &lt;source&gt;
+                                </code>
+                                <trans data-src="doesn&#39;t support" data-dst="不支持">
+                                    不支持
+                                </trans>
+                                <code>
+                                    <trans data-src="src" data-dst="SRC">
+                                        SRC
+                                    </trans>
+                                </code>
+                                <trans data-src=", but" data-dst="，但">
+                                    ，但
+                                </trans>
+                                <code>
+                                    srcset="whatever.jpg"
+                                </code>
+                                <trans data-src="works just as well" data-dst="作品一样好">
+                                    作品一样好
+                                </trans>
+                            </li>
+                        </ul>
+                        <p>
+                            <trans data-src="Once the" data-dst="一旦">
+                                一旦
+                            </trans>
+                            <code>
+                                &lt;source&gt;
+                            </code>
+                            <trans data-src="or" data-dst="或">
+                                或
+                            </trans>
+                            <code>
+                                &lt;img&gt;
+                            </code>
+                            <trans data-src="is selected, the" data-dst="的选择，">
+                                的选择，
+                            </trans>
+                            <code>
+                                srcset
+                            </code>
+                            <trans data-src="and" data-dst="和">
+                                和
+                            </trans>
+                            <code>
+                                <trans data-src="sizes" data-dst="尺寸">
+                                    尺寸
+                                </trans>
+                            </code>
+                            <trans data-src="attributes work as in previous examples, so you can mix and match techniques." data-dst="属性在前面的例子中，你可以混合和匹配技术。">
+                                属性在前面的例子中，你可以混合和匹配技术。
+                            </trans>
+                        </p>
+                        <p>
+                            <trans data-src="The" data-dst="这个">
+                                这个
+                            </trans>
+                            <code>
+                                &lt;picture&gt;
+                            </code>
+                            <trans data-src="element" data-dst="元素">
+                                元素
+                            </trans>
+                            <a href="http://caniuse.com/#search=picture">
+                                <trans data-src="works in Chrome, Firefox, and Opera" data-dst="在Chrome，Firefox，Opera">
+                                    在Chrome，Firefox，Opera
+                                </trans>
+                            </a>
+                            <trans data-src=", and falls back to the" data-dst="，落回">
+                                ，落回
+                            </trans>
+                            <code>
+                                &lt;img&gt;
+                            </code>
+                            <trans data-src="in other browsers. I&#39;m told it" data-dst="在其他浏览器。我告诉它" style="background: transparent;">
+                                在其他浏览器。我告诉它
+                            </trans>
+                            <a href="https://twitter.com/jacobrossi/status/639471869473656832">
+                                <trans data-src="might make it into the next release of Edge" data-dst="可能会在下一个版本的边缘">
+                                    可能会在下一个版本的边缘
+                                </trans>
+                            </a>
+                            <trans data-src=", which is nice." data-dst="，这是很好的。">
+                                ，这是很好的
+                            </trans>
+                        </p>
+                        <h3 id="live-example_2">
+                            <trans data-src="Live example" data-dst="活生生的例子">
+                                活生生的例子
+                            </trans>
+                        </h3>
+                        <figure class="full-figure">
+                            <picture>
+                                <source media="(max-width: 800px)" srcset="/static/posts/responsive-images/f1-focused-800.867f0b0b832f.jpg 800w,/static/posts/responsive-images/f1-focused-1406.jpg 1406w" sizes="(min-width: 530px) calc(100vw - 96px),100vw"/>
+                                <img style="width:100%" alt="F1 car in the gravel" src="./响应图像的解剖jakearchibald.com_files/f1-689.d6ed1b428a74.jpg" srcset="/static/posts/responsive-images/f1-689.d6ed1b428a74.jpg 689w,/static/posts/responsive-images/f1-1378.jpg 1378w,/static/posts/responsive-images/f1-500.jpg 500w,/static/posts/responsive-images/f1-1000.jpg 1000w" sizes="(min-width: 1066px) 689px,calc(75vw - 137px)"/>
+                            </picture>
+                        </figure>
+                        <h2 id="varying-on-type">
+                            <trans data-src="Varying on type" data-dst="不同类型">
+                                不同类型
+                            </trans>
+                        </h2>
+                        <p>
+                            <trans data-src="This method allows you to serve better-optimised formats to browsers that support them." data-dst="这种方法可以让你更好地优化格式的浏览器支持。">
+                                这种方法可以让你更好地优化格式的浏览器支持。
+                            </trans>
+                        </p>
+                        <figure class="img-diagram-figure">
+                            <div style="padding-top:28%">
+                            </div>
+                            <svg class="img-d-4" viewBox="0 0 679 187">
+                                <style>
+                                    .img-d-4 .st0{fill:#5F6464; white-space: pre;} .img-d-4 .st1{font-family:Inconsolata; font-weight: bold;} .img-d-4 .st2{font-size:25.7851px;} .img-d-4 .st3{fill:#C92C2C;} .img-d-4 .st4{fill:#309D47;} .img-d-4 .st5{fill:#1990B8;} .img-d-4 .st6{fill:none;} .img-d-4 .st7{font-family:'Just Another Hand';} .img-d-4 .st8{font-size:41px;} .img-d-4 .st9{fill:none;stroke:#ED1F24;stroke-width:3;stroke-miterlimit:10;} .img-d-4 .st10{fill:#ED1F24;}
+                                </style>
+                                <text transform="matrix(1 -.018 .018 1 3.594 22.076)">
+                                    <tspan x="0" y="0" class="st0 st1 st2">
+                                        &lt;
+                                    </tspan>
+                                    <tspan x="12.9" y="0" class="st3 st1 st2">
+                                        <trans data-src="picture" data-dst="图片">
+                                            图片
+                                        </trans>
+                                    </tspan>
+                                    <tspan x="103.1" y="0" class="st0 st1 st2">
+                                        <trans data-src="&gt;" data-dst="&amp;#62;">
+                                            &amp;#62;
+                                        </trans>
+                                    </tspan>
+                                    <tspan x="0" y="30.9" class="st0 st1 st2">
+                                        &lt;
+                                    </tspan>
+                                    <tspan x="38.7" y="30.9" class="st3 st1 st2">
+                                        <trans data-src="source" data-dst="来源">
+                                            来源
+                                        </trans>
+                                    </tspan>
+                                    <tspan x="116" y="30.9" class="st0 st1 st2">
+                                    </tspan>
+                                    <tspan x="128.9" y="30.9" class="st4 st1 st2">
+                                        <trans data-src="type" data-dst="类型">
+                                            类型
+                                        </trans>
+                                    </tspan>
+                                    <tspan x="180.5" y="30.9" class="st0 st1 st2">
+                                        ="</tspan><tspan x="206.3" y="30.9" class="st5 st1 st2"><trans data-src="image/webp" data-dst="WebP图像/">WebP图像/</trans></tspan><tspan x="335.2" y="30.9" class="st0 st1 st2"><trans data-src="&quot;" data-dst="“">“</trans></tspan><tspan x="0" y="61.9" class="st0 st1 st2"></tspan><tspan x="128.9" y="61.9" class="st4 st1 st2"><trans data-src="srcset" data-dst="srcset">srcset</trans></tspan><tspan x="206.3" y="61.9" class="st0 st1 st2">="
+                                    </tspan>
+                                    <tspan x="232.1" y="61.9" class="st5 st1 st2">
+                                        <trans data-src="snow.webp" data-dst="snow.webp">
+                                            snow.webp
+                                        </trans>
+                                    </tspan>
+                                    <tspan x="348.1" y="61.9" class="st0 st1 st2">
+                                        <trans data-src="&quot;&gt;" data-dst="“&amp;#62;">
+                                            “&amp;#62;
+                                        </trans>
+                                    </tspan>
+                                    <tspan x="0" y="92.8" class="st0 st1 st2">
+                                        &lt;
+                                    </tspan>
+                                    <tspan x="38.7" y="92.8" class="st3 st1 st2">
+                                        <trans data-src="img" data-dst="IMG">
+                                            IMG
+                                        </trans>
+                                    </tspan>
+                                    <tspan x="77.4" y="92.8" class="st0 st1 st2">
+                                    </tspan>
+                                    <tspan x="90.2" y="92.8" class="st4 st1 st2">
+                                        <trans data-src="alt" data-dst="中高音">
+                                            中高音
+                                        </trans>
+                                    </tspan>
+                                    <tspan x="128.9" y="92.8" class="st0 st1 st2">
+                                        ="</tspan><tspan x="154.7" y="92.8" class="st5 st1 st2"><trans data-src="Hut in the snow" data-dst="小屋在雪中">小屋在雪中</trans></tspan><tspan x="348.1" y="92.8" class="st0 st1 st2"><trans data-src="&quot;" data-dst="“">“</trans></tspan><tspan x="0" y="123.8" class="st0 st1 st2"></tspan><tspan x="90.2" y="123.8" class="st4 st1 st2"><trans data-src="src" data-dst="SRC">SRC</trans></tspan><tspan x="128.9" y="123.8" class="st0 st1 st2">="
+                                    </tspan>
+                                    <tspan x="154.7" y="123.8" class="st5 st1 st2">
+                                        <trans data-src="snow.jpg" data-dst="snow.jpg">
+                                            snow.jpg
+                                        </trans>
+                                    </tspan>
+                                    <tspan x="257.9" y="123.8" class="st0 st1 st2">
+                                        <trans data-src="&quot;&gt;" data-dst="“&amp;#62;">
+                                            “&amp;#62;
+                                        </trans>
+                                    </tspan>
+                                    <tspan x="0" y="154.7" class="st0 st1 st2">
+                                        &lt;/
+                                    </tspan>
+                                    <tspan x="25.8" y="154.7" class="st3 st1 st2">
+                                        <trans data-src="picture" data-dst="图片">
+                                            图片
+                                        </trans>
+                                    </tspan>
+                                    <tspan x="116" y="154.7" class="st0 st1 st2">
+                                        <trans data-src="&gt;" data-dst="&amp;#62;">
+                                            &amp;#62;
+                                        </trans>
+                                    </tspan>
+                                </text>
+                                <path class="st6" d="M659 110.7l-228.7 2-.8-98 228.6-2z">
+                                </path>
+                                <text transform="matrix(1 -.008 .008 1 429.879 49.61)">
+                                    <tspan x="0" y="0" class="st7 st8">
+                                        <trans data-src="If this type is supported," data-dst="如果这种类型的支持，">
+                                            如果这种类型的支持，
+                                        </trans>
+                                    </tspan>
+                                    <tspan x="0" y="40" class="st7 st8">
+                                        <trans data-src="use this" data-dst="使用此">
+                                            使用此
+                                        </trans>
+                                    </tspan>
+                                </text>
+                                <path class="st9" d="M368.6 40c37.6-2 58-2 58-2">
+                                </path>
+                                <path class="st10" d="M374.4 47l-3.4-7 2.8-7.4-16.8 8z">
+                                </path>
+                                <path class="st9" d="M395 69.5c33.7-1 34.5 2.8 34.5 2.8">
+                                </path>
+                                <path class="st10" d="M401 76.5l-3.5-7 2.8-7.4-16.8 8z">
+                                </path>
+                                <text transform="translate(366 141.5)" class="st7 st8">
+                                    <trans data-src="…else this" data-dst="否则这…">
+                                        否则这…
+                                    </trans>
+                                </text>
+                                <path class="st9" d="M307 133.4c37.3-1.5 55.5.5 55.5.5">
+                                </path>
+                                <path class="st10" d="M313 140.6l-3.5-7 2.8-7.4-16.8 7.8z">
+                                </path>
+                            </svg>
+                        </figure>
+                        <ul>
+                            <li>
+                                <code>
+                                    type
+                                </code>
+                                <trans data-src="is a mime type" data-dst="是一个MIME类型">
+                                    是一个MIME类型
+                                </trans>
+                            </li>
+                            <li>
+                                <trans data-src="You can have multiple sources and mix" data-dst="你可以有多个来源和混合">
+                                    你可以有多个来源和混合
+                                </trans>
+                                <code>
+                                    type
+                                </code>
+                                <trans data-src="with" data-dst="与">
+                                    与
+                                </trans>
+                                <code>
+                                    <trans data-src="media" data-dst="媒体">
+                                        媒体
+                                    </trans>
+                                </code>
+                                <trans data-src="," data-dst="，">
+                                    ，
+                                </trans>
+                                <code>
+                                    srcset
+                                </code>
+                                <trans data-src=", and even" data-dst="，甚至">
+                                    ，甚至
+                                </trans>
+                                <code>
+                                    <trans data-src="sizes" data-dst="尺寸">
+                                        尺寸
+                                    </trans>
+                                </code>
+                                <trans data-src="to create something truly monstrous/awesome" data-dst="创造一些真正可怕的/可怕">
+                                    创造一些真正可怕的/可怕
+                                </trans>
+                            </li>
+                        </ul>
+                        <p>
+                            <trans data-src="This" data-dst="这">
+                                这
+                            </trans>
+                            <a href="http://caniuse.com/#search=picture">
+                                <trans data-src="works in Chrome, Firefox, and Opera" data-dst="在Chrome，Firefox，Opera">
+                                    在Chrome，Firefox，Opera
+                                </trans>
+                            </a>
+                            <trans data-src=", and falls back to the" data-dst="，落回">
+                                ，落回
+                            </trans>
+                            <code>
+                                &lt;img&gt;
+                            </code>
+                            <trans data-src="in other browsers." data-dst="在其他浏览器。">
+                                在其他浏览器
+                            </trans>
+                        </p>
+                        <h3 id="live-example_3">
+                            <trans data-src="Live example" data-dst="活生生的例子">
+                                活生生的例子
+                            </trans>
+                        </h3>
+                        <figure class="full-figure">
+                            <picture>
+                                <source type="image/webp" srcset="/static/posts/responsive-images/snow.c9eadd40e48a.webp"/>
+                                <img style="width:100%" alt="Hut in the snow" src="./响应图像的解剖jakearchibald.com_files/snow.9f5756525434.jpg"/>
+                            </picture>
+                        </figure>
+                        <h2 id="further-reading">
+                            <trans data-src="Further reading" data-dst="进一步的阅读">
+                                进一步的阅读
+                            </trans>
+                        </h2>
+                        <p>
+                            <trans data-src="Hopefully the above helps as a kind of quick reference to the various use-cases, but if not, dig into these:" data-dst="希望以上的帮助作为一种对各种情况下使用快速参考，但如果没有，挖到这些：">
+                                希望以上的帮助作为一种对各种情况下使用快速参考，但如果没有，挖到这些：
+                            </trans>
+                        </p>
+                        <ul>
+                            <li>
+                                <a href="http://blog.cloudfour.com/responsive-images-101-definitions/">
+                                    <trans data-src="A 10-part novella on responsive images" data-dst="在10部中篇小说响应图像">
+                                        在10部中篇小说响应图像
+                                    </trans>
+                                </a>
+                                <trans data-src="- by Jason Grigsby" data-dst="格雷斯比家的备用杰森">
+                                    格雷斯比家的备用杰森
+                                </trans>
+                            </li>
+                            <li>
+                                <a href="https://dev.opera.com/articles/responsive-images/">
+                                    <trans data-src="Responsive Images: Use Cases and Code Snippets" data-dst="响应图像：用例和代码片段">
+                                        响应图像：用例和代码片段
+                                    </trans>
+                                </a>
+                                <trans data-src="- similar to this article, but covers more combinations of use-cases" data-dst="类似于这篇文章，但覆盖更多的用例组合">
+                                    类似于这篇文章，但覆盖更多的用例组合
+                                </trans>
+                            </li>
+                            <li>
+                                <a href="https://developers.google.com/web/updates/2015/09/automating-resource-selection-with-client-hints">
+                                    <trans data-src="Client hints" data-dst="客户端提示">
+                                        客户端提示
+                                    </trans>
+                                </a>
+                                <trans data-src="- a server-side alternative to responsive images" data-dst="-选择一个服务器端响应图像">
+                                    -选择一个服务器端响应图像
+                                </trans>
+                            </li>
+                        </ul>
+                        <p>
+                            <small>
+                                <trans data-src="Thanks to Mike Hall, Jason Grigsby, Simon Peters, and Yoav Weiss for proofreading and point-sharpening." data-dst="感谢Mike Hall，Jason Grigsby，Simon Peters，和Yoav Weiss校对和刃磨。">
+                                    感谢Mike Hall，Jason Grigsby，Simon Peters，和Yoav Weiss校对和刃磨。
+                                </trans>
+                            </small>
+                        </p>
+                    </div>
+                    <div class="comments" id="comments">
+                        <div id="disqus_thread">
+                        </div>
+                        <script>
+                            var disqus_shortname = 'jakearchibald';  var disqus_identifier = '2015/anatomy-of-responsive-images';  var disqus_title = 'The anatomy of responsive images';  var disqus_url = 'http://jakearchibald.com/2015/anatomy-of-responsive-images';  (function() {    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';    document.getElementsByTagName('head')[0].appendChild(dsq);  })();
+                        </script>
+                        <noscript>
+                            <trans data-src="I hate that Disqus doesn&#39;t work without JavaScript. It should." data-dst="我讨厌Disqus不工作没有JavaScript。它应该。">
+                                我讨厌Disqus不工作没有JavaScript。它应该。
+                            </trans>
+                        </noscript>
+                        <a href="http://disqus.com/" class="dsq-brlink">
+                            <trans data-src="comments powered by" data-dst="评论由">
+                                评论由
+                            </trans>
+                            <span class="logo-disqus">
+                                <trans data-src="Disqus" data-dst="Disqus">
+                                    Disqus
+                                </trans>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+                <div class="side">
+                    <section>
+                        <figure class="my-big-face">
+                            <h1>
+                                <img src="./响应图像的解剖jakearchibald.com_files/me.439a7c69520f.jpg" alt="Jake Archibald"/>
+                            </h1>
+                        </figure>
+                        <p>
+                            <trans data-src="Hello, I’m Jake and that is my face. I’m a developer advocate for Google Chrome." data-dst="你好，我是卫国明，这是我的脸。我是一个谷歌浏览器开发人员倡导者。" style="background: transparent;">
+                                你好，我是卫国明，这是我的脸。我是一个谷歌浏览器开发人员倡导者。
+                            </trans>
+                        </p>
+                        <h1>
+                            <trans data-src="Elsewhere" data-dst="在别处">
+                                在别处
+                            </trans>
+                        </h1>
+                        <ul class="icon-list link-list">
+                            <li>
+                                <a href="https://twitter.com/jaffathecake">
+                                    <span class="i i-social twitter">
+                                    </span>
+                                    <trans data-src="Twitter" data-dst="推特">
+                                        推特
+                                    </trans>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="http://lanyrd.com/profile/jaffathecake/">
+                                    <span class="i i-social lanyrd">
+                                    </span>
+                                    <trans data-src="Lanyrd" data-dst="lanyrd">
+                                        lanyrd
+                                    </trans>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://github.com/jakearchibald/">
+                                    <span class="i i-social github">
+                                    </span>
+                                    <trans data-src="Github" data-dst="GitHub">
+                                        GitHub
+                                    </trans>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://plus.google.com/116237864387312784020">
+                                    <span class="i i-social gplus">
+                                    </span>
+                                    <trans data-src="Google+" data-dst="谷歌">
+                                        谷歌
+                                    </trans>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="http://www.flickr.com/photos/jaffathecake/">
+                                    <span class="i i-social flickr">
+                                    </span>
+                                    <trans data-src="Flickr" data-dst="Flickr" style="background: transparent;">
+                                        Flickr
+                                    </trans>
+                                </a>
+                            </li>
+                        </ul>
+                        <h1>
+                            <trans data-src="Contact" data-dst="联系">
+                                联系
+                            </trans>
+                        </h1>
+                        <p>
+                            <trans data-src="Feel free to" data-dst="感到自由" style="background: transparent;">
+                                感到自由
+                            </trans>
+                            <a href="mailto:jaffathecake@gmail.com">
+                                <trans data-src="throw me an email" data-dst="给我一个电子邮件">
+                                    给我一个电子邮件
+                                </trans>
+                            </a>
+                            <trans data-src=",    unless you&#39;re a recruiter, in which case destroy every email-capable    device you own to prevent this possibility." data-dst="，除非你是一个招聘人员，在这种情况下，摧毁所有的电子邮件功能的设备你自己来防止这种可能性。" style="background: transparent;">
+                                ，除非你是一个招聘人员，在这种情况下，摧毁所有的电子邮件功能的设备你自己来防止这种可能性。
+                            </trans>
+                        </p>
+                    </section>
+                </div>
+                <script>
+                    <trans data-src="ready.push(&#39;aboutMeSidebar&#39;);" data-dst="准备推（&amp;#39;aboutmesidebar”）；">
+                        准备推（&amp;#39;aboutmesidebar”）；
+                    </trans>
+                </script>
+            </div>
+        </div>
+        <div style="position: static; display: block; width: 0px; height: 0px; border: none; padding: 0px; margin: 0px;">
+            <div id="trans-tooltip" style="visibility: hidden; left: 688px; top: 377px;">
+                <div id="tip-left-top" style="background: url(&quot;chrome-extension://ikkbfngojljohpekonpldkamedehakni/imgs/map/tip-left-top.png&quot;);">
+                </div>
+                <div id="tip-top" style="width: 308px; background: url(&quot;chrome-extension://ikkbfngojljohpekonpldkamedehakni/imgs/map/tip-top.png&quot;) repeat-x;">
+                </div>
+                <div id="tip-right-top" style="background: url(&quot;chrome-extension://ikkbfngojljohpekonpldkamedehakni/imgs/map/tip-right-top.png&quot;);">
+                </div>
+                <div id="tip-right" style="height: 126px; background: url(&quot;chrome-extension://ikkbfngojljohpekonpldkamedehakni/imgs/map/tip-right.png&quot;) repeat-y;">
+                </div>
+                <div id="tip-right-bottom" style="background: url(&quot;chrome-extension://ikkbfngojljohpekonpldkamedehakni/imgs/map/tip-right-bottom.png&quot;);">
+                </div>
+                <div id="tip-bottom" style="width: 301px; background: url(&quot;chrome-extension://ikkbfngojljohpekonpldkamedehakni/imgs/map/tip-bottom.png&quot;) repeat-x;">
+                </div>
+                <div id="tip-left-bottom" style="background: url(&quot;chrome-extension://ikkbfngojljohpekonpldkamedehakni/imgs/map/tip-left-bottom.png&quot;);">
+                </div>
+                <div id="tip-left" style="height: 133px; background: url(&quot;chrome-extension://ikkbfngojljohpekonpldkamedehakni/imgs/map/tip-left.png&quot;);">
+                </div>
+                <div id="trans-content">
+                    <div>
+                        <div style="padding:13px 13px;width: 266px;">
+                            <p>
+                                原文：
+                            </p>
+                            <div style="width:250px;white-space:normal;">
+                                Flickr
+                            </div>
+                            <div>
+                                <img src="chrome-extension://ikkbfngojljohpekonpldkamedehakni/imgs/map/logo.png" style="height:22px;margin-top:12px;"/>
+                                <a href="https://jakearchibald.com/2015/anatomy-of-responsive-images/#" id="check_in_fanyi_baidu_com_333" style="float:right;margin-top:21px;margin-right:-10px;text-decoration: none;color: #0066ff;letter-spacing:1px;">
+                                    到百度翻译中打开〉
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="tip-arrow-bottom" style="visibility: hidden; left: 834px; top: 508px; background: url(&quot;chrome-extension://ikkbfngojljohpekonpldkamedehakni/imgs/map/tip-arrow-bottom.png&quot;);">
+            </div>
+            <div id="tip-arrow-top" style="visibility: hidden; left: 916px; top: 401px; background: url(&quot;chrome-extension://ikkbfngojljohpekonpldkamedehakni/imgs/map/tip-arrow-top.png&quot;);">
+            </div>
+        </div>
+    </body>
+</html>

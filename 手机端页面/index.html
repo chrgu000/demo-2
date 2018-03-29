@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+		<style type="text/css">
+			*{
+				margin:0;
+				padding:0;
+			}
+			body{
+				font-size:'黑体';
+			}
+			img{
+				border:0;
+			}
+
+			header{
+				height:40px;
+				background:#393A3F;
+				color:white;
+			}
+			header > span:first-child{
+				padding:20px;
+				font-size:22px;
+				line-height: 40px;
+				cursor:pointer;
+			}
+			header > span:first-child:active{
+				opacity:0.5;
+			}
+			.login{
+				font-size:18px;
+				color:#FAFBFF;
+			}
+			.title{
+				width:calc(100% - 40px);
+				height:139px;
+				margin:43px auto;
+				border-bottom:1px solid #EEEEEE;
+				text-align:center;
+			}
+			.title > h2{
+				font-style:normal;
+				font-size:18px;
+				color:#1D1D1D;
+				margin-top:4px;
+			}
+			/*内容设置*/
+			.center{
+					width:calc(100% - 40px);
+					height:172px;
+					margin:0 auto;
+					text-align:center;
+
+			}
+
+			.center span:first-child{
+				color:#1E1E1E;
+				font-size:16px;
+				text-align:center;
+				font-weight:bold;
+				display:block;
+				height:13px;
+			}
+			.center span:nth-of-type(2){
+				color:#8A8A8A;
+				font-size:0.9em;
+
+			}
+			.center span:nth-of-type(2):before{
+				content : '';
+				display:inline-block;
+				width:5px;
+				height: 5px;
+				background:#808080;
+				border-radius:50%;
+				position:relative;
+				right:16px;
+			}
+			/*登录按钮*/
+			button{
+				width: 100%;
+				height:40px;
+				background:#04BE01;
+				text-align:center;
+				border-radius:5px;
+				outline:none;
+				border:none;
+				cursor:pointer;
+				font-size:1em;
+				color:white;
+				margin-top:47px;
+			}
+			button:active{
+				opacity:0.5;
+			}
+		</style>
+
+	</head>
+	<body>
+		<!--头部-->
+		<header>
+			<span>X</span>
+			<span class="login">微信登录</span>
+		</header>
+		<!--标题-->
+		<div class="title">
+			<img src="images/logo.png" alt=""/>
+			<h2>熊猫直播APP</h2>
+		</div>
+		<!--内容-->
+		<div class="center">
+			<span>登陆后该应用将获得以下权限</span><br>
+			<span>获得你的公开信息(昵称,头像等)</span><br>
+			<button>确认登录</button>
+		</div>
+	</body>
+</html>

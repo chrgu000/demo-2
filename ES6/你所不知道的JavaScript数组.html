@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>你所不知道的JavaScript数组</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+
+</body>
+</html>
+<script type="text/javascript">
+
+  /*
+    1. 原始缓冲区的创建
+    通过 ArrayBuffer 这个构造函数可以创建一个原始缓冲区：
+        Buffer 缓冲区
+   */
+
+   var buffer  = new ArrayBuffer(30);
+   console.log(
+      buffer
+   );
+
+   /*
+    buffer 实例拥有一个 byteLength 的属性，用于获取 buffer 的 size，一个只有 IE11+ 以及 ios6+ 支持的 slice 方法，用于对 buffer 长度进行截取操作。
+      ArrayBuffer slice(
+        unsigned long begin
+        unsigned long end Optional
+      );
+
+
+    */
+
+
+    // 可以测试这个 DEMO：
+
+    var buffer = new ArrayBuffer(12);
+    var x = new Int32Array(buffer);
+        x[1] = 1234;
+    var slice = buffer.slice(4);
+    var y = new Int32Array(slice);
+    console.log(x[1], y[0]);
+        x[1] = 6789;
+    console.log(x[1], y[0]);
+
+    /*
+      2. 类型化数组
+      类型化数组类型表示可编制索引和操纵的 ArrayBuffer 对象 的各种视图。 所有数组类型的长度均固定。
+
+      名称  大小（以字节为单位）  描述
+      Int8Array 1 8 位二补码有符号整数
+      Uint8Array  1 8 位无符号整数
+      Int16Array  2 16 位二补码有符号整数
+      Uint16Array 2 16 位无符号整数
+      Int32Array  4 32 位二补码有符号整数
+      Uint32Array 4 32 位无符号整数
+      Float32Array  4 32 位 IEEE 浮点数
+      Float64Array  8 64 位 IEEE 浮点数
+      Int 就是整型，Uint 为无符号整形，Float 为浮点型，这些是 C 语言中的基本概念，我就不具体解释了。由于这些视图化结构都是大同小异，本文只对 Float32Array 类型作说明，读者可以举一反三。
+
+      Float32Array 跟 Array 是十分类似的，只不过他每一个元素都是都是一个 32位（4字节） 的浮点型数据。Float32Array 一旦创建其大小不能再修改。
+
+      我们可以直接创建一个 Float32Array:
+     */
+
+     var x = new Float32Array(2);
+         x[0] = 17;
+    console.log(x[0], x[1]), x.length; // 17 0 2
+
+
+    // 需要有这么一个概念，他依然是一个数组，只不过该数组中的每个元素都是 Float 32 位的数据类型，再如：
+    var x = new Float32Array([17, -45.3]);
+    console.log(x[0], x[1], x.length);  // 17 -45.29999923706055 2
+
+
+    /*
+      我们把一个数组的值直接赋给了 x 这个 Float32Array 对象，那么在储存之前会将它转换成一个 32位浮点数。
+
+        由于该类数组的每个元素都是同一类型，所以在堆栈模型中，他们全部会被压入到栈之中，因此类型化数组都是值类型，他并不是引用类型！这个要引起注意，从下面的例子中也可以反映出来：
+     */
+
+
+     var x = new Float32Array([17, -45.3]);
+     var y = new Float32Array(x);
+     console.log(x[0], x[1], x.length); // 17 -45.29999923706055 2
+
+        x[0] = -2;
+    console.log(y[0]); // 17, y的值没变
+
+
+    /*
+      将 x 的值复制给 y，修改 x[0], y[0] 并没有变化。
+
+      除了上面的方式，我们还可以通过其他方式来创建一个类型化数组
+     */
+
+      var buffer = new ArrayBuffer(12);
+      var x = new Float32Array(buffer, 0, 2);
+      var y = new Float32Array(buffer, 4, 1);
+          x[1] = 7;
+      console.log(y[0]); // 7
+
+      /*
+        解释下这里为什么返回 7.
+              ArrayBuffer（12）
+        +-+-+-+-+-+-+-+-+-+-+-+-+-+
+        |0|1|2|3|4|5|6|7|8| | | | |
+        +-+-+-+-+-+-+-+-+-+-+-+-+-+
+        \              /
+          x (Float32Array)
+          offset：0
+          byteLength：4
+          length:2
+
+            ArrayBuffer（12）
+        +-+-+-+-+-+-+-+-+-+-+-+-+-+
+        |0|1|2|3|4|5|6|7|8| | | | |
+        +-+-+-+-+-+-+-+-+-+-+-+-+-+
+                \       /
+                     y
+
+              Created By Barret Lee
+
+
+       */
+
+       /*
+        看了上面的图解还有疑问么？我觉得我不用继续解释了。可以把 ArrayBuffer 的单位看成 1，而 Float32Array 的单位是 4.
+
+          3. DataView对象
+            DataView 对象对数据的操作更加细致，不过我觉得没啥意思，上面提到的各种类型化数组已经可以基本满足应用了，所以这里就一笔带过，一个简单的示例：
+
+        */
+
+        var buffer = new ArrayBuffer(12);
+        var x = new DataView(buffer, 0);
+            x.setInt8(0, 22);
+            x.setFloat32(1, Math.PI);
+        console.log(x.getInt8(0), x.getFloat32(1)); // 22 3.1415927410125732
+
+        /*
+
+          三、XHR2 中的 ArrayBuffer
+          ArrayBuffer 的应用特别广泛，无论是 WebSocket、WebAudio 还是 Ajax等等，前端方面只要是处理大数据或者想提高数据处理性能，那一定是少不了 ArrayBuffer 。
+
+          XHR2 并不是什么新东西，可能你用到了相关的特性，却不知这就是 XHR2 的内容。最主要的一个东西就是 xhr.responseType，他的作用是设置响应的数据格式，可选参数有："text"、"arraybuffer"、"blob"或"document"。请注意，设置（或忽略）xhr.responseType = '' 会默认将响应设为"text"。这里存在一个这样的对应关系：
+
+          请求            响应
+          text            DOMString
+          arraybuffer     ArrayBuffer
+          blob            Blob
+          document        Document
+          举个栗子：
+         */
+
+
+         var xhr = new XMLHttpRequest();
+              xhr.open('GET', './data/test.json', true);
+              xhr.responseType = 'arraybuffer';
+
+              xhr.onload = function(e) {
+                  // this.response == uInt8Array.buffer
+                  var uInt8Array = new Uint8Array(this.response);
+                  console.log(
+                      uInt8Array
+                  );
+              };
+
+              xhr.send();
+
+       // 我们在 xhr.responseType 中设置了属性为 arraybuffer，那么在拿到的数据中就可以用类型化数组来接受啦！
+
+
+       /*
+        四、小结
+          本文主要介绍了 Array 在堆栈模型中的存放方式，也详细描述了 ArrayBuffer 这个原始缓冲区的二进制数据类型，在 web 开发中，数据以及数据的储存是一个重要的部分，希望引起注意！
+        */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>

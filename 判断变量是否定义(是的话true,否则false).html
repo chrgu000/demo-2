@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/jquery v1.6.1.js"></script>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+      if((typeof haorooms != undefined) ){
+        console.log('1');
+      }
+
+      //判断变量是否定义(是的话true,否则false)
+      Object.prototype.isVar = function (a) {
+          var temp = isVar.toString().match(/function([^\(]*)\(([^\)]*)\)/);
+          var savaVar = temp[2].split(',').join('');
+          var str = eval('window.' + savaVar);
+          return (str == undefined);
+      };
+
+      console.log(Object.isVar(window.a));
+
+
+
+
+</script>

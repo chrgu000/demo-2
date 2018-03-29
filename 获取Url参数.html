@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>获取Url参数</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    var Url = "?onePageType=register&from=qrcode&recommendCode=10208932";
+
+    // 第一种 函数调用
+    function getParameterByName(name) {
+        name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+        var regexS = "[\\?&]" + name + "=([^&#]*)";
+        var regex = new RegExp(regexS);
+        var results = regex.exec(Url);
+        // var results = regex.exec(window.location.search);
+        if (results == null) {
+          return "";
+        } else {
+            return decodeURIComponent(results[1].replace(/\+/g, " "));
+        }
+    }
+
+    console.log(getParameterByName('recommendCode'));
+
+    // 第二种 函数调用
+    var urlParams = {};
+      (function() {
+          var match,
+              pl = /\+/g, // Regex for replacing addition symbol with a space
+              search = /([^&=]+)=?([^&]*)/g,
+              decode = function(s) {
+                  return decodeURIComponent(s.replace(pl, " "));
+              },
+              query = Url.substring(1);
+              // query = window.location.search.substring(1);
+          while (match = search.exec(query)) urlParams[decode(match[1])] = decode(match[2]);
+      })();
+
+      console.log(urlParams.recommendCode);
+
+       // 第三种对象获取
+      function getParameterByName2(name) {
+        var match = RegExp('[?&]' + name + '=([^&]*)').exec(Url);
+        // var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+        return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+    }
+
+    console.log(getParameterByName2('recommendCode'));
+
+
+    // 第四种 对象获取
+    var qs = (function(a) {
+    if (a == "") return {};
+    var b = {};
+    for (var i = 0; i < a.length; ++i)
+    {
+        var p=a[i].split('=');
+        if (p.length != 2) continue;
+        b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+    }
+    return b;
+  })(Url.substr(1).split('&'));
+  // })(window.location.search.substr(1).split('&'));
+
+  console.log(qs.recommendCode);
+
+
+
+
+</script>

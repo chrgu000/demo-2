@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+        .red{
+          color: red;
+        }
+        .blue{
+          color:blue;
+        }
+  </style>
+    <script src="../js/jquery-1.10.2.js"></script>
+</head>
+<body>
+      <button id="btn" class="red">按钮</button>
+</body>
+</html>
+<script>
+      $(function () {
+
+          $('#btn').on('click', function () {
+              if($(this).hasClass('red')){
+                $(this).addClass('blue');
+              }
+          })
+      })
+
+</script>

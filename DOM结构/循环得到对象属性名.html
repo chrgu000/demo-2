@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+  // 获取对象名
+  function myKey (o) {
+      if (typeof o !== 'object') throw TypeError();
+      var result = [];
+      for (var prop in o)
+        if (o.hasOwnProperty(prop)) {
+          result.push(prop);
+        }
+        return result;
+    }
+
+  var o = {
+    1 : 'aaa',
+    2 : 'bb'
+  }
+  var name = Object.keys(o);
+
+  var arr = myKey(o);
+
+
+  for (var i = 0; i < arr.length; i++) {
+    console.log(arr[i]);
+  }
+  /*console.log(arr[0]);
+  console.log(name[0]);*/
+
+
+
+</script>

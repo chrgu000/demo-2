@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/jquery v1.6.1.js"></script>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+     function Fn(anme) {
+       this.name = name;
+     }
+
+     Fn.prototype = {
+        test : '测试'
+     }
+     var fn1 = new Fn();
+     var fn2 = new Fn();
+     var fn3 = new Fn();
+      fn1.test = 'fn更改test';
+     console.log(fn1.test);
+     console.info(fn2.test);
+     fn2.__proto__.test = 'fn2更改';
+     console.info(fn3.test);
+
+
+
+
+     //定义类 ES6
+    class Person {
+      constructor(name, age) {
+            this.name = name;
+            this.age = age;
+      }
+      setSex(_sex) {
+            this.sex = _sex;
+      }
+    }
+
+    //ES5
+   /* function Person(name, age){
+          this.name = name;
+          this.age = age;
+    }
+
+    Person.prototype.setSex = function (_sex) {
+          this.sex = _sex;
+    }*/
+
+    let test = new Person('名称','年龄');
+      console.info(test);
+
+
+
+    class B {}
+    let b = new B();
+    console.info(b.constructor === B.prototype.constructor); //true
+
+
+
+
+</script>

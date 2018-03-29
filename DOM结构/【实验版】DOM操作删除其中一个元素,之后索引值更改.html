@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>
+            DOM操作删除其中一个元素,之后索引值更改
+        </title>
+        <script src="../js/jquery v1.6.1.js">
+        </script>
+    </head>
+    <body>
+        <ul id="ul">
+            <li>
+                这是第0个列表
+                <input type="button" value="按钮" onclick="delEle({i: 0})"/>
+                <input type="radio" name="ck" style="opacity : 0"/>
+            </li>
+            <li>
+                这是第1个列表
+                <input type="button" value="按钮" onclick="delEle({i: 1})"/>
+                <input type="radio" name="ck" style="opacity : 0"/>
+            </li>
+            <li>
+                这是第2个列表
+                <input type="button" value="按钮" onclick="delEle({i: 2})"/>
+                <input type="radio" name="ck" style="opacity : 0"/>
+            </li>
+            <li>
+                这是第3个列表
+                <input type="button" value="按钮" onclick="delEle({i: 3})"/>
+                <input type="radio" name="ck" style="opacity : 0"/>
+            </li>
+            <li>
+                这是第4个列表
+                <input type="button" value="按钮" onclick="delEle({i: 4})"/>
+                <input type="radio" name="ck" style="opacity : 0"/>
+            </li>
+        </ul>
+    </body>
+</html>
+<script>
+    function delEle(data) {
+
+        // 设置全局
+        var Global = this;
+
+        // 获取索引值
+        var index = data.i;
+
+        // 获取子级
+        var $li = $(Global).find('li');
+
+        // 操作父级
+        var $setEle = $('li').eq(index);
+
+        // 操作之后的元素
+        var $nextEle =  $setEle.nextAll();
+
+
+        $nextEle.each(function () {
+
+          // 创建新数组保存更改的值
+          var newArr = [];
+
+          // 获取操作元素
+          var $inpEle = $(this).find('input:eq(0)').prop('outerHTML');
+
+          //获取第二个input
+           var $inpEle2 = $(this).find('input:eq(1)').prop('outerHTML');
+
+           //获取文本
+           var $textEle = $(this).text();
+
+           // 分割字符串
+            var $arr = $inpEle.split('');
+
+            for (var i = 0; i < $arr.length; i++) {
+
+                // 判断新数组是否有分割数据内容
+              if(newArr[i] != $arr[i]){
+
+                // 正则判断是否获取到数字
+                  if (/\d/.test($arr[i])) {
+                    // 获取到的索引值减一,和删除后索引对应
+                    $arr[i] = $arr[i] - 1;
+                    console.log($arr[i]);
+
+                  }
+                    // 将修改索引的DOM添加到新数据
+                    newArr.push($arr[i]);
+              }
+
+                // 替换属性DOM结构
+                $inpEle = newArr.join('');
+
+                //替换显示DOM结构
+                $(this).html($textEle + $inpEle + $inpEle2);
+            }
+
+        })
+
+          // 设置单选按钮为true
+          $('input[type="radio"]').eq(index).prop('checked',true);
+
+          // 获取所有单选按钮
+          var checks = document.getElementsByName("ck");
+
+          var tempIndex = 0;
+                for (var i = 0; i < checks.length; i++) {
+                    if (checks[i].checked == true) {
+                        ul.removeChild(checks[i].parentNode);
+                        tempIndex = i;
+                        i--;
+
+                    }
+                }
+
+
+
+
+
+    }
+
+
+
+
+
+</script>

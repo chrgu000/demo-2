@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/jquery v1.6.1.js"></script>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+  //五种声明数值类型变量的方式
+
+    //方式一：最常见的方式，通过数字字面量方式声明
+    var num1 = 123;
+    //方式二：偶尔使用方式，大部分情况下是将字符串转成数字
+    var num2 = Number(123);
+    //方式三：很少使用，各神书，包括犀牛书，都将其列入不推荐方式
+    var num3 = new Number(123);
+    //方式四：神方式，目前还没见过人使用
+    var num4 = new Object(123);
+    //方式五：更离奇，更诡异
+    var num5 = Object(123);
+//====================================================
+    var num = new Number(123);
+    console.log(typeof num); //输出：object
+    console.log(Object.prototype.toString.call(num)); //输出：[object Number]
+//====================================================
+    var num11 = Object(123);
+    console.log(typeof num11); //输出：object
+    console.log(Object.prototype.toString.call(num11)); //输出：[object Number]
+//====================================================
+    var num22 = 123;
+    console.log(num22.toString()); //输出：'123'，竟然没出错
+    var str = num22.toString();
+    console.log(str);
+    /*
+      当用户通过字面量方式声明一个变量，并在该变量上调用如toString等方法，JS脚本引擎会偷偷地创建该变量对应的包装对象，并在该对象上调用对应的方法；当调用结束，则销毁该对象；这个过程对于用户来说是不可见的，因此不少初学者会有这方面的困惑。
+
+     */
+
+</script>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/jquery v1.6.1.js"></script>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+   //封装判断参数是否为0,1,2来返回对应文本
+   //完整版封装判断0,1...状态,返回对应文本
+  function ifStatus(parameter, obj) {
+      var parameter = typeof parameter != 'number' ? (parameter.replace(/\s/g, "")) / 1 : parameter;
+      var obj = obj || {};
+      var flag = false;
+      var statusText = '';
+      for (var i in obj) {
+          if (flag == false && i == parameter) {
+              flag = true;
+              tatusText = obj[i];
+          }
+      }
+      if (flag == true) {
+          return tatusText;
+      } else {
+          return '未填写';
+      }
+  }
+
+
+          console.log(ifStatus(' 2 ',{
+              0 : '这是为0返回文本',
+              1 : '这是为1返回文本',
+              2 : '这是为2返回文本',
+              3 :'这是为3返回文本'
+
+
+          }));
+</script>

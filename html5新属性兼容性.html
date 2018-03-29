@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <!-- <script src="js/jquery v1.6.1.js"></script> -->
+  <style>
+  /*html5*/
+  article,aside,dialog,footer,header,section,footer,nav,figure,menu{display:block}
+  </style>
+  <!-- =================第一种===================: -->
+  <!--[if lt IE9]>
+      <script src="js/html5 v3.7.0.js"></script>
+
+  <![endif]-->
+<style>
+    header{
+      color: red;
+    }
+
+</style>
+
+<!-- =====================第二种==================== -->
+<!--[if lt IE9]>
+<script>
+   (function() {
+     if (!
+     /*@cc_on!@*/
+     0) return;
+     var e = "abbr, article, aside, audio, canvas, datalist, details, dialog, eventsource, figure, footer, header, hgroup, mark, menu, meter, nav, output, progress, section, time, video".split(', ');
+     var i= e.length;
+     while (i--){
+         document.createElement(e[i])
+     }
+})()
+</script>
+<![endif]-->
+
+
+
+
+
+</head>
+<body>
+<!--[if lte IE 8]>
+    <noscript>
+         <style>.html5-wrappers{display:none!important;}</style>
+         <div class="ie-noscript-warning">您的浏览器禁用了脚本，请<a href="">查看这里</a>来启用脚本!或者<a href="/?noscript=1">继续访问</a>.
+         </div>
+    </noscript>
+<![endif]-->
+    <header>这是header</header>
+    <audio controls="controls">
+<!--     <source src="audio/song.ogg" type="audio/ogg"> -->
+    <source src="audio/song.mp3" type="audio/mpeg">
+      您的浏览器不支持音频元素。
+</audio>
+
+
+</body>
+</html>
+<script>
+
+</script>

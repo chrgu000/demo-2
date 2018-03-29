@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Excuse me？这个前端面试在搞事！</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+  /*for (var i = 0; i < 5; i++) {
+    setTimeout(function() {
+      console.log(i);
+    }, 1000 * i);
+  }*/
+  // 5个5
+
+
+  // 第一种,闭包
+  /* for (var i = 0; i < 5; i++) {
+      (function(i) {
+        setTimeout(function() {
+          console.log(i);
+        }, 1000 * i);
+      })(i)
+    }*/
+
+    // 第二种ES6 函数
+    /*for (var i = 0; i < 5; i++) {
+        ((i) => {
+          setTimeout(function() {
+            console.log(i);
+          }, 1000 * i);
+        })(i)
+    }*/
+
+    // 第三种ES6 块集作用域
+    /*for (let i = 0; i < 5; i++) {
+          setTimeout(function() {
+            console.log(i);
+          }, 1000 * i);
+    }*/
+
+
+     // “这样子的话，内部其实没有对 i 保持引用，其实会变成输出 5。”
+    /*for (var i = 0; i < 5; i++) {
+      (function() {
+        setTimeout(function() {
+          console.log(i);
+        }, i * 1000);
+      })(i);
+    }
+*/
+
+  // “应该是立马输出 0 到 4 吧。”
+  /*for (var i = 0; i < 5; i++) {
+    setTimeout((function(i) {
+      console.log(i);
+    })(i), i * 1000);
+  }*/
+
+
+    // 2 3 5 4 1
+    setTimeout(function() {
+    console.log(1, new Date().getSeconds());
+    }, 0);
+    new Promise(function executor(resolve) {
+      console.log(2, new Date().getSeconds());
+      for( var i = 0; i < 10000; i++) {
+        i == 9999 && resolve();
+      }
+      console.log(3, new Date().getSeconds());
+    }).then(function() {
+      console.log(4, new Date().getSeconds());
+    });
+    console.log(5, new Date().getSeconds());
+
+
+   /* for (var i = 0; i < 5; i++) {
+      setTimeout(function () {
+          console.log(i,new Date().getSeconds())
+        }, 1000 * i)
+    }*/
+</script>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>封装验证码点击倒计时</title>
+    <style>
+    *{
+      margin:0;
+      padding: 0;
+    }
+    input,button{
+      border:0;
+      outline:0;
+    }
+
+      #btn {
+        width:150px;
+        height: 50px;
+        display: block;
+        border-radius:50px;
+        margin:100px auto;
+        cursor:pointer;
+        color: white;
+        font-size:15px;
+        font-family: "微软雅黑";
+
+      }
+     /*  #btn:active {
+       opacity:0.5;
+     } */
+
+      .btn-bg {
+        background-color: #FF7626;
+      }
+      .btn-disabled {
+        background-color: #999999;
+      }
+    </style>
+    <script src="../js/jquery-1.10.2.js"></script>
+</head>
+<body>
+
+<!-- <input type="button" id="btn" value="免费获取验证码" onclick="settime(this)" /> -->
+    <!-- <button id="btn">发送验证码</button> -->
+
+    <button id="btn" type="button" class="btn-bg">获取验证码</button>
+</body>
+</html>
+  <script>
+
+    // 获取函数名
+    var getFnName = function(callee) {
+        var _callee = callee.toString().replace(/[\s\?]*/g, ""),
+            comb = _callee.length >= 50 ? 50 : _callee.length;
+        _callee = _callee.substring(0, comb);
+        var name = _callee.match(/^function([^\(]+?)\(/);
+        if (name && name[1]) {
+            return name[1];
+        }
+        var caller = callee.caller,
+            _caller = caller.toString().replace(/[\s\?]*/g, "");
+        var last = _caller.indexOf(_callee),
+            str = _caller.substring(last - 30, last);
+        name = str.match(/var([^\=]+?)\=/);
+        if (name && name[1]) {
+            return name[1];
+        }
+        return "anonymous"
+    };
+
+
+    function $invokeSettime(obj) {
+        var defaultObj = {
+            time : obj.time == null ? 120 : obj.time,
+            activeCls : obj.activeCls == null ? 'btn-disabled' : obj.activeCls,
+            timeInterval : obj.timeInterval == null ? 1000 : obj.timeInterval
+          }
+        // 声明新变量,保存不变的时间
+        const temoTime = defaultObj.time;
+
+        // 倒计时更改的值
+        var countdown = defaultObj.time;
+        $setTime(obj);
+
+        function $setTime (obj) {
+            if (countdown == 0) {
+               $(obj).removeClass('btn-disabled');
+               $(obj).attr("disabled", false);
+                $(obj).text("获取验证码");
+                countdown = temoTime;
+                return;
+            } else {
+                $(obj).addClass('btn-disabled');
+                $(obj).attr("disabled", true);
+                $(obj).text("重新发送(" + countdown + "s)");
+                countdown--;
+            }
+            setTimeout(function () {
+                $setTime(obj);
+            }, defaultObj.timeInterval);
+        }
+    }
+
+    $('#btn').on('click', function () {
+        new $invokeSettime("#btn");
+
+    })
+
+
+/*  var countdown = 60;
+
+  function settime(obj) {
+      if (countdown == 0) {
+          obj.removeAttribute("disabled");
+          obj.value = "免费获取验证码";
+          countdown = 60;
+          return;
+      } else {
+          obj.setAttribute("disabled", true);
+          obj.value = "重新发送(" + countdown + ")";
+          countdown--;
+      }
+      setTimeout(function() {
+          settime(obj)
+      }, 1000)
+  }*/
+
+    /*function $CountActive (ele, time, defaultCls, countCls) {
+
+    }*/
+</script>

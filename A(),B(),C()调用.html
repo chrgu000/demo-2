@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/jquery v1.6.1.js"></script>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+  function A() {
+      var deferred = $.Deferred();
+      setTimeout(function() {
+          deferred.resolve("A return!");
+      }, 1000);
+      return deferred.promise();
+  }
+
+  function B(value) {
+      var deferred = $.Deferred();
+      setTimeout(function() {
+          deferred.resolve(value + "B return!");
+      }, 1000);
+      return deferred.promise();
+  }
+
+  function C(value) {
+      alert(value)
+  }
+
+
+  A().then(B).then(C);
+</script>

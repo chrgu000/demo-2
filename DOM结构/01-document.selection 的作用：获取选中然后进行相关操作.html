@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+        <title>document.selection 的 createRange</title>
+    </head>
+    <body>
+
+      <div>请选中这里的部分文字。</div>
+      <div><input type="button" value="加粗" onclick="javascript:Bold();" /></div>
+    <script type="text/javascript" language="javascript">
+    // IE/Opera支持 Firefox/Safari/Chrome不支持
+    <!--
+    function Bold() {
+        var r = document.selection.createRange();
+        r.execCommand("Bold");
+    }
+    -->
+    </script>
+
+    </body>
+    </html>

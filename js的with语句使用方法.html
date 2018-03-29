@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/jquery v1.6.1.js"></script>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    function Lakers() {
+       this.name = "kobe bryant";
+       this.age = "28";
+       this.gender = "boy";
+    }
+  var people = new Lakers();
+  with(people) {
+         var str = "姓名: " + name + "<br>";
+         str += "年龄：" + age + "<br>";
+         str += "性别：" + gender;
+         document.write(str);
+  }
+
+</script>

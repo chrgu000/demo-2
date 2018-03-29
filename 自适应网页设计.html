@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/jquery v1.6.1.js"></script>
+  <!--
+    viewport是网页默认的宽度和高度，上面这行代码的意思是，网页宽度默认等于屏幕宽度（width=device-width），原始缩放比例（initial-scale=1）为1.0，即网页初始大小占屏幕面积的100%。
+所有主流浏览器都支持这个设置，包括IE9。对于那些老式浏览器（主要是IE6、7、8），需要使用css3-mediaqueries.js。
+   -->
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1" /> -->
+
+<!--
+    其中 css3-mediaqueries 就是用来解决IE8及以下版本浏览器不支持 CSS3 media queries 的问题的。
+    这2个js只能用和主站一样的域名，而不能用其他域名，否则就不会生效！
+好吧，懒得去深究为什么它不支持跨域了，直接把上述代码修改如下就搞定了：
+ -->
+<!-- <script src="https:///res.zhangge.net/wp-content/themes/begin/js/html5.js"></script>
+<script src="//res.zgboke.com/wp-content/themes/begin/js/css3-mediaqueries.js"></script> -->
+
+<!--[if lt IE 9]>
+<script src="js/html5.js"></script>
+<script src="js/css3-mediaqueries.js">
+</script>
+<![endif]-->
+
+<style>
+    /* 指定，字体大小是页面默认大小的100%，即16像素。 */
+
+    body {
+        font: normal 100% Helvetica, Arial, sans-serif;
+        padding: 0;
+        margin: 0;
+    }
+
+    h
+    /* 1的大小是默认大小的1.5倍，即24像素（24/16=1.5）。 */
+
+    h1 {
+        font-size: 1.5em;
+    }
+
+    .main {
+        float: right;
+        width: 70%;
+        height:100px;
+        background: red;
+    }
+
+    .leftBar {
+        float: left;
+        width: 30%;
+        height: 100px;
+        background:blue;
+    }
+    /* 老版本的IE不支持max-width，所以只好写成：
+    此外，windows平台缩放图片时，可能出现图像失真现象。这时，可以尝试使用IE的专有命令：
+  　　img { -ms-interpolation-mode: bicubic; }
+     */
+    img { width: 100%; }
+    img, object { max-width: 100%;}
+  .content{
+    width: 500px;
+    height: 500px;
+  }
+
+</style>
+<!-- 如果屏幕宽度小于400像素（max-device-width: 400px），就加载tinyScreen.css文件。 -->
+<!-- <link rel="stylesheet" type="text/css"
+　　　　media="screen and (max-device-width: 400px)"
+　　　　href="tinyScreen.css" /> -->
+
+<!-- 如果屏幕宽度在400像素到600像素之间，则加载smallScreen.css文件。
+  除了用html标签加载CSS文件，还可以在现有CSS文件中加载。
+
+  除了用html标签加载CSS文件，还可以在现有CSS文件中加载。
+　　@import url("tinyScreen.css") screen and (max-device-width: 400px);
+ -->
+
+ <!--
+  　<link rel="stylesheet" type="text/css"
+　　　　media="screen and (min-width: 400px) and (max-device-width: 600px)"
+　　　　href="smallScreen.css" />
+  -->
+  <script src="js/imgSizer.js"></script>
+</head>
+<body>
+  <h2>a11</h2>
+  <div class="main"></div>
+  <div class="leftBar"></div>
+
+<div class="content"><img src="images/demo3.gif" alt=""></div>
+</body>
+</html>
+<script>
+  /*　addLoadEvent(function() {
+　　　　var imgs = document.getElementById("content").getElementsByTagName("img");
+　　　　imgSizer.collate(imgs);
+　　});*/
+</script>

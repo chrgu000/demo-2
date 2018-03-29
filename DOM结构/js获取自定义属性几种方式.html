@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>js获取自定义属性几种方式</title>
+</head>
+<body>
+    <span data-test="这是data-test" test="这是test" id="txtBox"></span>
+</body>
+</html>
+<script>
+  var ele = document.getElementsByTagName('span')[0];
+
+    // 获取自定义属性
+    console.log(ele.getAttribute("test"));
+    console.log(ele.attributes["data-test"].nodeValue);
+    console.log(ele.dataset.test);
+    console.log(ele.dataset['test']);
+
+    // 设置自定义属性
+    document.all.txtBox.setAttribute("displayName","123456");
+    // 设置属性.必须html有自定义属性,否则会报错
+    ele.attributes["data-test"].nodeValue = "123456";
+    // 设置dataset对象
+    ele.dataset.test = '666';
+</script>

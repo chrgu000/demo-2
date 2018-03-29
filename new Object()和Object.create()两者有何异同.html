@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/jquery v1.6.1.js"></script>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    /*
+      Object.create() 是E5的一个新特性哦，其实可以理解为继承一个对象，create方法有两个参数
+一个是要继承的对象的原型，如果没有就传null，第二个参数是对象的属性描述符，这些都是E5才有的~
+     */
+
+     var a = { x : 1};
+     var b = Object.create(a);
+    console.info(b);//输出：{};
+    console.info(b.__proto__);//输出：{x:1}
+
+
+    //第二种：
+    //如果用
+    var c = new Object(a)
+    console.info(c);//输出：{x:1}
+    console.info(c.__proto__);//输出：{}
+    //只要注意区分__proto__和prototype就可以了，希望对你有帮助
+    /*
+      所以 var b = Object.create(a.prototype); // b 继承了a的原型
+      这个说法是错误的，应该是b.__proto__=== a.prototype,严格等于
+      结论：b的原型指向a的prototype属性
+     */
+
+    /*
+      简单来讲，new Object()是一种通过构造函数来创建object的方式，而Object.create(proto, [ propertiesObject ])
+      不需要通过构造函数就可以创建一个object，Object.create()的第一个参数是必须要的，第二个参数可选。其实Object.create()内部依然是通过new一个构造函数的方式来实现的，它有构造函数，不过这个构造函数是隐式存在的，看一下使老旧浏览器支持Object.create方法的“polyfill”就可以对它们之间的区别一目了然了：
+
+
+      if (!Object.create) {
+        Object.create = function (o) {
+        function F() {}  //定义了一个隐式的构造函数
+        F.prototype = o;
+        return new F();  //其实还是通过new来实现的
+        };
+      }
+
+     */
+
+    var aa = { x : 1 };
+    var bb = new Object(aa); //这里aa和bb都是Object的实例,也就是不同对象,但他们都继承了Object的prototype原型
+    console.info(aa == bb); //true 值相同
+    console.info(aa === bb); //false //不同对象,所以不相同
+
+
+    var a1 = { x : 2 };
+    var b1 = Object.create(aa.constructor.prototype);
+    console.info(a1);
+    console.log(a1 == b1); //false 因为实例化的不同对象
+    console.log(a1.__proto__ == b1.__proto__); //true 因为他们指向的都是Object的原型
+    console.log(a1.__proto__ === b1.__proto__); //true 因为他们指向的都是Object的原型
+    console.log(a1.__proto__ == Object.prototype); //true
+    console.log(a1.__proto__ === Object.prototype); //true
+
+
+    var obj1 = {};
+    var obj2 = new Object();
+    var obj3 = Object.create(Object.prototype);
+
+    console.log(obj1.__proto__ === obj2.__proto__); //true
+    console.log(obj1.__proto__ === obj3.__proto__); //true
+    console.log(obj2.__proto__ === obj3.__proto__); //true
+
+
+
+</script>

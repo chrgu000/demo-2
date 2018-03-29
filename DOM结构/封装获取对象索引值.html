@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>封装获取对象索引值</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+
+  var o = {
+      return : [
+          {
+            id : 6
+
+          },
+          {
+            id : 0
+          }
+
+      ]
+  }
+
+
+
+
+  // ==================  封装获取数组对象的索引   ============================
+  function $getIndexId(arr, attrName, value) {
+    // 获取对象数组
+    var arr = arr;
+
+    // 获取要得到索引得索引名
+    var keys = typeof attrName != 'string' ? '' + attrName : attrName;
+
+    // 循环遍历数组
+    for (var i in arr) {
+      // 判断内一层是否存在这个属性,是的话进行判断
+      if (arr[i][keys]) {
+        if (arr[i][keys] == value) {
+          return i;
+        }
+      } else { // 否则进入下一层循环
+        // 循环遍历对象
+        for (var j in arr[i]) {
+          if (arr[i][j][keys] == value) {
+            return j;
+          }
+        }
+      }
+
+    }
+  }
+
+    var indexId = $getIndexId(o,'id',0);
+    console.log($getIndexId(o,'id',0));
+    console.log(o.return[indexId].id);
+
+</script>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/jquery v1.6.1.js"></script>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    /*
+      js的构造函数（在别的后台语言上叫做类）上可以添加一些成员，可以在构造函数内部的this上添加，可以在构造函数本身上添加，通过这两种方式添加的成员，就分别称为实例成员和静态成员。
+
+    1、实例成员和静态成员
+
+      实例成员:构造函数中this上添加的成员
+      静态成员：构造函数本身上添加的成员
+     */
+
+      function Person(name, age) {
+        this.name = name;
+        this.age = age;
+        this.sayHi = function() {
+                console.log('Hello...')
+            }
+            //上述的name\age\sayHi就是实例成员
+    }
+    Person.hobby = 'running'
+    Person.climb = function() {
+            console.log('Climbing...')
+        }
+        //上述的hobby和climb就是静态成员
+    Person.prototype.jump = function() {
+            console.log('Jumping...')
+        }
+        //jump为p1的__proto__属性指向的它的原型对象上的成员
+        //===============那么，
+    var p1 = new Person('Lucy', 29)
+    p1.name //'Lucy'
+    p1.age //29
+    p1.sayHi() //Hello...
+    p1.jump() // Jumping...
+    Person.climb() //Climbing...
+    Person.hobby //running...
+        //==============但是
+    p1.climb() //报错
+    Person.sayHi() //报错
+    Person.jump() //报错
+
+    /*
+      、总结
+
+      实例成员，只能由实例化的对象来访问
+      静态成员，只能由构造函数本身来访问
+      实例化对象的proto指向构造函数的prototype属性指向的对象，实例化的对象可以访问到它后者身上的成员
+
+    3、实例化对象的原型链和构造函数的原型链
+    http://img.blog.csdn.net/20170303183502719?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc29uZ2xmNTIx/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast
+    易错点：
+  (1)p1是手动创建的，没有constructor属性，p1.constructor是访问的Person.prototype上的constructor属性；
+  (2)Function是自己创建的自己，Function.constructor指向自己；
+  (3)Object对象是Function创建的；
+  (4)每个构造函数、普通函数和Function都有自己的prototype属性；
+  (5)Function.proto指向Object.prototype,Object.prototype的proto指向null
+       */
+
+</script>

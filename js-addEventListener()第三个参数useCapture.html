@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/jquery v1.6.1.js"></script>
+</head>
+<body>
+<div id="div1" style="background: blue;width: 100px; height: 100px;">
+        <div id="div2" style="background: red;width: 70px; height: 70px;">
+            <div id="div3" style="background: yellow;width: 50px; height: 50px;"></div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+  /*
+    第3个参数叫做useCapture，是一個boolean值，就是true or false 。
+    如果送出true的話就是瀏覽器會使用Capture方式，false的話是Bubbling，只有在特定狀況下才會有影響，通常建議是false，而會有影響的情形是目標元素(target element)有祖先元素(ancestor element)，而且也有同樣的事件對應函數
+
+
+    当第三个参数设置为true就在捕获过程中执行，反之就在冒泡过程中执行处理函数。
+   */
+
+  var oDvi1 = document.getElementById('div1'),
+      oDvi2 = document.getElementById('div2'),
+      oDvi3 = document.getElementById('div3');
+
+
+  // 123 -> 456 -> 345
+  oDvi1.addEventListener('click', xx1, true);
+  oDvi2.addEventListener('click', xx2, false);
+  oDvi3.addEventListener('click', xx3, true);
+
+
+  function xx1(){ //蓝
+      alert(123);
+  }
+
+  function xx2(){ //红
+      alert(345);
+  }
+
+  function xx3(){//黄
+      alert(456);
+  }
+    /*
+    总结:
+
+    在div3上触发点击事件
+
+    捕获阶段: 外-》里 * 在div1处检测 useCapture 是否为true,是则执行程序， div2同理 .
+
+    目标阶段: 目标到div3处，发现div3就是鼠标点击的节点， 所以这里是目标阶段。若有事件处理程序，则执行该程序，这里不论 useCapture 为 true 还是 false。
+
+    冒泡阶段: 里-》外  在div2处检测useCapture 是否为false， 是则执行该程序 . div1同理
+     */
+</script>

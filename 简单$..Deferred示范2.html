@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/jquery v1.6.1.js"></script>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+　var wait = function(dtd){
+　　　　var dtd = $.Deferred(); //在函数内部，新建一个Deferred对象
+　　　　var tasks = function(){
+　　　　　　alert("执行完毕！");
+　　　　　　dtd.resolve(new Date()); // 执行完成后，返回当前时间
+　　　　};
+　　　　setTimeout(tasks,1000);
+　　　　return dtd.promise(); // 返回promise对象
+　　};
+　　$.when(wait())
+　　.done(function(time){alert("完成时间：" + time); })
+　　.fail(function(){ alert("出错啦！"); })
+</script>

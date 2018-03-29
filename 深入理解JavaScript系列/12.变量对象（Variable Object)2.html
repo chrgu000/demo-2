@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+
+</head>
+<body>
+
+</body>
+</html>
+<script>
+   a = 10;
+  var date1 = new Date();
+  for(var i = 0; i <= 1000000; i++){
+        window.a;
+  }
+  console.log(new Date() - date1);//143
+
+
+  var date2 = new Date();
+  for(var j = 0; j <= 1000000; j++){
+        a;
+  }
+  console.log(new Date() - date2);//5
+
+
+  a = 10;
+  var date3 = new Date();
+  console.log(window.a);
+  console.log(window.window.window.window.a);
+  for (var i = 0; i <= 1000000; i++) {
+      window.window.window.window.window.window.a;
+  }
+
+  console.log(new Date() - date3);//5
+</script>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/jquery v1.6.1.js"></script>
+  <style>
+    div{
+      color:blue;
+    }
+    span{
+      color:red;
+    }
+</style>
+</head>
+<body>
+  <div>"John" 找到arr索引为: <span></span></div>
+  <div>4 找到arr索引为: <span></span></div>
+  <div>"Karl" 没有找到: <span></span></div>
+  <div>"Pete" 在数组中，但不在索引2之后或之后，所以: <span></span></div>
+</body>
+</html>
+<script>
+      var arr1 = [1,2,3,4];
+      console.log($.isArray(arr1));
+      var arr = [4,"Pete",8,"John"];
+      var $spans = $("span");
+        $spans.eq(0).text($.inArray("John", arr));
+        $spans.eq(1).text($.inArray(4, arr));
+        $spans.eq(2).text($.inArray("Karl",arr));
+        $spans.eq(3).text($.inArray("Pete", arr,2));
+</script>

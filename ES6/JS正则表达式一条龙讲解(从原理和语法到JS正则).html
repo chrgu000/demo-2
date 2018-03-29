@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>JS正则表达式一条龙讲解(从原理和语法到JS正则)</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+
+</body>
+</html>
+<script type="text/javascript">
+
+    // 匹配abce 或de
+    var  test = /(abc|d)e/;
+
+    // 匹配一个位置，这个位置的右边能匹配表达式exp，注意这个表达式仅仅匹配一个位置，只是它对于这个位置的右边有要求，而右边的东西是不会被放进结果的，比如用read(?=ing)去匹配“reading”，结果是“read”，而“ing”是不会放进结果的
+    var  test1 = /a(?=exp)/;
+
+    // 匹配一个位置，这个位置的右边不能匹配表达式exp
+    var  test2 = /a(?!exp)/;
+
+    // 在默认的模式（贪婪）下，会尽可能多的匹配内容
+    var test3 = /ab*/;
+
+    // 而通过在限定符后面加问号?可以进行非贪婪匹配，会尽可能少地匹配。用ab*?去匹配“abbb”，结果会是“a”
+     var test4 = /ab*?/;
+
+     // 不带问号的限定符也称匹配优先量词，带问号的限定符也称忽略匹配优先量词。
+
+    console.log(test.test('de'), test.exec('de'));
+    console.log(test1.test('aexp'), test1.exec('aexp'));
+    console.log(test2.test('a1exp'), test2.exec('a1exp'));
+    console.log(test3.test('abbb'), test3.exec('abbb'));
+    console.log(test4.test('abbb'), test4.exec('abbb'));
+
+
+    var str = "Reading and Writing";
+    var pattern = /\b([a-zA-Z]+)ing\b/g;
+    var matches;
+    while(matches = pattern.exec(str)){
+      console.log(matches.index +' '+ matches[0] + ' ' + matches[1]);
+    }
+
+
+    /*
+      4. RegExp构造函数属性
+
+      RegExp构造函数包含一些属性，适用于作用域中的所有正则表达式，并且基于所执行的最近一次正则表达式操作而变化。
+
+      RegExp.input或RegExp["$_"]：最近一次要匹配的字符串
+      RegExp.lastMatch或RegExp["$&"]：最近一次匹配项
+      RegExp.lastParen或RegExp["$+"]：最近一次匹配的捕获组
+      RegExp.leftContext或RegExp["$`"]：input字符串中lastMatch之前的文本
+      RegExp.rightContext或RegExp["$'"]：input字符串中lastMatch之后的文本
+      RegExp["$n"]：表示第n个捕获组的内容，n取1-9
+     */
+
+     /*
+      5. String类型上的模式匹配方法
+        上面提到的exec和test都是在RegExp实例上的方法，调用主体是一个正则表达式，而以字符串为主体调用模式匹配也是最为常用的。
+
+        5.1 匹配捕获的match方法
+        在字符串上调用match方法，本质上和在正则上调用exec相同，但是match方法返回的结果数组是没有input和index属性的。
+      */
+
+      var str = "Reading and Writing";
+      var pattern = /\b([a-zA-Z]+)ing\b/g;
+      // 在String上调用match
+      var matches = str.match(pattern);
+      // 等价于在RegExp上调用exec
+      var matches2 = pattern.exec(str);
+
+      console.log(matches, matches2);
+
+      /*
+        5.2 返回索引的search方法
+          接受的参数和match方法相同，要么是一个正则表达式，要么是一个RegExp对象。
+       */
+
+       //下面两个控制台输出是一样的，都是5
+      var str = "I am reading.";
+      var pattern = /\b([a-zA-Z]+)ing\b/g;
+
+      var matches = pattern.exec(str);
+      console.log(matches.index);
+
+      var pos = str.search(pattern);
+      console.log(pos);
+
+      /*
+        5.3 查找并替换的replace方法
+
+         var result = str.replace(RegExp or String, String or Function);
+         第一个参数（查找）：
+                RegExp对象或者是一个字符串（这个字符串就被看做一个平凡的字符串）
+        第二个参数（替换内容）：
+                一个字符串或者是一个函数
+        返回：替换后的结果字符串，不会改变原来的字符串
+
+
+        第一个参数是字符串
+
+        只会替换第一个子字符串
+
+        第一个参数是正则
+
+        指定g修饰符，则会替换所有匹配正则的地方，否则只替换第一处
+
+        第二个参数是字符串
+
+        可以使用一些特殊的字符序列，将正则表达式操作的值插进入，这是很常用的。
+
+        $n：匹配第n个捕获组的内容，n取0-9
+        $nn：匹配第nn个捕获组内容，nn取01-99
+        $`：匹配子字符串之后的字符串
+        $'：匹配子字符串之前的字符串
+        $&：匹配整个模式得字符串
+        $$：表示$符号本身
+        第二个参数是一个函数
+
+        在只有一个匹配项的情况下，会传递3个参数给这个函数：模式的匹配项、匹配项在字符串中的位置、原始字符串
+        在有多个捕获组的情况下，传递的参数是模式匹配项、第一个捕获组、第二个、第三个...最后两个参数是模式的匹配项在字符串位置、原始字符串
+        这个函数要返回一个字符串，表示要替换掉的匹配项
+
+
+
+        5.4 分隔字符串的split
+        基于指定的分隔符将一个字符串分割成多个子字符串，将结果放入一个数组，接受的第一个参数可以是RegExp对象或者是一个字符串（不会被转为正则），第二个参数可选指定数组大小，确保数组不会超过既定大小。
+
+        6 JS（ES5）中正则的局限
+        JS（ES5）中不支持以下正则特性（在一览图中也可以看到）：
+
+        匹配字符串开始和结尾的\A和\Z锚
+        向后查找（所以不支持零宽度后发断言）
+        并集和交集类
+        原子组
+        Unicode支持（\uFFFF之后的）
+        命名的捕获组
+        单行和无间隔模式
+        条件匹配
+        注释
+        四、ES6对正则的主要加强
+        ES6对正则做了一些加强，这边仅仅简单罗列以下主要的3点，具体可以去看ES6
+
+        1. 构造函数可以传正则字面量了
+        ES5中构造函数是不能接受字面量的正则的，所以会有双重转义，但是ES6是支持的，即便如此，还是建议用字面量创建，简洁高效。
+
+
+        // \uD83D\uDC2A是一个4字节的UTF-16编码，代表一个字符
+        /^\uD83D/u.test('\uD83D\uDC2A')
+        // false，加了u可以正确处理
+        /^\uD83D/.test('\uD83D\uDC2A')
+        // true，不加u，当做两个unicode字符处理
+        加了u修饰符，会改变一些正则的行为：
+
+        .原本只能匹配不大于\uFFFF的字符，加了u修饰符可以匹配任何Unicode字符
+        Unicode字符新表示法\u{码点}必须在加了u修饰符后才是有效的
+        使用u修饰符后，所有量词都会正确识别码点大于0xFFFF的Unicode字符
+        使一些反义元字符对于大于\uFFFF的字符也生效
+        3. y修饰符
+
+        y修饰符的作用与g修饰符类似，也是全局匹配，开始从位置0开始，后一次匹配都从上一次匹配成功的下一个位置开始。
+
+        不同之处在于，g修饰符只要剩余位置中存在匹配就可，而y修饰符确保匹配必须从剩余的第一个位置开始。
+
+        所以/a/y去匹配"ba"会匹配失败，因为y修饰符要求，在剩余位置第一个位置（这里是位置0）开始就要匹配。
+
+        ES6对正则的加强，可以看这篇
+
+        五、应用正则的实践思路
+
+        应用正则，一般是要先想到正则（废话），只要看到和“找”相关的需求并且这个源是可以被字符串化的，就可以想到用正则试试。
+
+        一般在应用正则有两类情况，一是验证类问题，另一类是搜索、提取、替换类问题。验证，最常见的如表单验证；搜索，以某些设定的命令加关键词去搜索；提取，从某段文字中提取什么，或者从某个JSON对象中提取什么（因为JSON对象可以字符串化啊）；替换，模板引擎中用到。
+
+        1. 验证类问题
+
+        验证类问题是我们最常遇到的，这个时候其实源字符串长什么样我们是不知道，鬼知道萌萌哒的用户会做出什么邪恶的事情来，推荐的方式是这样的:
+
+        首先用白话描述清楚你要怎样的字符串，描述好了之后，就开脑洞地想用户可能输入什么奇怪的东西，就是自己举例，拿一张纸可举一大堆的，有接受的和不接受的（这个是你知道的），这个过程中可能你会去修改之前的描述；
+        把你的描述拆解开来，翻译成正则表达式；
+        测试你的正则表达式对你之前举的例子的判断是不是和你预期一致，这里就推荐用在线的JS正则测试去做，不要自己去一遍遍写了。
+        2. 搜索、提取、替换类问题
+
+        这类问题，一般我们是知道源文本的格式或者大致内容的，所以在解决这类问题时一般已经会有一些测试的源数据，我们要从这些源数据中提取出什么、或者替换什么。
+
+        找到这些手上的源数据中你需要的部分；
+        观察这些部分的特征，这些部分本身的特征以及这些部分周围的特征，比如这部分前一个符号一定是一个逗号，后一个符号一定是一个冒号，总之就是找规律；
+        考察你找的特征，首先能不能确切地标识出你要的部分，不会少也不会多，然后考虑下以后的源数据也是如此么，以后会不会这些特征就没有了；
+        组织你对要找的这部分的描述，描述清楚经过你考察的特征；
+        翻译成正则表达式；
+        测试。
+
+       */
+
+
+       let isPhone = /0?(13|14|15|18)([0-9]{9})/;
+       console.log(isPhone.test(13688888888), isPhone.exec(13688888888));
+
+
+
+
+
+
+
+
+
+
+</script>

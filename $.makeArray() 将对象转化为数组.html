@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/jquery v1.6.1.js"></script>
+
+</head>
+<body>
+      <div>1</div>
+      <div>2</div>
+      <div>3</div>
+      <div>4</div>
+</body>
+</html>
+<script>
+  //返回一个节点列表
+  var elems = document.getElementsByTagName( "div" );
+  // 将NodeList转换为一个数
+  var arr = $.makeArray( elems );
+  // 在dom元素列表中使用数组方法
+  arr.reverse();
+  $(arr).appendTo(document.body);
+      console.log(arr5);
+</script>

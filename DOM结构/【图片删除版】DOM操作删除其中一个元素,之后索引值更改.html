@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>
+            DOM操作删除其中一个元素,之后索引值更改
+        </title>
+        <script src="../js/jquery v1.6.1.js">
+        </script>
+    </head>
+    <body>
+      <div class="x-inner x-form-inner x-scroll-scroller-vertical x-size-monitored x-paint-monitored x-scroll-scroller" id="ext-element-273" style="transform: translate3d(0px, 0px, 0px);">
+          <div class="x-size-monitors scroll">
+              <div class="expand">
+              </div>
+              <div class="shrink">
+              </div>
+          </div>
+          <div class="x-paint-monitor cssanimation">
+          </div>
+
+          <p style="text-align:left">
+              <img src="../images/gwm1.jpg" style="width:200px;height:200px;"/>
+              --0
+              <input index="0" type="button" onclick="javascript:deletepic({'ia':'0'});" value="删除"/>
+              <input type="radio" name="ck" style="opacity : 0"/>
+          </p>
+
+          <p style="text-align:left">
+              <img src="../images/gwm1.jpg" style="width:200px;height:200px;"/>
+              --1
+              <input index="1" type="button" onclick="javascript:deletepic({'ia':'1'});" value="删除"/>
+              <input type="radio" name="ck" style="opacity : 0"/>
+          </p>
+
+          <p style="text-align:left">
+              <img src="../images/gwm1.jpg" style="width:200px;height:200px;"/>
+              --2
+              <input index="1" type="button" onclick="javascript:deletepic({'ia':'2'});" value="删除"/>
+              <input type="radio" name="ck" style="opacity : 0"/>
+          </p>
+
+          <p style="text-align:left">
+              <img src="../images/gwm1.jpg" style="width:200px;height:200px;"/>
+              --3
+              <input index="1" type="button" onclick="javascript:deletepic({'ia':'3'});" value="删除"/>
+              <input type="radio" name="ck" style="opacity : 0"/>
+          </p>
+      </div>
+
+    </body>
+</html>
+<script>
+    function deletepic(data) {
+        // 获取索引值
+        var index = data.ia;
+
+        // 获取ID
+        var setEle = document.getElementById('ext-element-273');
+
+        $delParentChanggeObje ('p', index, 'input', setEle);
+    }
+
+    /*
+        @点击子级按钮,删除父级元素,并更改HTML DOM里设置对象索引值
+
+        @param delParent{Array DOM} 删除父级元素标签名,比如li
+        @param index{Number} 删除按钮的索引值,比如data.i
+        @param curClickEle{Element Name} 当前点击按钮,比如input
+            ※注:这里不能填写button,只能填写input
+
+        @param delParents{Element} 删除父级的父元素
+
+        示范:
+        $delParentChanggeObje ('li', index, 'input', ul);
+     */
+
+      function $delParentChanggeObje (delParent, index, curClickEle, delParents) {
+          // 设置全局
+          var Global = $(this);
+          // 获取子级
+          var $li = Global.find(delParent);
+          // 操作父级
+          var $setEle = $(delParent).eq(index);
+         // 操作之后的元素
+         var $nextEle = $setEle.nextAll();
+
+              $nextEle.each(function() {
+                  //保存当前li的this
+                  var _self = $(this);
+                  // 创建新数组保存更改的值
+                  var newArr = [];
+                  // 获取图片元素
+                  var $getImg = _self.find('img').eq(0).prop('outerHTML');
+                  // 获取操作元素
+                  var $inpEle = _self.find(curClickEle).eq(0).prop('outerHTML');
+                  //获取第二个input
+                  var $inpEle2 = _self.find(curClickEle).eq(1).prop('outerHTML');
+                  //获取文本
+                  var $textEle = _self.text();
+
+                  // 分割字符串
+                  var $arr = $inpEle.split('');
+                  for (var i = 0; i < $arr.length; i++) {
+                      // 判断新数组是否有分割数据内容
+                      if (newArr[i] != $arr[i]) {
+                          // 正则判断是否获取到数字
+                          if (/\d/.test($arr[i])) {
+                              // 获取到的索引值减一,和删除后索引对应
+                              $arr[i] = $arr[i] - 1;
+                          }
+                          // 将修改索引的DOM添加到新数据
+                          newArr.push($arr[i]);
+                      }
+                      // 替换属性DOM结构
+                      $inpEle = newArr.join('');
+                      //替换显示DOM结构
+                      _self.html($getImg + $textEle + $inpEle + $inpEle2);
+                  }
+              })
+
+              // 设置单选按钮为true
+              $('input[type="radio"]').eq(index).prop('checked', true);
+              // 获取所有单选按钮
+              var checks = document.getElementsByName("ck");
+              var tempIndex = 0;
+              for (var i = 0; i < checks.length; i++) {
+                  if (checks[i].checked == true) {
+                      delParents.removeChild(checks[i].parentNode);
+                      i--;
+                  }
+              }
+          }
+
+
+</script>

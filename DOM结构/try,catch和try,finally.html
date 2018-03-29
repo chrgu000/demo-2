@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="../js/jquery-1.10.2.js"></script>
+</head>
+<body>
+    <ul>
+      <li class="test">这是1个</li>
+      <li class="test">这是2个</li>
+      <li class="test">这是3个</li>
+      <li class="test">这是4个</li>
+    </ul>
+</body>
+</html>
+<script>
+    var $li = $("li");
+    $.each($li,function (index, domEle) {
+        $li.eq(index).html(index);
+    });
+
+
+      function fn () {
+          var x = 1;
+              try {
+                  return ++x;
+              } catch (e) {
+
+              } finally {
+                  ++x;
+              }
+              return x;
+      }
+      console.log(fn());
+
+
+
+              try {
+                  II
+              } finally {
+                  console.log(1);
+              }
+
+
+
+
+</script>

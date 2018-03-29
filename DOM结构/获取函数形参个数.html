@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+
+</body>
+</html>
+
+<script>
+    function fn(num1, num2) {
+        if (num2 != null) {
+            return num1 + num2;
+        } else {
+            return num1 || {};
+        }
+
+    }
+
+    function fn1(fn) {
+        // 执行回调函数
+        var flag = toString.call(fn) == '[object Function]' || typeof fn === "function";
+        return (flag == true? fn() : fn);
+    }
+
+     console.log(fn(2,3));
+     console.log(fn1(fn(2,3)));
+
+  var a = {};
+  var arr = [];
+  var fn = function(){              };
+    var argNameStr = fn.replace(/\/\/.*/gm, '').replace(/\/\*.*?\*\//g, '').replace(/\s+/g, ''); // 去掉空格
+
+console.log(argNameStr);
+ if(typeof(a) != "undefined" && a.valueOf("string") && a!= ''){
+    console.log(a);
+  }
+  </script>

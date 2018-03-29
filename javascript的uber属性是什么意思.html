@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/jquery v1.6.1.js"></script>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+  /*
+    在早期的JavaScript中，uber方法类似于Java的super，它可以让某方法调用父类的方法。Douglas Crockford使用了德语的"über"，其意思类似于super，避免了和保留字的冲突。但是，Crockford也说，super的思想在classical设计模式中很重要，但是在JavaScript的原型和函数设计模式中，显得没有必要。
+
+
+    经典的面向对象语言一般都有访问父类(超类)的特殊语法，这样子类的方法就可以使用父类的方法了，子类和父类的方法同名。
+现代JavaScript中，没有这种特殊语法，uber可以实现这一功能，但是繁琐一些。
+  */
+
+    function extend(Child, Parent) {
+        var F = function() {};
+        F.prototype = Parent.prototype;
+        Child.prototype = new F();
+        Child.prototype.constructor = Child;
+        Child.uber = Parent.prototype;
+    }
+
+     /* function extend(Child, Parent) {
+        var p = new Parent;
+        var c = Child.prototype;
+        for (var i in p) {
+            c[i] = p[i];
+        }
+        c.constructor = Child;
+        c.uber = p;
+      }*/
+
+    function Shape() {}
+    Shape.prototype.name = 'Shape';
+    Shape.prototype.toString = function() {
+        return this.constructor.uber ? this.constructor.uber.toString() + ', ' + this.name : this.name;
+    };
+
+    function TwoDShape() {}
+    extend(TwoDShape, Shape);
+    TwoDShape.prototype.name = '2D shape';
+
+    function Triangle(side, height) {
+        this.side = side;
+        this.height = height;
+    }
+    var F = function() {};
+    extend(Triangle, TwoDShape);
+    Triangle.prototype.name = 'Triangle';
+    Triangle.prototype.getArea = function() {
+        return this.side * this.height / 2;
+    };
+    var Shape = function() {};
+    var TwoDShape = function() {};
+    Shape.prototype.name = 'shape';
+    Shape.prototype.toString = function() {
+        return this.uber ? this.uber.toString() + ', ' + this.name : this.name;
+    };
+    extend(TwoDShape, Shape);
+    var td = new TwoDShape();
+      console.info(td.name); //"shape"
+      console.info(Shape.name); //"shape
+      /*
+        TwoDShapes实例上没有name属性，其原型对象也就是Shape实例对象上也没有这个属性，
+        但是Shape的原型对象上有这个属性name;
+       */
+      console.log(td.hasOwnProperty("name")); //false
+      console.log(td.__proto__.hasOwnProperty("name")); //false
+      console.log(td.__proto__.__proto__.hasOwnProperty("name")); //true
+      /*
+        派生的层次是：Shape -> TwoDShape -> Triangle函数extend将继承的代码封装了起来。临时构造函数F()的作用：当子类的属性改变时，不改变父类的属性。uber属性：指向父类原型。toString()方法中，检查构造函数的父类的原型是否存在，如果存在，则调用其toString()方法，由此实现了在子类中调用父类方法。
+
+       */
+</script>

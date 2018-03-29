@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/jquery v1.6.1.js"></script>
+  <style>
+    body {
+        font: 200%/1.45 charter;
+    }
+    ref::before {
+        content: '\00A7';
+        letter-spacing: .1em;
+    }
+
+    p:after{content:':我是后缀'}
+</style>
+</head>
+<body>
+<article>根据商法，卖方可以<ref>1782</ref>, 向买家提供全额退款</article>
+<p>正文内容</p>
+</body>
+</html>
+<script>
+ function ruleSelector(selector) {
+        function uni(selector) {
+            return selector.replace(/::/g, ':')
+        }
+        //Array.prototype.filter的实现适用于所有含有length属性的object
+        return Array.prototype.filter.call(Array.prototype.concat.apply([], Array.prototype.map.call(document.styleSheets, function(x) {
+            return Array.prototype.slice.call(x.cssRules);
+        })), function(x) {
+            return uni(x.selectorText) === uni(selector);
+        });
+    }
+
+    var toggle = false,
+        pseudo = ruleSelector("ref::before").slice(-1);
+
+    document.querySelector("article").onclick = function() {
+        pseudo.forEach(function(rule) {
+            if (toggle = !toggle)
+                rule.style.color = "red";
+            else
+                rule.style.color = "black";
+        });
+    }
+
+    /*
+      第二种封装
+     */
+  var css = function(t,s) {
+      s = document.createElement('style');
+      s.innerText = t;
+      document.body.appendChild(s);
+  };
+  document.onclick = function() {
+      css('p:after{content:\':修改一下\'}');
+  };
+</script>

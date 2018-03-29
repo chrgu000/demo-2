@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="../js/jquery-1.10.2.js"></script>
+</head>
+<body>
+      <button class="loginBtn">按钮</button>
+</body>
+</html>
+<script>
+
+  $('.loginBtn').on('click',function () {
+      alert(1);
+  })
+  $(document).on('keyup', function (e) {
+       if (e.keyCode == 13) {
+            $('.loginBtn').trigger('click');
+        };
+  })
+</script>

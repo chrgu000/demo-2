@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    // 创建函数
+    var fn = function () { };
+
+
+    // 判断函数是否为空
+    function isFunctionEmpty (fn) {
+        // 将函数转换成字符串
+        var fnStr = fn.toString();
+
+        // 截取函数{}里内容
+        var lastLocal =  fnStr.slice(fnStr.indexOf('{'));
+
+        // 截取内容文本
+        var contentText = func(fnStr,fnStr.indexOf('{'), fnStr.length);
+
+        // 更改StringY原型replaceAll替换全部指定字符串
+        String.prototype.replaceAll = function(reallyDo, replaceWith, ignoreCase) {
+          if (!RegExp.prototype.isPrototypeOf(reallyDo)) {
+            return this.replace(new RegExp(reallyDo, (ignoreCase ? "gi" : "g")),
+                replaceWith);
+          } else {
+            return this.replace(reallyDo, replaceWith);
+          }
+        };
+
+        // 从开头截取指定字符串
+        function func(str, startNum, EndNum) {
+    　　　　return str.slice(startNum, EndNum).replace(/([^x00-xff])/g, "$1a").slice(startNum, EndNum).replace(/([^x00-xff])a/g, "$1");
+    　　 }
+
+        // 替换空格
+        lastLocal = lastLocal.replaceAll(' ', '');
+        contentText = contentText.replaceAll(' ', '');
+
+        // 判断结果
+        var ret = fn.length == 0 && lastLocal == '{}' && contentText == '' ? true : false;
+
+        return ret;
+    }
+
+
+    console.log(isFunctionEmpty(fn));
+
+</script>

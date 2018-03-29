@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>
+        </title>
+        <script src="../js/jquery v1.6.1.js">
+        </script>
+        <style type="text/css">
+            #p { width: 300px; height: 300px; padding: 10px;  border: 1px solid black; }
+            #c { width: 100px; height: 100px; border: 1px solid red; }
+        </style>
+    </head>
+    <body>
+        <!--
+            DOM0事件
+            DOM0的事件具有极好的跨浏览器优势, 会以最快的速度绑定, 如果你通过DOM2绑定要等到JS运行, DOM0不用, 因为DOM0是写在元素上面的哇;
+        -->
+        <input onclick="alert(event)" />
+        <form>
+            <input name="hehe" value="hehe" />
+            <input onclick="alert(hehe.value)"/>
+            所有DOM0的事件作用域被扩展了哇;
+        </form>
+
+
+
+         <div id="p">
+            parent
+            <div id="c">
+                child
+            </div>
+    </body>
+</html>
+<script>
+    /*
+    IE的事件流是冒泡, 从里面往上面冒, netscape是从外部元素往内部元素捕获;
+    而DOM2级的事件规定了事件流包含三个阶段包括：
+    1：事件捕获，
+    2：处于目标阶段，
+    3：事件冒泡阶段（IE8以及更早版本不支持DOM事件流）;
+    */
+    var p = document.getElementById('p'),
+        c = document.getElementById('c');
+    c.addEventListener('click', function() {
+    alert('子节点捕获')
+    }, true);
+    c.addEventListener('click', function(e) {
+    alert('子节点冒泡')
+    }, false);
+    p.addEventListener('click', function() {
+    alert('父节点捕获')
+    }, true);
+    p.addEventListener('click', function() {
+    alert('父节点冒泡')
+    }, false);
+</script>

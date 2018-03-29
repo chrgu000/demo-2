@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <div class="top" >我这个是一个框架噢，很明显它是存在于一个窗口内的，所以我用它去判断究竟它是不是处于顶层窗口</div>
+</body>
+</html>
+<script type="text/JavaScript">
+    var b = window.top == window.self;
+    document.write( "顶层窗口与自身的窗口在一起吗：" + b );
+</script>

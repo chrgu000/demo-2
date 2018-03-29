@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>js中__proto__和prototype的区别和关系？</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+   /*
+    __proto__ 、prototype傻傻分不清楚？ 记住以下两点:1. __proto__是每个对象都有的一个属性，而prototype是函数才会有的属性。
+    2. __proto__指向的是当前对象的原型对象，而prototype指向的，是以当前函数作为构造函数构造出来的对象的原型对象。看起来有点绕，我 show you the code，下面我们用右手作为原型来给自己构造一个女神:
+
+   */
+
+
+  //在JavaScript的世界中，所有的函数都能作为构造函数，构造出一个对象
+   //下面我给自己构造一个女神做对象
+   function NvShen () {
+     this.name = "Alice";
+   }
+   //现在我设置NvShen这个函数的prototype属性
+   //一般来说直接用匿名的对象就行，我这里是为了方便理解，
+   //先定义一个hand对象再把hand赋值给NvShen的prototype
+   var hand = {
+     whichOne: "right hand",
+     someFunction: function(){
+       console.log("not safe for work.");
+     }
+   };
+   NvShen.prototype = hand;
+
+   //这个时候，我们可以用NvShen作为构造函数，构造出myObject对象
+   var myObject = new NvShen();
+   console.log(myObject.__proto__ === NvShen.prototype) //true
+
+   /*
+    好了，通过上面的代码，我们构建了一个女神对象myObject，而myObject的原型是hand对象，而刚好myObject的构造函数NvShen()的prototype属性也指向hand对象。现在我们知道，prototype与__proto__的关系就是：你的__proto__来自你构造函数的prototype 还有，上面的例子中，myObject是通过new NvShen()创建的，而hand对象，则是赋值语句创建的，这有什么不同？   其实hand这种直接用赋值语句加花括号来创建的对象，叫做对象字面量，你可以想象JavaScript内置了一个叫Object()的构造函数，这个函数的prototype属性指向的是一个空对象：
+
+   */
+
+   console.log(Object.prototype) //输出{}
+
+   /*
+    而所有对象字面量都是通过Object()构造出来的，换言之，对象字面量的__proto__属性都指向Object.prototype, which is 一个空对象。   所以我们可以知道, hand.__proto__ 指向的是Object.prototype   再附送你一个fun fact:   Object.prototype这个对象，它的__proto__指向的是null，然后就没有然后了。
+   */
+    console.log(Object.prototype.__proto__);//输出null
+
+
+      var obj = { a : 1 };
+      console.log(obj.__proto__ === Object.prototype);    // true
+
+
+      var str = new String('123');
+      console.log(str.__proto__ === String.prototype);    // true
+
+
+      function Point(){};
+      var Circle = Object.create(Point);
+      console.log(Circle.__proto__ === Point);            // true
+      console.log(Circle.__proto__ === Point.prototype);  // false
+
+
+      var p = new Point();
+      console.log(Point.__proto__);   // function Empty() {}
+      console.log(Point.__proto__ == Object.prototype); // true
+      console.log(Point.prototype);   // Point {}
+      console.log(p.__proto__);       // Point {}
+      console.log(p.__proto__  == Point.prototype); // true
+      console.log(p.prototype);       // undefined
+      console.log(Point.__proto__ === Function.prototype;);
+
+      console.log(Function.__proto__ === Function.prototype); // true
+      console.log(Object.__proto__ === Function.prototype); // true
+      console.log(Function.prototype.__proto__ === Object.prototype); // true
+</script>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/jquery v1.6.1.js"></script>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    function Cat(name,color){
+　　　　this.name = name;
+　　　　this.color = color;
+　　　　this.type = "猫科动物";
+　　　　this.eat = function(){
+            console.info("吃老鼠");
+        };
+        arguments.callee.prototype.aa = 6;
+        Cat.prototype.bb = 6;
+　　}
+
+
+    var cat1 = new Cat("大毛","黄色");
+    var cat2 = new Cat ("二毛","黑色");
+     console.log(cat1.type); // 猫科动物
+     cat1.eat() // 吃老鼠
+     cat1.type = 'cat1';
+     console.log(cat1.type);
+     cat1.aa = 5;
+     console.log(cat1.aa);
+     console.log(cat1.bb);
+
+
+
+     function Cat1(name,color){
+　　　　this.name = name;
+　　　　this.color = color;
+　　}
+　　Cat1.prototype.type = "猫科动物";
+　　Cat1.prototype.eat = function(){console.info("吃老鼠")};
+  　var cat11 = new Cat1("大毛","黄色");
+　　var cat22 = new Cat1("二毛","黑色");
+　　console.info(cat11.type); // 猫科动物
+　　cat11.eat(); // 吃老鼠
+
+    console.info(cat11.eat == cat22.eat); //true
+    console.info(cat11 == cat22);
+    //判断，某个proptotype对象和某个实例之间的关系。
+    console.info(Cat1.prototype.isPrototypeOf(cat11)); //true
+　　console.info(cat11.propertyIsEnumerable('name')); //true
+    //用来判断某一个属性到底是本地属性，还是继承自prototype对象的属性。
+    console.info(cat11.hasOwnProperty("name"));
+    //in运算符可以用来判断，某个实例是否含有某个属性，不管是不是本地属性。
+    console.info('type' in cat11);
+
+
+
+
+    var a = function(){
+      //empty
+      }
+      a.prototype.var1 = [1,2,3];
+      var b = new a();
+      b.var1.push(4);
+      console.info(b.var1);
+      var c = new a();
+      console.info(c.var1.join(","))
+
+</script>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+
+</head>
+<body>
+
+</body>
+</html>
+<script>
+  function foo(x, y, z) {
+    // 声明的函数参数数量arguments (x, y, z)
+    document.write(foo.length + '<br />'); // 3
+    // 真正传进来的参数个数(only x, y)
+    document.write(arguments.length + '<br />'); // 2
+    // 参数的callee是函数自身
+    document.write((arguments.callee === foo) + '<br />'); // true
+    // 参数共享
+    document.write((x === arguments[0]) + '<br />'); // true
+    document.write(x + '<br />'); // 10
+    arguments[0] = 20;
+    document.write(x + '<br />'); // 20
+    x = 30;
+    document.write(arguments[0] + '<br />'); // 30
+    // 不过，没有传进来的参数z，和参数的第3个索引值是不共享的
+    z = 40;
+    document.write(arguments[2] + '<br />'); // undefined
+    arguments[2] = 50;
+    document.write(z + '<br />'); // 40
+  }
+
+  foo(10, 20);
+//========================================
+  function test(a, b) {
+    var c = 10;
+    function d() {}
+    var e = function _e() {};
+    (function x() {});
+  }
+  document.write('test(10): ' + test(10) + '<br />'); // call
+  /*
+  当进入带有参数10的test函数上下文时，AO表现为如下：
+    AO(test) = {
+      a: 10,
+      b: undefined,
+      c: undefined,
+      d: <reference to FunctionDeclaration "d">
+      e: undefined
+    };
+    注意，AO里并不包含函数“x”。这是因为“x” 是一个函数表达式(FunctionExpression, 缩写为 FE) 而不是函数声明，函数表达式不会影响VO。 不管怎样，函数“_e” 同样也是函数表达式，但是就像我们下面将看到的那样，因为它分配给了变量 “e”，所以它可以通过名称“e”来访问。 函数声明FunctionDeclaration与函数表达式FunctionExpression 的不同，将在第15章Functions进行详细的探讨，也可以参考本系列第2章揭秘命名函数表达式来了解。
+
+    这之后，将进入处理上下文代码的第二个阶段 — 执行代码。
+   */
+//========================================
+  document.write(x + '<br />'); // function
+    var x = 10;
+    document.write(x + '<br />'); // 10
+    x = 20;
+
+    function x() {};
+    document.write(x + '<br />'); // 20
+//========================================
+    if (true) {
+      var a = 1;
+    } else {
+      var b = 2;
+    }
+//========================================
+     document.write(a + '<br />'); // 1
+     document.write(b + '<br />'); // undefined,不是b没有声明，而是b的值是undefined
+//========================================
+     //document.write(aa + '<br />') // undefined
+     //document.write(bb + '<br />') // "b" 没有声明
+    var aa;
+    document.write(aa + '<br />'); // undefined, 这个大家都知道，
+    b = 10;
+    document.write(b + '<br />'); // 10, 代码执行阶段创建
+
+     aa = 20;
+    document.write(aa + '<br />'); // 20, 代码执行阶段修改
+//========================================
+    /*
+    关于变量，还有一个重要的知识点。变量相对于简单属性来说，变量有一个特性(attribute)：{DontDelete},这个特性的含义就是不能用delete操作符直接删除变量属性。
+     */
+     a1 = 10;
+     document.write('a1: ' + window.a1 + '<br />'); // 10
+     document.write(delete a1 + '<br />'); // true
+
+     document.write(window.a1 + '<br />'); // undefined
+
+     var b1 = 20;
+     document.write(window.b1 + '<br />'); // 20
+
+     document.write(delete b1 + '<br />'); // false
+
+     document.write(window.b1 + '<br />'); // still 20
+//========================================
+    eval('var a2 = 10;');
+     document.write(window.a2 + '<br />'); // 10
+
+     document.write(delete a2 + '<br />'); // true
+
+     document.write(window.a2 + '<br />'); // undefined
+     //但是这个规则在有个上下文里不起走样，那就是eval上下文，变量没有{DontDelete}特性。
+//========================================
+    /*
+    按标准规范，活动对象是不可能被直接访问到的。
+    但是，一些具体实现并没有完全遵守这个规定，
+    例如SpiderMonkey和Rhino；的实现中，函数有一个特殊的属性 __parent__，通过这个属性可以直接引用到活动对象（或全局变量对象），在此对象里创建了函数。
+     */
+    //例如 (SpiderMonkey, Rhino)
+/*    var global = this;
+    var a3 = 10;
+
+    function foo2() {}
+    //这个__parent__用来指向一个对象的上下文属性，但它已被删除。
+    //IE6,7支持
+   document.write('foo2.__parent__ :' + foo2.__parent__ + '<br />'); // global
+
+    var VO = foo.__parent__;
+
+    document.write('VO.a3: ' + VO.a3 + '<br />'); // 10
+    document.write('(VO === global): ' + (VO === global) + '<br />'); */// true
+
+    /*
+    在上面的例子中我们可以看到，函数foo是在全局上下文中创建的，所以属性__parent__ 指向全局上下文的变量对象，即全局对象。
+
+    然而，在SpiderMonkey中用同样的方式访问活动对象是不可能的：在不同版本的SpiderMonkey中，内部函数的__parent__ 有时指向null ，有时指向全局对象。
+
+    在Rhino中，用同样的方式访问活动对象是完全可以的。
+
+    例如 (Rhino)：
+     */
+    var global = this;
+    var x = 10;
+
+    (function foo() {
+
+      var y = 20;
+
+      // "foo"上下文里的活动对象
+      var AO = (function () {}).__parent__;
+
+      print(AO.y); // 20
+
+      // 当前活动对象的__parent__ 是已经存在的全局对象
+      // 变量对象的特殊链形成了
+      // 所以我们叫做作用域链
+      print(AO.__parent__ === global); // true
+
+      print(AO.__parent__.x); // 10
+
+    })();
+
+
+</script>

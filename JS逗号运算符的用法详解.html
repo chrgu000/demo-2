@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/jquery v1.6.1.js"></script>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+      var a = 10, b = 20;
+      function CommaTest(){
+        return a++, b++, 10;
+      }
+
+      var c = CommaTest();
+      console.log(a); // 返回11
+      console.log(b); // 返回21
+      console.log(c); // 返回10
+
+      console.log(2 * 5,2 * 4); //10 8
+
+      var a = 20;
+      var b = (++a,10);
+      console.log(b);
+
+      console.log(x = 8 * 2,x * 4) /*整个表达式的值为64，x的值为16*/ //16 64
+      console.log(x = 8 * 2,x * 4,x * 2) /*整个表达式的值为128，x的值为16*/ //16 64 32
+      console.log(x = (z = 5,5 * 2)) /*整个表达式为赋值表达式，它的值为10，z的值为5*/ //10
+      console.log(x = z = 5,5 * 2) /*整个表达式为逗号表达式，它的值为10，x和z的值都为5*/ //5 10
+
+</script>

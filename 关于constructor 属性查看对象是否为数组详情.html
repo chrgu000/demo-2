@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/jquery v1.6.1.js"></script>
+</head>
+<body>
+            <p>判断是否为数组。</p>
+            <p id="demo1"></p>
+</body>
+</html>
+<script>
+        /*
+            1、myArray返回的是fruits数组（本例是的）；
+            2、constructor返回的是myArray的构造函数，返回function Array(){[native code]}，类型为function；
+            3、toString起到了转换类型的作用，把2中的function类型转化为字符串“function Array(){[native code]}”；
+            4、indexOf("Array")：表示在3返回的字符串中查找Array的字符串，返回的是"Array"字符串的起始位置，返回9，大于-1，返回 true；
+            Tips：indexOf()，当能索引的时候返回索引值，从起始0开始，若没有要查找的字符串返回-1；
+         */
+
+        var fruits = ["Banana", "Orange", "Apple", "Mango"];
+        document.getElementById("demo1").innerHTML = isArray(fruits);
+        function isArray(myArray) {
+            return myArray.constructor.toString().indexOf("Array") > -1;
+        }
+
+
+        // 方法三之 特性判断法
+
+        function isArray2(object){
+            return  object && typeof object==='object' &&
+                    typeof object.length==='number' &&
+                    typeof object.splice==='function' &&
+                     //判断length属性是否是可枚举的 对于数组 将得到false
+                    !(object.propertyIsEnumerable('length'));
+        }
+        //有length和splice并不一定是数组，因为可以为对象添加属性，而不能枚举length属性，才是最重要的判断因子。
+        /*
+            有length和splice并不一定是数组，因为可以为对象添加属性，而不能枚举length属性，才是最重要的判断因子。
+            ps: 在这里普及下 propertyIsEnumerable 方法：
+
+            object. propertyIsEnumerable(proName)
+            判断指定的属性是否可列举
+            备注：如果 proName 存在于 object 中且可以使用一个 For…In 循环穷举出来，那么 propertyIsEnumerable 属性返回 true。如果 object 不具有所指定的属性或者所指定的属性不是可列举的，那么 propertyIsEnumerable 属性返回 false。
+            propertyIsEnumerable 属性不考虑原型链中的对象。
+
+         */
+
+         //方法四之 最简单的方法
+         /*
+            这种方式既解决了instanceof存在的跨页面问题，也解决了属性检测方式所存在的问题，实在是一种妙招，一个很好的解决方案。
+            除此之外，这种解决办法也可以应用于判断Date,Function等类型的对象。
+          */
+
+        function isArray3(o) {
+            return Object.prototype.toString.call(o) === '[object Array]';
+        }
+        /*
+            标准浏览器中完美的作到，但是（为什么要说但是呢）IE6中，却会出现以下问题：
+        过Object.prototype.toString.call获取的 字符串,undefined,null均为Object
+         */
+
+        var oP = Object.prototype,
+        toString = oP.toString;
+
+        function typeOf(value) {
+            if (null === value) {
+                return 'null';
+            }
+
+            var type = typeof value;
+            if ('undefined' === type || 'string' === type) {
+                return type;
+            }
+
+            var typeString = toString.call(value);
+            switch (typeString) {
+            case '[object Array]':
+                return 'array';
+            case '[object Date]':
+                return 'date';
+            case '[object Boolean]':
+                return 'boolean';
+            case '[object Number]':
+                return 'number';
+            case '[object Function]':
+                return 'function';
+            case '[object RegExp]':
+                return 'regexp';
+            case '[object Object]':
+                if (undefined !== value.nodeType) {
+                    if (3 == value.nodeType) {
+                        return (/\S/).test(value.nodeValue) ? 'textnode': 'whitespace';
+                    } else {
+                        return 'element';
+                    }
+                } else {
+                    return 'object';
+                }
+            default:
+                return 'unknow';
+            }
+        }
+        console.log(typeOf([1,2]));
+</script>

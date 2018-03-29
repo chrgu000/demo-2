@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="../js/jquery v1.6.1.js"></script>
+</head>
+<body>
+      <div id="myDiv">这是我的div</div>
+</body>
+</html>
+<script>
+  var a = document.createElement('a');
+  a.href = 'http://www.cnblogs.com/wayou/p/';
+  console.log(a.host);
+  console.log(parseURL(a));
+  function parseURL(url) {
+      var a = document.createElement('a');
+      a.href = url;
+      return {
+          source: url,
+          protocol: a.protocol.replace(':', ''),
+          host: a.hostname,
+          port: a.port,
+          query: a.search,
+          params: (function() {
+              var ret = {},
+                  seg = a.search.replace(/^\?/, '').split('&'),
+                  len = seg.length,
+                  i = 0,
+                  s;
+              for (; i < len; i++) {
+                  if (!seg[i]) {
+                      continue;
+                  }
+                  s = seg[i].split('=');
+                  ret[s[0]] = s[1];
+              }
+              return ret;
+          })(),
+          file: (a.pathname.match(/\/([^\/?#]+)$/i) || [, ''])[1],
+          hash: a.hash.replace('#', ''),
+          path: a.pathname.replace(/^([^\/])/, '/$1'),
+          relative: (a.href.match(/tps?:\/\/[^\/]+(.+)/) || [, ''])[1],
+          segments: a.pathname.replace(/^\//, '').split('/')
+      };
+  }
+/*
+    引子：
+            文档对象模型是一种与编程语言及平台无关的API(Application programming Interface)，借助于它，程序能够动态地访问和修改文档内容、结构或显示样式。W3C协会早在1988年就开始了DOM标准的制定，W3C DOM标准可以分为DOM1,DOM2,DOM3三个版本。
+
+    DOM1级主要定义的是HTML和XML文档的底层结构。DOM2和DOM3级别则在这个结构的基础上引入了更多的交互能力，也支持了更高级的XML特性。为此DOM2和DOM3级分为许多模块（模块之间具有某种关联），分别描述了DOM的某个非常具体的子集。
+
+        http://blog.sina.com.cn/s/blog_825442790101354v
+    具体详细的规范请查阅相关标准资料。
+
+    1、DOM0级事件处理方式：
+        通过javascript制定事件处理程序的传统方式。就是将一个函数赋值给一个事件处理属性。第四代web浏览器出现，至今为所有浏览器所支持。优点，简单且具有跨浏览器的优势。
+        例：var btn = document.getElementById("btn");
+                btn.onclick = function(){
+                    alert(this.id);//this指定当前元素btn
+
+                }
+    删除DOM0事件处理程序，只要将对应事件属性置为null即可。
+    btn.onclick = null;
+    缺点：一个事件处理程序只能对应一个处理函数。
+
+    2、DOM2级事件处理方式
+        DOM2级事件处理方式指定了，添加事件处理程序和删除事件处理程序的方法。分别是：
+        addEventListener(eventName,func,isPuhuo);
+        removeEventListener(eventName,func,isPuhuo);
+        例如：
+        var btn = document.getElementById("btn");
+        handler = function(){
+            ……
+        }
+        addEventListener("click",handler,false/true);
+        removeEventListener("click",handler,false/true);
+    参数分别是，事件处理属性名称，处理函数，是否在捕获时执行事件处理函数。
+    注：
+          a)  eventName的值均不含on,例如注册鼠标点击事件eventName为“click”
+          b)  处理函数中的this依然指的是指当前dom元素
+          c)  通过addEventListener添加的事件处理程序，只能通过removeEventListener来删除，也就是说通过addEventListener添加的匿名函数将无法被删除。
+    IE中的DOM2级事件处理
+          d)IE中的DOM2级事件处理使用了attachEvent和detachEvent来实现。这俩个方法接受俩个相同的参数，事件处理名称和事件处理函数。IE8级更早版本只支持冒泡型事件，所以attachEvent添加的事件都会被添加到冒泡阶段。
+        例如：
+                var btn = document.getElementById("btn");
+                btn.attachEvent("onclick",function(){
+                    alert(this);//此处this是window
+                });
+        注意;通过attachEvent添加的事件第一个参数是“onclick”而非标准事件中的“click”。在使用attachEvent方法和DOM0级事件处理程序的主要区别在于事件处理程序的作用域。采用DOM0级处理方式，事件处理程序会在其所属元素的作用域内运行。使用attachEvent，事件处理程序会在全局作用域内运行，因此this等于window。
+
+    跨浏览的事件处理方式：
+
+    var EventUtil = {
+        addEventHandler:function(element,type.handler){
+    if(element.addEventListener){
+                element.addEventListener(type,handler);
+    }else if(element.attachEvent){
+                element.attachEvent("on" + type,handler);
+    }else{
+                element["on" + type] = handler;
+    }
+        },
+    removeEventHandler:function(element,type,handler){
+    if(element.addEventListener){
+                element.removeEventListener(type,handler);
+    }else if(element.detachEvent){
+                element.detachEvent("on" + type,handler);
+    }else{
+                element["on"+type] = null;
+    }
+        }
+    }
+
+    3、DOM3事件
+        DOM浏览器中可能发生的事件有很多种，不同事件类型具有不同的信息，DOM3级事件规定了一下几种事件：
+        UI事件，当用户与页面上的元素交互时触发；
+        焦点事件，当元素获得或者失去焦点时触发；
+        鼠标事件，当用户通过鼠标在页面上执行操作时触发；
+        滚轮事件，当使用鼠标滚轮（或类似设备）时触发；
+        文本事件，当在文档中，输入文本时触发；
+        键盘事件，当用户通过键盘在页面上执行操作时触发；
+        合成事件，当为IME（Input Method Editor，输入法编辑器）输入字符时触发；
+        变动事件，当底层Dom结构发生变化时触发；
+        DOM3级事件模块在DOM2级事件的基础上重新定义了这些事件，也添加了一些新事件。包括IE9在内的主流浏览器都支持DOM2级事件，IE9也支持DOM3级事件。
+    DOM中的事件模拟（自定义事件）：
+    DOM3级还定义了自定义事件，自定义事件不是由DOM原生触发的，它的目的是让开发人员创建自己的事件。要创建的自定义事件可以由createEvent("CustomEvent");
+    返回的对象有一个initCustomEvent（）方法接收如下四个参数。
+    1）type：字符串，触发的事件类型，自定义。例如 “keyDown”，“selectedChange”;
+    2）bubble（布尔值）：标示事件是否应该冒泡；
+    3）cancelable(布尔值)：标示事件是否可以取消；
+    4）detail（对象）：任意值，保存在event对象的detail属性中；
+    可以像分配其他事件一样在DOM中分派创建的自定义事件对象。如：
+
+    var  div = document.getElementById("myDiv");
+    EventUtil.addEventHandler(div,"myEvent", function () {
+    alert("div myEvent!");
+    });
+    EventUtil.addEventHandler(document,"myEvent",function(){
+    alert("document myEvent!");
+    });
+    if(document.implementation.hasFeature("CustomEvents","3.0")){
+    var e = document.createEvent("CustomEvent");
+    e.initCustomEvent("myEvent",true,false,"hello world!");
+    div.dispatchEvent(e);
+    }
+    这个例子中创建了一个冒泡事件“myEvent”。而event.detail的值被设置成了一个简单的字符串，然后在div和document上侦听该事件，因为在initCustomEvent中设置了事件冒泡。所以当div激发该事件时，浏览器会将该事件冒泡到document。
+    IE中的事件模拟(IE8及之前版本中)：
+    与DOM中事件模拟的思路类似，先创建event对象，再为其指定相应信息，然后再使用该对象来触发事件。当然IE在实现以下每个步骤都不太一样。
+    例如：
+    var btn = document.getElementById("myBtn");
+    //创建事件对象,不接受任何参数，结果会返回一个通用的event对象，你必须为该event对象指定所有必要的信息。
+    var event  = document.createEventObject();
+    //初始化事件对象
+    event.screenX = 100；
+    event.screenY = 0;
+    event.clientX = 0;
+    event.clientY =0;
+    event.ctrlKey = false;
+    event.altKey = false;
+    event.shiftKey = false;
+    event.button = 0;
+
+    //触发事件
+    btn.fireEvent("onclick",event);
+ */
+
+    var EventUtil = {
+        addEventHandler: function(element, type,handler) {
+            if (element.addEventListener) {
+                element.addEventListener(type, handler);
+            } else if (element.attachEvent) {
+                element.attachEvent("on" + type, handler);
+            } else {
+                element["on" + type] = handler;
+            }
+        },
+        removeEventHandler: function(element, type, handler) {
+            if (element.addEventListener) {
+                element.removeEventListener(type, handler);
+            } else if (element.detachEvent) {
+                element.detachEvent("on" + type, handler);
+            } else {
+                element["on" + type] = null;
+            }
+        }
+    }
+
+  var div = document.getElementById("myDiv");
+  EventUtil.addEventHandler(div, "myEvent", function(e) {
+      console.log("div myEvent!");
+      console.log(e.detail);
+  });
+  EventUtil.addEventHandler(document, "myEvent", function() {
+      console.log("document myEvent!");
+  });
+  if (document.implementation.hasFeature("CustomEvents", "3.0")) {
+      var e = document.createEvent("CustomEvent");
+      e.initCustomEvent("myEvent", true, false, "hello world!");
+      div.dispatchEvent(e);
+  }
+
+</script>

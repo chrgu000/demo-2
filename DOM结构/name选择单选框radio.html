@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="../js/jquery v1.6.1.js"></script>
+</head>
+<body>
+
+<p>点击文本标签</p><form name="input" action="">
+<input type="radio" name="sex" id="male" value="1" data-index="1"/>
+<label for="male" style="cursor:pointer;">Male男</label>
+<input type="radio" name="sex" id="female" value="2"/>
+<label for="female" style="cursor:pointer;">Female女</label>
+</form>
+</body>
+</html>
+<script>
+    var obj = {
+        a : 1
+    }
+
+/*    if (obj.a === 1) {
+      $('input[name="sex"]').eq(1).attr('checked',true)
+    } else {
+      $('input[name="sex"]').eq(0).attr('checked',true)
+    }*/
+
+
+    $radioChecked('sex', obj.a, false);
+
+    /*
+      值变更时触发,选中单选按钮
+      @author waecy(waecy2@sina.cn)
+
+      @param {String} name 要选择中单选按钮name值
+      @param {String} InterfaceValue 后台接口传入的值
+      @param {String} booleanValue 判断是否禁止选中,不传参数或false禁止选中,传入true能够手动选中
+     */
+
+    function $radioChecked (name,InterfaceValue,booleanValue) {
+
+      // 获取所有input对应name的单选框
+      var inputs = document.getElementsByName(name);
+
+      // 循环遍历个数
+      for (var i = 0, len = inputs.length; i < len; i++) {
+
+          // 判断如果单选框value等于后台传入的值,那么选中并禁止操作
+          if (inputs[i].value == InterfaceValue) {
+                inputs[i].checked = true;
+          }
+
+        // 判断是否禁止选中,不传参数或false禁止选中,传入true能够手动选中
+         if (arguments[2] == null || arguments[2] == false) {
+                inputs[i].disabled = true;
+         } else {
+                inputs[i].disabled = false;
+         }
+
+      }
+    }
+</script>

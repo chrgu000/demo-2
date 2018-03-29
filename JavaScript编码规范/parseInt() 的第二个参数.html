@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="../js/jquery v1.6.1.js"></script>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+
+  console.log(parseInt('09',10));    // 输出0 IE6
+  console.log(parseInt('09',10));    // 输出9 chrome
+  /*
+      将分钟的字符串转换为整形，开头为0的字符串转整形的时候会被当做8进制，IE9，chrome默认是10进制；IE6默认不是，所以就会报错：1
+      先看一下js的进制表示法就能理解了：
+
+      十进制直接表示，例如：1，2，3，4，5，6
+      八进制要加零表示，例如：00，01，02，03，04，05
+      十六进制要加0x表示，例如：0xA1,0x13,0xFF
+   */
+
+
+  console.log(parseInt('010',10));    // 输出10
+  console.log(parseInt('010',8));     // 输出8
+
+  console.log(parseInt('0x10',10));    // 输出0
+  console.log(parseInt('0x10',16));     // 输出16
+
+
+</script>

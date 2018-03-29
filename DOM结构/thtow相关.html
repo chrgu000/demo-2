@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+
+
+</body>
+</html>
+<script>
+    var  token =  null;
+    mainlop : while(token != null) {
+      continue mainlop;
+    }
+
+    // 获取对象属性名
+    var obj = {
+        a : '这是a',
+        b : '这是b'
+    }
+    var i = 0;
+    var arr = [];
+    for (arr[i++] in obj);
+    console.log(arr);
+
+
+    // 将数组里的数字拼接成字符串,排除undefined,NaN,''
+    var data = [1,2,3,undefined,NaN,'',0,'66',null,4,5];
+    var total = '';
+    for (var i = 0; i < data.length; i++) {
+          if(!data[i]) continue; // 不能 处理undfined数据
+          total += data[i];
+    }
+    console.log(total);
+
+
+    // 计算阶乘函数
+    function factorial (num) {
+        // 如果输入是合法的,则抛出一个异常
+        if (num < 0) {
+          throw new Error('num不能是负数');
+        }
+
+        //否则,计算出一个值,并正常返回它
+        for (var i = 1; num > 1; i *= num, num--) /* empty */;
+          return i;
+    }
+    console.log(factorial(3));
+    // console.log(factorial(-3));
+
+
+
+    // 让用户手动输入,查询阶乘结果
+    try {
+      // 要求用户输入一个数字
+      var n = Number(prompt('请输入一个正整数',''));
+
+      // 假设输入是合法的,计算这个数的阶乘
+      var f = factorial(n);
+
+      // 显示结果
+      console.log(n + "| =" + f);
+    } catch (e) {
+      // 如果输入不合法,将执行这里的逻辑
+      console.log(e); //查询用户产生了什么错误
+    }
+
+
+
+    function foo() {
+        try {
+
+        } finally {
+          return 1
+        }
+    }
+    console.log(foo());
+
+</script>

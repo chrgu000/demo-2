@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>lcoalStorage用法</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+     localStorage.setItem("x", 1); //以"name"的名字存储一个数值
+    var a = localStorage.getItem("x"); //获取x的数值
+    console.log(a);
+    //枚举所有的存储的名字/值对
+    for(var i = 0;i<localStorage.length;i++){//length 表示了所有名字/值对
+        var name = localStorage.key(i); //获取第i对的名字
+        var value = localStorage.getItem(name);//获取该对的值
+        console.log(name);
+        console.log(value);
+    }
+
+    localStorage.removeItem("x")//删除"x"项
+    localStorage.clear();//全部删除
+
+
+      localStorage.o = {x:1};//存储一个带有"x"属性的对象
+      localStorage.o.x = 2; //试图设置该对象的属性值
+      //localStorage.o.x; //=>undefined x没有改变
+       localStorage.getItem("o").x = 2;//我们并不像存储2
+      console.log(localStorage.o.x);
+
+
+       //识别出是哪类存储机制
+        var memory = window.localStorage || (window.userDataStorage && new userDataStorage()) || new cookieStorage();
+         //然后在对于的机制中查询数据
+
+         memory.setItem("x",'1');
+        var username = memory.getItem("x");
+        console.log(localStorage.x);
+
+</script>

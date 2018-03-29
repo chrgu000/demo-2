@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/jquery v1.6.1.js"></script>
+</head>
+<body>
+    <button id="btn">按钮</button>
+</body>
+</html>
+<script>
+  var currying = function(fn) {
+      // fn 指官员消化老婆的手段
+      var args = [].slice.call(arguments, 1);
+
+      /*
+        1.先通过getWife第二个参数,设置范畴的参数
+       */
+
+      console.log(args);["合法老婆"]
+      // args 指的是那个合法老婆
+      return function() {
+          // 已经有的老婆和新搞定的老婆们合成一体，方便控制
+
+        /*
+          2.return是当函数调用时,返回结果,所以这时,调用 getWife的值又指向了范畴参数
+         */
+
+          var newArgs = args.concat([].slice.call(arguments));
+      console.log(newArgs); // ["合法老婆", "大老婆", "小老婆", "俏老婆", "刁蛮老婆", "乖老婆", "送上门老婆"]
+       //合法老婆;大老婆;小老婆;俏老婆;刁蛮老婆;乖老婆;送上门老婆
+          // 这些老婆们用 fn 这个手段消化利用，完成韦小宝前辈的壮举并返回
+
+        /*
+            3.通过获取newArgs最终值返回
+         */
+          return fn.apply(null, newArgs);
+      };
+  };
+
+  // 下为官员如何搞定7个老婆的测试
+  // 获得合法老婆
+  var getWife = currying(function() {
+      /*
+        将定义匿名函数this指向Array的原型,继承getWife实参
+       */
+      var allWife = [].slice.call(arguments);
+      // allwife 就是所有的老婆的，包括暗渡陈仓进来的老婆
+      console.log(allWife.join(";"));
+  }, "合法老婆");
+
+
+  // 获得其他6个老婆
+  getWife("大老婆","小老婆","俏老婆","刁蛮老婆","乖老婆","送上门老婆");
+
+  // 换一批老婆
+  getWife("超越韦小宝的老婆")
+//=================================================================
+    var smallKenan = function(action) {
+        var bigKenan = function(doing) {
+            var result = "";
+            if (action === "take drugs") {
+                if (doing === "bathWithGirlFriend") {
+                    result = "尖叫，新一，你这个色狼，然后一巴掌，脸煮熟了~";
+                } else if (doing === "pointOutKiller") {
+                    result = "新一，这个案子就交给你的，快点找出谁是凶手吧~";
+                }
+            } else {
+                if (doing === "bathWithGirlFriend") {
+                    result = "来吧，柯南，一起洗澡吧~";
+                } else if (doing === "pointOutKiller") {
+                    result = "小孩子家，一边玩去！";
+                }
+            }
+            console.log(result);
+            return arguments.callee; // 等同于return bigKenan
+        };
+        return bigKenan;
+    };
+    // 小柯南吃药了，然后和毛利兰洗澡，凶案现场指证犯人；结果是……
+    smallKenan("take drugs")("bathWithGirlFriend")("pointOutKiller");
+//=================================================================
+    /*
+      柯里化有3个常见作用：
+        1. 参数复用；
+        2. 提前返回；
+        3. 延迟计算/运行。
+     */
+    var addEvent = function(el, type, fn, capture) {
+        if (window.addEventListener) {
+            el.addEventListener(type, function(e) {
+                fn.call(el, e);
+            }, capture);
+        } else if (window.attachEvent) {
+            el.attachEvent("on" + type, function(e) {
+                fn.call(el, e);
+            });
+        }
+    };
+
+    var addEvent2 = (function(){
+    if (window.addEventListener) {
+        return function(el, sType, fn, capture) {
+            el.addEventListener(sType, function(e) {
+                fn.call(el, e);
+            }, (capture));
+        };
+    } else if (window.attachEvent) {
+        return function(el, sType, fn, capture) {
+            el.attachEvent("on" + sType, function(e) {
+                fn.call(el, e);
+            });
+        };
+    }
+  })();
+
+  function fn(e){
+    console.log('这是fn函数内!');
+    // console.log(e);
+  }
+  addEvent2(btn,'click',fn,'这是name');
+//=================================================================
+    //“延迟计算”
+    var fishWeight = 0;
+    var addWeight = function(weight) {
+        fishWeight += weight;
+    };
+
+    addWeight(2.3);
+    addWeight(6.5);
+    addWeight(1.2);
+    addWeight(2.5);
+    console.log(fishWeight);   // 12.5
+
+  //柯里化实现
+  var curryWeight = function(fn) {
+      var _fishWeight = [];
+      return function() {
+          if (arguments.length === 0) {
+              return fn.apply(null, _fishWeight);
+          } else {
+            console.log('之前: ' + _fishWeight);
+              _fishWeight = _fishWeight.concat([].slice.call(arguments));
+            console.log('之后: ' + _fishWeight);
+          }
+      }
+  };
+  var fishWeight1 = 0;
+  var addWeight2 = curryWeight(function() {
+      var i = 0;
+      len = arguments.length;
+      for (i; i < len; i += 1) {
+          fishWeight1 += arguments[i];
+      }
+  });
+  addWeight2(2.3);
+  addWeight2(6.5);
+  addWeight2(1.2);
+  addWeight2(2.5);
+  addWeight2(); //  这里才计算
+  console.log(fishWeight1); // 12.5
+
+
+  var averageWeight3 = 0;
+  var addWeight3 = curryWeight(function() {
+      var i = 0; len = arguments.length;
+      for (i; i < len; i += 1) {
+          averageWeight3 += arguments[i] / len;
+      }
+  });
+
+  addWeight3(2.3);
+  addWeight3(6.5);
+  addWeight3(1.2);
+  addWeight3(2.5,2.3); //好处就是参数个数随意
+  addWeight3();    //  这里才计算
+
+  console.log(averageWeight3);
+//=================================================================
+    var obj = {
+        "name": "currying"
+    },
+    fun = function() {
+        console.log(this.name);
+    }.bind(obj);
+
+    fun(); // currying
+
+
+    //从IE6~8的自定义扩展来看，其实现的机制就是柯里化（不考虑执行时的新增参数）：
+    if (function() {}.bind) {
+        Function.prototype.bind = function(context) {
+            var self = this,
+                args = Array.prototype.slice.call(arguments);
+            return function() {
+                // return self.apply(context, args.slice(1));w
+                return self.apply(context, arguments);
+            }
+        };
+    }
+    fun2 = function() {
+        console.log(this.name);
+    }.bind(obj);
+    fun2();
+</script>

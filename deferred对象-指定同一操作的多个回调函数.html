@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/jquery v1.6.1.js"></script>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+　　$.ajax("/echo/html/")
+　　.done(function(){ alert("哈哈，成功了！"); })
+　　.fail(function(){ alert("出错啦！"); })
+    .done(function(){ alert("第二个回调函数！");} );
+</script>

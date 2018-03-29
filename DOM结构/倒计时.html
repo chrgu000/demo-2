@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+    <div id="showId"></div>
+
+
+    <span id="a1"></span>
+    <span id="a2"></span>
+    <span id="a3"></span>
+    <span id="a4"></span>
+    <span id="a5"></span>
+
+</body>
+</html>
+<script>
+    /**
+   * 倒计时
+   */
+
+  /*function Conutdown(endtime,showid){
+      var timer = setInterval(function () {
+          var date = new Date();
+          var end = new Date(endtime);
+          var _time = end - date;
+          var d = Math.floor(_time / 1000 / 60 / 60 / 24);
+          var h = Math.floor(_time / 1000 / 60 / 60 % 24);
+          var m = Math.floor(_time / 1000 / 60 % 60);
+          var s = Math.floor(_time / 1000 % 60);
+          var ms = Math.floor(_time % 1000);
+
+          if (d < 0) {
+              clearInterval(timer);
+              showid.innerHTML = "剩余" + "0" + "天" + "0" + "小时" + "0" + "分钟" + "0" + "秒" + '0毫秒';
+          } else {
+          // showid.textContent =  `${d}天${h}小时${m}分${s}秒${ms}`;
+            // showid.textContent = "剩余" + _day + "天" + _h + "小时" + _m + "分钟" + _s + "秒" + _ms;
+          showid.innerHTML = "剩余" + d + "天" + h + "小时" + m + "分钟" + s + "秒" + ms;
+
+          }
+
+
+      },10)
+
+  }
+
+  console.log(Conutdown('2016/12/26 00:00:00',showId));
+  */
+  // ==================  定时器  ============================
+    function Conutdown(endtime, showid, getDate){
+        var timer = setInterval(function () {
+            var date = new Date();
+            var end = new Date(endtime);
+            var _time = end - date;
+            var d = Math.floor(_time / 1000 / 60 / 60 / 24);
+            var h = Math.floor(_time / 1000 / 60 / 60 % 24);
+            var m = Math.floor(_time / 1000 / 60 % 60);
+            var s = Math.floor(_time / 1000 % 60);
+            var ms = Math.floor(_time % 1000);
+
+            // 获取单独得到日期
+            var getDate = getDate || true;
+
+            // 判断日期是否过期
+            if (d < 0) {
+                clearInterval(timer);
+
+                // 获取变量里不同的参数进行判断
+              switch (getDate) {
+                case 'd':
+                  showid.innerHTML = '0';
+                  break;
+                // 如果是h就是小时
+                case 'h':
+                  showid.innerHTML = '0';
+
+                // 如果是m就是分钟
+                case 'm':
+                  showid.innerHTML = '0';
+                  break;
+
+                // 如果是s就是秒
+                case 's':
+                  showid.innerHTML = '0';
+                  break;
+
+                // 毫秒
+                case 'ms':
+                  showid.innerHTML = '0';
+                  break;
+                default :
+                   showid.innerHTML = "剩余" + d + "天" + h + "小时" + m + "分钟" + s + "秒" + ms;
+                  break;
+                }
+            } else {
+            // showid.textContent =  `${d}天${h}小时${m}分${s}秒${ms}`;
+              // showid.textContent = "剩余" + _day + "天" + _h + "小时" + _m + "分钟" + _s + "秒" + _ms;
+
+         // 获取变量里不同的参数进行判断
+              switch (getDate) {
+                case 'd':
+                  showid.innerHTML = d;
+                  break;
+                // 如果是h就是小时
+                case 'h':
+                  showid.innerHTML = h;
+
+                // 如果是m就是分钟
+                case 'm':
+                  showid.innerHTML = m;
+                  break;
+
+                // 如果是s就是秒
+                case 's':
+                  showid.innerHTML = s;
+                  break;
+
+                // 毫秒
+                case 'ms':
+                  showid.innerHTML = ms;
+                  break;
+                default :
+                   showid.innerHTML = "剩余" + d + "天" + h + "小时" + m + "分钟" + s + "秒" + ms;
+                  break;
+                }
+
+
+            }
+
+
+        },10)
+
+    }
+
+Conutdown('2017/12/30 00:00:00',a1,'d')
+</script>

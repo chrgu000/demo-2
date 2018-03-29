@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/jquery v1.6.1.js"></script>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+/*
+  个人觉得这种方式比较简单，也相对好理解；
+另外，对于$.Deferred().promise();最后那句总结很明确了---> 没有参数时，返回一个新的deferred对象，该对象的运行状态无法被改变；接受参数时，作用为在参数对象上部署deferred接口
+ */
+  var wait = function(dfd) {
+      var task = function() {
+          alert('completed!!');
+          dfd.resolve();
+      }
+      setTimeout(task, 1000);
+  }
+  $.Deferred(wait).done(function() {
+      alert('done')
+  });
+</script>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+        <title>
+            关于字体大小px与rem混用的个人经验
+        </title>
+        <meta name="description" content=""/>
+        <meta name="keywords" content=""/>
+        <link href="" rel="stylesheet"/>
+        <style type="text/css">
+              /*
+          关于rem与px的区别，网上已经有不少文章了，在此不多谈。主要想谈的是：在制作网页时，什么时候设定字体大小用px，什么时候用rem？
+
+        先谈结论，再讲为什么。一般情况下，还是以用px为主，只有当需要在不同设备上显示不同大小的字体时，再用rem。
+
+        举个极端例子，一个网页，需要在最大屏幕3000px(为了方便起见，我们这里只谈屏幕宽度)上显示，同时也需要在最小屏幕320px上显示。不管屏幕多大，人的肉眼能看清楚的字体大小都是16px（我们只是假设，也可以是14px甚至12px，但先假设为16px）。通常情况下，把字体大小设置为16px是没有问题的，这样的话，在小屏幕上，一行能显示20个汉字，大屏幕上一行能显示200个汉字，多少没关系，多了就自动换行呗，无非就是大屏幕上看起来文章较短，而小屏幕上看起来文章较长，但人的眼睛都能看得清，这是没有问题的。
+
+        但是有时候这里会出现一个小问题：在做标题的时候，设计师觉得在小屏幕上用16px显示5个汉字没有问题，但是在大屏幕上用16px显示5个汉字，就太小了，会显得整个屏幕空空荡荡，在这种情况下，就需要用到rem了。（em我就不想再谈了，没有意义，要用就直接用rem，关于这两者的区别，可以自行百度）
+
+        谈rem不谈base font毫无意义，谈base font不谈屏幕尺寸也毫无意义。
+
+        直接上代码，可能说的更明白：
+
+         */
+            /*手机端的标准字体大小为16px*/
+        html {
+            font-size: 16px;
+          }
+          @media only screen and (min-width : 320px) {
+          }
+          /*当屏幕宽度大于480像素时，将采用以下字体大小为标准大小，下同*/
+          @media only screen and (min-width : 480px) {
+              html {
+                  font-size: 18px;
+              }
+          }
+          @media only screen and (min-width : 768px) {
+              html {
+                  font-size: 20px;
+              }
+          }
+          @media only screen and (min-width : 992px) {
+              html {
+                  font-size: 20px;
+              }
+          }
+          @media only screen and (min-width : 1200px) {
+              html {
+                  font-size: 22px;
+              }
+          }
+
+        /*
+          不用担心，这里所设置的字体大小不会影响到你的任何直接定义为px的字体大小，这里的字体大小只有在一种情况下发生作用，那就是使用rem的时候。
+
+      回到刚才的例子，手机上一行显示5个汉字的时候，因为手机屏幕小，所以就用16px的字体就够了，所以我们就用1rem，当我们写完font-size:1rem的时候，它在大屏幕上，根据上面的设定，自动就变成22px了。
+
+      调的时候的顺序一定要搞清，不要两边来回乱调，而一定是要手机优先，先在小屏幕上用px确保字体显示正常了，再放到大屏幕上看，如果哪块觉得太空，需要放大字体，那么再回到小屏幕上，改写为rem，然后再放到大屏上看。
+
+
+       */
+
+        </style>
+    </head>
+    <body>
+
+
+        <style>
+          /*
+          其实em也不是完全毫无用处，在用于首行缩进以及行高时，只能用em，而不能用rem。举个例子：
+
+          在这种情况下，你如果把上面两处的2em改成2rem，反而不对了。
+             */
+            p {
+            text-indent: 2em;
+            line-height: 1.5em;
+            }
+        </style>
+        <div style="font-size: 1rem;">
+            <p>
+             进行测试进行测试进行测试进行测试进行测试进行测试进行测试进行测试进行测试进行测试进行测试进行测试进行测试进行测试
+            </p>
+        </div>
+        <div style="font-size: 3rem;">
+            <p>
+                 进行测试进行测试进行测试进行测试进行测试进行测试进行测试进行测试进行测试进行测试进行测试进行测试进行测试进行测试
+            </p>
+        </div>
+    </body>
+</html>

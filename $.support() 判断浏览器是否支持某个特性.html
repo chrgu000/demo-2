@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/jquery v1.6.1.js"></script>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+/*
+    如果你也是Jquery最初的使用者，那么你一定经历过这样判断浏览器的时代：$.browser.msie && $.browser.version，你目前使用的组件里可能还有应用。但是Jquery1.3以后就不建议使用了，到jQuery 1.9之后就不复存在了。应该是因为到ie8以上的版本判断就有问题了...⊙﹏⊙b汗
+
+  只有另外想办法，使用$.support来判断浏览器！测试如下代码：
+
+  alert($.support.opacity+" "+$.support.style+" "+window.XMLHttpRequest);
+  ie6：false false undefind
+  ie7：false false object
+  ie8：false true object
+  ie9：true true object
+  SO，判断浏览器可以：alert($.support.opacity+" "+$.support.style+" "+window.XMLHttpRequest);
+  var isIE6 = !$.support.opacity && !$.support.style && window.XMLHttpRequest==undefined;
+  var isIE7 = !$.support.opacity && !$.support.style && window.window.XMLHttpRequest!=undefined;
+  var isIE67 = !$.support.opacity && !$.support.style;//ie6\7
+  如果要检查ie浏览器，干脆直接使用 var isIE = /msie/.test(navigator.userAgent.toLowerCase());
+ */
+
+console.log($.support.opacity);
+console.log($.support.style);
+console.log(window.XMLHttpRequest);
+
+</script>

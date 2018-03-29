@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/jquery v1.6.1.js"></script>
+</head>
+<body>
+  <div>jQuery.isFunction( objs[ 0 ] ) = <span></span></div>
+  <div>jQuery.isFunction( objs[ 1 ] ) = <span></span></div>
+  <div>jQuery.isFunction( objs[ 2 ] ) = <span></span></div>
+  <div>jQuery.isFunction( objs[ 3 ] ) = <span></span></div>
+  <div>jQuery.isFunction( objs[ 4 ] ) = <span></span></div>
+</body>
+</html>
+<script>
+  function stub() {}
+    var objs = [
+      function() {}, //true
+      { x:15, y:20 }, //false
+      null, //false
+      stub, //tre
+      "function" //false
+  ];
+
+  $.each( objs, function( i ) {
+    var isFunc = $.isFunction( objs[ i ]);
+    $( "span" ).eq(i).text( isFunc );
+  });
+</script>

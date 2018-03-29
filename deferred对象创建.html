@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/jquery-1.10.2.js"></script>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+  // 换到已存在的模块
+  var obj = {
+      hello : function( name ) {
+        alert("你好: "+ name );
+      }
+  },
+  // 创建一个延期
+  defer = $.Deferred();
+  // 设定目标为承诺
+  defer.promise(obj);
+  // 解决延迟
+  defer.resolve("John");
+  // 解决延迟
+  obj.done(function( name ) {
+  obj.hello( name );// Will alert "Hello John"
+  })
+  </script>

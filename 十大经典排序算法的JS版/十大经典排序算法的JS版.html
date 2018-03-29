@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <!-- <script src="js/jquery v1.6.1.js"></script> -->
+</head>
+<body>
+
+</body>
+</html>
+<script>
+  /*
+    @topic 输入：随机输入n个数：5,7,8,6,1,1,2,5,4,9
+    @result 输出：n个数的排列（从小到大）：1,1,2,4,5,5,6,7,8,9
+   */
+// ===========================================================
+/*
+  冒泡排序（Bubble Sort）
+  冒泡排序是一种简单的排序算法，它重复的走访要排序的数列，一次比较两个元素，如果它们的顺序错误就把它们交换过来，走访数列的工作是重复的进行直到没有再需要交换，也就是说数列已经排序完成，这个算法的名字的由来是因为越小的元素会精油交换慢慢浮到数列的顶端。
+ */
+ var arr = [1,20,12,13,1,42,100,13,11,1,200,13];
+  //1.初级版
+  function bubbleSort(array) {
+    const length = array.length;
+    for (let i = 0; i < length; i++) {
+        for (let j = 0; j < length - 1 - i; j++) {
+            if (array[j] > array[j + 1]) {
+           let temp = array[j + 1];
+                array[j + 1] = array[j];
+                array[j] = temp;
+            }
+        }
+    }
+    return array;
+  }
+  console.time("第1种:冒泡排序(初级版):");
+  console.log(bubbleSort(arr));
+  console.timeEnd("第1种:冒泡排序(初级版):");
+
+  /*
+    2.改进版
+    设置一个标志性变量pos，用于记录每趟排序中最后一次进行交换的位置，由于pos位置之后的记录均已交换到位，故在进行下一趟排序是只要扫描到pos位置即可
+   */
+   var arr1 = [1,20,12,13,1,42,100,13,11,1,200,13];
+  function bubbleSort2(array) {
+    let i = array.length - 1;
+    while (i > 0) {
+        let pos = 0;
+        for (let j = 0; j < i; j++) {
+            if (array[j] > array[j + 1]) {
+                pos = j;
+                let temp = array[j];
+                array[j] = array[j + 1];
+                array[j + 1] = temp;
+            }
+        }
+        i = pos;
+    }
+    return array;
+  }
+  console.time("第1种:冒泡排序(改进版):");
+  console.log(bubbleSort2(arr1).reverse());
+  console.timeEnd("第1种:冒泡排序(改进版):");
+  /*
+    3.加强版
+    传统冒泡排序中的每一趟排序操作只能找到一个最大值或者最小值，我们考虑利用在每趟排序中进行正向和反向两遍冒泡的方法一可以得到里那个个最终值（最大及最小），从而使排序趟数至少减少一半
+  */
+  var arr2 = [1,20,12,13,1,42,100,13,11,1,200,13];
+  function bubbleSort3(array) {
+    let low = 0;
+    let high = array.length - 1;
+    while (low < high) {
+        for (let j = low; j < high; j++) {
+            if (array[j] > array[j + 1]) {
+                const temp = array[j];
+                array[j] = array[j + 1];
+                array[j + 1] = temp;
+            }
+        }
+        --high;
+    }
+    return array;
+  }
+  console.time("第1种:冒泡排序(加强版):");
+  console.log(bubbleSort3(arr2));
+  console.timeEnd("第1种:冒泡排序(加强版):");
+
+// ===========================================================
+  /*
+    选择排序（Selection Sort）
+    表现最稳定的排序算法之一，因为无论什么数据进去都是O(n2)的时间复杂度......所以用它的时候数据规模越小越好，唯一的好处就是不占用额外的内存空间，理论上将，选择排序可能也是平时排序一般人想到的最多的排序方法之一
+   */
+  var arr4 = [1,20,12,13,1,42,100,13,11,1,200,13];
+  function selectionSort(array) {
+    let length = array.length;
+    for (let i = 0; i < length - 1; i++) {
+        let minIndex = i;
+        for (let j = i + 1; j < length; j++) {
+            if (array[j] < array[minIndex]) {
+                minIndex = j;
+            }
+        }
+        let temp = array[i];
+        array[i] = array[minIndex];
+        array[minIndex] = temp;
+    }
+    return array;
+  }
+  console.time('第2种:选择排序:');
+  console.log(selectionSort(arr4));
+  console.timeEnd('第2种:选择排序:');
+
+// ===========================================================
+  /*
+  插入排序（Insertion Sort）
+    插入排序的代码实现虽然没有冒泡排序和选择排序那么简单粗暴，但是它的原理却是最好理解的，它的工作原理是通过构建有序序列，对未排序的数据，在已排序的序列中从后向前扫描，找到相应的位置并插入
+   */
+  var arr5_1 = [1,20,12,13,1,42,100,13,11,1,200,13];
+   // 1.初级版—从后往前插
+  function insertionSort(array) {
+    for (let i = 1; i < array.length; i++) {
+        let key = array[i];
+        let j = i - 1;
+        while (j >= 0 && array[j] > key) {
+            array[j + 1] = array[j];
+            j--;
+        }
+        array[j + 1] = key;
+    }
+    return array;
+  }
+  console.time('第3种:插入排序:');
+  console.log(insertionSort(arr5_1));
+  console.timeEnd('第3种:插入排序:');
+
+  var arr5_2 = [1,20,12,13,1,42,100,13,11,1,200,13];
+
+  // 2.升级版—基于二分法
+  function insertionSort2(array) {
+    for (let i = 1; i < array.length; i++) {
+        let key = array[i],
+            left = 0,
+            right = i - 1;
+        while (left <= right) {
+            let middle = parseInt((left + right) / 2);
+            if (key < array[middle]) {
+                right = middle - 1;
+            } else {
+                left = middle + 1;
+            }
+        }
+        for (let j = i - 1; j >= left; j--) {
+            array[j + 1] = array[j];
+        }
+        array[left] = key;
+    }
+    return array;
+  }
+  console.time('第3种:插入排序(升级版—基于二分法):');
+  console.log(insertionSort2(arr5_2));
+  console.timeEnd('第3种:插入排序(升级版—基于二分法):');
+
+// ===========================================================
+  /*
+  希尔排序（Shell Sort）
+    希尔排序的核心在于间隔序列的设定。既可以提前设定好间隔序列，也可以动态定义间隔序列。
+   */
+
+  var arr6 = [1,20,12,13,1,42,100,13,11,1,200,13];
+  function shellsort(arr) {
+      var i,
+          k,
+          j,
+          len = arr.length,
+          gap = Math.ceil(len / 2),
+          temp;
+      while (gap > 0) {
+          for (var k = 0; k < gap; k++) {
+              var tagArr = [];
+              tagArr.push(arr[k])
+              for (i = k + gap; i < len; i = i + gap) {
+                  temp = arr[i];
+                  tagArr.push(temp);
+                  for (j = i - gap; j > -1; j = j - gap) {
+                      if (arr[j] > temp) {
+                          arr[j + gap] = arr[j];
+                      } else {
+                          break;
+                      }
+                  }
+                  arr[j + gap] = temp;
+              }
+              // console.log(tagArr,"gap间隔为:"+gap);//输出当前进行插入排序的数组。
+              // console.log(arr);//输出此轮排序后的数组。
+          }
+          gap = parseInt(gap / 2);
+      }
+      return arr;
+  }
+
+  console.time('第4种:希尔排序:');
+  console.log(shellsort(arr6));
+  console.timeEnd('第4种:希尔排序:');
+
+  var arr6_2 = [1, 20, 12, 13, 1, 42, 100, 13, 11, 1, 200, 13];
+
+  function shellSort2(arr) {
+      var len = arr.length,
+          temp,
+          gap = 1;
+      while (gap < len / 3) { //动态定义间隔序列
+          gap = gap * 3 + 1;
+      }
+      for (gap; gap > 0; gap = Math.floor(gap / 3)) {
+          for (var i = gap; i < len; i++) {
+              temp = arr[i];
+              for (var j = i - gap; j >= 0 && arr[j] > temp; j -= gap) {
+                  arr[j + gap] = arr[j];
+              }
+              arr[j + gap] = temp;
+          }
+      }
+      return arr;
+  }
+  console.time('第4种:希尔排序2:');
+  console.log(shellSort2(arr6_2));
+  console.timeEnd('第4种:希尔排序2:');
+
+
+// ===========================================================
+  /*
+  归并排序（Merge Sort）
+    归并排序是建立在归并操作的一种有效的排序算法，该算法是采用分治法的一个非常典型的应用。归并排序是一种稳定的排序算法，将已有序的子序列合并，等到一个完全有序的序列，即先使每个子序列有序，再使子序列段有序，若将两个有序表合并成一个有序表，称作2路合并
+   */
+    var arr7 = [1,20,12,13,1,42,100,13,11,1,200,13];
+    function mergeSort(array) {
+      if (array.length < 2) {
+          return array;
+      }
+      const middle = parseInt(array.length / 2);
+      const left = array.slice(0, middle);
+      const right = array.slice(middle);
+      return merge(test_run(left), test_run(right));
+    }
+    function merge(left, right) {
+      const newArray = [];
+      while (left.length && right.length) {
+          if (left[0] <= right[0]) {
+              newArray.push(left.shift());
+          } else {
+              newArray.push(right.shift());
+          }
+      }
+      while (left.length) {
+          newArray.push(left.shift());
+      }
+      while (right.length) {
+          newArray.push(right.shift());
+      }
+      return newArray;
+    }
+    console.time('第5种:归并排序:');
+    console.log(shellsort(arr7));
+    console.time('第5种:归并排序:');
+// ===========================================================
+  /*
+    快速排序（Quick Sort）
+    快速排序的基本思想是：通过一趟排序将待排记录分割成独立的两部分，其中一部分记录关键字均比另一部分的关键字小，则可分别对这两部分记录继续进行排序，以达到整个序列有序
+   */
+   var arr8_1 = [1,20,12,13,1,42,100,13,11,1,200,13];
+  // 方法一
+  const quickSort = function (array) {
+    if (array.length <= 1) {
+        return array;
+    }
+    const pivotIndex = parseInt(array.length / 2);
+    const pivot = Number(array.splice(pivotIndex, 1));
+    const left = [];
+    const right = [];
+    for (let i = 0; i < array.length; i++) {
+        if (array[i] < pivot) {
+            left.push(array[i]);
+        } else {
+            right.push(array[i]);
+        }
+    }
+    return quickSort(left).concat([pivot], quickSort(right));
+  }
+    console.time('第6种:快速排序:(方法一)');
+    console.log(quickSort(arr8_1));
+    console.timeEnd('第6种:快速排序:(方法一)');
+    // 方法二
+    // 其中 left = 0; right = array.length-1
+  var arr8_2 = [1,20,12,13,1,42,100,13,11,1,200,13];
+
+  function quickSort2(array, left, right) {
+      if (left < right) {
+          let x = array[right],
+              i = left - 1;
+          for (let j = left; j <= right; j++) {
+              if (array[j] <= x) {
+                  i++;
+                  const temp = array[i];
+                  array[i] = array[j];
+                  array[j] = temp;
+              }
+          }
+          quickSort2(array, left, i - 1);
+          quickSort2(array, i + 1, right);
+      }
+      return array;
+  }
+  console.time('第6种:快速排序:(方法二)');
+  console.log(quickSort2(arr8_2,0,arr8_2.length - 1));
+  console.timeEnd('第6种:快速排序:(方法二)');
+// ===========================================================
+  /*
+   堆排序（Heap Sort）
+
+  是指利用堆这种数据结构所涉及的一种排序算法，堆积是一个近似完全二叉树的结构，并满足堆积的性质：即子节点的键值或索引总是小于（或大于）它的父节点
+   */
+  var arr9 = [1,20,12,13,1,42,100,13,11,1,200,13];
+    function heapSort(array) {
+      let length = array.length;
+      for (let i = parseInt(array.length / 2) - 1; i >= 0; i--) {
+          heap(array, i, length);
+      }
+      for (let j = length - 1; j >= 1; j--) {
+          const temp = array[0];
+          array[0] = array[j];
+          array[j] = temp;
+          heap(array, 0, --length);
+      }
+      return array;
+    }
+    function heap(array, x, length) {
+      let l = 2 * x + 1,
+          r = 2 * x + 2,
+          largest = x;
+      if (l < length && array[l] > array[largest]) {
+          largest = l;
+      }
+      if (r < length && array[r] > array[largest]) {
+          largest = r;
+      }
+      if (largest != x) {
+          const temp = array[x];
+          array[x] = array[largest];
+          array[largest] = temp;
+          heap(array, largest, length);
+      }
+    }
+    console.time('第7种:堆排序:');
+    console.log(heapSort(arr9));
+    console.timeEnd('第7种:堆排序:');
+
+// ===========================================================
+  /*
+      计数排序（Counting Sort）
+
+      计数排序的核心在于输入的数据值转换为键存储在额外开辟的数组空间中，作为一种限行时间非要咋地的排序，计数排序要求输入的数据必须是由确定范围的整数。
+    计数排序是一种很稳定的排序算法，需要用到一个额外的数组C，其中第i个元素是待排序数组A中值等于i的元素的个数，然后根据数字C将A中的元素排到正确的位置上个，它只能对数组进行排序
+   */
+  var arr10 = [1,20,12,13,1,42,100,13,11,1,200,13];
+  function countSort(array) {
+    const newArray = [],
+          C = [];
+    let min = array[0];
+    let max = array[0];
+    for (let i = 0; i < array.length; i++) {
+        if (min >= array[i]) {
+            min = array[i];
+        }
+        if (max <= array[i]) {
+            max = array[i];
+        }
+        if (C[array[i]] = C[array[i]]) {
+            C[array[i]]++;
+        } else {
+            C[array[i]] = 1;
+        }
+    }
+    for (let j = min; j < max; j++) {
+        C[j + 1] = (C[j + 1] || 0) + (C[j] || 0);
+    }
+    for (let k = array.length - 1; k >= 0; k--) {
+        newArray[C[array[k]] - 1] = array[k];
+        C[array[k]]--;
+    }
+    return newArray;
+  }
+
+    console.time('第8种:计数排序:');
+    console.log(countSort(arr10))
+    console.timeEnd('第8种:计数排序:');
+
+// ===========================================================
+  /*
+    桶排序（Bucket Sort）
+    桶排序是计数排序的升级版。它利用了函数的映射关系，高效与否的关键就在于这个映射函数的确定。桶排序 (Bucket sort)的工作的原理：假设输入数据服从均匀分布，将数据分到有限数量的桶里，每个桶再分别排序（有可能再使用别的排序算法或是以递归方式继续使用桶排序进行排序
+   */
+  var arr11 = [1,20,12,13,1,42,100,13,11,1,200,13];
+
+  /*
+    方法说明：桶排序
+    @param array 数组
+    @param num 桶的数量
+   */
+function bucketSort2(array, num) {
+    if (array.length <= 1) {
+        return array;
+    }
+    var len = array.length,
+        buckets = [],
+        result = [],
+        min = max = array[0],
+        regex = '/^[1-9]+[0-9]*$/',
+        space,
+        n = 0;
+        // console.time("桶排序耗时");
+        num = num || (num > 1 && regex.test(num) ? num : 10);
+    for (var i = 1; i < len; i++) {
+        min = min <= array[i] ? min : array[i];
+        max = max >= array[i] ? max : array[i];
+    }
+    space = (max - min + 1) / num;
+    for (var j = 0; j < len; j++) {
+        var index = Math.floor((array[j] - min) / space);
+        if (buckets[index]) { // 非空桶，插入排序
+            var k = buckets[index].length - 1;
+            while (k >= 0 && buckets[index][k] > array[j]) {
+                buckets[index][k + 1] = buckets[index][k];
+                k--;
+            }
+            buckets[index][k + 1] = array[j];
+        } else { //空桶，初始化
+            buckets[index] = [];
+            buckets[index].push(array[j]);
+        }
+    }
+    while (n < num) {
+        result = result.concat(buckets[n]);
+        n++;
+    }
+    // console.timeEnd("桶排序耗时");
+    return result;
+}
+
+
+  //桶排序,自然数,无重复值
+  function BucketSort(arr){
+      var buckets = [];
+      for(var i=0;i<arr.length;i++){
+          buckets[arr[i]] = arr[i];
+      }
+      arr = [];
+      for(var i=0;i<buckets.length;i++){
+          if(buckets[i]!==undefined){
+              arr.push(buckets[i]);
+          }
+      }
+
+      return arr;
+  }
+    console.time('第9种:桶排序(无重复值):');
+    console.log(BucketSort(arr11))
+    console.timeEnd('第9种:桶排序(无重复值):');
+
+// ===========================================================
+  /*
+  基数排序（Radix Sort）
+
+  基数排序也是非比较的排序算法，对每一位进行排序，从最低位开始排序，复杂度为O(kn),为数组长度，k为数组中的数的最大的位数；基数排序是按照低位先排序，然后收集；再按照高位排序，然后再收集；依次类推，直到最高位。有时候有些属性是有优先级顺序的，先按低优先级排序，再按高优先级排序。最后的次序就是高优先级高的在前，高优先级相同的低优先级高的在前。基数排序基于分别排序，分别收集，所以是稳定的。
+
+   */
+    var arr12 = [1,20,12,13,1,42,100,13,11,1,200,13];
+
+    //LSD Radix Sort
+    var counter = [];
+    function radixSort(arr, maxDigit) {
+        var mod = 10;
+        var dev = 1;
+        for (var i = 0; i < maxDigit; i++, dev *= 10, mod *= 10) {
+            for(var j = 0; j < arr.length; j++) {
+                var bucket = parseInt((arr[j] % mod) / dev);
+                if(counter[bucket]==null) {
+                    counter[bucket] = [];
+                }
+                counter[bucket].push(arr[j]);
+            }
+            var pos = 0;
+            for(var j = 0; j < counter.length; j++) {
+                var value = null;
+                if(counter[j]!=null) {
+                    while ((value = counter[j].shift()) != null) {
+                          arr[pos++] = value;
+                    }
+              }
+            }
+        }
+        return arr;
+    }
+
+    console.time('第10种:基数排序:');
+    console.log(radixSort(arr12,10))
+    console.timeEnd('第10种:基数排序:');
+
+// ===========================================================
+
+
+
+</script>

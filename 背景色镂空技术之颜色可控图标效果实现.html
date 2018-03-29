@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <!-- <script src="js/jquery v1.6.1.js"></script> -->
+  <link rel="stylesheet" href="css/demo.css" type="text/css" />
+  <link rel="stylesheet" href="css/hl.css" type="text/css" />
+  <style>
+    a{
+      text-decoration:none !important
+    }
+    .icon {
+        display: inline-block;
+        width: 16px;
+        height: 20px;
+        background-image: url(images/sprite_icons.png);
+        /* 该颜色控制图标的颜色 */
+        background-color: #34538b;
+
+    }
+
+    .icon1 {
+        background-position: 0 0;
+    }
+
+    .icon2 {
+        background-position: -20px 0;
+    }
+
+    .icon3 {
+        background-position: -40px 0;
+    }
+
+    .icon4 {
+        background-position: -60px 0;
+    }
+
+    .link {
+        margin-right: 15px;
+    }
+    .link:hover {
+        text-decoration: none;
+        color: red; /* 虽然改变的是文字颜色，但是图标颜色也一起变化了 */
+    }
+</style>
+</head>
+<body>
+  更改颜色：<input id="colorInput" type="color" value="#34538b" autocomplete="off">
+<p>
+    <i class="icon icon1"></i><a href="##" class="link">返回</a>
+    <i class="icon icon2"></i><a href="##" class="link">刷新</a>
+    <i class="icon icon3"></i><a href="##" class="link">收藏</a>
+    <i class="icon icon4"></i><a href="##" class="link">展开图片</a>
+</p>
+
+
+</body>
+</html>
+<script>
+    var eleInput = document.getElementById("colorInput"),
+        eleIcons = document.getElementsByTagName("i");
+    eleInput.onchange = function() {
+        var i = 0,
+            length = eleIcons.length;
+        for (; i < length; i++) {
+            eleIcons[i].style.backgroundColor = this.value;
+        }
+    };
+</script>

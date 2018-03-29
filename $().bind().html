@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/jquery v1.6.1.js"></script>
+</head>
+<body>
+  <input type="text" value="1">
+</body>
+</html>
+<script>
+  $('input').bind(
+　　　　'click change', //同时绑定click和change事件
+　　　　function() {
+　　　　　　alert('Hello');
+　　　　}
+　　);
+</script>

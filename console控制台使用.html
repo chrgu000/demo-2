@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/jquery v1.6.1.js"></script>
+</head>
+<body>
+     <table id="mytable" border="1">
+        <tr>
+            <td>A</td>
+            <td>A</td>
+            <td>A</td>
+        </tr>
+        <tr>
+            <td>bbb</td>
+            <td>aaa</td>
+            <td>ccc</td>
+        </tr>
+        <tr>
+            <td>111</td>
+            <td>333</td>
+            <td>222</td>
+        </tr>
+    </table>
+</body>
+</html>
+<script>
+  /*
+  ["$$", "$x", "dir", "dirxml", "keys", "values", "profile", "profileEnd", "monitorEvents", "unmonitorEvents", "inspect", "copy", "clear", "getEventListeners", "undebug", "monitor", "unmonitor", "table", "$0", "$1", "$2", "$3", "$4", "$_"]
+
+   */
+//==========================================================
+  console.log('用于输出普通信息');
+  console.info('用于输出提示性信息');
+  console.error('用于输出错误信息');
+  console.warn('用于输出错误信息');
+  console.debug('用于输出调试信息');
+//==========================================================
+  /*
+    console对象的上面5种方法，都可以使用printf风格的占位符。不过，占位符的种类比较少，只支持字符（%s）、整数（%d或%i）、浮点数（%f）和对象（%o）四种。
+   */
+
+  console.log("%d年%d月%d日",2011,3,26);
+  console.log("圆周率是%f",3.1415926);
+//==========================================================
+  //%o占位符，可以用来查看一个对象内部情况
+  var dog = {};
+  dog.name = "大毛";
+  dog.color = "黄色";
+  console.log("%o", dog);
+//==========================================================
+  //console.dirxml用来显示网页的某个节点（node）所包含的html/xml代码
+   window.onload = function () {
+        var mytable = document.getElementById('mytable');
+        console.dirxml(mytable);
+    }
+//==========================================================
+  /*
+      分组显示控制台信息
+      console.groupEnd结束一组输出信息
+   */
+
+    console.group('第一组');
+    console.info('通知');
+    console.groupEnd();
+//==========================================================
+  //console.assert对输入的表达式进行断言，只有表达式为false时，才输出相应的信息到控制台
+      var a = false;
+      console.assert(a,'为false输入信息!');
+
+//==========================================================
+    function fn(){
+      console.count('fn被执行次数 : ');
+    }
+    fn();
+    fn();
+    fn();
+//==========================================================
+  /*
+    console.dir(这个方法是我经常使用的 可不知道比for in方便了多少)直接将该DOM结点以DOM树的结构进行输出，可以详细查对象的方法发展等等
+   */
+   var obj = {
+    a : 1,
+    b : 2,
+    c :true,
+    my : function(){
+      alert('hello!');
+    }
+   }
+   console.dir(obj);
+//==========================================================
+  //console.time 计时开始
+  //console.timeEnd 计时结束
+
+
+  //第一种方法是由console.time来统计实例化100000个对象所需的时间
+  console.time('Array initaialize');
+  var arr = new Array(100000);
+  for (var i = arr.length - 1; i >= 0; i--) {
+      arr[i] = new Object();
+  }
+  console.timeEnd('Array initaialize');
+
+  //第二种方法是由传统的时间差相减来实例化1000000个对象所需的时间
+/*  var start = new Date.getTime();
+  var arr1 = new Array(100000);
+  for (var i = arr1.length - 1; i >= 0; i--) {
+      arr1[i] = new Object();
+  }
+  console.log(new Date().getTime() - start);*/
+
+//==========================================================
+  //console.profile和console.profileEnd配合一起使用来查看CPU使用相关信息
+  console.profile('Array initaialize2');
+  var arr3 = new Array(100000);
+  for (var i = arr3.length - 1; i >= 0; i--) {
+      arr3[i] = new Object();
+  }
+  console.profileEnd('Array initaialize2');
+//==========================================================
+  //console.timeline和console.timelineEnd配合一起记录一段时间轴
+
+  console.timeline('Array initaialize3');
+  var arr4 = new Array(100000);
+  for (var i = arr4.length - 1; i >= 0; i--) {
+      arr4[i] = new Object();
+  }
+  console.timelineEnd('Array initaialize3');
+
+//==========================================================
+  //console.trace 堆栈跟踪相关的调试
+  function doTask(){
+    doSubTask(1000,10000);
+  }
+
+  function doSubTask(countX,countY){
+      for(var i = 0; i < countX; i++){
+          for(var j = 0;j < countY; j++){}
+      }
+      console.trace();
+  }
+  doTask();
+//==========================================================
+  //清除控制器
+  // console.clear()
+//==========================================================
+  //$_命令返回最近一次表达式执行的结果，功能跟按向上的方向键再回车是一样的
+  //而0 4则代表了最近5个你选择过的DOM节点。
+  /*
+  什么意思？在页面右击选择审查元素，然后在弹出来的DOM结点树上面随便点选，这些被点过的节点会被记录下来，而$0会返回最近一次点选的DOM结点，以此类推，$1返回的是上上次点选的DOM节点，最多保存了5个，如果不够5个，则返回undefined。
+   */
+  //==========================================================
+  //Chrome 控制台中原生支持类jQuery的选择器，也就是说你可以用$加上熟悉的css选择器来选择DOM节点
+
+  //必须在控制台输入
+  // copy(document.getElementsByTagName('table')[0])
+
+  //==========================================================
+  //keys和values前者返回传入对象所有属性名组成的数据，后者返回所有属性值组成的数组
+  var myObj1 = {
+    name : '姓名',
+    age : '年龄',
+    sex : '性别'
+  }
+  //keys(myObj1)   同样必须在控制台输入,且在对象后面
+  //values(myObj1);
+  //==========================================================
+  var languages = {
+    csharp: { name: "C#", paradigm: "object-oriented" },
+    fsharp: { name: "F#", paradigm: "functional" }
+  };
+
+  var languages2 = [
+      { name: "JavaScript", fileExtension: ".js" },
+      { name: "TypeScript", fileExtension: ".ts" },
+      { name: "CoffeeScript", fileExtension: ".coffee" }
+  ];
+
+  console.table(languages);
+  console.table(languages2);
+  //如果你想限定每一列是特定的属性，你还可以将他们的键作为一个数组，传给console.table()，作为其第二个参数：
+  console.table(languages, ["name","paradigm"]);
+
+  //如果只是想显示一个属性，则传字符串就足够了：
+  console.table(languages, "name");
+  //==========================================================
+  //monitor & unmonitor
+  /*
+    monitor(function)，它接收一个函数名作为参数，比如function a,每次a被执行了，都会在控制台输出一条信息，里面包含了函数的名称a及执行时所传入的参数。
+
+    而unmonitor(function)便是用来停止这一监听。
+   */
+
+   function sayHello(name){
+      alert('hello,' + name);
+   }
+     /*
+       monitor(sayHello);
+       sayHello('angela');
+       unmonitor(sayHello);
+       sayHello('haha')
+  */
+
+
+  /*
+    $ // 简单理解就是 document.querySelector 而已。
+    $$ // 简单理解就是 document.querySelectorAll 而已。
+    $_ // 是上一个表达式的值
+    0−4 // 是最近5个Elements面板选中的DOM元素，待会会讲。
+    dir // 其实就是 console.dir
+    keys // 取对象的键名, 返回键名组成的数组
+    values // 去对象的值, 返回值组成的数组
+
+
+   */
+  //==========================================================
+  // 从第二个参数开始，依序输出所有字符串
+  console.log("%s", "hoge", "foo");   // 输出结果为hoge foo
+  // 将对象转换为字符串后输出
+  console.log("%s", "hoge", {foo:"FOO"}); // 输出结果为hoge ({foo:"FOO"})
+  // 将数值转换为字符串后输出，从第二个参数开始，依序输出所有数值
+  console.log("%d",10,10.5);      // 输出结果为10 10.5
+  // 将字符串作为数值进行转换，将输出NaN
+  console.log("%d", "hoge");      // 输出NaN
+  // 输出百分号
+  console.log("%%", "hoge");  // 输出% hoge
+
+</script>

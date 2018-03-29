@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+        <title>
+            bootstrap中关于兼容ie8 和 rem的问题总结
+        </title>
+        <meta name="description" content=""/>
+        <meta name="keywords" content=""/>
+        <!--
+            关于ie8兼容的问题 在bootstrap官方文档已经给了相应的解决方案
+            头部加入
+        -->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <!-- 　后面还需要加入 -->
+
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+          <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+          <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+       <![endif]-->
+
+
+      <!-- 这段意思是在ie9以及ie9以下可以使用  别的ie写法（做个标记） -->
+
+        <script type="text/template">
+            <!--[if !IE]><!--> 除IE外都可识别 <!--<![endif]-->
+            <!--[if IE]> 所有的IE可识别 <![endif]-->
+            <!--[if IE 6]> 仅IE6可识别 <![endif]-->
+            <!--[if lt IE 6]> IE6以及IE6以下版本可识别 <![endif]-->
+            <!--[if gte IE 6]> IE6以及IE6以上版本可识别 <![endif]-->
+            <!--[if IE 7]> 仅IE7可识别 <![endif]-->
+            <!--[if lt IE 7]> IE7以及IE7以下版本可识别 <![endif]-->
+            <!--[if gte IE 7]> IE7以及IE7以上版本可识别 <![endif]-->
+            <!--[if IE 8]> 仅IE8可识别 <![endif]-->
+            <!--[if IE 9]> 仅IE9可识别 <![endif]-->
+
+
+
+        </script>
+
+
+        <link href="" rel="stylesheet"/>
+    </head>
+    <body>
+    </body>
+</html>

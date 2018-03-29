@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>
+            Document
+        </title>
+        <style>
+      .choose {
+        position: relative;
+    }
+
+    .choose .radio {
+        position: relative;
+        display: inline-block;
+        font-weight: 400;
+        color: #0c4757;
+        padding-left: 25px;
+        cursor: pointer;
+    }
+
+    .choose .radio input {
+        position: absolute;
+        left: -9999px;
+    }
+
+    .choose .radio i {
+        display: block;
+        position: absolute;
+        top: 6px;
+        left: 0;
+        width: 15px;
+        height: 15px;
+        outline: 0;
+        border: 1px solid #e4e4e4;
+        background: #ffffff;
+        border-radius: 50%;
+        transition: border-color .3s;
+        -webkit-transition: border-color .3s;
+    }
+
+    /*  单选框选中颜色 */
+    .choose .radio input + i:after {
+        position: absolute;
+        content: '';
+        top: 2px;
+        left: 2px;
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background-color: #ff5d5b;
+        opacity: 0;
+        transition: opacity .1s;
+        -webkit-transition: opacity .1s;
+    }
+
+    .choose .radio input:checked + i:after {
+        opacity: 1;
+    }
+
+
+
+    input[type="radio"] + label::before {
+        content: "\a0"; /*不换行空格*/
+        display: inline-block;
+        vertical-align: middle;
+        font-size: 18px;
+        width: 1em;
+        height: 1em;
+        margin-right: .4em;
+        border-radius: 50%;
+        border: 1px solid #01cd78;
+        text-indent: .15em;
+        line-height: 1;
+    }
+
+
+        </style>
+    </head>
+    <body>
+     <!--  demo1 -->
+        <div class="choose">
+            <label class="radio">
+                选项1
+                <input type="radio" name="radio" value="1" checked/>
+                <i>
+                </i>
+            </label>
+            <label class="radio">
+                选项2
+                <input type="radio" value="2" name="radio"/>
+                <i>
+                </i>
+            </label>
+        </div>
+
+
+      <!--  demo2 -->
+      <div class="female">
+          <input type="radio" id="female" name="sex" />
+          <label for="female">女</label>
+      </div>
+      <div class="male">
+          <input type="radio" id="male" name="sex" />
+          <label for="male">男</label>
+      </div>
+
+    </body>
+</html>

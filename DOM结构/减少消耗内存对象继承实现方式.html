@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>减少消耗内存对象继承实现方式</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+
+  // 是一个完整的实现继承的方法。在内部创建了一个最小化的对象，减少内存消耗。
+    var _hasProp = {}.hasOwnProperty;
+    var extends = function (child, parent) {
+        for(var key in parent) {
+            if(_hasProp.call(parent, key)) {
+                child[key] = parent[key];
+            }
+        }
+        function ctor(){
+            this.constructor = child;
+        }
+        ctor.prototype = parent.prototype;
+        child.prototype = new ctor();
+        child._super_ = parnet.prototype;
+        return child;
+  }
+
+  /*
+    继承的另一种实现方式
+　　除了用原型，还有一种方式也可以实现继承，叫做类复制。怎么个复制法呢，看下面的代码：
+   */
+    function People (name) {
+        this.name = name;
+        this.age = 11;
+        this.getName = function(){
+            return this.name;
+        }
+    }
+
+    function Worker (name) {
+        People.call(this, name);
+    }
+
+    var w1 = new Worker('w1');
+    console.log(w1.getName()); // w1
+    console.log(w1.age); // 11
+
+    /*
+      在People构造器中所有的属性和方法都用this关键字定义在了自身，而不是放在它的原型上。在子类Worker中，用call把People当作函数执行了一下，并传入this作为上下文对象。这样就相当于把People中的所有语句拿过来执行一次，所有属性的定义也都被复制过来了。同样可以实现继承。完全与原型无关。
+
+　　那么这种方式与原型继承有何区别呢？最大的区别就在于原型是一个引用，所有实例都引用一个共享的对象，每次创建出一个实例时，并不会复制原型的内容，只是用一个指针指过去。而类复制的方法不存在共有的东西，每创建一个对象都把构造器中的代码执行一次，当构造器中的方法较多时，会消耗很多的内存。而原型继承就不会了，只需一个指针指过去就完了。
+
+　　由这种工作方式产生的另一个区别就是动态修改，我们知道在原型继承中，只要修改了构造器原型中的值，实例对象也跟着变化。但是类复制就不能了，每个对象都有自己的一份数据，已创建出来的对象不会再受构造器的影响了。
+
+　　另外还有一点，就是属性的访问速度。类复制的方式，对象的属性都在自身，所以在查找的时候可以立即找到，而原型继承在查找的时候还得顺着原型链向上查找，其访问速度肯定不如类复制的快。
+
+     */
+</script>

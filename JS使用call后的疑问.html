@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/jquery v1.6.1.js"></script>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+      var HOME = HOME || {};
+      HOME.sandBox = function ($) {
+          var result = function (coreObj) {
+              // this.coreObj = coreObj;
+          }
+
+          result.fn = result.prototype;
+          result.fn.each = function (arr, callback) {
+              arr.forEach(function (v, i) {
+                  callback.call(v, i, v);
+              });
+          }
+          return new result();
+      }(jQuery)
+
+      HOME.sandBox.each([1, 2, 3, 4, 5], function (i, v) {
+               console.log(i, this, this.toString(), v);    // 0 Number {[[PrimitiveValue]]: 1} "1" 1
+                console.log(this == v); // true
+                console.log(this === v); // false
+                console.log(typeof this); // object
+                console.log(typeof v); // number
+      });
+
+//===================================================
+      var a = 1;
+      console.log(typeof a); //number
+      var b = new Number(1);
+      console.log(typeof b); //object
+      console.log(b); //Number {[[PrimitiveValue]]: 1}
+//===================================================
+      console.log(typeof Number(1)); //number
+       console.log(typeof new Number(1)); //object
+       console.log(typeof new Object(1)); //object
+       console.log(typeof Object(1)); //object
+//===================================================
+       function t(a) {
+          console.log(this);
+          console.log(a);
+          console.log(a == this);
+          console.log(a === this);
+          console.log(typeof this);
+          console.log(typeof a)
+      };
+      t.call(1,1); //第一个参数为Number {[[PrimitiveValue]]: 1}包装对象
+      //t.call(null,null); //第一个参数为null,this指向window
+      //t.call(undefined, undefined);  //第一个参数为null,this指向window
+
+      /*
+        至于null和undefined, 由于没有对应的封装类型（参见MDN），如果t.call(null,null)或者t.call(undefined, undefined), JS引擎无法将null或undefined转换成对应的封装类型，就会把window对象设为t的this（chrome下是这样的，其他浏览器没有测试）：
+       */
+</script>

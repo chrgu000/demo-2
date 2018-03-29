@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>浅谈 JS 对象添加 getter与 setter 的5种方法以及如何让对象属性不可配置或枚举</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    /*
+      定义 getter 与 setter
+    通过对象初始化器定义
+    使用 Object.create 方法
+    使用 Object.defineProperty 方法
+    使用 Object.defineProperties 方法
+    使用 Object.prototype.__defineGetter__ 以及 Object.prototype.__defineSetter__ 方法
+    什么是属性描述符
+    创建属性不可配置不可枚举的对象
+    Enumerable 特性
+    Configurable 特新
+    提高及扩展
+    定义 getter 与 setter
+
+    1.通过对象初始化器在创建对象的时候指明（也可以称为通过字面值创建对象时声明)
+    */
+
+    (function () {
+        var o = {
+            a : 7,
+            get b () {return this.a + 1;},//通过 get,set的 b,c方法间接性修改 a 属性
+            set c (x) {this.a = x / 2}
+        };
+        console.log(o.a); // 7
+        console.log(o.b); // 8
+        o.c = 50;
+        console.log(o.a); // 25
+    })();
+
+
+   /* (function () {
+      var o = {
+          a : 7,
+          get a () {return this.a +1;},//死循环
+          set a(x){this.a = x/2}
+      };
+      console.log(o.a);
+      console.log(o.b);
+      o.c = 50;
+      console.log(o.a);
+  })();*/
+
+
+      (function () {
+        var b = "bb";
+        var c = "cc";
+        var o = {
+            a : 7,
+            get [b](){return this.a + 1;},
+            set [c](x)  {this.a = x / 2},
+        };
+        console.log(o.a);
+        console.log(o[b]);
+        o["cc"] = 50;
+        console.log(o.a);
+    })();
+
+
+
+    // ============ 2.使用 Object.create 方法 =====================
+    /*
+      概述
+      Object.create() 方法创建一个拥有指定原型和若干个指定属性的对象。
+
+  语法
+      Object.create(proto, [ propertiesObject ])
+    */
+    (function () {
+        var o = null;
+        o = Object.create(Object.prototype, // 指定原型为 Object.prototype
+                {
+                    bar:{
+                        get :function(){
+                            return 10;
+                        },
+                        set : function (val) {
+                            console.log("Setting `o.bar` to ",val);
+                        }
+                    }
+                }//第二个参数
+            );
+        console.log(o.bar);
+        o.bar = 12;
+    })();
+
+    // 或者
+    (function () {
+      var o = null;
+      o = Object.create(Object.prototype, // 指定原型为 Object.prototype
+              {
+                  bar:{
+                      get :function(){
+                          return this.a;
+                      },
+                      set : function (val) {
+                          console.log("Setting `o.bar` to ",val);
+                          this.a = val;
+                      },
+                      configurable :true
+                  }
+              }//第二个参数
+          );
+      o.a = 10;
+      console.log(o.bar);
+      o.bar = 12;
+      console.log(o.bar);
+  })();
+
+
+    (function () {
+      var o = {a:10};
+      o = Object.create(o, // 指定原型为 o 这里实际可以理解为继承
+              {
+                  bar:{
+                      get :function(){
+                          return this.a;
+                      },
+                      set : function (val) {
+                          console.log("Setting `o.bar` to ",val);
+                          this.a = val;
+                      },
+                      configurable :true
+                  }
+              }//第二个参数
+          );
+      console.log(o.bar);
+      o.bar = 12;
+      console.log(o.bar);
+  })();
+
+  // 使用这种方式的好处是可配置性高，但初学者容易迷糊。
+
+
+    // ============ 3.使用 Object.defineProperty 方法 =====================
+    /*
+      概要
+      Object.defineProperty() 方法直接在一个对象上定义一个新属性，或者修改一个已经存在的属性， 并返回这个对象。
+  语法
+      Object.defineProperty(obj, prop, descriptor)
+  参数
+      obj
+          需要定义属性的对象。
+      prop
+          需被定义或修改的属性名。
+      descriptor
+          需被定义或修改的属性的描述符。
+    */
+
+    // 这个方法与前面两种的区别是：使用前面两种只能在声明定义的时候指定 getter 与 setter，使用该方法可以随时的添加或修改。
+    (function () {
+        var o = { a : 1} // 声明一个对象,包含一个 a 属性,值为1
+        Object.defineProperty(o,"b",{
+            get: function () {
+                return this.a;
+            },
+            set : function (val) {
+                this.a = val;
+            },
+            configurable : true
+        });
+
+        console.log(o.b);
+        o.b = 2;
+        console.log(o.b);
+    })();
+
+
+      // ============ 4.使用 Object.defineProperties方法 =====================
+      // 如果说需要一次性批量添加 getter 与 setter 也是没问题的，使用如下方法：
+    /*
+      概述
+        Object.defineProperties() 方法在一个对象上添加或修改一个或者多个自有属性，并返回该对象。
+      语法
+          Object.defineProperties(obj, props)
+      参数
+        obj
+      将要被添加属性或修改属性的对象
+          props
+      该对象的一个或多个键值对定义了将要为对象添加或修改的属性的具体配置
+    */
+
+      (function () {
+      var obj = {a:1,b:"string"};
+      Object.defineProperties(obj,{
+          "A":{
+              get:function(){return this.a + 1;},
+              set:function(val){this.a = val;}
+          },
+          "B":{
+              get:function(){return this.b + 2;},
+              set:function(val){this.b = val}
+          }
+      });
+
+      console.log(obj.A); // 2
+      console.log(obj.B); // 'string2'
+      obj.A = 3;
+      obj.B = "hello";
+      console.log(obj.A); // 4
+      console.log(obj.B); // "hello2"
+  })();
+
+
+   // ============ 5.使用 Object.prototype.__defineGetter__ 以及 Object.prototype.__defineSetter__ 方法 =====================
+
+   (function () {
+      var o = {a:1};
+      o.__defineGetter__("giveMeA", function () {
+          return this.a;
+      });
+      o.__defineSetter__("setMeNew", function (val) {
+          this.a  = val;
+      })
+      console.log(o.giveMeA); // 1
+      o.setMeNew = 2;
+      console.log(o.giveMeA); // 2
+})();
+
+
+
+
+
+    //使用默认值配置
+  (function () {
+      var obj = {};//声明一个空对象
+      Object.defineProperty(obj,"key",{
+          value:"static"
+        //没有设置 enumerable 使用默认值 false
+        //没有 configurable 使用默认值 false
+        //没有 writable 使用默认值 false
+  });
+
+        console.log(obj.key);           //输出 “static”
+        obj.key = "new"                 //尝试修改其值,修改将失败,因为 writable 为 false
+        console.log(obj.key);           //输出 “static”
+        obj.a = 1;//动态添加一个属性
+        for(var item in obj){ //遍历所有 obj 的可枚举属性
+             console.log(item);
+        }//只输出一个 “a” 因为 “key”的 enumerable为 false
+    })();
+
+
+    //显示配置 等价于上面
+/*  (function () {
+      var obj = {};
+      Object.defineProperty(obj,"key",{
+          enumerable : false,
+          configurable : false,
+          writable : false,
+          value : "static"
+      })
+  })();*/
+
+      //等价配置
+   /* (function () {
+        var o = {};
+        o.a = 1;
+        //等价于
+        Object.defineProperty(o,"a",{
+                value : 1,
+                writable : true,
+                configurable : true,
+                enumerable : true
+              }
+        );
+
+        Object.defineProperty(o,"a",{value :1});
+        //等价于
+        Object.defineProperty(o,"a",{
+          value : 1,
+          writable : false,
+          configurable : false,
+          enumerable : false
+        });
+    })();*/
+
+
+
+    // 创建属性不可配置不可枚举的对象
+    (function () {
+      var o = {};
+      Object.defineProperty(o,"a",{value :1,enumerable :true});
+      Object.defineProperty(o,"b",{value :2,enumerable :false});
+      Object.defineProperty(o,"c",{value :2});//enumerable default to false
+      o.d = 4; // 如果直接赋值的方式创建对象的属性,则这个属性的 enumerable 为 true
+
+      for(var item in o){ //遍历所有可枚举属性包括继承的属性
+          console.log(item);
+      }
+
+      console.log(Object.keys(o));//获取 o 对象的所有可遍历属性不包括继承的属性
+
+      console.log(o.propertyIsEnumerable('a'));//true
+      console.log(o.propertyIsEnumerable('b'));//false
+      console.log(o.propertyIsEnumerable('c'));//false
+  })()
+
+
+    //==================  Configurable 特性 ======================
+
+    var o1 = {};
+    Object.defineProperty(o1,"a",{get: function () {return 1;},
+                                configurable : false} );
+                                //enumerable 默认为 false,
+                                //value 默认为 undefined,
+                                //writable 默认为 false,
+                                //set 默认为 undefined
+
+    //抛出异常,因为最开始定义了 configurable 为 false,故后期无法对其进行再配置
+    //Object.defineProperty(o1,"a",{configurable : true} );
+    //抛出异常,因为最开始定义了 configurable 为 false,故后期无法对其进行再配置,enumerable 的原值为 false
+    //Object.defineProperty(o1,"a",{enumerable : true} );
+    //抛出异常,因为最开始定义了 configurable 为 false,set的原值为 undefined
+    //Object.defineProperty(o1,"a",{set : function(val){}} );
+    //抛出异常,因为最开始定义了 configurable 为 false,故无法进行覆盖,尽管想用一样的来覆盖
+    //Object.defineProperty(o1,"a",{get : function(){return 1}});
+    //抛出异常，因为最开始定义了 configurable 为 false,故无法将其进行重新配置把属性描述符从存取描述符改为数据描述符
+    //Object.defineProperty(o1,"a",{value : 12});
+
+    console.log(o1.a);//输出1
+    //delete o1.a;      //想要删除属性,将失败
+    console.log(o1.a);//输出1
+
+
+
+    /*
+      提高及扩展
+    1.属性描述符中容易被误导的地方之 writable 与 configurable
+
+    */
+
+      var o2 = {};
+      Object.defineProperties(o2, {
+          "a": {
+              value:1,
+              writable:true,// 可写
+              configurable:false// 不可配置
+              // enumerable 默认为 false 不可枚举
+          },
+          "b":{
+              get :function(){
+                  return this.a;
+              },
+              configurable:false
+          }
+      });
+      console.log(o2.a);   //1
+      o2.a = 2;            // 修改值成功,writable 为 true
+      console.log(o2.a);   //2
+      Object.defineProperty(o2,"a",{value:3});// 同样为修改值成功
+      console.log(o2.a);   //3
+
+      // 将其属性 b 的属性描述符从存取描述符重新配置为数据描述符
+      //Object.defineProperty(o2,"b",{value:3});// 抛出异常,因为 configurable 为 false
+
+
+      /*
+        通过上面的学习，我们都知道传递属性描述符参数时，是定义一个匿名的对象，里面包含属性描述符内容，若每定义一次便要创建一个匿名对象传入，将会造成内存浪费。故优化如下：
+      */
+
+
+        (function () {
+          var obj = {};
+
+          //回收同一对象,即减少内存浪费
+          function withValue(value){
+              var d = withValue.d ||(
+                  withValue.d = {
+                      enumerable : false,
+                      configurable : false,
+                      writable : false,
+                      value :null
+                  }
+                  );
+              d.value = value;
+              return d;
+          }
+          Object.defineProperty(obj,"key",withValue("static"));
+
+
+          console.log(obj.key);
+      })();
+</script>

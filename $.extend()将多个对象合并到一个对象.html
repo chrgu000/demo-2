@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/jquery v1.6.1.js"></script>
+</head>
+<body>
+  <div id="log"></div>
+</body>
+</html>
+<script>
+    var object1 = {
+        apple: 0,
+        banana: {
+            weight: 52,
+            price: 100
+        },
+        cherry: 97
+    };
+    var object2 = {
+        banana: {
+            price: 200
+        },
+        durian: 100
+    };
+    // object2合并到object1
+    $.extend(object1, object2);
+    // 假设JSON。stringify -在IE < 8中不可用
+    $("#log").append(JSON.stringify(object1));
+</script>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="js/jquery v1.6.1.js"></script>
+  <style>
+  /*
+    一个有冒号，一个是空格分隔。前者IE8+及其他现代浏览器；后者为IE6-7准备的。
+   */
+  .example:before, .example before {
+    content: attr(data-content);
+  }
+
+  .example:after, .example after {
+      content: attr(data-content);
+  }
+
+
+
+  .tip {
+      padding: 5px 10px;
+      margin-left: 15px;
+      border: 1px solid #F8D19F;
+      border-radius: 3px;
+      background-color: #FDFBB8;
+      color: #D07807;
+      font-size: 12px;
+      position: absolute;
+  }
+
+  .tip:before, .tip before, .tip:after, .tip after {
+      content: attr(data-content);
+      font-family: xms;
+      position: absolute;
+      top: 6px;
+  }
+
+  .tip:before, .tip before {
+      color: #F8D19F;
+      left: -10px;
+  }
+
+  .tip:after, .tip after {
+      color: #FDFBB8;
+      left: -8px;
+  }
+  </style>
+</head>
+<body>
+  <div class="example" data-content="◀"></div>
+
+  <img src="http://image.zhangxinxu.com/image/study/s/s128/mm1.jpg" />
+  <span id="tip" class="tip" data-content="&#x25c0;">这是年轻时候的张含韵</span>
+</body>
+</html>
+<script>
+  var $beforeAfter = function(dom) {
+    if (document.querySelector || !dom && dom.nodeType !== 1) return;
+
+    var content = dom.getAttribute("data-content") || '';
+    var before = document.createElement("before")
+        , after = document.createElement("after");
+
+    // 内部content
+    before.innerHTML = content;
+    after.innerHTML = content;
+    // 前后分别插入节点
+    dom.insertBefore(before, dom.firstChild);
+    dom.appendChild(after);
+};
+
+$beforeAfter(document.getElementById("tip"));
+</script>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/jquery v1.6.1.js"></script>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+"use strict";
+  /*"use strict";
+  x = {p1:10, p2:20}
+  */
+  function f(){
+    "use strict";
+    this.a = 1;
+  };
+  new f();// 报错，this未定义
+    console.log(new f().a)
+
+　　var x = 2;
+　　console.info(eval("var x = 5; x")); // 5
+　　console.info(x); // 2
+
+
+　  var o = {};
+　　Object.preventExtensions(o);
+　　//o.v = 1; // 报错
+
+  var o = Object.create(null, {
+      x: {
+      value: 1,
+      configurable: true
+      }
+  });
+  console.log(o); //x = 1能通过严格模式
+
+  /*var foo = 'foo'; bar = 'bar';
+  delete foo; // 静默失败
+  delete bar; // 正常模式成功
+  console.log(foo + bar);*/
+
+
+  (function (global) {
+      console.log(global);
+  })(this);
+
+    function foo() {
+      console.log(this);
+    }
+    foo.call(this);
+
+    window.xx = 5;;
+　　delete window.xx;
+    console.log(window.xx);
+　　var o = Object.create(null, {'x': {
+　　　　　　value: 1,
+　　　　　　configurable: true
+　　}});
+　　delete o.x; // 删除成功
+  console.log(o)
+</script>

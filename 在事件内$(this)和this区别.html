@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/jquery v1.6.1.js"></script>
+</head>
+<body>
+  <div class="box">点击</div>
+</body>
+</html>
+<script>
+　　　$('.box').bind('click',function(){
+        console.log($(this).attr('id')); //undefined $(this)返回的是一个数组
+        console.log(this.id); //this返回的当前时间
+        console.log($(this).context.outerHTML);
+        console.log(this);
+    })
+</script>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>列表页</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+
+    <style type="text/css">
+      *{
+        margin:0;
+        padding:0;
+      }
+      body{
+        font-size:'微软雅黑';
+      }
+      img{
+        border:0;
+        vertical-align: middle;
+        display: inline-block;
+      }
+
+    *, *:after, *:before {
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      -webkit-user-select: none;
+      -webkit-touch-callout: none;
+      -webkit-user-drag: none;
+    }
+     ul,ul li,ol,ol li{
+      list-style: none;
+     }
+
+
+     i,s{
+        font-style:normal;
+        text-decoration: initial;
+     }
+
+      header{
+        height:40px;
+        background:#1EC3B2;
+        text-align:center;
+        line-height: 40px;
+        color:white;
+        font-weight: bold;
+      }
+
+
+    /* 设置总体div上边距 */
+    .boxList{
+      margin:30px  0 0 0;
+    }
+
+
+    .hbxtUl{
+      width: 100%;
+      overflow: hidden;
+    }
+
+
+    .hbxtLeft {
+      width:70%;
+      /*background: red;*/
+      float: left;
+
+    }
+
+    .boxList > ul {
+      width: calc(100% - 20px);
+      height: 8rem;
+      margin: 0 auto;
+      background: white;
+      border:1px solid #E4E4E4;
+      box-sizing: border-box;
+    }
+
+
+    /* ===== 设置列表标题 ====== */
+    .hbxtTopText{
+      font-size: .92rem;
+      color: #000;
+      font-weight: bold;
+      display: inline-block;
+      transform: translate(0,3px);
+    }
+
+  .hbxtTop{
+    padding: 25px 0 0 14px;
+
+  }
+
+
+    .hbxtRight {
+      width: 30%;
+      /*background:blue;*/
+      float: right;
+    }
+
+  /* === 设置底部li====== */
+  .hbxtBottom {
+    width: 100%;
+    overflow: hidden;
+    padding-left: 50px;
+
+    color: #999;
+    font-size: 100%;
+    /* font-size: 1rem; */
+    padding-bottom: 5px;
+
+
+  }
+
+  .hbxtProfit{
+    font-size: 1.5rem;
+  }
+
+   .hbxtBottom > li{
+      width: 33.33%;
+   }
+
+   </style>
+
+</head>
+<body bgcolor="#F3F3F3">
+  <!--头部-->
+    <header>
+      <span class="title">列表页</span>
+    </header>
+
+    <div class="boxList">
+      <ul>
+        <li>
+          <div class="hbxtLeft">
+              <ul class="hbxtUl">
+                <li>
+                  <p class="hbxtTop">
+                      <img src="imagesP2p/b-shi.png" alt="">
+                      <span class="hbxtTopText">测试5</span>
+                      <img src="imagesP2p/quan1.png" alt="">
+                  </p>
+
+                  <p class="hbxtBottom">
+                     <span>
+                       <i class="hbxtProfit">7</i>
+                        <s>%</s>
+                        <span>+5%</span>
+                     </span>
+                    <span>100元</span>
+                    <span>2个月</span>
+                  </p>
+                  <p class="hbxtBottom">
+                    <span>年化收益率</span>
+                    <span>金额</span>
+                    <span>期限</span>
+                  </p>
+                </li>
+
+              </ul>
+
+          </div>
+
+          <div class="hbxtRight">
+            <center>
+               <canvas id='databidp{bidId}' width='60' height='60'></canvas>
+            </center>
+            <span>已满标</span>
+          </div>
+
+        <li>
+      </ul>
+
+    </div>
+
+
+</body>
+</html>

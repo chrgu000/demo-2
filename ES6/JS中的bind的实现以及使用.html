@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>JS中的bind的实现以及使用</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+
+</body>
+</html>
+<script type="text/javascript">
+      /*
+        绑定函数
+
+        bind()最简单的用法是创建一个函数，使这个函数不论怎么调用都有同样的this值。常见的错误就像上面的例子一样，将方法从对象中拿出来，然后调用，并且希望this指向原来的对象。如果不做特殊处理，一般会丢失原来的对象。使用bind()方法能够很漂亮的解决这个问题：
+       */
+        this.num = 9;
+        var mymodule = {
+          num: 81,
+          getNum: function() { return this.num; }
+        };
+
+        console.log(
+             mymodule.getNum() // 81
+        );
+
+
+        var getNum = mymodule.getNum;
+        console.log(
+              getNum() // 9, 因为在这个例子中，"this"指向全局对象
+        );
+
+
+
+        // 创建一个'this'绑定到module的函数
+        var boundGetNum = getNum.bind(mymodule);
+        console.log(
+          boundGetNum() // 81
+        );
+
+        /*
+          偏函数（Partial Functions）
+          Partial Functions也叫Partial Applications，这里截取一段关于偏函数的定义：
+
+          Partial application can be described as taking a function that accepts some number of arguments, binding values to one or more of those arguments, and returning a new function that only accepts the remaining, un-bound arguments.
+
+          这是一个很好的特性，使用bind()我们设定函数的预定义参数，然后调用的时候传入其他参数即可
+         */
+
+
+
+
+         function list() {
+            return Array.prototype.slice.call(arguments);
+          }
+
+          var list1 = list(1, 2, 3); // [1, 2, 3]
+
+          // 预定义参数37
+          var leadingThirtysevenList = list.bind(undefined, 37);
+
+          var list2 = leadingThirtysevenList(); // [37]
+          var list3 = leadingThirtysevenList(1, 2, 3); // [37, 1, 2, 3]
+
+          console.log(
+            list1, // [1, 2, 3]
+            list2, // [37]
+            list3 // [37, 1, 2, 3]
+          );
+
+
+          /*
+            和setTimeout一起使用
+              一般情况下setTimeout()的this指向window或global对象。当使用类的方法时需要this指向类实例，就可以使用bind()将this绑定到回调函数来管理实例。
+           */
+
+           function Bloomer() {
+              this.petalCount = Math.ceil(Math.random() * 12) + 1;
+            }
+
+            // 1秒后调用declare函数
+            Bloomer.prototype.bloom = function() {
+              window.setTimeout(this.declare.bind(this), 1000);
+            };
+
+            Bloomer.prototype.declare = function() {
+              console.log('我有 ' + this.petalCount + ' 朵花瓣!');
+            };
+
+            var test = new Bloomer;
+                test.bloom();
+
+
+          /*
+            注意：对于事件处理函数和setInterval方法也可以使用上面的方法
+
+            绑定函数作为构造函数
+            绑定函数也适用于使用new操作符来构造目标函数的实例。当使用绑定函数来构造实例，注意：this会被忽略，但是传入的参数仍然可用。
+           */
+
+           function Point(x, y) {
+              this.x = x;
+              this.y = y;
+            }
+
+            Point.prototype.toString = function() {
+              return this.x + ',' + this.y;
+            };
+
+            var p = new Point(1, 2);
+            console.log(
+               p.toString() // '1,2'
+            );
+
+
+            var emptyObj = {};
+            var YAxisPoint = Point.bind(emptyObj, 0/*x*/);
+            // 实现中的例子不支持,
+            // 原生bind支持:
+            var YAxisPoint = Point.bind(null, 0/*x*/);
+
+            var axisPoint = new YAxisPoint(5);
+                console.log(
+                   axisPoint.toString() // '0,5'
+                );
+
+              console.log(
+                axisPoint instanceof Point, // true
+                axisPoint instanceof YAxisPoint, // true
+                new Point(17, 42) instanceof YAxisPoint // true
+              );
+
+
+          /*
+            上面例子中Point和YAxisPoint共享原型，因此使用instanceof运算符判断时为true。
+
+            捷径
+            bind()也可以为需要特定this值的函数创造捷径。
+
+            例如要将一个类数组对象转换为真正的数组，可能的例子如下：
+           */
+
+          function fn(a, b){
+              var slice = Array.prototype.slice;
+                  slice.call(arguments);
+
+                  // 如果使用bind()的话，情况变得更简单：
+                  var unboundSlice = Array.prototype.slice;
+                  var slice = Function.prototype.call.bind(unboundSlice)
+                      slice(arguments);
+          }
+
+
+          /*
+            实现
+
+            上面的几个小节可以看出bind()有很多的使用场景，但是bind()函数是在 ECMA-262 第五版才被加入；它可能无法在所有浏览器上运行。这就需要我们自己实现bind()函数了。
+
+            首先我们可以通过给目标函数指定作用域来简单实现bind()方法：
+           */
+
+
+
+           Function.prototype.bind = function(context){
+              self = this;  // 保存this，即调用bind方法的目标函数
+              return function () {
+                  return self.apply(context, arguments);
+              };
+          };
+
+          // 考虑到函数柯里化的情况，我们可以构建一个更加健壮的bind()：
+          Function.prototype.bind = function(context){
+            // 这里获取调用当bind函数参数,并从第二个参数开始
+            var args = Array.prototype.slice.call(arguments, 1),
+            self = this;
+            return function(){
+                // 获取空函数参数列表,为空
+                var innerArgs = Array.prototype.slice.call(arguments);
+                 // 返回一个空函数,合并为调用的函数参数
+                var finalArgs = args.concat(innerArgs);
+                return self.apply(context,finalArgs);
+            };
+          };
+
+          /*
+            这次的bind()方法可以绑定对象，也支持在绑定的时候传参。
+
+            继续，Javascript的函数还可以作为构造函数，那么绑定后的函数用这种方式调用时，情况就比较微妙了，需要涉及到原型链的传递：
+           */
+           Function.prototype.bind = function(context){
+            var args = Array.prototype.slice(arguments, 1),
+            F = function(){},
+            self = this,
+            bound = function(){
+                var innerArgs = Array.prototype.slice.call(arguments);
+                var finalArgs = args.concat(innerArgs);
+                return self.apply((this instanceof F ? this : context), finalArgs);
+            };
+
+            F.prototype = self.prototype;
+            bound.prototype = new F();
+            retrun bound;
+          };
+
+
+          /*
+            这是《JavaScript Web Application》一书中对bind()的实现：通过设置一个中转构造函数F，使绑定后的函数与调用bind()的函数处于同一原型链上，用new操作符调用绑定后的函数，返回的对象也能正常使用instanceof，因此这是最严谨的bind()实现。
+
+            对于为了在浏览器中能支持bind()函数，只需要对上述函数稍微修改即可：
+           */
+           Function.prototype.bind = function (oThis) {
+            if (typeof this !== "function") {
+              throw new TypeError("Function.prototype.bind - what is trying to be bound is not callable");
+            }
+
+            var aArgs = Array.prototype.slice.call(arguments, 1),
+                fToBind = this,
+                fNOP = function () {},
+                fBound = function () {
+                // 这里错了，&& oThis要去掉，并不用管之前绑定的上下文
+                  return fToBind.apply(
+                      this instanceof fNOP ? this : oThis || window,
+                      aArgs.concat(Array.prototype.slice.call(arguments))
+                  );
+                };
+
+            fNOP.prototype = this.prototype;
+            fBound.prototype = new fNOP();
+
+            return fBound;
+          };
+
+
+
+
+
+
+
+
+
+
+</script>

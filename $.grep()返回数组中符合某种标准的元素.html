@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/jquery v1.6.1.js"></script>
+
+</head>
+<body>
+
+</body>
+</html>
+<script>
+     var arr = $.grep( [ 0, 1, 2 ], function( n, i ) {
+       return n > 0;
+     });
+     document.write(arr);
+     console.log(arr);
+     //过滤一个数字数组，以包括不大于零的数字。
+     var arr2 = $.grep( [ 0, 1, 2 ], function( n, i ) {
+          return n > 0;
+      },true);
+     console.log(arr2);
+
+     //这里n代表第一个数,i代表第二个数
+    var arr3 = [ 1, 9, 3, 8, 6, 1, 5, 9, 4, 7, 3, 8, 6, 9, 1 ];
+    var arr4 = $.grep(arr3, function( n, i ) {
+          return ( n !== 5 && i > 4 );
+        });
+    var arr5 = $.grep(arr4, function( a ) { //再次使用,会更改原数组
+         return a !== 9;
+    });
+
+      console.log(arr4);
+      console.log(arr5);
+</script>

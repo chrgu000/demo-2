@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/jquery v1.6.1.js"></script>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+     //构造函数的prototype
+   console.log(Object.prototype);   //Object {}
+   console.log(Array.prototype);    //[Symbol(Symbol.unscopables): Object]
+   console.log(Function.prototype); //function () {}
+   console.log(Number.prototype);   //Number {[[PrimitiveValue]]: 0}
+   console.log(RegExp.prototype);   //Object {}
+   console.log(String.prototype);   //String {length: 0, [[PrimitiveValue]]: ""}
+   console.log(Boolean.prototype);  //Boolean {[[PrimitiveValue]]: false}
+   //实例的prototype
+   console.log(({name: 'yunmo'}).prototype);  //undefined
+   console.log(([1,2]).prototype);   //undefined
+   console.log((function(){}).prototype);   //Object {}
+   console.log((1).prototype);  //undefined
+   console.log(('yunmo').prototype);   //undefined
+   console.log((true).prototype);    //undefined
+   //实例的__proto__
+   console.log(({name: 'yunmo'}).__proto__);  //Object {}
+   console.log(([1,2]).__proto__);   //[Symbol(Symbol.unscopables): Object]
+   console.log((function(){}).__proto__);   //function () {}
+   console.log((1).__proto__);  //Number {[[PrimitiveValue]]: 0}
+   console.log(('yunmo').__proto__);   //String {length: 0, [[PrimitiveValue]]: ""}
+   console.log((true).__proto__);    //Boolean {[[PrimitiveValue]]: false}
+//===============================================
+   function Yunmo() {
+    console.log('I AM YUNMO');
+  }
+  var yunmo = new Yunmo();
+  console.log(yunmo.constructor === Yunmo);  //true
+//===============================================
+  var presetObject = {
+    name: 'yun',
+    age: 18
+  };
+  presetObject.prototype = Object.prototype;
+  //var yunmo = new Object(presetObject); //true
+  var yunmo = Object.create(presetObject);
+  console.log(yunmo.__proto__ === yunmo.constructor.prototype);  //false
+//===============================================
+/*  var Coder = function (name, age) {
+      this.name = name;
+      this.age = age;
+      this.learnCoding = function () {
+          console.log(this.name + ' is learning coding while he is ' + this.age);
+      }
+  };
+  var yun = new Coder('yun', 18);
+  var mo = new Coder('mo', 12);
+  yun.learnCoding();
+  mo.learnCoding();
+  console.log(yun.learnCoding === mo.learnCoding);   //false
+*/
+  var Coder = function (name, age) {
+    this.name = name;
+    this.age = age;
+  };
+  Coder.prototype.learnCoding = function () {
+      console.log(this.name + ' is learning coding while he is ' + this.age);
+  };
+  var yun = new Coder('yun', 18);
+  var mo = new Coder('mo', 12);
+  yun.learnCoding();
+  mo.learnCoding();
+  console.log(yun.learnCoding === mo.learnCoding);   //true
+
+  /*
+    原型链
+  对象在调用一个方法时会先在自身寻找是否有该方法，若没有，则通过内部的__proto__属性去自己的构造函数原型上寻找，如果还找不到，继续向上追溯，直到Object.prototype.__proto__ = null为止，这种依靠原型查找形成的查询链条，即原型链。
+
+
+    原型链的查找是根据什么进行的？prototype？__proto__？还是constructor?
+  理论上来说，谁都不是。因为prototype、__proto__ 和constructor这三个属性是由js引擎对外暴露的API。如本文一开始所说的，对象内部存在一个隐藏属性[[prototype]]，外部是无法直接访问的，js引擎通过提供__proto__属性使得代码上能够访问[[prototype]]。因此，从实际可操作的层面来说，是根据__proto__属性进行查找的。
+
+
+   */
+</script>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/jquery v1.6.1.js"></script>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+/*    function Person(name) {
+      console.log(name);
+    }
+    Person('js');//js*/
+    function Person(name) {
+       this.name = name;
+       this.showMe = function() {
+           console.log(this.name);
+      }
+    };
+var one = new Person('<a href="http://lib.csdn.net/base/javascript" class="replace_word" title="JavaScript知识库" target=\'_blank\' style="color:#df3434; font-weight:bold;">JavaScript</a>');
+one.showMe();//<a href="http://lib.csdn.net/base/javascript" class='replace_word' title="JavaScript知识库" target='_blank' style='color:#df3434; font-weight:bold;'>javascript</a>
+//=====================================================
+  function Person2(name) {
+   this.name = name;
+   this.showMe = function() {
+           console.log(this.name);
+        }
+  };
+
+  var one = new Person2('js');
+
+  console.log(one.prototype)//undefined
+  console.log(typeof Person2.prototype);//object
+  console.log(Person2.prototype.constructor);//function Person2(name) {...};
+//=====================================================
+  function Person3(name) {
+   this.name = name;
+   this.showMe = function() {
+           console.log(this.name);
+        }
+  };
+
+  Person3.prototype.from = function() {
+    console.log('I come from prototype.');
+  }
+
+  var one1 = new Person3('js');
+
+  one1.showMe();//js,这个结果没有什么好奇怪的
+  one1.from();//I come from prototype.，这个结果有一点奇怪吧
+  console.log(one1);
+  /*
+    要解释这个结果就要仔细研究一下new这个操作符了.var one=new Person('js');这个语句执行的过程可以分成下面的语句：
+
+    按照《悟透javascript》书中说的，new形式创建对象的过程实际上可以分为三步：
+  第一步是建立一个新对象（叫A吧）；
+  第二步将该对象（A）内置的原型对象设置为构造函数(就是Person)prototype 属性引用的那个原型对象；
+  第三步就是将该对象（A）作为this 参数调用构造函数(就是Person)，完成成员设置等初始化工作。
+  其中第二步中出现了一个新名词就是内置的原型对象，注意这个新名词跟prototype对象不是一回事，为了区别我叫它inobj,inobj就指向了函数Person的prototype对象。在person的prototype对象中出现的任何属性或者函数都可以在one对象中直接使用，这个就是javascript中的原型继承了。
+   */
+
+   var one2 = {};
+   one2.prototype = Person3.prototype;
+   Person3.call(one2,'js');
+   one2.prototype.from = function(){
+    console.log('one2更改');
+   }
+
+  one2.prototype.from();
+  Person3.prototype.from();
+//=====================================
+  one1.showMe();//js,这个结果没有什么好奇怪的
+  one1.from();//I come from prototype.，这个结果有一点奇怪吧
+  console.log(one1.constructor);//function Person(name) {...}
+  console.log(Person3.prototype.constructor);//function Person(name) {...}
+//=====================================
+   //接着看继承是如何实现的。
+    function SubPerson() {}
+    SubPerson.prototype = new Person3();
+
+    var subOne = new SubPerson();
+    subOne.from();//I come from prototype.
+    console.log(subOne.constructor);//function Person(name) {...};
+    console.log(SubPerson.prototype.constructor);//function Person(name) {...};
+
+    /*
+      继承的实现很简单，只需要把子类的prototype设置为父类的一个对象即可。注意这里说的可是对象哦！
+ 那么通过prototype属性实现继承的原理是什么呢？还是先看图形说明，然后编写代码进行验证。
+     */
+//=====================================
+  var father = new Person3('js');//为了下面演示使用showMe方法，采用了js参数,实际多采用无参数
+  console.log(father.constructor);//查看构造函数,结果是:function Person(name) {...};
+  function SubPer() {};
+  SubPer.prototype = father;//注意这里
+  SubPer.prototype.constructor = SubPer;
+
+  var son = new SubPer();
+  son.showMe();//js
+  son.from();//I come from prototype.
+  console.log(father.constructor);//function SubPer(){...}
+  console.log(son.constructor);//function SubPer(){...}
+  console.log(SubPer.prototype.constructor);//function SubPer(){...}
+</script>

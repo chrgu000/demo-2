@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/jquery v1.6.1.js"></script>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+  /*
+    propertyIsEnumerable()是用来检测属性是否属于某个对象的,如果检测到了,返回true,否则返回false.
+    1.这个属性必须属于实例的,并且不属于原型.
+    2.这个属性必须是可枚举的,也就是自定义的属性,可以通过for..in循环出来的.
+    只要符合上面两个要求,就会返回true;
+  */
+    function MyObject() {
+       this.name = "我是实例的属性";
+    }
+    var obj = new MyObject();
+        console.info(obj.propertyIsEnumerable("name"));//true
+      MyObject.prototype.say = "我是原型的属性";
+        console.log(MyObject.prototype.say);
+        console.info(obj.propertyIsEnumerable("say")); //false
+        console.info(obj.hasOwnProperty("say")); //false
+       for (var i in obj) {
+         console.info(i);//name,age
+      }
+
+    /*
+        PropertyIsEnumerable
+        判断给定的属性是否可以用 for...in 语句进行枚举。
+        hasOwnProperty(property)
+        判断对象是否有某个特定的属性。必须用字符串指定该属性
+
+     */
+</script>

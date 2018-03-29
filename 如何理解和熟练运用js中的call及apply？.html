@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/jquery v1.6.1.js"></script>
+  <style>
+  #box{
+    width: 100px;
+    height: 100px;
+    border : 1px solid red;
+  }
+  </style>
+</head>
+<body>
+
+      <div id="box"></div>
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <button id="morning">按钮一</button>
+        <button id="morning2">按钮二</button>
+        <a href="">这是a标签</a>
+        <p>这是p</p>
+</body>
+</html>
+<script>
+      /*
+        用的比较多的，通过document.getElementsByTagName选择的dom 节点是一种类似array的array。它不能应用Array下的push,pop等方法。我们可以通过：
+
+       */
+
+       //Array.prototype.slice.call(document.getElementsByTagName("*"))
+       console.log(typeof document.getElementsByTagName('div'));
+       //这样domNodes就可以应用Array下的所有方法了
+//======================================
+     function add(j, k){
+          return j + k;
+      }
+
+      function sub(j, k){
+          return j - k;
+      }
+
+      console.log(add(5,3)); //8
+      console.log(add.call(sub, 5, 3)); //8
+      console.log(add.apply(sub, [5, 3])); //8
+
+      console.log(sub(5, 3)); //2
+      console.log(sub.call(add, 5, 3)); //2
+      console.log(sub.apply(add, [5, 3])); //2
+
+
+      var Parent = function(){
+          this.name = "yjc";
+          this.age = 22;
+      }
+
+      var child = {};
+
+      console.log(child);//Object {} ,空对象
+      Parent.call(child);
+      console.log(child); //Object {name: "yjc", age: 22}
+//======================================
+
+    function Man() {}
+      Man.prototype = {
+          valet: false,
+          wakeUp: function(event) {
+              console.log(this.valet + '你已点击: ' + this.innerText);
+          }
+    };
+    var wooster = new Man();
+    //get "undefined? Some breakfast, please
+    var button = document.getElementById('morning');
+    button.addEventListener(
+        "click",
+        wooster.wakeUp,
+        false
+    );
+
+    //使用apply来改变 wakeUp 的上下文环境，即 wakeUp 中的this
+    var button = document.getElementById('morning2');
+    button.addEventListener(
+        "click",
+        function() {
+            Man.prototype.wakeUp.apply(wooster, arguments);
+        },
+        false
+    );
+
+    function changeStyle(attr, value){
+          this.style[attr] = value;
+    }
+    var box = document.getElementById('box');
+    changeStyle.call(box, "height", "200px");
+
+//======================================
+  var aHello = {
+    name : "hello",
+    showName : function(){
+        console.log(this.name);
+    }
+  }
+
+  document.querySelector('a').onclick = function(e){
+      //方法一
+      // aHello.showName();
+      //方法二 因为引用， onclick改变了【对象aHello】showName内this的指向。所以我们必须在【引用】的时候对showName方法进行重新绑定新的指向；
+      aHello.showName.bind(aHello);
+
+      if ( e && e.preventDefault ) e.preventDefault();
+      else window.event.returnValue = false;
+  }
+
+
+
+  var aHello1 = {
+    name : "hello",
+    setYourAge : function(name,age){
+       console.log(name);
+       console.log(age);
+    }
+  }
+
+/*  document.querySelector('p').onclick = function(){
+    aHello1.setYourAge.call(aHello1,'jessinca',25);
+    // aHello1.setYourAge.apply(aHello1,['jessinca',25]);
+
+  }*/
+  document.querySelector('p').onclick = aHello1.setYourAge.bind(aHello1,'jessinca',25);
+
+//======================================
+  function exam(a, b, c, d, e) {
+    // 先看看函数的自带属性 arguments 什么是样子的
+    console.log(arguments);
+    // 使用call/apply将arguments转换为数组, 返回结果为数组，arguments自身不会改变
+    var arg = [].slice.call(arguments);
+    console.log(arg);
+  }
+  exam(2, 8, 9, 10, 3);
+
+  // result:
+  // { '0': 2, '1': 8, '2': 9, '3': 10, '4': 3 }
+  // [ 2, 8, 9, 10, 3 ]
+  //
+  // 也常常使用该方法将DOM中的nodelist转换为数组
+  // [].slice.call( document.getElementsByTagName('li') );
+  //
+  //======================================
+
+  /*
+
+  其实我觉得比较要注意的是两点，搞清楚了就明白了
+  1.fn1.call(fn2)是执行了fn1函数的再给个例子Math.max.call(null, 3, 5, 4); 这里是执行了max函数的，同时传入三个参数3，5，4
+  2.fn1.call(fn2)是将fn1里this的指向变成了fn2还是这个例子Math.max.call(null, 3, 5, 4);这里没有改变this的指向就写了null.
+   */
+   console.log(Math.max.call(null, 3, 5, 4)); //call和apply为null时默认指向window
+  //======================================
+    var log = console.log.bind(console)
+    var o = {}
+    o.add = function(a, b) {
+        return a + b
+    }
+    var add = function(a, b) {
+        return a * 2 + b * 2
+    }
+    // o.m = add
+    // o.m()
+    // delete o.m
+    log(add.call(o, 3, 4)) // 输出为 14, add函数对象会覆盖o.add
+    log(o.add(3, 4)) // 为什么输出为 7？
+  //======================================
+    function Foo() {}
+    Foo.prototype.method = function(a, b, c) {
+        console.log(this, a, b, c);
+    };
+
+    // 创建一个解绑定的 "method"
+    // 输入参数为: this, arg1, arg2...argN
+    Foo.method = function() {
+        // 结果: Foo.prototype.method.call(this, arg1, arg2... argN)
+        Function.call.apply(Foo.prototype.method, arguments);
+    };
+     Foo.prototype.method(1,2,3);
+     Foo.method(1,2,3);
+    // Foo.method 同下，效果一样的
+    Foo.method2 = function() {
+        var args = Array.prototype.slice.call(arguments);
+        Foo.prototype.method.apply(args[0], args.slice(1));
+    };
+    Foo.method2(1,2,3);
+  //======================================
+  /*首先，需要明白的是, 使用[1,2,3].slice();和使用Array.prototype.slice.apply ([1,2,3]);的原理是一样的,都
+  是通过改变Array.prototype.slice函数中的this指针的指向. 如下:*/
+  //方式1
+  var arr = [1, 2, 3];
+  var arrClone = arr.slice();
+    console.log(arrClone);
+  //方式2
+  var arrApplyClone = Array.prototype.slice.apply(arr);
+    console.log(arrApplyClone);
+
+  /*方式1中,我们用数组字面量定义了一个数组arr, 相当于var arr = new Array(1, 2, 3);通过JS的原型继承,我们
+  知道数组arr可以调用Array.prototype中的所有方法,因此当调用arr.slice()时,Array.prototype.slice方法中的
+  this是指向arr数组的.
+  方式2中,apply()方法用于改变函数体内this对象的值,本身Array.prototype.slice函数中的this的值时不确定的,
+  但是当我们使用apply()方法并将arr作为第一个参数传入时,就可以设置Array.prototype.slice函数中的this的
+  值为arr. 因此使用Array.prototype.slice.apply(arr);和arr.slice();其实是没有差别的.
+  因此我们就可以像下面这样使用 Array.prototype.slice(arguments);来转换类数组arguments了.*/
+
+
+
+  </script>

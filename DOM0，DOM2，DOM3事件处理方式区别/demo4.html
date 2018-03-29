@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+<div id="d">ddssdsd</div>
+
+</body>
+</html>
+  <script type="text/javascript">
+    var node = document.getElementsByTagName('*');
+    var d = document.getElementById('d');
+    d.addEventListener('click', function () {
+      alert();
+    }, false);
+    d.addEventListener('click', function () {
+      alert('我是第二次');
+    }, false);
+    d.onclick = function () {
+      alert('不规范的绑定');
+    }
+    d.addEventListener('click', function () {
+      alert();
+    }, true);
+
+    d.addEventListener('mousedown', function () {
+      console.log('mousedown');
+    }, true);
+    var evets = typeof getEventListeners == 'function' && getEventListeners(d);
+    console.log(evets);
+  </script>

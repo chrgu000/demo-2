@@ -1,0 +1,304 @@
+<!doctype html>
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+<title>Image preview example</title>
+    <!-- <script src="../js/jquery v1.6.1.js"></script> -->
+<style type="text/css">
+      #imagePreview {
+        width:200px;
+        height:200px;
+        /*float: right;*/
+        filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale);
+      }
+</style>
+<!-- <script src="../js/localStorage.js"></script> -->
+</head>
+
+<body>
+<div id="imagePreview"></div>
+<form name="uploadForm">
+<p>
+  <input id="imageInput" type="file" name="myPhoto" onchange="loadImageFile();" /><br />
+  <input type="submit" value="发送" />
+  </p>
+</form>
+<button id="btn">保存</button>
+</body>
+</html>
+<script type="text/javascript">
+    /*
+        chrome,firefox,IE11都支持显示图片和保存
+
+        已知问题:
+        一:IE8,9,10不显示图片,更无法保存
+        二:IE6,7显示图片,但无法保存
+     */
+    (function(window) {
+        var LS;
+        (function() {
+            var o = document.getElementsByTagName("head")[0],
+                n = window.location.hostname || "localStorage",
+                d = new Date(),
+                doc, agent;
+            //typeof o.addBehavior 在IE6下是object，在IE10下是function，因此这里直接用!判断
+            /*
+                addBehavior()是一种JS调用的外部函数文件其扩展名为.htc
+
+             */
+            if (!o.addBehavior) return; //防止有些浏览器默认禁用localStorage，这里优先考虑userData本地存储
+            try { //尝试创建iframe代理
+                agent = new ActiveXObject('htmlfile');
+                agent.open();
+                agent.write('<s' + 'cript>document.w=window;</s' + 'cript><iframe src="/favicon.ico"></frame>');
+                agent.close();
+                doc = agent.w.frames[0].document;
+            } catch (e) {
+                doc = document;
+            }
+            o = doc.createElement('head'); //这里通过代理document创建head，可以使存储数据垮目录访问
+            doc.appendChild(o);
+            d.setDate(d.getDate() + 36500);
+            o.addBehavior("#default#userData");
+            o.expires = d.toUTCString();
+            o.load(n);
+            var root = o.XMLDocument.documentElement,
+                attrs = root.attributes,
+                prefix = "prefix_____hack__",
+                reg1 = /^[-\d]/,
+                reg2 = new RegExp("^" + prefix),
+                encode = function(key) {
+                    return reg1.test(key) ? prefix + key : key;
+                },
+                decode = function(key) {
+                    return key.replace(reg2, "");
+                };
+            LS = {
+                length: attrs.length,
+                notNativeCode: true,
+                getItem: function(key) {
+                    return (attrs.getNamedItem(encode(key)) || {
+                        nodeValue: null
+                    }).nodeValue || root.getAttribute(encode(key)); //IE9中 通过o.getAttribute(name);取不到值，所以才用了下面比较复杂的方法。（也许你会诧异IE9不是有原生的localStorage吗，是的，但是用户可以关闭DOM存储，所以为了保险一些还是考虑IE9可能会使用到#userData吧。）
+                },
+                setItem: function(key, value) {
+                    root.setAttribute(encode(key), value); //IE9中无法通过 o.setAttribute(name, value); 设置#userData值，而用下面的方法却可以。
+                    o.save(n);
+                    this.length = attrs.length;
+                },
+                removeItem: function(key) {
+                    root.removeAttribute(encode(key)); //IE9中无法通过 o.removeAttribute(name); 删除#userData值，而用下面的方法却可以。
+                    o.save(n);
+                    this.length = attrs.length;
+                },
+                clear: function() {
+                    while (attrs.length) {
+                        this.removeItem(attrs[0].nodeName);
+                    }
+                    this.length = 0;
+                },
+                key: function(i) {
+                    return attrs[i] ? decode(attrs[i].nodeName) : undefined;
+                }
+            };
+        })();
+        (function(w, localStorage) { //封装LS，对外提供接口
+            var f = function() {
+                return null;
+            };
+            w.LS = localStorage ? {
+                set: function(key, value) {
+                    //fixed iPhone/iPad 'QUOTA_EXCEEDED_ERR' bug
+                    if (this.get(key) !== undefined) this.remove(key);
+                    localStorage.setItem(key, value);
+                },
+                //查询不存在的key时，有的浏览器返回null，这里统一返回undefined
+                get: function(key) {
+                    var v = localStorage.getItem(key);
+                    return v === null ? undefined : v;
+                },
+                remove: function(key) {
+                    localStorage.removeItem(key);
+                },
+                clear: function() {
+                    localStorage.clear();
+                },
+                each: function(callback) {
+                    var list = this.obj(),
+                        fn = callback || function() {},
+                        key;
+                    for (key in list)
+                        if (fn.call(this, key, this.get(key)) === false) break;
+                },
+                obj: function() {
+                    var list = {},
+                        i = 0,
+                        n, key;
+                    if (localStorage.isVirtualObject) {
+                        list = localStorage.key(-1);
+                    } else {
+                        n = localStorage.length;
+                        for (; i < n; i++) {
+                            key = localStorage.key(i);
+                            list[key] = this.get(key);
+                        }
+                    }
+                    return list;
+                }
+            } : {
+                set: f,
+                get: f,
+                remove: f,
+                clear: f,
+                each: f,
+                obj: f
+            }; //如果都不支持则所有方法返回null
+        })(window, LS || window.localStorage); //这里优先使用自定义的LS
+    })(window);
+var loadImageFile = (function() {
+    if (window.FileReader) {
+        var oPreviewImg = null,
+            //创建FileReader对象,读取文件相关信息
+            oFReader = new window.FileReader(),
+            //设置上传后缀
+            rFilter = /^(?:image\/bmp|image\/cis\-cod|image\/gif|image\/ief|image\/jpeg|image\/jpeg|image\/jpeg|image\/pipeg|image\/png|image\/svg\+xml|image\/tiff|image\/x\-cmu\-raster|image\/x\-cmx|image\/x\-icon|image\/x\-portable\-anymap|image\/x\-portable\-bitmap|image\/x\-portable\-graymap|image\/x\-portable\-pixmap|image\/x\-rgb|image\/x\-xbitmap|image\/x\-xpixmap|image\/x\-xwindowdump)$/i;
+
+        //当FileReader对象加载完成进行操作
+        oFReader.onload = function(oFREvent) {
+            if(typeof window.localStorage.savaImg !== "undefined"){
+                document.getElementById("imagePreview").innerHTML = '';
+                window.localStorage.removeItem('savaImg');
+            }
+
+            if (!oPreviewImg) {
+              //获取上传图片input元素
+                var newPreview = document.getElementById("imagePreview");
+                //创建图片标签
+                oPreviewImg = new Image();
+                //设置高和宽
+                oPreviewImg.style.width = (newPreview.offsetWidth).toString() + "px";
+                oPreviewImg.style.height = (newPreview.offsetHeight).toString() + "px";
+                console.log(oFREvent);
+                //传图片input元素内添加o建图片标签的宽和高
+                newPreview.appendChild(oPreviewImg);
+            }
+            //给新创建图片标签添加转码Base64,再添加
+            oPreviewImg.src = oFREvent.target.result;
+        };
+        return function() {
+          //得到获取上传图片长度
+            var aFiles = document.getElementById("imageInput").files;
+            if (aFiles.length === 0) {
+                return;
+            }
+            //如果没有定义的有效图片后缀,提示用户
+            if (!rFilter.test(aFiles[0].type)) {
+                alert("您必须选择一个有效的图像文件!");
+                return;
+            }
+            //ileReader对象的readAsDataURL方法可以将读取到的文件编码成Data URL
+            oFReader.readAsDataURL(aFiles[0]);
+        }
+    }
+    if (navigator.appName === "Microsoft Internet Explorer") {
+        return function() {
+          //如果是IE5.5 - 9的话,使用滤镜解决png图片透明问题,这里value是图片路径
+            document.getElementById("imagePreview").filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = document.getElementById("imageInput").value;
+        }
+    }
+})();
+
+    imagePreview.onload = function(){
+           //检测浏览器是否支持localStorage
+         if (typeof localStorage == 'undefined') {
+          //创建localStorage
+          var localStorageClass = function() {
+              this.options = {
+                  expires: 60 * 24 * 3600,
+                  domain: "swe_ling@163.com"
+              }
+          }
+          localStorageClass.prototype = {
+              //初实化。添加过期时间
+              init: function() {
+                  var date = new Date();
+                  date.setTime(date.getTime() + 60 * 24 * 3600);
+                  this.setItem('expires', date.toGMTString());
+              },
+              //内部函数 参数说明(key) 检查key是否存在
+              findItem: function(key) {
+                  var bool = document.cookie.indexOf(key);
+                  if (bool < 0) {
+                      return true;
+                  } else {
+                      return false;
+                  }
+              },
+              //得到元素值 获取元素值 若不存在则返回 null
+              getItem: function(key) {
+                  var i = this.findItem(key);
+                  if (!i) {
+                      var array = document.cookie.split(';')
+                      for (var j = 0; j < array.length; j++) {
+                          var arraySplit = array[j];
+                          if (arraySplit.indexOf(key) > -1) {
+                              var getValue = array[j].split('=');
+                              //将 getValue[0] trim删除两端空格
+                              getValue[0] = getValue[0].replace(/^\s\s*/, '').replace(/\s\s*$/, '')
+                              if (getValue[0] == key) {
+                                  return getValue[1];
+                              } else {
+                                  return 'null';
+                              }
+                          }
+                      }
+                  }
+              },
+              //重新设置元素
+              setItem: function(key, value) {
+                  var i = this.findItem(key)
+                  document.cookie = key + '=' + value;
+              },
+              //清除cookie 参数一个或多一
+              clear: function() {
+                  for (var cl = 0; cl < arguments.length; cl++) {
+                      var date = new Date();
+                      date.setTime(date.getTime() - 100);
+                      document.cookie = arguments[cl] + "=a; expires=" + date.toGMTString();
+                  }
+              }
+          }
+          var localStorage = new localStorageClass();
+          localStorage.init();
+        }
+    }
+
+
+    window.onload = function(){
+        //保存本地储存来进行判断
+        var item = localStorage.getItem('savaImg') || '';
+            if((item !== undefined) || item !== null || item !== ''){
+                console.log(item);
+                var filter = localStorage.getItem('savaImg') == null ? '' : localStorage.getItem('savaImg');
+                document.getElementById('imagePreview').innerHTML = filter;
+                //去除IE下回输出null和空格
+                // document.getElementById('imagePreview').innerHTML.replace(/[null,\s]/ig, '');
+            }
+
+            //删除缓存
+            /* localStorage.clear('');
+               document.getElementById('imagePreview').innerHTML = '';
+             */
+    }
+
+    btn.onclick = function(){
+        //保存本地储存来进行判断
+        var item = localStorage.getItem('savaImg') || '';
+            if((item === undefined) || item === null || item === ''){
+                LS.set('savaImg',imagePreview.innerHTML);
+                alert('你已保存图片成功!');
+            }
+
+    }
+
+</script>

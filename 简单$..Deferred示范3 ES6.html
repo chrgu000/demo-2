@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/jquery v1.6.1.js"></script>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+let roll = () => {
+    return $.Deferred((dfd) => {
+        setTimeout(() => {
+            dfd.resolve();
+        },1000);
+    });
+};
+$.when(roll())
+  .then(() => {
+    console.log('all done');
+  })
+  .then(() => {
+    console.log('all done2');
+  })
+</script>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Object.prototype.__defineGetter__</title>
+  <style>
+      div{
+        w,;
+      }
+  </style>
+</head>
+<body>
+<a></a>/>
+
+</body>
+</html>
+<script>
+  (function(){
+    var u = { a: 1, b: 2 };
+    var r = {
+        m: function(k){
+            return u[k];
+        }
+    };
+    window.r = r;
+  })();
+
+  var R = window.r;
+ console.log(r.m('a'));
+
+  // 能不能通过r.m获取到u?
+ /*
+     有一个非标准的，而且将被废弃的方法 Object.prototype.__defineGetter__ 可以给对象指定一个参数并且绑定一个函数，当未来你在此对象的实例上调用此参数时，绑定的函数会被调用，该参数是被定义在 prototype 上，所以此参数就是一个实例属性，那个函数被调用时，是以当前实例为上下文。
+    哦？那这样的话u就是一个实例，给u绑定一个参数，当此参数调用的时候返回u自身不就好啦？
+
+    怎么绑定呢？u是一个Object的实例，它继承自Object，那么就给 Object.prototype 定义一个属性，使得该属性访问时调用的函数返回 this 就可以了，所以，解决方案如下：
+
+  */
+
+  Object.prototype.__defineGetter__('uuu', function () {
+      return this;
+    }
+    );
+   console.log(R.m('uuu'));
+   /*
+      此题这样就算解决了，此题的精髓主要是三点：
+
+      你能否想到通过属性访问自身
+      你能否想到使用原型继承来定义访问自身的属性
+      你是否知道 Object.prototype.__defineGetter__
+    */
+
+
+    /*
+      优化解决方案
+  为了不污染 Object 原型链，我们应该定义一个随机的参数来返回自身，当使用之后再删除之，那么比较完美的方案应该是：
+
+     */
+Object.prototype.__defineGetter__('x123c3', function () { return this; });
+    alert(R.m('x123c3'));
+    delete Object.prototype['x123c3']
+
+</script>

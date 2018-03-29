@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/jquery v1.6.1.js"></script>
+  <style>
+  .box{
+    width: 100px;
+    height: 100px;
+    /*background: red;*/
+  }
+  .box:before{
+    content: '这是before生成内容';
+    display:block;
+    width:100px;
+    height:100px;
+    border:1px solid blue;
+  }
+  .box:after{
+        content : '这是after生成内容';
+        display:block;
+        width:100px;
+        height:100px;
+        border:1px solid black;
+  }
+  .box.info:after{
+        content : '这是#box.info生成内容';
+        display:block;
+        width:100px;
+        height:100px;
+        border:1px solid black;
+  }
+/* ======================================== */
+  a.content:after {
+     content: attr(href);
+  }
+
+/* ======================================== */
+  ol {
+   list-style-type:none;
+   counter-reset:sectioncounter;
+  }
+
+  ol li:before {
+     content:"图片" counter(sectioncounter) "： ";
+     counter-increment:sectioncounter;
+  }
+
+/* ======================================== */
+/*
+  此技术可以应用于各类元素，而不仅仅是q标签，另外，Safari 3以及IE7（以及以下）是不支持此技术的。
+ */
+
+  /* 为不同语言指定引号的表现 */
+  :lang(en) > q {quotes:'"' '"';}
+  :lang(no) > q {quotes:"«" "»";}
+  :lang(ch) > q {quotes:"“" "”";}
+
+  /* 在q标签的前后插入引号 */
+  q:before {
+      content:open-quote;
+  }
+  q:after  {
+      content:close-quote;
+  }
+/* ======================================== */
+/*
+  注意：
+  1. 你不能对图片进行重复或平铺，或是使用image sprite。
+  2. 目前仅在Opera 9.5+ 和 Safari 4+浏览器下起作用，因为这些浏览器支持所有元素的content方法，而不仅仅局限于:after或是:before。
+  替换的图片无法应用alt属性，所以一些特殊的使用屏幕阅读器的用户可能无法理解您替换的图片的含义。
+ */
+
+  div.logo {
+   content:url(images/top_img2.jpg);
+  }
+/* ======================================== */
+  p.pdf a[href $=".pdf"]:after {
+      content:url(images/icon_pdf.png);
+  }
+  p.pdf a[rel = "external"]:after {
+      content:url(images/a.png);
+  }
+
+  a:after {
+    content: "(" attr(href) ")";
+  }
+
+  abbr:after {
+   content: "(" attr(title) ")";
+  }
+  </style>
+</head>
+<body>
+
+<!-- ================================================= -->
+    <a class="content" href="http://waecy2.lofter.com/">此标签的href值是：</a>
+<!-- ================================================= -->
+    <ol>
+      <li><img src="images/top_img.jpg" width="128" height="96" /></li>
+      <li><img src="images/top_img2.jpg" width="128" height="96" /></li>
+    </ol>
+<!-- ================================================= -->
+  <p lang="en"><q>It’s only work if somebody makes you do it.</q></p>
+  <p lang="no"><q>Hvis du forteller meg nok en vits, så skal jeg slå deg til jorden.</q></p>
+  <p lang="zh"><q>欢迎来到上海，欢迎参观世博会！</q></p>
+<!-- ================================================= -->
+    <div class="logo">这是logo文字</div>
+<!-- ================================================= -->
+  <p class="pdf">您可以查看此PDF文件：
+    <a href="/sample.pdf">web站点的性能优化.pdf</a>，或是在线查看，
+    <a href="http://waecy2.lofter.com/" rel="external">点击这里</a>。</p>
+
+<!-- ================================================= -->
+  <a href="这是a标签"></a>
+  <abbr title="这是abbr标签"></abbr>
+<!-- ================================================= -->
+   <div class="box"></div>
+</body>
+</html>
+<script>
+  $(function () {
+    $('head').append("<style>.box:after{ content : '这是after替换生成内容'; display:block; width:100px; height:100px; border:1px solid black;}</style>");
+
+      //第二种 添加class,替换样式
+      // $("#box").addClass("info");
+  })
+</script>

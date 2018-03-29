@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/jquery v1.6.1.js"></script>
+  <style>
+  /*
+      三个选择器都声明了--color变量。不同元素读取这个变量的时候，会采用优先级最高的规则，因此三段文字的颜色是不一样的。
+这就是说，变量的作用域就是它所在的选择器的有效范围。
+   */
+   :root {
+      --color: blue;
+   }
+    div { --color: green; }
+    #alert { --color: red; }
+    * { color: var(--color); }
+
+/*五 : 响应式布局*/
+  body {
+    --primary: pink;
+    --secondary: #F7EFD2;
+  }
+
+  a {
+    color: var(--primary);
+    text-decoration-color: var(--secondary);
+  }
+
+  @media screen and (min-width: 768px) {
+    body {
+      --primary:  red;
+      --secondary: #7F583F;
+    }
+  }
+
+  /* 六、兼容性处理
+    对于不支持 CSS 变量的浏览器，可以采用下面的写法。
+   */
+  a {
+    color: #7F583F;
+    color: var(--primary);
+  }
+ /*也可以使用@support命令进行检测。*/
+  @supports ( (--a: 0)) {
+    /* supported */
+    color: var(--primary);
+  }
+
+  @supports ( not (--a: 0)) {
+    /* not supported */
+     color: #7F583F;
+  }
+
+
+  </style>
+</head>
+<body>
+    <p>蓝色</p>
+    <div>绿色</div>
+    <div id="alert">红色</div>
+    <a href="">这是a标签</a>
+</body>
+</html>
+<script>
+    //七、JavaScript 操作
+    const isSupported =
+      window.CSS &&
+      window.CSS.supports &&
+      window.CSS.supports('--a', 0);
+
+    if (isSupported) {
+      /* supported */
+    } else {
+      /* not supported */
+    }
+
+    //JavaScript 操作 CSS 变量的写法如下。
+    // 设置变量
+    document.body.style.setProperty('--primary', '#7F583F');
+
+    // 读取变量
+    console.log(document.body.style.getPropertyValue('--primary').trim());
+    // '#7F583F'
+
+    // 删除变量
+    document.body.style.removeProperty('--primary');
+    console.log(document.body.style.getPropertyValue('--primary').trim() === '');
+
+    //这意味着，JavaScript 可以将任意值存入样式表。下面是一个监听事件的例子，事件信息被存入 CSS 变量。
+    const docStyle = document.documentElement.style;
+
+    document.addEventListener('mousemove', (e) => {
+       document.body.style.setProperty('--mouse-x', e.clientX);
+       document.body.style.setProperty('--mouse-y', e.clientY);
+
+    });
+    document.addEventListener('click', (e) => {
+      console.log(document.body.style.getPropertyValue('--mouse-x').trim())
+      console.log(document.body.style.getPropertyValue('--foo').trim());
+    });
+
+</script>

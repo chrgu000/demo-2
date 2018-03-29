@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/jquery v1.6.1.js"></script>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    //重写console.log 改变输出文字的样式
+/*    var _log = console.log;
+    console.log = function () {
+        _log.call(console,'%c' + [].slice.call(arguments).join(''),'color:#1E8EFF')
+    };*/
+
+    console.log('更改log颜色');
+
+    //2、利用控制台输出图片
+    console.log("%c", "padding:50px 300px;line-height:120px;background:url('http://wayou.github.io/2014/09/10/chrome-console-tips-and-tricks/rabbit.gif') no-repeat;");
+
+    //3、指定输出文字的样式 渐变文字
+    console.log('%chello world这是渐变文字', 'background-image:-webkit-gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );color:transparent;-webkit-background-clip: text;font-size:5em;');
+
+    //console.log() 接收不定参数，参数间用逗号分隔，最终会输出会将它们以空白字符连接。
+    console.log('%c你好','color:red;','小明','你知道小红被妈妈打了么');
+</script>

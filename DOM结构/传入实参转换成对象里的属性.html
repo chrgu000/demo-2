@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+    <table border="1" cellpadding="0">
+
+      <tbody id="tbody">
+
+      </tbody>
+    </table>
+</body>
+</html>
+<script>
+
+
+  function fn(getDataName) {
+
+      var tempIndex = 0;
+      var newArr = [];
+      for (var i = 0; i < getDataName.length; i++) {
+          if (getDataName[i] == '.') {
+              tempIndex = i + 1;
+              break;
+          }
+
+      }
+
+
+
+      // 获取截取开始位置
+      var firstStr = tempIndex;
+
+      // 获取截取结束位置
+      var endStr = getDataName.length;
+
+
+      window.getDataName = getDataName.substr(firstStr, endStr);
+      console.log(window.getDataName);
+      var obj1 = {
+          a : 1,
+          b : {
+            a1 : 12,
+            b2 : 22
+          }
+      }
+
+       if(getDataName.indexOf('.') == -1) {
+        return obj1[window.getDataName];
+      }
+      return obj1[window.getDataName];
+  }
+
+  console.log(fn('a'));
+
+//==================================================
+    var testData = {
+        data: [{
+            id: '1',
+            color: '红色'
+        }, {
+            id: '1',
+            color: '红色'
+        }, {
+            id: '2',
+            color: '蓝色'
+        }, {
+            id: '3',
+            color: '黄色'
+        }]
+    };
+    //提供一个可选的Key排序函数
+    function rend(datas, keySortFun) {
+        var keys = Object.keys(datas[0]); //获取对象所有的key
+        keySortFun && keySortFun(keys);
+        var HTMLStrs = [];
+        datas.forEach(function(data) {
+            var resultStr = [];
+            keys.forEach(function(key) {
+                var value = data[key];
+                resultStr.push('<td data-key="' + key + '">' + value + '</td>');
+            });
+            HTMLStrs.push(resultStr.join(' '));
+        });
+        console.log('<tr>' + HTMLStrs.join(' ') + '</tr>');
+        tbody.innerHTML = '<tr>' + HTMLStrs.join(' ') + '</tr>';
+    }
+    rend(testData.data);
+
+
+//==================================================
+    var message = {
+        "color": "yellow",
+        "product": "food"
+    }
+
+    function tab(key) {
+        console.log(message[key]);
+    }
+    tab("color");
+    tab("product");
+
+//==================================================
+      var data = {
+        'id1' : {
+            'color': 'red',
+            'price': '100.00',
+            'size': '200*10mm',
+            'net': 'gps'
+        },
+        'id2' : {
+            'color': 'green',
+            'price': '10.00',
+            'size': '100*10mm',
+            'net': '4g'
+        }
+    }
+    console.log(data['id2'].color);
+
+
+//==================================================
+    /*
+    重复调用Ajax函数
+    @param Interface {String} 需要请求接口
+    @param getEle {Element} 需要添加内容的DOM元素
+    @param getDataName {String} 需要获取的属性名,以.分割,若获取子对象内的属性,后面也以.属性名格式访问
+
+  */
+  function $callAjaxs (Interface, getEle, getDataName) {
+    // 得到请求接口
+    var Interface = Interface;
+
+    // 需要添加内容的DOM元素
+    window.getEle = getEle;
+
+    // 获取对象属性名
+    var getDataName =  getDataName;
+
+    // 开始ajax
+    Ext.Ajax.request({
+         url : __ctxPath + Interface,
+             params: {
+              isMobile : "1"
+            },
+
+            // 同步发布请求
+             async : false,
+         success : function(response) {
+          var data =  JSON.parse(response.responseText);
+
+          // 如果没有.,说明只访问一层属性名
+          if(getDataName.indexOf('.') == -1) {
+            // 给指定元素添加请求的json值
+            $(window.getEle).html(data[getDataName]);
+
+            // 销毁temp临时属性,以便重复调用
+            delete window.getEle;
+
+          } else {
+            // 得到添加内容的DOM元素
+            var getEle = window.getEle;
+
+            // 若返回层级属性值.分割数组
+            var splitArr = getDataName.split('.');
+
+            // 保存拼接字符串
+            var tempStr = '';
+
+            // 保存最终返回数组格式访问属性值
+            var resultStr = typeof data === 'object' ? 'data' : data;
+
+            // 返回可执行结果
+            var result = null;
+
+            // 循环遍历分割数组
+            for(var i = 0, len = splitArr.length; i < len; i++) {
+              // 进行拼接
+              tempStr += '["' + splitArr[i] + '"]';
+            }
+              // 返回最终访问属性值数组格式
+              resultStr = resultStr + tempStr;
+
+              // 将字符串转换成可执行代码
+                result = eval('(' + resultStr + ')');
+
+              // 给指定元素添加请求的json值
+              $(getEle).html(result);
+
+              // 销毁temp临时属性,以便重复调用
+              delete window.getEle;
+          }
+         }
+    })
+  }
+</script>

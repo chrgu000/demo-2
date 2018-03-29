@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<form action="">
+    <label for="">商品类型：<input type="text" name="name"/></label>
+    <label for="">标题：<input type="text" name="title"/></label>
+    <label  for="">价格：<input type="text" name="price"/></label>
+    <label for=""><input type="button" value="提交" id="submit"/></label>
+</form>
+
+<button id="btn">保存localStorage的值</button>
+<script src="locaStorage.js"></script>
+<script src="../js/jquery v1.6.1.js"></script>
+<script>
+
+    /*if(typeof LocalStorage.getItem("name") !== 'undefined' && LocalStorage.getItem("name") != null){
+        alert(LocalStorage.getItem('name'));
+    }
+      btn.onclick = function (){
+        LocalStorage.setItem("name", 1);
+     }*/
+
+
+
+
+// window.location.href = "demo2.html";
+
+
+$(function() {
+    var names = $("input[name='name']");
+    var tit = $("input[name='title']");
+    var price = $("input[name='price']");
+    var submit = $("#submit");
+    submit.click(function() {
+        //保存缓存
+        LocalStorage.setItem("name", names.val());
+        LocalStorage.setItem("title", tit.val());
+        LocalStorage.setItem("price", price.val());
+        window.location.href = "demo2.html";
+        //return false;
+        window.event.returnValue = false; //(仅 IE 支持)
+        //读取缓存
+    });
+    //读取缓存
+    names.attr("value", LocalStorage.getItem("name"));
+    tit.attr("value", LocalStorage.getItem("title"));
+    price.attr("value", LocalStorage.getItem("price"));
+})
+</script>
+</body>
+</html>

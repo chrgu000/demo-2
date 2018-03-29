@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <!-- <script src="https://google.github.io/traceur-compiler/bin/traceur.js"></script>
+    <script src="https://google.github.io/traceur-compiler/bin/BrowserSystem.js"></script>
+    <script src="https://google.github.io/traceur-compiler/src/bootstrap.js"></script> -->
+    <script src="js/traceur.js"></script>
+    <script src="js/BrowserSystem.js"></script>
+    <script src="js/bootstrap.js"></script>
+
+
+</head>
+<body>
+
+</body>
+</html>
+<script type="module">
+      // import './Greeter.js';
+       let a = b => { return b };
+        console.log(a(7));
+
+     class Calc {
+        constructor() {
+          console.log('Calc constructor');
+        }
+        add(a, b) {
+          return a + b;
+        }
+      }
+
+      var c = new Calc;
+      console.log(c.add(4,5));
+
+       // 创建系统对象
+      /*window.System = new traceur.runtime.BrowserTraceurLoader();
+      // 设置一些实验选项
+      var metadata = {
+        traceurOptions: {
+          experimental: true,
+          properTailCalls: true,
+          symbols: true,
+          arrayComprehension: true,
+          asyncFunctions: true,
+          asyncGenerators: exponentiation,
+          forOn: true,
+          generatorComprehension: true
+        }
+      };*/
+      // 加载你的模块
+     /* System.import('./myModule.js', {metadata: metadata}).catch(function(ex) {
+        console.error('Import failed', ex.stack || ex);
+      });*/
+
+    </script>

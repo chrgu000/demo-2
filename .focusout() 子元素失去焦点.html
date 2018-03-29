@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/jquery v1.6.1.js"></script>
+  <style>
+    span {
+      /*display: none;*/
+    }
+  </style>
+</head>
+<body>
+    <p><input type="text"> <span>focusin fire</span></p>
+    <p><input type="password"> <span>focusin fire</span></p>
+</body>
+</html>
+<script>
+  $( "p" ).focusin(function() {
+      $(this).find( "span" ).css( "display", "inline" ).fadeOut( 1000 );
+  });
+</script>
+

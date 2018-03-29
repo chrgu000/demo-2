@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <!-- <script src="js/jquery v1.6.1.js"></script> -->
+</head>
+<style>
+  .demo {
+      width: 256px;
+      height: 800px;
+      margin: 0 auto;
+  }
+
+</style>
+<body>
+          <div class="demo">
+            <p><strong>这是原图</strong></p>
+            <img id="imageOrigin" src="images/gwm2.jpg" />
+              <p><strong>这是box-shadow生成的</strong></p>
+              <div id="boxShadow"></div>
+</body>
+</html>
+<script>
+  imageOrigin.onload = function (){
+      if (typeof window.screenX !== "undefined") {
+        // 创建画布
+        var canvas = document.createElement("canvas");
+        //得到内容为2D
+        var context = canvas.getContext("2d");
+           console.log(context);
+           canvas.style.background = 'black';
+        //获取图片的宽和高
+        var width = 200;
+        var height = 200;
+            canvas.width = width;
+            canvas.height = height;
+
+        var imageOrigin = document.getElementById("imageOrigin");
+        var boxShadow = document.getElementById("boxShadow");
+        var funBoxShadow = function() {
+
+          //在画布上定位图像，并规定图像的宽度和高度：
+          //context.drawImage(img,x,y,width,height);
+            context.drawImage(imageOrigin, 0, 0, width, height);
+
+
+            var imageData = context.getImageData(0, 0, width, height);
+            console.log(imageData );
+            var arrBoxShadow = [],
+                length = imageData.data.length;
+            // 遍历颜色参数值
+            for (var index = 0; index < length; index++) {
+                if (index % 4 === 0) {
+                    var x = index / 4 % width,
+                        y = Math.floor(index / 4 / width);
+                    arrBoxShadow.push((x + 1) + "px " + (y + 1) + "px rgba(" +
+                        [imageData.data[index], imageData.data[index + 1], imageData.data[index + 2], imageData.data[index + 3]].join() +
+                    ")");
+                }
+            };
+
+            boxShadow.style.boxShadow = arrBoxShadow.join();
+        };
+
+        if (imageOrigin.height === height) {
+            // has cached
+            funBoxShadow();
+        } else {
+            imageOrigin.onload = funBoxShadow;
+        }
+
+        boxShadow.style.width = boxShadow.style.height = "1px";
+        boxShadow.style.margin = "-1px 0 0 -1px";
+    } else {
+        document.getElementById("boxShadow").innerHTML = '当前浏览器low了点~~';
+    };
+  }
+</script>

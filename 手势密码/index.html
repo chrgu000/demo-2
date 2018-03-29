@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="user-scalable=no, width=device-width, height=device-height" />
+         <meta HTTP-EQUIV="pragma" CONTENT="no-cache">
+        <meta HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
+        <meta HTTP-EQUIV="expires" CONTENT="0">
+  <title></title>
+<script src="jquery-2.1.4.min.js"></script>
+<script src="src/jquery.gesture.password.js"></script>
+  <!--<link rel="stylesheet" href="../dist/css/danmuplayer.css">-->
+</head>
+<body>
+<div id="gesturepwd"></div>
+
+
+
+
+</body>
+
+
+<!--<script src="../dist/js/danmuplayer.min.js"></script>-->
+
+</html>
+<script>
+  // 初始化容器
+          $("#gesturepwd").GesturePasswd({
+            backgroundColor:"#252736",  // 背景色
+            color:"#FFFFFF",   // 主要的控件颜色
+            roundRadii:25,    // 大圆点的半径
+            pointRadii:6, // 大圆点被选中时显示的圆心的半径
+            space:73,  // 大圆点之间的间隙
+            width: window.screen.width,   // 整个组件的宽度
+            height: window.screen.width,  // 整个组件的高度
+            lineColor:"#00aec7",   // 用户划出线条的颜色
+            zindex :100  // 整个组件的css z-index属性
+            });
+
+            // 设置全局变量,实现计时
+             var conut = 0;
+
+             localStorage.setItem("userName", 'www');
+             localStorage.setItem(localStorage.getItem("userName") + "isGesturePassword", 'false');
+
+            // 触发触摸事件
+              $("#gesturepwd").on("hasPasswd", function (e, passwd) {
+                // 每次点击累加
+                conut++;
+
+                // 判断密码是否输入正确
+                 var pwdFlag = false;
+
+                 // 提示文本
+                 var textInfo = '';
+
+                 // 获取用户名
+                 var username = localStorage.getItem("userName");
+
+                 // 判断是否有设置密码
+                 var isGesturePassword = localStorage.getItem(username + "isGesturePassword");
+
+                // 重新账号/密码登录
+              var relist = false;
+
+//                console.log(passwd);
+//                console.log(localStorage.getItem(username + 'gesturePassword'));
+
+              // 校检手势密码
+                 if (passwd.length < 4) {
+                    // 提示文本
+                    textInfo = '至少需要4个链接点';
+                 } else {
+                   // 如果没设置密码进入以下代码
+                   if (isGesturePassword == 'false' && localStorage.getItem(username + 'getGesturePassword') == null) {
+
+                    // 是否是第二次设置手势密码
+                    if (conut > 1) {
+                      // 判断和上一次绘制是否一致
+                      if (passwd != localStorage.getItem(username + 'repeatGesturePassword')) {
+                            // 移除上一次绘制密码
+                            localStorage.removeItem(username + 'repeatGesturePassword');
+
+                        // 提示文本
+                        textInfo = '与上一次绘制的不一致，请重新绘制';
+
+                        // 还原计时器
+                        conut = 0;
+                      } else {
+                        // 提示文本
+                        textInfo = '设置手势密码成功';
+
+                        // 设置密码成功
+                        pwdFlag = true;
+
+                        // 设置成功后的手势密码
+                        localStorage.setItem(username + 'getGesturePassword', passwd);
+
+                        // 设置手势密码成功
+                        localStorage.setItem(username + "isGesturePassword", 'true');
+                      }
+                    }   else {
+                      // 设置第一次手势密码
+                      localStorage.setItem(username + 'repeatGesturePassword', passwd);
+
+                      // 登录成功判断
+                      pwdFlag = true;
+
+                       // 提示再次输入
+  //                                $('#diverrorMsg').html("再次绘制解锁图案");
+
+                                  // 提示文本
+                        textInfo = '再次绘制解锁图案';
+                    }
+
+                   } else { // 登录密码
+                    // 判断和上一次绘制是否一致
+                    if (passwd != localStorage.getItem(username + 'getGesturePassword')) {
+                      // 判断是否输入错5次
+                      if (conut % 5 == 0) {
+                        // 提示文本
+                        textInfo = '你已连续5次输错手势，手势解锁已关闭，请重新登录';
+
+                        // 手势密码为空
+                        localStorage.setItem(username + "isGesturePassword", "false");
+
+                        // 重新账号/密码登录
+                        relist = true;
+                      } else {
+                        // 提示文本
+                        textInfo = '手势错误，请重新登录';
+                      }
+                    } else {
+                      // 登录成功判断
+                      pwdFlag = true;
+
+                      // 提示文本
+                      textInfo = '登录成功';
+                    }
+                   }
+                 }
+
+                // 判断设置手势密码和登录是否成功
+                  if(pwdFlag == true){
+                   // 显示成功提示
+                    $(this).trigger("passwdRight");
+
+                    // 延迟半秒以照顾视觉效果
+                    setTimeout(function() {
+
+                       //  提示框
+                       alert(textInfo);
+                       /*Ext.Msg.alert('提示', textInfo + '!', function () {
+                          // 手势登录成功后跳转页面
+                      if (textInfo == '设置手势密码成功' || textInfo == '登录成功') {
+                            mobileNavi.push(Ext.create('hrmobile.public.myhome.index',{}));
+
+                            // 显示底部栏
+                            showbottomBarIndex();
+                      }
+                        // 跳转首页
+                       }
+                     );*/
+                    },500);
+                  } else {
+                    // 显示错误提示
+                      $(this).trigger("passwdWrong");
+
+                    //  提示框
+                     alert(textInfo);
+                    /*Ext.Msg.alert('提示', textInfo + '!', function () {
+                        // 判断是否错误过多,需要到登录页重新登录
+                        if (relist == true) {
+                          mobileNavi.push(Ext.create('hrmobile.public.myhome.login',{}));
+                        }
+                    }
+                    );*/
+                  }
+
+
+
+              });
+
+</script>

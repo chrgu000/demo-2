@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="../js/jquery v1.6.1.js"></script>
+
+<style>
+h2 {
+    color: red;
+    font-family: Arial;
+    background: #990000;
+    padding: 5px;
+    color: #fff;
+}
+</style>
+<body>
+    <div id="a5">123
+        <p>456
+             <span>789
+                    <b>bbbbb</b>
+             </span>
+        </p>
+    </div>
+    <hr/>
+    <button onclick="getParent()">察看选中的路径</button>
+    <h2 id="show">&nbsp;</h2>
+
+      <iframe src="" frameborder="1" id="HtmlEdit"></iframe>
+     <textarea name="" id="text" cols="30" rows="10"></textarea>
+</body>
+<script>
+
+  function SelectRange(obj, begin, end) {
+      if (obj.createTextRange) {
+          var rng = obj.createTextRange();
+          rng.moveStart("character", -0);
+          rng.moveEnd("character", -0);
+          rng.collapse(true);
+          rng.moveStart("character", begin);
+          rng.moveEnd("character", end - begin);
+          rng.select();
+      }
+      if (obj.setSelectionRange) {　　　　　
+          obj.setSelectionRange(begin, end);
+      }
+  }
+  function getParent() {
+      var o,
+          path = [];
+      o = document.all ? document.selection.createRange().parentElement() : window.getSelection().focusNode.parentNode;
+      do {
+          path.push(o.tagName);
+      } while (o = o.parentNode, o && o !== document.body)
+      alert(path.reverse().join('->').toLowerCase())
+      addBold();
+  };
+
+  function getSelectText() {
+      if (isIE) {
+          alert(frameDoc.selection.createRange().text);
+      } else {
+          alert(frameWin.getSelection().getRangeAt(0));
+      }
+  }
+
+  var editor;
+  editor = document.getElementById("HtmlEdit").contentWindow;
+  //只需键入以下设定，iframe立刻变成编辑器。
+  editor.document.designMode = 'On';
+  editor.document.contentEditable = true;
+  //但是IE与FireFox有点不同，为了兼容FireFox，所以必须创建一个新的document。
+  editor.document.open();
+  editor.document.writeln('<html><body></body></html>');
+  editor.document.close();
+
+  //字体特效 － 加粗方法一
+  function addBold() {
+      editor.focus();
+      //所有字体特效只是使用execComman()就能完成。
+      editor.document.execCommand("Bold", false, null);
+  }
+  // addBold();
+
+  //字体特效 － 加粗方法二 只有IE和open支持
+  function addBold2() {
+      editor.focus();
+      //获得选取的焦点
+      var sel = editor.document.selection.createRange();
+      insertHTML("<b>" + sel.text + "</b>");
+  }
+  // addBold2();
+
+
+  //封装完美兼容加粗字体函数
+  function $addBold(ele){
+      ele.focus();
+      var _this = arguments[0];
+      if(typeof document.selection !== 'undefined'){
+        //获得选取的焦点
+        var sel = _this.document.selection.createRange();
+        insertHTML("<b>" + sel.text + "</b>");
+      } else {
+         _this.document.execCommand("Bold", false, null);
+      }
+
+    function insertHTML(html) {
+        if (_this.document.selection.type.toLowerCase() != "none") {
+            _this.document.selection.clear();
+        }
+        _this.document.selection.createRange().pasteHTML(html);
+    }
+  }
+  // $addBold(editor);
+
+
+
+
+  function insertHTML(html) {
+      if (editor.document.selection.type.toLowerCase() != "none") {
+          editor.document.selection.clear();
+      }
+      editor.document.selection.createRange().pasteHTML(html);
+  }
+
+</script>

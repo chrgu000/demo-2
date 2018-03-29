@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>初探Promise.html</title>
+  <script src="../js/jquery-1.10.2.js"></script>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+
+  // Promise 铺(四声)若 (一声)妹丝(丝是两牙闭紧,不要漏出舌头的)
+
+  /* 例2.2 */
+/*  setTimeout(function() {
+      console.log('taskA, asynchronous');
+  }, 0);
+  console.log('taskB, synchronize');*/
+
+  /* 例2.3 */
+  /******************同步回调******************/
+/*  var fun1 = function(callback) {
+      //do something
+      console.log("before callback");
+      (callback && typeof(callback) === 'function') && callback();
+      console.log("after callback");
+  }
+  var fun2 = function(param) {
+      //do something
+      var start = new Date();
+      while((new Date() - start) < 3000) { //delay 3s
+      }
+      console.log("I'm callback");
+  }
+  fun1(fun2);*/
+
+
+    /* 例2.4 */
+  /******************异步回调******************/
+  function request(url, param, successFun, errorFun) {
+      $.ajax({
+          type: 'GET',
+          url: url,
+          param: param,
+          async: true,    //默认为true,即异步请求；false为同步请求
+          success: successFun,
+          error: errorFun
+      });
+  }
+ /* request('test.html', '', function(data) {
+      //请求成功后的回调函数，通常是对请求回来的数据进行处理
+      console.log('请求成功啦, 这是返回的数据:', data);
+  },function(error) {
+      console.log('sorry, 请求失败了, 这是失败信息:', error);
+  });
+*/
+
+
+   // 例2.5
+  function sendRequest(url, param) {
+      return new Promise(function (resolve, reject) {
+          request(url, param, resolve, reject);
+      });
+  }
+
+ /* sendRequest('data/test.json', '').then(function(data) {
+      //异步操作成功后的回调
+      console.log('请求成功啦, 这是返回的数据:', data);
+  }, function(error) {
+      //异步操作失败后的回调
+      console.log('sorry, 请求失败了, 这是失败信息:', error);
+  });
+
+  /* 例2.6 */
+ /* request('data/test.json', '', function(data1) {
+      console.log('第一次请求成功, 这是返回的数据:', data1);
+      request('test2.html', data1, function (data2) {
+          console.log('第二次请求成功, 这是返回的数据:', data2);
+          request('test3.html', data2, function (data3) {
+              console.log('第三次请求成功, 这是返回的数据:', data3);
+              //request... 继续请求
+          }, function(error3) {
+              console.log('第三次请求失败, 这是失败信息:', error3);
+          });
+      }, function(error2) {
+          console.log('第二次请求失败, 这是失败信息:', error2);
+      });
+  }, function(error1) {
+      console.log('第一次请求失败, 这是失败信息:', error1);
+  });*/
+
+
+  /* ================== 例2.7 ===============*/
+ /* sendRequest('data/test.json', '').then(function(data1) {
+      console.log('第一次请求成功, 这是返回的数据:', data1);
+  }).then(function(data1) {
+      console.log('第二次请求成功, 这是返回的数据:', data2);
+  }).then(function(data3) {
+      console.log('第三次请求成功, 这是返回的数据:', data3);
+  }).catch(function(error) {
+      //用catch捕捉前面的错误
+      console.log('sorry, 请求失败了, 这是失败信息:', error);
+  });*/
+
+
+  /* 例3.2 */
+  var promise = new Promise(function(resolve, reject) {
+    console.log('这是resolved之前的');
+    resolve();
+    console.log('这是resolved之后的');
+  });
+
+ /* promise.then(function() {
+    console.log('resolved');
+  });
+
+  console.log('outer');*/
+
+
+  /* 例3.3 */
+ /* promise.then(function(data) {
+      console.log('success');
+  }).catch(function(error) {
+      console.log('error', error);
+  });*/
+
+  /*******等同于*******/
+  /*promise.then(function(data) {
+      console.log('success');
+  }).then(undefined, function(error) {
+      console.log('error', error);
+  });*/
+
+
+  /* 例3.4 */
+  /*var promise = new Promise(function (resolve, reject) {
+      throw new Error('test');
+  });*/
+  /*******等同于*******/
+  /*var promise = new Promise(function (resolve, reject) {
+      reject(new Error('test'));
+  });
+
+  //用catch捕获
+  promise.catch(function (error) {
+      console.log(error);
+  });*/
+
+
+  /* 例3.5 */
+  /*sendRequest('data/test.json').then(function(data1) {
+      //do something
+      console.log(data1);
+  }).then(function (data2) {
+      //do something
+     console.log(data2);
+  }).catch(function (error) {
+      //处理前面三个Promise产生的错误
+       console.log(error);
+  });*/
+
+
+  /*
+      例3.6
+      promise状态一旦改变就会凝固，不会再改变。因此promise一旦fulfilled了，再抛错，也不会变为rejected，就不会被catch了
+     */
+  /*var promise = new Promise(function(resolve, reject) {
+    resolve();
+    throw 'error';
+  });
+
+  promise.catch(function(e) {
+     console.log(e);      // This is never called
+  });
+*/
+
+
+    /*
+    例3.7
+      如果没有使用catch方法指定处理错误的回调函数，Promise对象抛出的错误不会传递到外层代码，即不会有任何反应（Chrome会抛错），这是Promise的另一个缺点。
+    */
+ /* var promise = new Promise(function (resolve, reject) {
+      resolve(x);
+  });
+  promise.then(function (data) {
+      console.log(data);
+  });*/
+
+
+
+  /*
+      Promise.all方法接受一个数组（或具有Iterator接口）作参数，数组中的对象（p1、p2、p3）均为promise实例（如果不是一个promise，该项会被用Promise.resolve转换为一个promise)。它的状态由这三个promise实例决定。
+
+      当p1, p2, p3状态都变为fulfilled，p的状态才会变为fulfilled，并将三个promise返回的结果，按参数的顺序（而不是 resolved的顺序）存入数组，传给p的回调函数，如例3.8。
+      当p1, p2, p3其中之一状态变为rejected，p的状态也会变为rejected，并把第一个被reject的promise的返回值，传给p的回调函数，如例3.9。
+   */
+    /* 例3.8 */
+    /*var p1 = new Promise(function (resolve, reject) {
+        setTimeout(resolve, 3000, "first");
+    });
+    var p2 = new Promise(function (resolve, reject) {
+        resolve('second');
+    });
+    var p3 = new Promise((resolve, reject) => {
+      setTimeout(resolve, 1000, "third");
+    });
+
+    Promise.all([p1, p2, p3]).then(function(values) {
+      console.log(values);
+    });*/
+
+    /* 例3.9 */
+   /* var p1 = new Promise((resolve, reject) => {
+      setTimeout(resolve, 1000, "one");
+    });
+    var p2 = new Promise((resolve, reject) => {
+      setTimeout(reject, 2000, "two");
+    });
+    var p3 = new Promise((resolve, reject) => {
+      reject("three");
+    });
+
+    Promise.all([p1, p2, p3]).then(function (value) {
+        console.log('resolve', value);
+    }, function (error) {
+        console.log('reject', error);    // => reject three
+    });*/
+
+
+    // 这多个 promise 是同时开始、并行执行的，而不是顺序执行。从下面例子可以看出。如果一个个执行，那至少需要 1+32+64+128
+
+    /* 例3.10 */
+    /*function timerPromisefy(delay) {
+        return new Promise(function (resolve) {
+            setTimeout(function () {
+                resolve(delay);
+            }, delay);
+        });
+    }
+    var startDate = new Date().getTime();
+
+    Promise.all([
+        timerPromisefy(1),
+        timerPromisefy(32),
+        timerPromisefy(64),
+        timerPromisefy(128)
+    ]).then(function (values) {
+        console.log(new Date().getTime() - startDate + 'ms');
+        console.log(values);
+    });*/
+
+
+    /*
+        例3.11
+        Promise.race方法同样接受一个数组（或具有Iterator接口）作参数。当p1, p2, p3中有一个实例的状态发生改变（变为fulfilled或rejected），p的状态就跟着改变。并把第一个改变状态的promise的返回值，传给p的回调函数。
+     */
+    /*var p1 = new Promise(function(resolve, reject) {
+        setTimeout(reject, 500, "one");
+    });
+    var p2 = new Promise(function(resolve, reject) {
+        setTimeout(resolve, 100, "two");
+    });
+
+    Promise.race([p1, p2]).then(function(value) {
+        console.log('resolve', value);
+    }, function(error) {
+        // not called
+        console.log('reject', error);
+    });
+
+    var p3 = new Promise(function(resolve, reject) {
+        setTimeout(resolve, 500, "three");
+    });
+    var p4 = new Promise(function(resolve, reject) {
+        setTimeout(reject, 100, "four");
+    });
+
+    Promise.race([p3, p4]).then(function(value) {
+        //not called
+        console.log('resolve', value);
+    }, function(error) {
+        console.log('reject', error);
+    });*/
+
+
+    // 在第一个promise对象变为resolve后，并不会取消其他promise对象的执行，如下例
+    /* 例3.12 */
+   /* var fastPromise = new Promise(function (resolve) {
+        setTimeout(function () {
+            console.log('fastPromise');
+            resolve('resolve fastPromise');
+        }, 100);
+    });
+    var slowPromise = new Promise(function (resolve) {
+        setTimeout(function () {
+            console.log('slowPromise');
+            resolve('resolve slowPromise');
+        }, 1000);
+    });
+    // 第一个promise变为resolve后程序停止
+    Promise.race([fastPromise, slowPromise]).then(function (value) {
+        console.log(value);    // => resolve fastPromise
+    });*/
+
+  /*
+      .resolve()
+      语法：
+
+      Promise.resolve(value);
+      Promise.resolve(promise);
+      Promise.resolve(thenable);
+
+   */
+    var test = Promise.resolve('Success');
+
+  /*******等同于*******/
+  var test1 = new Promise(function (resolve) {
+       resolve('Success');
+  });
+
+
+  test.then(function (data){
+      console.log(data);
+  })
+
+  /*
+      这段代码会让这个Promise对象立即进入resolved状态，并将结果success传递给then指定的onFulfilled回调函数。由于Promise.resolve()也是返回Promise对象，因此可以用.then()处理其返回值。
+
+   */
+
+    /* 例3.13 */
+  Promise.resolve('success2').then(function (value) {
+      console.log(value);
+  });
+
+
+  /* 例3.14 */
+  //Resolving an array
+  /*Promise.resolve([1,2,3]).then(function(value) {
+    console.log(value[0]);    // => 1
+  });
+
+  //Resolving a Promise
+  var p1 = Promise.resolve('这是p1');
+  var p2 = Promise.resolve(p1);
+  p2.then(function (value) {
+      console.log(value);     // => this is p1
+  });*/
+
+  // Promise.resolve()的另一个作用就是将thenable对象（即带有then方法的对象）转换为promise对象。
+   /* 例3.15 */
+ /* var p1 = Promise.resolve({
+      then: function (resolve, reject) {
+          resolve("这是一个thenable对象！");
+      }
+  });
+  console.log(p1 instanceof Promise);     // => true
+
+  p1.then(function(value) {
+      console.log(value);     // => this is an thenable object!
+    }, function(e) {
+      //not called
+  });
+*/
+  /*
+    再看下面两个例子，无论是在什么时候抛异常，只要promise状态变成resolved或rejected，状态不会再改变，这和新建promise是一样的。
+   */
+
+
+  /* 例3.16 */
+  //在回调函数前抛异常
+/*  var p1 = {
+      then: function(resolve) {
+        throw new Error("error");
+        resolve("Resolved");
+      }
+  };
+
+  var p2 = Promise.resolve(p1);
+  p2.then(function(value) {
+      //not called
+  }, function(error) {
+      console.log(error);       // => Error: error
+  });
+
+  //在回调函数后抛异常
+  var p3 = {
+      then: function(resolve) {
+          resolve("Resolved");
+          throw new Error("error");
+      }
+  };
+
+  var p4 = Promise.resolve(p3);
+  p4.then(function(value) {
+      console.log(value);     // => Resolved
+  }, function(error) {
+      //not called
+  });
+*/
+
+  /*
+    .reject()
+    语法：Promise.reject(reason)
+    这个方法和上述的Promise.resolve()类似，它也是new Promise()的快捷方式。
+
+    这段代码会让这个Promise对象立即进入rejected状态，并将错误对象传递给then指定的onRejected回调函数。
+   */
+
+    // Promise.reject(new Error('error'));
+
+    /*******等同于*******/
+   /* new Promise(function (resolve, reject) {
+        reject(new Error('error'));
+    });*/
+
+
+    /* 例4.1 */
+    /*function taskA() {
+        console.log(x);
+        console.log("任务 A");
+    }
+    function taskB() {
+        console.log("任务 B");
+    }
+    function onRejected(error) {
+        console.log("catch错误：任务A或B:", error);
+    }
+    function finalTask() {
+        console.log("最后的任务");
+    }
+    var promise = Promise.resolve();
+    promise.then(taskA)
+        .then(taskB)
+        .catch(onRejected)
+        .then(finalTask);*/
+
+      /*
+        根据例4.1的输出结果及流程图，可以看出，A抛错时，会按照 taskA → onRejected → finalTask这个流程来处理。A抛错后，若没有对它进行处理，如例3.7，状态就会维持rejected，taskB不会执行，直到catch了错误。
+
+       */
+       /* 例4.2 */
+    /*function taskA() {
+        console.log(x);
+        console.log("Task A");
+    }
+    function taskB() {
+        console.log("Task B");
+    }
+    function onRejectedA(error) {
+        console.log("Catch Error: A", error);
+    }
+    function onRejectedB(error) {
+        console.log("Catch Error: B", error);
+    }
+    function finalTask() {
+        console.log("Final Task");
+    }
+    var promise = Promise.resolve();
+    promise
+        .then(taskA)
+        .catch(onRejectedA)
+        .then(taskB)
+        .catch(onRejectedB)
+        .then(finalTask);*/
+
+        /*
+          将例4.2与4.1对比，在taskA后多了对A的处理，因此，A抛错时，会按照A会按照 taskA → onRejectedA → taskB → finalTask这个流程来处理，此时taskB是正常执行的。
+
+         */
+
+    // 情景3：每次调用then都会返回一个新创建的promise对象，而then内部只是返回的数据
+       /* 例4.3 */
+      //方法1：对同一个promise对象同时调用 then 方法
+      /*var p1 = new Promise(function (resolve) {
+          resolve(100);
+      });
+      p1.then(function (value) {
+          return value * 2;
+      });
+      p1.then(function (value) {
+          return value * 2;
+      });
+      p1.then(function (value) {
+          console.log("finally: " + value);
+      });
+
+
+      //方法2：对 then 进行 promise chain 方式进行调用
+      var p2 = new Promise(function (resolve) {
+          resolve(100);
+      });
+      p2.then(function (value) {
+          return value * 2;
+      }).then(function (value) {
+          return value * 2;
+      }).then(function (value) {
+          console.log("finally: " + value);
+      });*/
+
+
+      /*
+        第一种方法中，then的调用几乎是同时开始执行的，且传给每个then的value都是100，这种方法应当避免。方法二才是正确的链式调用。
+          因此容易出现下面的错误写法：
+
+      /* 例4.4 */
+   /* function badAsyncCall(data) {
+        var promise = Promise.resolve(data);
+        promise.then(function(value) {
+            //do something
+            return value + 1;
+        });
+        return promise;
+    }
+    badAsyncCall(10).then(function(value) {
+       console.log(value);          // 想要得到11，实际输出10
+    });*/
+
+
+    /* 改写例4.4 */
+   /* function goodAsyncCall(data) {
+        var promise = Promise.resolve(data);
+        return promise.then(function(value) {
+            //do something
+            return value + 1;
+        });
+    }
+    goodAsyncCall(10).then(function(value) {
+       console.log(value);
+    });*/
+
+    // 情景4：在异步回调中抛错，不会被catch到
+    // Errors thrown inside asynchronous functions will act like uncaught errors
+  /*  var promise = new Promise(function(resolve, reject) {
+        setTimeout(function() {
+          throw 'Uncaught Exception!';
+        }, 1000);
+    });
+
+      promise.catch(function(e) {
+        console.log(e);       // This is never called
+      });*/
+
+      // 情景5： promise状态变为resove或reject，就凝固了，不会再改变
+      console.log(1);
+    new Promise(function (resolve, reject){
+        reject();
+        setTimeout(function (){
+            resolve();            // not called
+        }, 0);
+    }).then(function(){
+        console.log(2);
+    }, function(){
+        console.log(3);
+    });
+    console.log(4);
+
+</script>

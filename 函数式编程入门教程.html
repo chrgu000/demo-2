@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/jquery v1.6.1.js"></script>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+
+  /*
+    本质上，函数式编程只是范畴论的运算方法，跟数理逻辑、微积分、行列式是同一类东西，都是数学方法，只是碰巧它能用来写程序
+   */
+    class Category {
+        constructor(val) {
+            this.val = val;
+        }
+        addOne(x) {
+            return x + 1;
+        }
+    }
+
+
+  const compose = function (f, g) {
+    return function (x) {
+      return f(g(x));
+    };
+  }
+</script>

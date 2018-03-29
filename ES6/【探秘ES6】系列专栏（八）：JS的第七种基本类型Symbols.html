@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>【探秘ES6】系列专栏（八）：JS的第七种基本类型Symbols-</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+
+</body>
+</html>
+<script type="text/javascript">
+      /*
+        Symbols可以解决这个问题
+
+          Symbols集中的值可以由程序创建和并作为属性的键来使用，也不用担心名称冲突。
+
+          var mySymbol = Symbol();
+          调用Symbol()来创建一个新的Symbol值，它不会等同于其他值。
+
+          与字符串和数字一样，你可以使用symbol来作为属性值。因为它不等同于其它任何字符串，这个symbol-keyed属性可以确保不会与其它任何属性冲突。
+
+          obj[mySymbol] = "ok!";  // guaranteed not to collide
+          console.log(obj[mySymbol]);  // ok!
+
+       */
+      var mySymbol = Symbol();
+      var mySymbol2 = Symbol();
+      var obj = {};
+          obj[mySymbol] = "ok!";  // guaranteed not to collide
+          obj[mySymbol2] = "ok!";
+        console.log(obj[mySymbol], obj[mySymbol] === obj[mySymbol2]);  // ok!
+
+        for (var i in obj) {
+          console.log(i, obj[i]);
+        }
+
+        /*
+          关于这段代码的几个说明：
+
+          Symbol(“isMoving”)中的“isMoving”被称作描述。它对调试很有用。当你使用console.log()就可以打印出对应的symbol值，如果你想把它转换为字符串（比如说在打印错误信息的时候）可以使用.toString()。
+          element[isMoving]被称作symbol-keyed属性（使用symbol作为键的属性）。从字面意思就可以说明它就是使用symbol作为属性名而不是使用字符串。除去这一点，它和其它属性并没什么区别。
+          和数组元素一样，symbol-keyed属性不能通过圆点符号来获取值（obj.name 这样是不行的）。它的值必须通过方括号来获取。
+          通过symbol的值获取symbol-keyed属性值就很容易了。上面的例子展示了如何获取和设置element[isMoving]，我们可以判断元素的isMoving状态了，如果有必要的话甚至可以删除isMoving状态。
+          另一方面，以上的前提是isMoving在当前作用域中。这体现了symbols的弱封装机制：一个模块可以创建几个symbols在对象中任意使用而不用担心与其它模块的属性冲突。
+          因为symbol键值是被设计来避免冲突的，所以JavaScript最基本的对象检测特性是会忽略symbol键值的。以for-in循环为例，循环只会遍历对象的字符串类型的键。Symbol键直接被忽略过了。Object.key(obj)和 Object.getOwnPropertyNames(obj) 也是这样运作的。但是sysmbols并不完全是私有的：可以使用新API——Object.getOwnPropertySymbols(obj)将所对象的所有symbol键；另一个新API—— Reflect.ownKeys(obj)，将会同时返回string和symbol类型的键。（在以后的文章中我们将完整地探讨Reflect API。）
+
+          在库和框架中symbols将会有很多用途，不久我们会看到，JS语言本身对它也会有广泛的使用。
+
+          symbols确切定义是什么呢？
+
+         */
+
+
+         console.log(Object.getOwnPropertySymbols(obj), Reflect.ownKeys(obj));
+
+
+         // symbols确切定义是什么呢？
+         console.log(typeof Symbol()); // "symbol"
+
+         /*
+          Symbols和其它基本类型大不一样。
+
+        从创建开始就是不可变的。你不能为它设置属性（如果你在严谨模式下尝试，会报类型错误）。它可以作为属性名。这是它的类字符串性质。
+
+        另一方面，每一个symbol都是唯一的。与其他的不同（就算他们的描述是一样的）你可以很容易地新创建一个。这是它的类对象性质。
+
+        ES6 symbols与Lisp和Ruby中的更传统的symbols很类似，但是没有如此紧密地集成到语言中。在Lisp中，所有的标识符都是symbols。在JS中，标识符和大多数属性的键值的首先仍是字符串，Symbols只是为开发人员提供了一个额外选择。
+
+        关于symbols的一个忠告：与JS中的其它类型不同，它不能被自动转换为字符串。试图拼接symbol与字符串将会引起类型错误。
+          */
+          /*
+            var sym = Symbol("<3");
+           "your symbol is " + sym
+          // TypeError: can't convert symbol to string
+           `your symbol is ${sym}`
+          // TypeError: can't convert symbol to string
+           */
+
+           // 你可以通过显示地将symbol转换为一个字符串来避免这个问题，通过String(sym)或者sym.toString()。
+
+
+           /*
+            symbols的三种形式
+
+              有三种方法来获取symbol。
+
+              Call Symbol()。我们已经讨论过这种方法了，每一次调用它都将返回一个唯一的symbol。
+          Call Symbol.for(string)。这种方法访问一组已经存在的symbol注册表。与通过Symbol()来定一个唯一值不同的是，symbol注册表中的symbols是共享的。如果你调用Symbol.for(“cat”)三十次，每一次返回都将是同一个symbol。在多页面或者单页面的多模块需要共享symbol时，这是很有效的方法。
+          使用标准中定义的Symbol.iterator。标准委员会自己定义了几种symbols。每一种都有它的特殊意义。
+          如果你仍然不确定symbols是否对你有帮助，这最后一个章节会很有趣，因为证实了在实践中symbols是很有用的。
+
+
+          ES6的文档中对通用symbols的使用是如何介绍的？
+
+        我们已经看过了ES6是如何使用symbol来避免与已有代码命名冲突的。几周前，在关于迭代器的文章中，我们了解了循环(var item of myArray)是从调用myArray[Symbol.iterator]()开始的。我提到这个方法以前的写法是myArray.iterator()，但是加了symbol以后向后兼容性会更好。
+
+        现在我们知道了symbols的用法和作用。那么就很容易理解为什么这样做和这样做的意义是什么。
+
+        这里还有其它几个ES6使用通用symbols的场景。（这些特性在Firefox中还没实现。）
+
+        使instanceof可扩展。在ES6中，表达式object instanceof constructor被指定为构造函数的一个方法：constructor[Symbol.hasInstance](Object)。这表明它是可扩展的。
+        消除新特性和旧代码之间的冲突。这比较难理解，但我们发现一些ES6的数组方法将会破坏旧网站的稳定性。其它的Web标准也会有类似的问题：仅仅是添加新方法到浏览器中，已存在的网站就会受到影响。无论如何，造成这些不稳定性的主要原因主要是由动态作用域引起的。所以ES6引入了一个特殊的symbol——Symbol.unscopables，这个Web标准可以用来防止某些方法被牵连到动态域中。
+        支持新的字符串匹配。在ES5中，str.match(myObject)尝试将myObject转换为正则表达式对象。在ES6中，首先检查myObject是否有myObject[Symbol.match](str)方法。现在库就可以给任何有正则表达式对象的地方提供通用的解析类。
+        所讲到的这几个symbol的应用都不常见，很难看到这些特性本身对我们的日常代码有任何影响。从长远看就比较有意义了。通用symbols是JavaScript对于PHP和Python中的__doubleUnderscores的改进。标准委员会将来会添加新的hooks到JS中，而不会有影响已有代码的风险。
+
+        我什么时候可以开始使用ES6 symbols？
+
+        Firefox 36和Chrome 38已经支持Symbols了。我自己也在Firefox中试过了，如果你运行的时候有问题，你该知道问谁吧——找我！
+
+        为了让那些本身还不支持ES6 symbols的浏览器支持它，你可以使用pollyfill（一段代码或插件，提供了那些开发者们希望浏览器原生提供支持的功能），比如core.js。因为Symbols还比较新，所以它的pollyfill还不是那么完善，详细了解请看使用说明。
+
+        接下来的两篇博客，首先会讨论一些我们期待已久的特性终于被ES6支持了，我实在忍不住抱怨它们的姗姗来迟。我们将从两个很古老的特性作为开始（老到几乎可以追溯到编程历史的起源），紧接着讨论两个与之非常相似的特性，由ephemerons提供技术支持。下次还将深入讨论collections（集合）。
+            */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>

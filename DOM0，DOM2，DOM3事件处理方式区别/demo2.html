@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+         #p { width: 300px; height: 300px; padding: 10px;  border: 1px solid black; }
+         #c { width: 200px; height: 200px; border: 1px solid red; }
+         #sub { width: 100px; height: 100px; border: 1px solid red; }
+    </style>
+</head>
+<body>
+  <div id="p">
+    parent
+  <div id="c">
+      child
+  </div>
+
+</body>
+</html>
+    <script type="text/javascript">
+    window.alert = function (msg) {
+      console.log(msg);
+    };
+
+    function fn(e) {
+        console.log('e.target == e.currentTarget : ' + (e.target == e.currentTarget)); // 4 false
+        console.log('当前处于第' + e.eventPhase + '阶段');
+    }
+
+    var p = document.getElementById('p'),
+        c = document.getElementById('c');
+
+/*    p.addEventListener('click', function (e) {
+      fn(e); // 4 false 第3阶段
+      alert('父节点冒泡')
+    }, false);
+
+    c.addEventListener('click', function (e) {
+      fn(e); // 2 true 第2阶段
+      alert('子节点捕获')
+    }, true);
+    c.addEventListener('click', function (e) {
+      fn(e); //3 true 第2阶段
+      alert('子节点冒泡')
+    }, false);
+    p.addEventListener('click', function (e) {
+      fn(e);  // 1 false 第2阶段
+      alert('父节点捕获')
+    }, true);*/
+
+    p.addEventListener('click', function (e) {
+       fn(e);// 4 false
+      alert('父节点冒泡')
+    }, false);
+
+    c.addEventListener('click', function (e) {
+      fn(e); // 2 true
+      alert('子节点冒泡')
+    }, false);
+    c.addEventListener('click', function (e) {
+      fn(e); // 3 true
+      alert('子节点捕获')
+    }, true);
+
+    p.addEventListener('click', function (e) {
+      fn(e); // 1 false
+      alert('父节点捕获')
+    }, true);
+    </script>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+
+    var obj = {}
+    var arr = Object.keys(obj);
+    var index = 0;
+    aaaa = 5;
+    if (typeof aaaa == "undefined") {
+        obj.aaaa = '';
+        console.log(arr[index]);
+        index++;
+    } else {
+        obj.aaaa = aaaa;
+        index++;
+    }
+    console.log(typeof a == "undefined");
+    console.log(typeof(b) == 'undefined');
+    console.log(arr[index]);
+    console.log(window[((typeof aaaa == 'undefined') ? 'undefined' : 'aaaa')] == null ? true : false);
+    var arr = ["中国|广东|深圳", "中国|广东|深圳", "中国|湖北|黄石", "中国|湖北|武汉", "中国|广东|广州", "中国|广东|广州", "中国|湖北|武汉", "中国|福建|福州", "中国|福建|厦门"];
+    var result = {};
+    var temp = {};
+    for (var i = 0; i < arr.length; i++) {
+        var item = arr[i];
+        var its = item.split('|'); //按|拆分
+        var country = its[0]; //国家
+        var province = its[1]; //省
+        var city = its[2]; //城市
+        if (!result[country]) { //国家不在结果对象里
+            result[country] = []; //添加
+        }
+        if (!temp[province]) { //临时对象没有省信息
+            result[country].push(temp[province] = { //记入结果数组
+                province: [province],
+                city: [],
+                count: []
+            });
+        }
+        var info = temp[province];
+        var found = false;
+        for (var j = info.city.length - 1; j >= 0; j--) { //在省信息的城市数组里查找是否已经存在
+            if (info.city[j] == city) {
+                found = true; //已经存在
+                info.count[j] = info.count[j] + 1; //更新count
+            }
+        }
+        if (!found) { //未找到城市
+            info.city.push(city); //添加
+            info.count.push(1); //count初始值为1
+        }
+    }
+    console.log(result);
+
+
+    /*
+        封装判断对象属性是否为
+        1.defined未定义
+        2.undefined
+        3.null
+        4.NaN
+        5.{}
+        6.0
+        7.Infinity
+        8.[]
+        8.''
+        9.'undefined','null','NaN','0','{}','[]',Infinity','-Infinity',functiom(){}'
+     */
+
+    var
+</script>

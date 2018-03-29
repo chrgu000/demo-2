@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="../js/jquery v1.6.1.js"></script>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    var obj = new Object();
+      obj['a b c'] = 6;
+      console.log(obj);
+      console.log(obj['a b c']);
+
+//=================================================
+  // An array with three elements
+  var myArray = new Array(3);
+
+  // Add some data
+  myArray[0] = "Hello";
+  myArray[1] = 42;
+  myArray[2] = new Date(2000, 1, 1);
+
+  document.write("原来的长度: " + myArray.length);
+  document.write("<br/>");
+  // Add some expando properties
+  myArray.expando = "JavaScript!";
+  myArray["another Expando"] = "Windows";
+
+  // 这将仍然显示3，
+  // 因为这两个扩展属性 不要影响长度
+  document.write("新的长度是: " + myArray.length);
+
+  // Output:
+  // original length is: 3
+// new length is : 3
+
+</script>

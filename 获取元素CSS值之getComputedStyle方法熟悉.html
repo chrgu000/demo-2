@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/jquery v1.6.1.js"></script>
+  <style>
+    #box{
+      width:100px;
+      height:100px;
+      background:red;
+    }
+    #box:after{
+      content: '这是文字';
+      display: block;
+      color:blue;
+
+    }
+    input[type="text"]{
+      color:red;
+    }
+
+    ::-webkit-input-placeholder{
+      color:red;
+    }    /* 使用webkit内核的浏览器 */
+    :-moz-placeholder{
+      color:red;
+    }                  /* Firefox版本4-18 */
+    ::-moz-placeholder{
+      color:red;
+    }                  /* Firefox版本19+ */
+    :-ms-input-placeholder{
+     color:red;
+    }
+  </style>
+</head>
+<body>
+        <div id="box"></div>
+        <input type="text" placeholder="这是input" id="inp">
+</body>
+</html>
+<script>
+// window.getComputedStyle(box, null).height获取到的只是px,若是em,rem,自动转换px
+    console.log(box.currentStyle ? box.currentStyle : window.getComputedStyle(box, null).height);
+
+    console.log(box.currentStyle ? box.currentStyle : window.getComputedStyle(box, 'after'));
+    console.log(window.getComputedStyle(inp).getPropertyValue("color"))
+
+    console.log(box.getBoundingClientRect().top);
+    console.log($getRect(box).top);
+    /*
+      注意：IE、Firefox3+、Opera9.5、Chrome、Safari支持，在IE中，默认坐标从(2,2)开始计算，导致最终距离比其他浏览器多出两个像素，我们需要做个兼容。
+      document.documentElement.clientTop;  // 非IE为0，IE为2
+      document.documentElement.clientLeft; // 非IE为0，IE为2
+     */
+    function $getRect(element) {
+        var rect = element.getBoundingClientRect();
+        var top = document.documentElement.clientTop;
+        var left = document.documentElement.clientLeft;
+        return {
+            top: rect.top - top,
+            bottom: rect.bottom - top,
+            left: rect.left - left,
+            right: rect.right - left
+        }
+    }
+
+</script>

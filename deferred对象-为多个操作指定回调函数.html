@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/jquery v1.6.1.js"></script>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+/*
+  这段代码的意思是，先执行两个操作$.ajax("test1.html")和$.ajax("test2.html")，如果都成功了，就运行done()指定的回调函数；如果有一个失败或都失败了，就执行fail()指定的回调函数。
+ */
+    $.when($.ajax("test1.html"), $.ajax("test2.html"))
+　　.done(function(){ alert("哈哈，成功了！"); })
+　　.fail(function(){ alert("出错啦！"); });
+</script>

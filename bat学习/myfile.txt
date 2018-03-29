@@ -1,0 +1,4 @@
+﻿﻿[quote]
+eol=c           - 指一个行注释字符的结尾(就一个)
+[/quote]
+[quote]

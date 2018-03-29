@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>如何实现px和rem完美转换</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+<style type="text/css">
+
+      /*
+        在做移动端前端开发的时候，常常遇到这样的问题，需要用rem来实现设备的自适应。但苦于rem和px的转换却又忘而却步。
+
+      1.首先要确认UI的设计稿的基准是按照哪种设备宽度的机型设计的，通常的设计稿是按照iphone6 plus也就是宽度750px来设计的。这样我们拿到手之后就要把如下的responsive.css中的 @media screen and (min-width: 320px) 设置成为font-size: 100px;
+
+      2.引入responsive.css成功后，之后在写页面样式的时候就可以按照 设计稿上显示宽度 除以 2 除以 100 得到。例如：100px/2/100 = 0.5rem;
+       */
+      /*****
+      responsive font
+      lastmodify zhancheng
+      由于UE目前都按375为1:2比例计算，所以默认370px为font-size:100px!important;
+      注释掉的地方是官方responsive默认以iphone4、5的标准为基准定义的
+      *****/
+      @media screen and (min-width: 320px) {
+        html {
+          /*font-size: 100px!important;*/
+          font-size: 84.375px!important;
+        }
+      }
+      @media screen and (min-width: 330px) {
+        html {
+          /*font-size: 103.125px!important;*/
+          font-size: 87.5px!important;
+        }
+      }
+      @media screen and (min-width: 340px) {
+        html {
+          /*font-size: 106.25px!important;*/
+          font-size: 90.625px!important;
+        }
+      }
+      @media screen and (min-width: 350px) {
+        html {
+          /*font-size: 109.375px!important;*/
+          font-size: 93.75px!important;
+        }
+      }
+      @media screen and (min-width: 360px) {
+        html {
+          font-size: 96.875px!important;
+          /*font-size: 112.5px!important;*/
+        }
+      }
+      @media screen and (min-width: 370px) {
+        html {
+          /*font-size: 115.625px!important;*/
+          font-size: 100px!important;
+        }
+      }
+      @media screen and (min-width: 380px) {
+        html {
+          /*font-size: 118.75px!important;*/
+          font-size: 103.125px!important;
+        }
+      }
+      @media screen and (min-width: 390px) {
+        html {
+          /*font-size: 121.875px!important;*/
+          font-size: 106.25px!important;
+        }
+      }
+      @media screen and (min-width: 400px) {
+        html {
+          /*font-size: 125px!important;*/
+          font-size: 109.375px!important;
+        }
+      }
+      @media screen and (min-width: 410px) {
+        html {
+          /*font-size: 128.125px!important;*/
+          font-size: 112.5px!important;
+        }
+      }
+      @media screen and (min-width: 420px) {
+        html {
+          /*font-size: 131.25px!important;*/
+          font-size: 115.625px!important;
+        }
+      }
+      @media screen and (min-width: 430px) {
+        html {
+          /*font-size: 134.375px!important;*/
+          font-size: 117.75px!important;
+        }
+      }
+      @media screen and (min-width: 440px) {
+        html {
+          /*font-size: 137.5px!important;*/
+          font-size: 120.875px!important;
+        }
+      }
+      @media screen and (min-width: 450px) {
+        html {
+          /*font-size: 140.625px!important;*/
+          font-size: 124px!important;
+        }
+      }
+      @media screen and (min-width: 460px) {
+        html {
+          /*font-size: 143.75px!important;*/
+          font-size: 127.125px!important;
+        }
+      }
+      @media screen and (min-width: 470px) {
+        html {
+          /*font-size: 146.875px!important;*/
+          font-size: 130.25px!important;
+        }
+      }
+      @media screen and (min-width: 480px) {
+        html {
+          /*font-size: 150px!important;*/
+          font-size: 133.375px!important;
+        }
+      }
+      @media screen and (min-width: 490px) {
+        html {
+          /*font-size: 153.125px!important;*/
+          font-size: 136.5px!important;
+        }
+      }
+      @media screen and (min-width: 500px) {
+        html {
+          /*font-size: 156.25px!important;*/
+          font-size: 139.625px!important;
+        }
+      }
+      @media screen and (min-width: 639px) {
+        html {
+          /*font-size: 200px!important;*/
+          font-size: 142.75px!important;
+        }
+      }
+      @media screen and (min-width: 719px) {
+        html {
+          /*font-size: 225px!important;*/
+          font-size: 135.875px!important;
+        }
+      }
+      @media screen and (max-width: 319px) {
+        html {
+          font-size: 84.375px!important;
+        }
+      }
+
+
+
+</style>
+
+
+</head>
+<body>
+
+</body>
+</html>

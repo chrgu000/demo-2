@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/jquery v1.6.1.js"></script>
+</head>
+<body>
+  <div id="parent">这是父级
+    <div id="box">这是子级</div>
+  </div>
+</body>
+</html>
+<script>
+  const arr = [1,2,3,4];
+  console.log('hello world');
+
+  const wm = new WeakMap();
+  let ele = document.getElementById('box');
+
+    wm.set(ele,'一些信息');
+    console.log(wm.get(ele));
+
+    ele.parentNode.removeChild(ele);
+    var alias = ele;
+    ele = null;
+    wm.get(ele);
+    console.log(wm.get(ele)); // undefined
+
+</script>

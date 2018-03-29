@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/jquery-1.10.2.js"></script>
+</head>
+<body>
+  <div id="box">
+    <button> 0 </button>
+    <button> 1 </button>
+    <button> 2 </button>
+    <button> 3 </button>
+    <button> 4 </button>
+    <div id="log"></div>
+    </div>
+</body>
+</html>
+<script>
+var logDiv = $( "#log" );
+
+for ( var i = 0; i < 5; i++ ) {
+  $( "button" ).eq( i ).on( "click", { value: i }, function( event ) {
+    var msgs = [
+      "button = " + $( this ).index(),
+      "event.data.value = " + event.data.value,
+      "i = " + i
+    ];
+    logDiv.append( msgs.join( ", " ) + "<br>" );
+  });
+}
+</script>

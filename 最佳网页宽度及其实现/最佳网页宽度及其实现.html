@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>最佳网页宽度及其实现</title>
+  <style>
+    body {
+      margin-left: 15%;
+      margin-right: 10%;
+    }
+    header{
+      background-color:#333;
+      color:white;
+      text-align: center;
+      font-size:2em;
+      margin: 10px auto;
+      min-width: 780px;
+      max-width: 1260px;
+      width:expression(document.body.clientWidth < 782 ? "780px" : document.body.clientWidth > 1262?  "1260px" : "auto");
+      height:40px;
+    }
+
+    #div-left{
+      width:50%;
+      height:40px;
+      float: left;
+      background:red;
+    }
+    #div-right{
+      width:50%;
+      height:40px;
+      float:right;
+      background:blue;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div id="div-left"></div>
+    <div id="div-right"></div>
+  </header>
+</body>
+</html>

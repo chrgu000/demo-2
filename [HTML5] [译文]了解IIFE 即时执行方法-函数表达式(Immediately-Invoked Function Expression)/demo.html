@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <a href="javascript:;">1</a>
+  <a href="javascript:;">2</a>
+  <a href="javascript:;">3</a>
+</body>
+</html>
+<script>
+      //这个方法将返回一个对‘私有’变量 i 有访问权的方法，这个被返回的方法，形象的说是个‘有特权’的方法。
+    function makeCounter() {
+    //‘i’ 只的作用域只在 ‘makeCounter’ 方法内。
+      var i = 0;
+      return function() {
+      console.log( ++i );
+    };
+    }
+
+    //注意变量 ‘counter’ 和 ‘counter2’ 有各自的变量 ‘i’。
+
+    var counter = makeCounter();
+    counter(); // 输出: 1
+    counter(); // 输出: 2
+
+    var counter2 = makeCounter();
+    counter2(); // 输出: 1
+    counter2(); // 输出: 2
+
+    //i; // ReferenceError: i is not defined (i 只在 makeCounter 方法中存在)
+
+
+
+  // 像这样定义的一个方法可以通过在其名字后面加一对()来调用它，如 foo()
+  // 在此 foo 只是对 function(){/* 一些代码 */} 这个方法的 function expression 的引用
+
+  //var foo = function(){ /* 一些代码 */ }
+
+  // 那么有没有可能直接通过在一个方法表达式后加()来调用它自身呢？
+
+  //function(){ /* 一些代码 */ }(); // SyntaxError: Unexpected token (
+
+//=====================================================================
+  /*
+    方法，括号和语法错误
+
+    如果你给方法指定一个名称，解析器依旧会抛出语法错误，不过这次是全然不同的原因。当()被放置在一个 function declaration 之后时，仅仅会被当作一个分组操作符而已。
+   */
+
+  // 从语法上来说，这个 function declaration 是有效的，但在其后用()调用是无效的
+  // 因为这里()仅仅被当作了一个分组操作符，而一个分组操作符中需要包含表达式。
+
+  //function foo(){ /* 一些代码 */ }(expression); // SyntaxError: Unexpected token )
+
+  // 现在，如果你在()中放一个 expression，错误没有了……
+  // 不过这个方法依旧不会被执行，因为：
+
+  //function foo(){ /* 一些代码 */ }( 1 );
+
+  // 它还会被视作一个 function declaration 后跟着一个与之全然无关的 expression，等价于这样：
+
+  //function foo(){ /* 一些代码 */ }( 1 );
+
+
+    // 以下两种方式都可以实现立即调用一个方法 function expression，并利用方法的 execution context
+  // 实现‘私有化’
+
+  (function(){ /* 一些代码 */ }()); // Crockford 推荐此种方法
+  (function(){ /* 一些代码 */ })(); // 但是这种方法一样可行
+
+  // 因为用括号进行强制操作的目的是消除 function expressions表达式 和方法 function declarations宣言 的歧义，所以
+  // 如果当解析器已经在之前遇到了一个表达式时也可以省略括号（但请务必往下看）
+  var i = function(){return 10;}();
+  true && function(){/* 一些代码 */}();
+  0, function(){/* 一些代码 */}();
+  console.log(i);
+
+  // 如果你不需要返回值，或者想尽可能的让你的代码难读些，你也可以
+  // 通过一个一元运算符来节省你宝贵的字节
+
+  !function(){ /* 一些代码 */ }();
+  ~function(){ /* 一些代码 */ }();
+  -function(){ /* 一些代码 */ }();
+  +function(){ /* 一些代码 */ }();
+
+  // 这里还有另一种花样，来自 [url=http://twitter.com/kuvos/status/18209252090847232]@kuvos[/url] ，虽然我搞不懂它为什么行，但它的确行。
+
+  new function(){ /* 一些代码 */ }
+  new function(){ /* 一些代码 */ }() // 只有当需要传递参数时才需要括号
+//=====================================================================
+  /*
+  通过闭包保存状态
+
+  当我们通过一个方法的标识符调用方法时我们可以对其传递参数，同样的，在使用 IIFE 时我们也可以传递参数。因为这里传入的参数在方法（也就是闭包）中是被‘锁定’的，所以一个 Immediately-Invoked Function Expression 可以有效的被用来保存状态。
+
+  如果你想了解闭包的更多知识，请阅读闭包在 JavaScript 中的解释。
+
+   */
+// 以下代码不会像你期望的那样工作，因为变量‘i’没有被锁定，每次点击
+// 时警示窗都会显示全部的元素数目，因为在那个点上它正是变量‘i’的值
+
+ /* var elems = document.getElementsByTagName('a');
+  for (var i = 0; i < elems.length; i++) {
+      elems[i].addEventListener('click', function(e) {
+          e.preventDefault();
+          alert('我是链接 #' + i);
+      }, 'false');
+  }*/
+  // 以下的代码可以达到我们的目的，在这个 IIFE 闭包中，变量‘i’像一个
+  // ‘锁定索引’被锁在其中。当循环结束执行时，尽管变量‘i’的值是元素的总数
+  // 但在 IIFE 闭包中，‘锁定索引’的值总是当时方法被调用时传入的‘i’值，因此
+  // 当一个链接被点击时，警示窗就会显示正确的值了。
+ /* var elems = document.getElementsByTagName('a');
+  for (var i = 0; i < elems.length; i++) {
+      (function(lockedInIndex) {
+          elems[i].addEventListener('click', function(e) {
+              e.preventDefault();
+              alert('我是链接 #' + lockedInIndex);
+          }, 'false');
+      })(i);
+  }*/
+  // 你也可以像这样使用一个 IIFE，虽然效果相同，但我觉得上面的写法可读性更高。
+  var elems = document.getElementsByTagName('a');
+  for (var i = 0; i < elems.length; i++) {
+      elems[i].addEventListener('click', (function(lockedInIndex) {
+          return function(e) {
+              e.preventDefault();
+              alert('我是链接 #' + lockedInIndex);
+          };
+      })(i), 'false');
+  }
+//===============================================================
+  // 这是一个 self-executing function(self-executing函数)并非自动执行职能，它执行它自身：
+  function foo1() { foo1(); }
+
+  // 这是一个 self-executing anonymous function(自执行的匿名函数)，因为它没有
+  // 标识符，需要用“arguments.callee”来调用它自身
+
+  var foo2 = function() { arguments.callee(); };
+
+  // 这可能是一个 self-executing anonymous function，但只有当“foo”标识符
+  // 指向它时才是。
+
+  var foo3 = function() { foo3(); };
+
+  // 一些人把这称作“self-executing anonymous function”(自执行的匿名函数),哪怕它并没有执行它自身
+  // 事实上，它是一个立即调用。
+
+  (function(){ /* 一些代码 */ }());
+
+  // IIFE 可以执行它自身，但大多数情况下这种模式我们用不着。
+  var i = 0;
+  (function(){ //递归若没返回值和判断会进入死循环,会Maximum call stack size exceeded
+    i++;
+    console.log(i);
+    if(i >= 3){
+      return;
+    }
+    arguments.callee();
+
+  }(i));
+
+  var i2 = 0;
+  (function foo4(){
+    i2++;
+    console.log(i2);
+    if(i2 >= 3){
+      return;
+    }
+    foo4();
+  }(i));
+  // 最后一个我们要注意的事情：这样的写法会在 BlackBerry 5(6) 中导致一个错误，因为
+  // 在一个命名方法中再次出现这个方法的标识符时会被认定为未定义值。
+  var i3 = 0;
+  (function foo5(){
+    i3++;
+    console.log(i3);
+    if(i3 >= 3){
+      return;
+    }
+    foo5();
+  }(i3));
+//===============================================================
+    /*
+    关于模块模式
+
+    既然都说到了这，那么附带提提模块模式也就成了顺利成章的事。如果你对 JavaScript 的模块模式不熟悉，请回看我的第一个代码示例，只不过用返回一个 Object 来代替返回一个 function（通常像这个例子一样它都是以单例的方式实现的）
+     */
+// 创建一个立即调用的匿名方法，将它的返回值赋予一个变量。
+
+  // 创建一个立即调用的匿名方法，将它的返回值赋予一个变量。
+  var counter = (function() {
+      var index = 0;
+      return {
+          get: function() {
+              return index;
+          },
+          set: function(val) {
+              index = val;
+          },
+          increment: function() {
+              return ++index;
+          }
+      };
+  }());
+  // ‘counter’ 是一个包含了若干方法的对象
+  console.log(counter.get()); // 0
+  counter.set(3);
+  console.log(counter.increment()); // 4
+  console.log(counter.increment()); // 5
+  console.log(counter.index); // undefined (‘i’ 不包含在返回对象的属性中)
+  //console.log(index); // ReferenceError: i is not defined (它只在闭包中存在)
+
+  // 模块模式不但强大而且简单。极短的代码就可以让你的方法和属性具有命名空间，最大限度的避免污染全局域并创建私有对象。
+  /*
+  名词注解
+
+  (1) 直译的话就是“自身调用自身的方法”或括号中的“自身执行自身的方法”，这个说法与其实质内容有所偏差，故笔者提出了更贴切的 IIFE 的说法。
+
+  (2) 通常翻译成执行环境或执行上下文，每一段有不同作用域的 JavaScript 代码都会在一个不同的执行环境中执行。具体中文详解可参见此博客
+
+  (3) 可以翻译为方法指令或方法申明，它和 function expression（可译为方法表达式）是 JavaScript 中一对比较容易让人困惑的概念。二者的区别非一言所能详尽，英文好的同学可阅读这片文章
+
+  (4) 见注解(3)
+
+  (5) 遇到让自己看起来恼火的代码时通常我们会忍不住蹦出“What The Fu...”。
+
+  (6) 黑莓5.0系统
+    */
+
+    {
+before: 'foo',
+    after: 'bar'
+    }
+</script>

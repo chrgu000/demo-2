@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="../js/jquery v1.6.1.js"></script>
+<style>
+.box{font-size: 20px;}
+.in{
+    font-size: 1ex;
+    border-left: 1ex solid black;
+    height: 10ex;
+    width: 20ex;
+    background-color: lightblue;
+}
+</style>
+</head>
+<body>
+<body>
+  <button>宋体</button><button>微软雅黑</button><button>arial</button><button>serif</button>
+  <div class="box">
+      <div class="in" id="test">x测试文字</div>
+  </div>
+</body>
+</body>
+</html>
+<script>
+    var aBtns = document.getElementsByTagName('button');
+    for(var i = 0; i < aBtns.length; i++ ){
+        aBtns[i].onclick = function(){
+            test.style.fontFamily = this.innerHTML;
+        }
+    }
+</script>

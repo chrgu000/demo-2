@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/jquery v1.6.1.js"></script>
+  <style>
+/*     body {
+  --foo: #7F583F;
+  --bar: #F7EFD2;
+   } */
+
+  span{
+    --color : red;
+    color: var(--color);
+  }
+  :root {
+    --color: blue;
+    --main-bg-color: red;
+    --height : 75px;
+    --main-color: #4d4e53;
+    --main-bg: rgb(255, 255, 255);
+    --logo-border-color: rebeccapurple;
+
+    --header-height: 68px;
+    --content-padding: 10px 20px;
+
+    --base-line-height: 1.428571429;
+    --transition-duration: .35s;
+    --external-link: "external link";
+    --margin-top: calc(2vh + 20px);
+
+
+    /*如果变量值是一个字符串，可以与其他字符串拼接。*/
+    --bar: 'hello';
+    --foo: var(--bar)' world';
+  }
+
+  .one {
+    color: white;
+    background-color: var(--main-bg-color);
+    margin: 10px;
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+  }
+
+  .two {
+    /*color: white;*/
+    background-color: black;
+    margin: 10px;
+    width: 150px;
+    height: var(--height);
+    display: inline-block;
+  }
+  .three {
+    /*color: white;*/
+    /*var()函数还可以使用第二个参数，表示变量的默认值。如果该变量不存在，就会使用这个默认值。*/
+    background-color: var(--main-bg-color);
+    margin: 10px;
+    width: 75px;
+    height: var(--h,75px);
+  }
+   .four {
+    /*color: white;*/
+    background-color: var(--main-bg-color);
+    margin: 10px;
+    width: 100px;
+    height: 70px;
+    /*第二个参数不处理内部的逗号或空格，都视作参数的一部分。*/
+    padding:var(--pad, 10px 15px 20px);
+  }
+
+  .five {
+    background: var(--main-bg-color);
+  }
+  .test{
+    width: 100px;
+    height: 100px;
+    border: 1px solid red;
+    color: black;
+    /*数值与单位直接写在一起，须使用calc()函数，将它们连接。*/
+    --gap: 20;
+    margin-top: calc(var(--gap) * 1px);
+  }
+  .test:after{
+    content: var(--foo);
+    display: inline-block;
+    width:100px;
+    height: 100px;
+
+  }
+  </style>
+</head>
+<body>
+  <span>这是span</span>
+
+  <div class="one">
+  <div class="two">
+    <div class="three">
+    </div>
+    <div class="four">
+    </div>
+  <div>
+</div>
+
+
+<div class="test">这是test</div>
+</body>
+</html>
+<script>
+
+</script>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/jquery v1.6.1.js"></script>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+     function F() {
+      // some code
+      }
+
+      var f = new F();
+      console.log(f.constructor === F);//true
+      console.log(f.constructor === F.prototype.constructor);//true
+      console.log(f.__proto__ === F.prototype); //true
+      console.log(f.__proto__ === F); //fasle
+      console.log(f instanceof F); //true
+
+
+      function Base() {}
+      // Sub1通过原型链从基础继承
+      function Sub1(){}
+      Sub1.prototype = new Base();
+      Sub1.prototype.constructor = Sub1;
+
+      Sub1.superclass = Base.prototype;
+
+      // Sub2从Sub1继承到原型链
+      function Sub2(){}
+      Sub2.prototype = new Sub1();
+      Sub2.prototype.constructor = Sub2;
+
+      Sub2.superclass = Sub1.prototype;
+
+      //测试原型链
+      console.log(Sub2.prototype.constructor);// function Sub2(){}
+      console.log(Sub2.superclass.constructor);// function Sub1(){}
+      console.log(Sub2.superclass.constructor.superclass.constructor);// function Base(){}
+
+      /*
+      上面的例子只是为了说明 constructor 在原型链中的作用，更实际一点的意义在于：一个子类对象可以获得其父类的所有属性和方法，称之为继承。
+
+      之前提到 constructor 易变，那是因为函数的 prototype 属性容易被更改，我们用时下很流行的编码方式来说明问题，请看下面的示例代码：
+       */
+
+    function F2() {}
+        F2.prototype = {
+        _name: 'Eric',
+        getName: function() {
+        return this._name;
+        }
+    };
+
+    //初看这种方式并无问题，但是你会发现下面的代码失效了：
+    var f2 = new F2();
+    console.log(f2.constructor === F2); // output false
+
+    /*
+    怎么回事？F 不是实例对象 f 的构造函数了吗？当然是！只不过构造函数 F 的原型被开发者重写了，这种方式将原有的 prototype 对象用一个对象的字面量{}来代替。而新建的对象{}只是 Object 的一个实例，系统（或者说浏览器）在解析的时候并不会在{}上自动添加一个 constructor 属性，因为这是 function 创建时的专属操作，仅当你声明函数的时候解析器才会做此动作。然而你会发现 constructor 并不是不存在的，下面代码可以
+      测试它的存在性：
+     */
+     console.log(typeof f2.constructor == 'undefined'); //false
+
+     /*
+      既然存在，那这个 constructor 是从哪儿冒出来的呢？我们要回头分析这个对象字面量
+  {}。因为{}是创建对象的一种简写，所以{}相当于是 new Object()。那既然{}是 Object
+  的实例，自然而然他获得一个指向构造函数 Object()的 prototype 属性的一个引用proto，又因为 Object.prototype 上有一个指向 Object 本身的 constructor属性。所以可以看出这个constructor其实就是Object.prototype的constructor，
+  下面代码可以验证其结论：
+      */
+
+     console.log(f2.constructor === Object.prototype.constructor);//true
+     console.log(f2.constructor === Object);//true
+     //一个解决办法就是手动恢复他的 constructor，下面代码非常好地解决了这个问题：
+     function F3() {}
+          F3.prototype = {
+            constructor: F3, /* 重置 constructor */
+            _name: 'Eric',
+            getName: function() {
+            return this._name;
+          }
+      };
+
+      var f3 = new F3();
+      console.log(f.constructor === F); // 输出true
+
+      console.log(typeof Array.constructor != 'undefined');// output true
+      console.log(typeof Array.prototype.constructor === Array); // output true
+      /*
+        不过这件事情也是好理解的，因为 构造函数也是函数。是函数说明它就是 Function 构造函数的实例对象，自然他内部也有一个指向 Function.prototype 的内部引用proto啦。因此我们很容易得出结论，这个 constructor（构造函数上的constructor 不是 prototype 上的）其实就是 Function 构造函数的引用：
+       */
+      console.log(Array.constructor === Function);// output true
+      console.log(Function.constructor === Function); // output true
+      console.log(Function.constructor === Function); // output true
+</script>
