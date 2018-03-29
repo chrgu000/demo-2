@@ -5066,7 +5066,7 @@ git添加文件
         【git push -u origin master】
         
         更新下载的github代码[更新github代码]
-               【git fetch origin master】 强推，即利用强覆盖方式用你本地的代码替代git仓库内的内容
+               【git fetch origin master】
                 
         代码合并:
         【git pull --rebase origin master】
@@ -5103,7 +5103,7 @@ git添加文件
        【Your branch is ahead of 'origin/mast】
        
         上网搜索，有的说是 本地之前的代码有部分提交了，使用强制提交覆盖
-        【git push -f】
+        【git push -f】 强推，即利用强覆盖方式用你本地的代码替代git仓库内的内容
         试了，不行；
         还有说 先使用git fetch 到本地 之后在merge ,然后在push
         【git fetch】
