@@ -1,4 +1,4 @@
- attachFiles 附上文件夹
+﻿ attachFiles 附上文件夹
  hrmobile 可移动的资源
 	【App.SHA-256.js】 ←加密js
 	【common.js】 ←common.js跟普通的js包含文件并没有其他不一样,主要是一些javascript经常要用到的函数,也定义了一些包括浏览器兼容,cookie操作,字符串函数扩展,图片操作等脚本,都是比较简单的函数扩展,直接看代码比较容易理解 有编程基础的应该清楚程序头文件的作用,他就相当于javascript的一个头文件,为了具有更广泛的通用性,一般不调用其他文件,因此这个文件也可以直接用于其他页面js的扩展调用 其中的函数大多是为了基于代码重用的目的方便在页面中调用,每次版本更新对这个文件的修改除了某些函数算法的优化,还要应对程序的扩展而对函数调用接口的更新,跟程序头文件的操作方式类似.
@@ -11,7 +11,9 @@
 	→【别让我想】
 	→【别让我烦】
         
+  SVN密码:姓名  
   SVN密码 姓名@2017
+
 =======================================================================
         SSH框架优势
 
@@ -218,6 +220,9 @@
 	选中js,下面选中 【Spket JavaScript Editor (缺省值)】 -- 【缺省值(F)】 -- 【确定】
 	ok
 ==================================================
+        MyEclipse设置UTF-8编码
+        【窗口(W) -- 首选项(P) -- 常规 - 工作空间】,在右侧左下角,文本文件编码(T),选择【其他(O) -- UTF-8】
+==================================================
 	MyEclipse中Java提示:
 	【窗口 -- 首选项 Java --编辑器 -- 内容辅助】 在java的自定激活触发器:填写
 	【.AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz】
@@ -252,7 +257,7 @@ JDK v1.6参数
         
         
 JDK v1.7参数
-	Xms256m -Xmx1024m -XX:PermSize=256m -XX:MaxPermSize=600m
+	-Xms256m -Xmx1024m -XX:PermSize=256m -XX:MaxPermSize=600m
 	-Drebel.spring_plugin=true   
 	-Drebel.aspectj_plugin=true   
 	-Drebel.struts2_plugin=true
@@ -318,6 +323,12 @@ JDK v1.7参数
 ==========================================================================
 	添加项目到新建的服务器,却无法自动发布?
 	右键新建服务器的项目名-------【Publish】发表
+==========================================================================
+        MyEclipse破解失败
+         com.jniwrapper.util.ProcessorInfo
+         
+         cmd输入【java -version】不能为9版本,必须为7
+         环境变量也得为7,否则会破解失败
 ==========================================================================
 	导入数据库后打开项目为404?
 	MySQL账号:credit
@@ -4988,21 +4999,22 @@ SELECT bpCustMemberId FROM `cs_person` WHERE bpCustMemberId=127;
         利用跳转让电脑不执行注释内容。
         优点是绝不出错，但是效率低，频繁使用时更低
         :1
-        pause>nul
+        pause>nulF
 ===============================================================
       浏览器书签缩放
         http://codebomber.com/jquery/resizer/
                 javascript:(function(){document.body.appendChild(document.createElement('script')).src='http://codebomber.com/jquery/resizer/resizer.min.js';})();
 ===============================================================
+        [git相关]]
 git配置:
         1.桌面右键【Git Bash Here】
         2.【mkdir ~/.ssh】创建
           【cd ~/.ssh/】进入
         3.输入以下
         	【git config --global user.name "waecy"】
-        	【git config --global user.email "wang867258173@mail.com"】
+        	【git config --global user.email "wang867258173@gmail.com"】
         4.生成key
-          【ssh-keygen -t rsa -C "wang867258173@mail.com"】
+          【ssh-keygen -t rsa -C "wang867258173@gmail.com"】
         5.连续按三次回车,设置密码为空
         6.打开%Userprofile%\.ssh
         7.记事本打开【id_rsa.pub】,复制密钥
@@ -5053,6 +5065,9 @@ git添加文件
         【git remote add origin git@github.com:waecysj/demo.git】
         【git push -u origin master】
         
+        更新下载的github代码[更新github代码]
+               【git fetch origin master】 强推，即利用强覆盖方式用你本地的代码替代git仓库内的内容
+                
         代码合并:
         【git pull --rebase origin master】
         
@@ -5082,9 +5097,28 @@ git添加文件
         【git commit -m "clear"】
         【git push origin master】
         
-git快捷键和命令:
+        本人遇到错误:
+        1.多次提交
+        failed to push some refs to git?
+        Git Your branch is ahead of 'origin/master' by X commits
+       【Your branch is ahead of 'origin/mast】
+       
+        上网搜索，有的说是 本地之前的代码有部分提交了，使用强制提交覆盖
+        【git push -f】
+        试了，不行；
+        还有说 先使用git fetch 到本地 之后在merge ,然后在push
+        【git fetch】
+        【git merge】
+
+        试了，依然不行
+        偶然用百度的方法
+        把当前分支代码上传到指定分支上
+        【git push -u origin develop】
+        结果是可以的。
+=============================================== 
+        git快捷键和命令:
         【Shift + Insert】键粘贴
-        【clear】清空命令窗口内容
+        【clear】清空命令窗口内容,也可以【Alt + F8】
         【cmd /c cls】 切换回系统cmd
         【ls】查看当前目录下都有些什么
         【git remote】命令列出所有远程主机。
@@ -5247,9 +5281,10 @@ git错误解决?
         【git fetch origin】 //取得长途更新，这里可以看做是筹办要取了
         【git merge origin/master】 //把更新的内容归并到本地分支/master
 
-
-
-
+========================================================
+        git下载项目[git下载github][下载github代码][github下载代码]
+        【git clone git://github.com/waecysj/demo】
+        【git clone https://github.com/waecysj/demo.git】
 ========================================================
         【bat交互执行git命令演示.bat】
 
@@ -6292,11 +6327,14 @@ em表示元素的font-size属性的计算值，如果用于font-size属性本身
         http://www.eclipsecolorthemes.org/?view=theme&id=28524
         
         1.打开【myeclipse -> 帮助(help) -> install from site】将路径粘贴在这里。等待安装颜色主题。      
-        【 https://raw.github.com/guari/eclipse-ui-theme/master/com.github.eclipseuitheme.themes.updatesite】
+        【https://raw.github.com/guari/eclipse-ui-theme/master/com.github.eclipseuitheme.themes.updatesite】
+        起名:theme
+        【theme - https://raw.github.com/guari/eclipse-ui-theme/master/com.github.eclipseuitheme.themes.updatesite】
+        
         2.选中【常规 - 外观 - 主题】为【Windows】,
               【当前主题(C))】为【缺省值(当前)】
         3.选中【常规 - 外观 - Edjtor Color Theme -- RecognEyes】
-        4.【导入 - General - 首选项】选中epf后缀文件
+        4.【导入 - General(常规) - 首选项】选中epf后缀文件
         5.【常规 - 外观和字体 -- 基本 -- 文本字体 -- 编辑】 大小选中【12】确定
 ====================================================================================
         ST显示右图标
@@ -7781,7 +7819,8 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
           金交在线
                 客户svn:
                        svn://116.62.72.238/svn/p2p/jjzx_web
-          
+                用户名hurong_dengzk    密码hurong_dengzk!
+                
                 前台网址：http://118.31.129.112/ 
                 后台网址：http://118.31.129.112:9090/heb_jjzx/login.jsp
 
@@ -7867,12 +7906,13 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
                 账号:【dengyuanye】     密码:【aaaaaa】 客户企业账号
                 账号:【wanghaoze】      密码:【aaaaaaa1】 投资人账号
                 账号:【linyongjin】      密码:【aaaaaa】 投资人账号
-                
+                挂牌人:【linyongjin】
+                购买人:【yuqingdanv】
 
           绑定银行卡账号
-               【houyetz7】
+                【houyetz7】
                短信验证码:
-               【666666】
+                【666666】
 
                 银行卡列表PC页面
                 【smstelph,ftl】
@@ -8128,7 +8168,7 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
         金语格ios
         IOS ID  【1720038986@qq.com】
         密码：  【Jinyuge1705】
-        
+         
         
         houye111
         账号:
