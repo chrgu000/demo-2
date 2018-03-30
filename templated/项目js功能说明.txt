@@ -559,7 +559,7 @@ JDK 6参数换成:
                 【MainActivity.java】
        将【Toast.makeText(getApplicationContext(), "获取服务器更新信息失败", 1).show();】注释
 ==========================================================================
-        App打包[安卓打包]
+        App打包[安卓打包][eclipse打包]
         
         	APP加载文件
         前提:
@@ -585,6 +585,17 @@ JDK 6参数换成:
         	链接: https://pan.baidu.com/s/1c3GaR0O 密码: fa5c
         4.打包时,把p2p_heb_jjzx_android\assets\www\hrmobile这个目录删掉,替换就好
         5.用eclipse打开项目目录,单击选中,右键项目【Anroid Tools -- Export Signed Application Package...(导出签名应用程序包…)】
+==========================================================================
+         App打包打错[安卓打包报错][eclipse打包报错][eclipse项目报错]
+         
+         1.【窗口(W) - 首选项(P) - Android】选择SDK路径
+         2.【窗口(W) - 首选项(P) - Java - 已安装的JRE - 添加(A)...】选择jdk v1.8
+         3.打开工具栏的下载图标【Android SDK Manager】或直接打开【SDK Manager.exe】
+         4.选中【Android 5.1.1 (API 22)】点【Install packages...(安装软件包…)】,选中【Accept Licenese(接受许可)】 - 【Install(安装)】
+         5.重迁项目
+         
+         也可以更改【project.properties】
+         target=android-22 ←这的Android SDK版本号
 ==========================================================================
         【eclipse真机调试APP】[eclipse手机调试App][eclipse运行App][eclipse安卓运行App][eclipse调试App][eclipse安卓调试App][App调试]
         1.手机开启【开发者选项 - USB调试)】
