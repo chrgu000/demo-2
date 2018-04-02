@@ -8099,7 +8099,18 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
 
         正式服务器密码：rw5x@*[X_zq
         测试服务器的密码：zqxm0754.
+-----------------------------------------------------------------------------
+        测试前台：http://zjzqgy.8866.org:8001/
+        测试后台：http://zjzqgy.8866.org:8245/login.jsp   admin  yuseen
         
+        正式地址:
+                https://xxmmzzqq.com/ 或【http://www.xxmmzzqq.com:8183】
+                https://114.55.56.118/
+                http://www.xxmmzzqq.com:8184/login.jsp
+                admin  yuseen
+                
+                
+                
         账户
                 【zhouqing123】  密码:【123456】
                 【zhouqing1234】
@@ -8107,13 +8118,11 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
                 【13264391752】
                 【hxx111】
                 
+        账号:【testwuhuimin】        密码:【123456】
+        账号:【zhengbj】        密码:【123456】
+                
        正式环境：
         账号:【chenqichao】        密码:【123456】
-        
-        
-        正式地址:
-                https://xxmmzzqq.com/ 或【http://www.xxmmzzqq.com:8183】
-                https://114.55.56.118/
 ====================================================================================
         爱钱来[沈阳云创项目]
         
