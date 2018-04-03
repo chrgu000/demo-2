@@ -6153,6 +6153,9 @@ em表示元素的font-size属性的计算值，如果用于font-size属性本身
                  【Ctrl + J】
         设置标签
                 【Ctrl + K】
+                
+        EmEditor保存书签
+        【工具(T) -- 自定义(C) -- 文件 -- 保存光标位置与书签(S)】√
 ====================================================================================
 　　    封装重复调用获取ajax属性值
 	/*
@@ -7436,6 +7439,9 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
         借款管理:[借款管理PC页面]
         PC页面:
                 【loan_management.ftl】
+                145行
+                招标中借款PC页面[已完成]:413行
+                已结清借款PC页面[已完成]:413行
         借款详情:
         PC页面:
                 【persionDirBid_content.ftl】
@@ -7471,8 +7477,7 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
         实际到账日 factDate
         
         
-        挂牌交易
-        PC页面:
+        挂牌交易PC页面:
                 【canTransferingList.ftl】
         个人账户 - 债权交易 -- 可交易 挂牌交易PC页面[交易信息PC页面][债权交易PC页面]
                 【orStartTransfer_form.ftl】
@@ -8089,10 +8094,11 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
 测试：
         江杭州周庆经济信息咨询有限公司
         ERP服务器+DB	zjzqgy.8866.org:9998	远程桌面	administrator	zqxm0754.	
-	
+	web服务器: www.xxmmzzqq.com   hurong   hurong123
 正式：
         浙江杭州周庆经济信息咨询有限公司	
         ERP服务器	114.55.56.118	QQ远程	administrator	rw5x@*[X_zq
+        web服务器: www.xxmmzzqq.com   hurong   hurong123
         
         项目编码：hurong_proj_zj_zqzceq  端口号：8245 参考版本：主干6.0  第三方：富有
         svn://192.168.0.102/hurong/p2p/branch/proj/zj/zqzceq_new
@@ -8240,7 +8246,7 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
         东莞市信全汽车租赁
         
         新项目：东莞市信全汽车租赁有限公司   车抵贷+尽调审批安卓ios
-        代码模板：标准车抵贷
+        代码模板：标准车抵贷f
         信全汽车:erp_gd_xqqc
     
         测试地址:
