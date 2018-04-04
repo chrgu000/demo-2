@@ -7484,7 +7484,7 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
                 计算js:
                         【bidOrSale.js】
                 计算js方法:
-                        【signMoney】
+                        【signMoney】277行
                 
                 挂牌js:
                         【bidOrSale.js】 transferFormPhone
@@ -7636,8 +7636,9 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
                 【orStartTransfer_form.ftl】
         js:
                 【bidOrSale.js】
-        点击元素:
-                【#transferFormbuy】
+        点击元素[计算]:
+                【#transferFormbuy】177行1
+                【signMoney】方法 218行
                 
         投资 - 债权交易 - 购买债权 - 回款计划
         js:
@@ -8126,6 +8127,12 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
                 
         账号:【testwuhuimin】        密码:【123456】
         账号:【zhengbj】        密码:【123456】
+             【wuhuimin】
+             【xiaomao】
+             【chenmm】
+             【zhangdw】
+             【wsj123】
+        
                 
        正式环境：
         账号:【chenqichao】        密码:【123456】
