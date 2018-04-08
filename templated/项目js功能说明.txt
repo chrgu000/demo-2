@@ -3012,6 +3012,24 @@ if (this._disabled == null || this._disabled == false) {
         jQuery内部会将这条语句转成$('#parent').find('.child')，比最快的形式慢了23%。
         所以，最佳选择是$parent.find('.child')。而且，由于$parent往往在前面的操作已经生成，jQuery会进行缓存，所以进一步加快了执行速度。
 =============================================================
+        jq获取焦点[jq获取焦点清除样式][jquery输入框focus事件]
+         // 用事件委托
+            $(document).on('focus', 'input', function () {
+                // 失去焦点事件
+        //                      $(this).trigger('blur');
+                
+                // 清除阴影
+                $('input').css({
+                    '-webkit-box-shadow': 'none',
+                    '-moz-box-shadow': 'none',
+                    'box-shadow': 'none',
+                    'outline': 'none'
+                })
+                
+                // 去除光标
+                $('input').attr('readonlyunselectable','on');
+            });
+=============================================================
         js获取url路径
         window.location.protocol + "//" + window.location.host 
 =============================================================
