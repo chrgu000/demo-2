@@ -3016,7 +3016,7 @@ if (this._disabled == null || this._disabled == false) {
          // 用事件委托
             $(document).on('focus', 'input', function () {
                 // 失去焦点事件
-        //                      $(this).trigger('blur');
+        //        $(this).trigger('blur');
                 
                 // 清除阴影
                 $('input').css({
@@ -7163,6 +7163,18 @@ em表示元素的font-size属性的计算值，如果用于font-size属性本身
        3.把【StartActivity.java】放入【src/com.hurong.invester】
        4.在【AndroidManifest.xml】文件里</application>上添加
                 <activity android:name="com.hurong.invester.StartActivity"></activity>
+====================================================================================
+       安卓启动3秒[App3秒][启动图3秒][App启动图3秒][安卓启动图3秒] 金语格
+       1【res/layout】文件下放入【start.xml】文件
+       2.【res/drawable】文件下放入【skip.xml】文件
+       3.在public void onCreate(Bundle savedInstanceState) {
+                super.onCreate(savedInstanceState);
+        下面添加
+                Intent intent = new Intent(this,StartActivity.class);
+		startActivity(intent);
+                
+       4.在【AndroidManifest.xml】文件里</application>上添加
+                <activity android:name="com.hurong.invester.StartActivity"/>    
 ====================================================================================
         众拓贷:
         【svn://192.168.0.102/hurong/p2p/branch/proj/heb/hbxt】
