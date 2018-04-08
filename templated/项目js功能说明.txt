@@ -4113,6 +4113,9 @@ Sencha Docs - Ext JS
         
         关闭搜狗输入法悬浮窗口
         右键【设置属性(P) -- 常用】 右侧勾选【隐藏状态栏】确定
+        
+        搜狗输入法明明输入中文却显示英文怎么办
+        【Ctrl + Shift + E】
 ===============================================================
         qq快捷键
         【Ctrl + Alt + A】 截图
@@ -7634,6 +7637,10 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
          方法:
                 【newslist】
          
+         公告列表点击样式
+                【cssP2p.css】
+                【.listitems_select】 187行
+                
          资金总览PC页面
                 【myHome.ftl】
         
@@ -8305,6 +8312,13 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
         账号:13011111114
              13011111115
         密码:222222
+        
+        机构代码:gk3pd5gdp2
+====================================================================================
+        华远永达（北京）网络科技有限公司    互联网金融+安卓+ios
+        项目编码：hurong_proj_bj_hyyd
+        钱简单
+        
 ====================================================================================
         [React Native][RN]
         
