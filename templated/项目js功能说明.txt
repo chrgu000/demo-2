@@ -7920,8 +7920,8 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
                 ----------------------------------------------------------------------------------------
                 测试环境信息：
                 http://47.92.116.172/   账号：houyetz2  密码： 111111  交易密码：houye1111
-                http://47.92.90.97:8181/hurong_proj_heb_jjzx/login.jsp;                                    admin    1
-                ----------------------------------------------------------------------------------------------------------
+                http://47.92.90.97:8181/hurong_proj_heb_jjzx/login.jsp;                                            admin    1
+----------------------------------------------------------------------------------------------------------
                 ios  
                 开发者账号【wangqi@chinaifae.com】
                 密码: 【13011588618wW】
@@ -7981,7 +7981,8 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
                 账号:【linyongjin】      密码:【aaaaaa】 投资人账号
                 挂牌人:【linyongjin】
                 购买人:【yuqingdanv】
-
+                账号:【shinanyu】      密码:【aaaaaa】
+                
           绑定银行卡账号
                 【houyetz7】
                短信验证码:
@@ -7989,8 +7990,7 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
 
                 银行卡列表PC页面
                 【smstelph,ftl】
-                
-                 
+
             用户在商户下不存在
             
             解决方法:
@@ -8315,10 +8315,46 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
         
         机构代码:gk3pd5gdp2
 ====================================================================================
-        华远永达（北京）网络科技有限公司    互联网金融+安卓+ios
-        项目编码：hurong_proj_bj_hyyd
-        钱简单
+                华远永达（北京）网络科技有限公司    互联网金融+安卓+ios
+                项目编码：hurong_proj_bj_hyyd
+                钱简单
+                正式前台 10.0.0.2	root     Qjd.com@2018
+                正式后台/数据库  10.0.0.3	root     Qjd.com@2018
+---------------------------------------------------------------------------------------------------------
+        测试服务器（测试环境前台，后台，数据库）10.0.0.4	root     Qjd.com@2018
+---------------------------------------------------------------------------------------------------------
+        测试erp
+        http://10.0.0.4:8181/erp_test/index.jsp#
+         测试web
+        http://10.0.0.4:8080/web_test/
+        正式web
+        http://119.90.53.155/
+        华远远达 正式erp
+        http://119.90.53.155:8181/hurong_proj_bj_hyyd/login.jsp     账户： admin  密码：   1
+        ---------------------------------------------------------------------------------------------
+        短信账号密码 1NJE6Z
+        账号169936
+
+        华远永达的项目信息
+        one111
+        zhaiwei
         
+        融融理财(测试)
+        http://192.168.0.106:13310/hurong_proj_zj_rtd_web/indexp2pmobile.html
+        融融理财(正式)
+        https://116.62.227.62/indexp2pmobile.html
+        
+        跳板机：远程windows服务器登陆地址及密码：
+        119.90.53.154:43289
+        administrator
+        HUAyuan806@2017
+        
+        
+        测试用
+        账号【gaoxuejiao】
+        账号【111111】
+       
+       
 ====================================================================================
         [React Native][RN]
         
