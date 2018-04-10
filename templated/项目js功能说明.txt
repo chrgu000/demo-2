@@ -1846,7 +1846,7 @@ Ext.define 实现扩展
 					DynamicConfig.MESSAGE).getTemplateFilePath());
 		}
 =============================================================
-                java获取索引值[java拼接索引值]
+                java获取索引值[java拼接索引值][java添加索引]
                 
                 第一种:String类型存数据库(三大步骤)
                 
