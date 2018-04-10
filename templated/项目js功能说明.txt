@@ -678,7 +678,7 @@ JDK 6参数换成:
         layout-wap.css
   //☛首页 右上角按钮 .viewbutton
 	→【mobile.css】
-  //☛首页banner广告, 640x702
+  //☛首页banner广告, 640 x 390
 	→【index.css】
 	文件路径:hrmobile\ec\resources\imagesP2p\index
   //☛首页banner内"立即申请"按钮 .wirite
@@ -7170,7 +7170,8 @@ em表示元素的font-size属性的计算值，如果用于font-size属性本身
        安卓启动3秒[App3秒][启动图3秒][App启动图3秒][安卓启动图3秒] 金语格
        1【res/layout】文件下放入【start.xml】文件
        2.【res/drawable】文件下放入【skip.xml】文件
-       3.在public void onCreate(Bundle savedInstanceState) {
+       3.在【MainActivity.java】里
+        public void onCreate(Bundle savedInstanceState) {
                 super.onCreate(savedInstanceState);
         下面添加
                 Intent intent = new Intent(this,StartActivity.class);
