@@ -1128,7 +1128,7 @@ Ext.define 实现扩展
 	【new Date().toLocaleTimeString()】 获取当前时间 
 	【handler】给button按钮组件添加点击事件
 
-	→:五种获取DOM元素[获取ID][获取元素][得到ID]
+	→:五种获取DOM元素[获取ID][获取元素][得到ID][Ext获取id][sench touch获取id][touch获取id]
 	1.【Ext.get()】获取DOM元素ID,可以获取文本和设置
                 Ext.get('box').dom.innerText
 	2.【Ext.fly("ID")】获取DOM元素ID,可以获取文本和设置
@@ -1146,8 +1146,6 @@ Ext.define 实现扩展
 	 2.【getCmpByName("")】获取组件的name
          3.【Ext.ComponentQuery.query('#组件ID')】能获取itemId的值
                 Ext.ComponentQuery.query('#val')[0].getValue()
-	
-	
 	获取当前组件名称
 	【mobileNavi.getActiveItem().$className】
         
@@ -2863,7 +2861,7 @@ if (this._disabled == null || this._disabled == false) {
         Ext中默认铺满整个屏幕?
         fullscreen: true,  //是否全屏，选择true则横竖屏切换时仍可以保证自动适应尺寸
 =============================================================
-        去除下拉框默认样式?
+        去除下拉框默认样式?[去除select默认样式][去除select样式]
         
         select {
         /*Chrome和Firefox里面的边框是不一样的，所以复写了一下*/
@@ -8355,6 +8353,18 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
         账号【gaoxuejiao】
         账号【111111】
        
+       我要借款PC页面
+           【financeCenter.ftl】
+       个人借款PC页面
+            【financeCenter.ftl】63行
+       个人借款PC页面
+            【financeCenter.ftl】163行
+       提交js:
+            【financeCheck.js】
+       个人借款提交方法
+            【savePer】450行
+       企业借款提交方法
+            【saveBusiness】506行
        
 ====================================================================================
         [React Native][RN]
