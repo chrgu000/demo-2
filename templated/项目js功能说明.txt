@@ -56,6 +56,7 @@
 	【Ctrl + /】 单行注释
 	【Ctrl + Shift + /】多行注释
         【Ctrl + L】跳转多少行
+        【Ctrl + Q】定位到最后编辑的地方 
 	【Ctrl + Shift + \】取消多行注释
 	【Ctrl + M】切换全部编辑窗口
 	【Ctrl + Shift + K】 查找上一个
@@ -88,6 +89,7 @@
         【Ctrl + E】 快速转换编辑器
         
         【Shift + Alt + A】 进入多行选择状态,再点击一遍恢复
+        【Ctrl + Shift + E】打开MyEclipse的菜单选项“Edit/编辑”，可以看到当前程序的保存路径，并且可以在你打开的所有程序中选择你想编辑的程序
 //===============================================
 	Java快捷键
 	选中函数方法
@@ -8352,7 +8354,9 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
         测试用
         账号【gaoxuejiao】
         账号【111111】
-       
+        
+       waecy111112
+       waecy111111
        我要借款PC页面
            【financeCenter.ftl】
        个人借款PC页面
