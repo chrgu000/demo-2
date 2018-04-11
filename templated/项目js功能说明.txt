@@ -7459,7 +7459,7 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
                 【persionDirBid_content.ftl】
         
         
-         我的 -- 散标投资PC页面
+         我的 -- 散标投资PC页面[我的散标PC页面]
                 【myFinancePurchase.ftl】
         
         我的 -- 散标投资 --回款中 -- 回款计划PC页面:
@@ -8352,11 +8352,9 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
         
         
         测试用
-        账号【gaoxuejiao】
-        账号【111111】
+        账号【gaoxuejiao】      密码【111111】
+        账号【jialullu】        密码【111111】
         
-       waecy111112
-       waecy111111
        我要借款PC页面
            【financeCenter.ftl】
        个人借款PC页面
@@ -8370,6 +8368,9 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
        企业借款提交方法
             【saveBusiness】506行
        
+       
+        IOS ID ：1720038986@qq.com
+        密码：Jinyuge1705
 ====================================================================================
         [React Native][RN]
         
