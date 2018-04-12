@@ -6157,9 +6157,9 @@ em表示元素的font-size属性的计算值，如果用于font-size属性本身
         
         → 第二种(js方式):
         scrollable: {  
-           //注意横向竖向模式的配置，不能配错  
+           // 注意横向竖向模式的配置，不能配错  
             direction: 'vertical',  
-           //隐藏滚动条样式  
+           // 隐藏滚动条样式  
            indicators: false  
         }
 ====================================================================================
@@ -8145,11 +8145,11 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
         正式服务器密码：rw5x@*[X_zq
         测试服务器的密码：zqxm0754.
 -----------------------------------------------------------------------------
-        测试前台：http://zjzqgy.8866.org:8001/
+        测试前台：http://www.xxmmzzqq.com:8183/ 小猫种钱测试地址
         测试后台：http://zjzqgy.8866.org:8245/login.jsp   admin  yuseen
         
         正式地址:
-                https://xxmmzzqq.com/ 或【http://www.xxmmzzqq.com:8183】
+                https://xxmmzzqq.com/
                 https://114.55.56.118/
                 http://www.xxmmzzqq.com:8184/login.jsp
                 admin  yuseen
