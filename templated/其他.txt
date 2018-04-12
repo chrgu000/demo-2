@@ -107,7 +107,7 @@ select * from bp_cust_member where telphoone = '18810745322';
                 【adb connect 127.0.0.1:62001】
        3.启动RN项目,在新建
                 【react-native run-android】
-                
+                172.16.10.242:8081
                 
          // 金交在线
                 【houye1】   【111111】

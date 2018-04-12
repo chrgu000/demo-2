@@ -8425,15 +8425,26 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
 
 
         Chocolatey安装
-        第一种(cmd.exe安装):
-        @powershell -NoProfile -ExecutionPolicy Bypass -Command "iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))" && SET PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin
+        第一种(cmd.exe安装)【管理员权限打开】
+        Chocolatey
+        @"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
+        
+        
+        环境变量 - 系统环境变量-添加
+        变量名(N):【ChocolateyInstall】
+        变量值(V):【C:\ProgramData\chocolatey】
+        
+       【Path】
+        添加:
+                【%ChocolateyInstall%\bin】
         
         第二种(powershell.exe安装):
-        iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))
+        @powershell -NoProfile -ExecutionPolicy Bypass -Command "iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))" && SET PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin
+        
+        
+        C:\ProgramData\chocolatey\bin
         
         当出现chocolatey is now ready时，表示安装完毕。
-        
-        
         
         1.安装Python 2.7.x版本（3.x版本不行）和node最新版.msi,还有jdk 1.8以上版本
         2.设置npm镜像以加速后面的过程
@@ -8550,8 +8561,8 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
          4.选择【Debug server host & port for device】调试服务器主机和设备端口
          5.填写ipconfig的以太网适配器 本地连接 - IPv4地址
              比如:【172.16.10.46:8081】
-             
-
+                  【172.16.10.242:8081】
+        ※:必须域名后面添加端口号,否则无法启动项目
 
 
 
@@ -8612,7 +8623,6 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
           jdk版本不对
           Android Studio2.2必须使用JDK8及以上版本，而且是强制的。
           
-          
         RN显示更多错误日志
         【gradlew compileDebug --stacktrace】
         如果上面的命令不管用，可以使用下面的命令试试
@@ -8625,7 +8635,7 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
          搜索文件
          【where /r C:\ adb.exe】
 ==============================================================
-        解决RN真机调试[OPPO A59m v5.1系统]
+        解决RN真机调试[OPPO A59m v5.1系统][rn启动不了][RN无法启动]
         1.打开【RN项目\android\build.gradle】文件
                 修改
                 【classpath 'com.android.tools.build:gradle:2.2.3'】
@@ -8680,7 +8690,6 @@ tion: Failed to install all
        Could not resolve all dependencies for configuration ':app:_debugApk'
        解决办法：
         是由于未安装 Android Surpport Responsitory，运行 sdk manager 找到 Extra 下的 android surpport responsitory 选中并安装即可
-        
 ==============================================================
         RN创建指定版本
         react-native init test --source react-native@0.49.5
