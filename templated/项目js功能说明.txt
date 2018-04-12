@@ -8709,6 +8709,19 @@ tion: Failed to install all
         3.再执行【react-native run-android】
         到这就结束了，基本这2个方法就可以解决React Native unable to load script from assets 了。
 ==============================================================
+        VirtualBox模拟器中关于VT-x is disabled in BIOS
+        电脑型号	联想 20H5A01YCD 笔记本电脑
+        显示器	联想 LEN40B0 ( 15.5 英寸  )
+        
+        联想ThinkPad
+        1.开机按【F1】进BIOS界面
+        2.上侧选择【Security】安全
+        3.下面选择第四个【Virtualization】虚拟化,按【Enter】回车键
+        4.选择第一个【Intel ((R)) Virtualization Technologu(英特尔（（R））的虚拟化的制作)】,按【Enter】回车键
+        5.选择第二个【Enabled】启用
+        6.【F10】保存,选择【Yes】
+        7.重启完毕
+==============================================================
         WebStorm2017.1.1 EAP
         webstorm 2017 激活破解
         选择License server 填入【http://idea.imsxm.com/】点击Active即可。
