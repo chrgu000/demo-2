@@ -4097,6 +4097,10 @@ Sencha Docs - Ext JS
         
         【Shift + 符号键】将小写字符转换大写
 ===============================================================
+        cmd快捷键
+        【Ctrl + Insert】复制
+        【Shift + Insert】粘贴
+===============================================================
         搜狗输入法快捷键
         
         输入【v + 数字】会显示中文数字,1-9有特殊符号 +/-f翻页
@@ -8447,6 +8451,14 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
         添加:
                 【%ChocolateyInstall%\bin】
         
+         环境变量 - 系统环境变量-添加
+        变量名(N):【GRADLE_HOME】
+        变量值(V):【D:\application\gradle-4.6】
+        
+       【Path】
+        添加:
+                【%GRADLE_HOME%\bin】
+                
         第二种(powershell.exe安装):
         @powershell -NoProfile -ExecutionPolicy Bypass -Command "iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))" && SET PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin
         
@@ -8700,7 +8712,7 @@ tion: Failed to install all
        解决办法：
         是由于未安装 Android Surpport Responsitory，运行 sdk manager 找到 Extra 下的 android surpport responsitory 选中并安装即可
 ==============================================================
-        RN创建指定版本
+        RN创建指定版本[RN创建版本][RN添加版本]
         react-native init test --source react-native@0.49.5
         
         react-native init MyApp --version 0.49.5
