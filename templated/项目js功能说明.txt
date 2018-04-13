@@ -13,7 +13,9 @@
         
   SVN密码:姓名  
   SVN密码 姓名@2017
-
+  
+        【tomcat】汤姆凯特
+        【BIOS】白殴死
 =======================================================================
         SSH框架优势
 
@@ -8712,7 +8714,19 @@ tion: Failed to install all
         VirtualBox模拟器中关于VT-x is disabled in BIOS
         电脑型号	联想 20H5A01YCD 笔记本电脑
         显示器	联想 LEN40B0 ( 15.5 英寸  )
+
+        第一步骤:
+        1.打开【Android Studio】,右下角选择【Configure(配置) --  SDK Manager(SDK管理器)】
+        2.选择【Appearance & Behavior(外观和行为) -- Android SDK】,选中右侧第二个【SDK Tools】
+        3.选择【Intel x86 Emulator Accelerator (HAXM installer) 6.2.1】(英特尔的x86模拟器加速器（haxm 6.2.1安装）)
+        4.选择【OK】安装
         
+        第二步骤:
+        1.打开【SDK主目录\extras\intel\Hardware_Accelerated_Execution_Manager】
+        2.安装【intelhaxm-android.exe】
+        PS:win10若失败,右键以win8兼容性安装
+        
+        第三步骤
         联想ThinkPad
         1.开机按【F1】进BIOS界面
         2.上侧选择【Security】安全
