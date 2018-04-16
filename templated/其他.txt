@@ -4,8 +4,9 @@ select * from bp_cust_member where loginname = 'jialullu';
 select * from bp_cust_member where telphoone = '18810745322';
 
         houye111
-32.9G
-
+        
+        react-native run-android
+        172.16.10.242
 交易密码：111111Jk
 校验码 9999
         中冀app：苹果开发者账号和密码

@@ -8459,11 +8459,28 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
         添加:
                 【%GRADLE_HOME%\bin】
                 
+        环境变量 - 系统环境变量-添加
+        变量名(N):【ChocolateyInstall】
+        变量值(V):【C:\ProgramData\chocolatey】
+        
+       【Path】
+        添加:
+                【%ChocolateyInstall%\bin】
+        
+         环境变量 - 系统环境变量-添加
+        变量名(N):【PYTHON_HOME】
+        变量值(V):【C:\Python27】
+        
+       【Path】
+        添加:
+                【%PYTHON_HOME%】
+                【%PYTHON_HOME%\Scripts】
+               
         第二种(powershell.exe安装):
         @powershell -NoProfile -ExecutionPolicy Bypass -Command "iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))" && SET PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin
         
         
-        C:\ProgramData\chocolatey\bin
+        【必须安装Android 6.0(API 23) -- SDK Platform API 23】
         
         当出现chocolatey is now ready时，表示安装完毕。
         
@@ -8754,6 +8771,28 @@ tion: Failed to install all
         5.选择第二个【Enabled】启用
         6.【F10】保存,选择【Yes】
         7.重启完毕
+==============================================================
+        Genymotion快捷键[Genymotion模拟器快捷键]
+        【Ctrl + M】打开RN菜单
+==============================================================
+        [react ntive][RN][RN学习]
+        // 引入组件
+        【TextInput】
+                【numberOfLines】文本行数限制，添加后超过限制行数文本会在末尾默认以...的形式省略。
+                 【style】 样式
+                        【color】 字体颜色
+                        【fontSize】 字体大小
+                        【fontFamily】 字体
+                        【fontStyle】 字的样式  （normal：正常italic：斜体）
+                        【fontWeight】 设置粗体（normal：正常bold：粗体100，200，300， 400， 500， 600， 700， 800， 900）
+                        【lineHeight】 行高
+                        【textAlign】 文字对其方式（auto：自动对齐left：左对齐right：右对齐 center：居中对齐）
+                        【textDecorationLine】 下划线和删除线样式（none：无线underline：下划线line-through：删除线 underline line-through：下划线和删除线）
+                        
+                        // Android需要设置下划线为透明才能去掉下划线
+                        【underlineColorAndroid={'transparent'}】
+                         【textAlignVertical="bottom"】  // 设置垂直位置 top或bottom
+                        
 ==============================================================
         WebStorm2017.1.1 EAP
         webstorm 2017 激活破解
