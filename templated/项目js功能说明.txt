@@ -8451,7 +8451,8 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
           choco(Chocolatey)
           Yarn、React Native的命令行工具（react-native-cli）
 
-
+        升级npm快捷键
+                【npm install -g npm】
         Chocolatey安装
         第一种(cmd.exe安装)【管理员权限打开】
         Chocolatey
