@@ -7981,14 +7981,15 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
                 密码【aaaaaa】
                 交易密码【11111aA】
                 
-                账号:【huxuanxue】      密码:【aaaaaa】
-                账号:【zhaoangxiao】    密码:【aaaaaaa1】 借款人
-                账号:【dengyuanye】     密码:【aaaaaa】 客户企业账号
-                账号:【wanghaoze】      密码:【aaaaaaa1】 投资人账号
-                账号:【linyongjin】      密码:【aaaaaa】 投资人账号
+                账号:【huxuanxue】              密码:【aaaaaa】
+                账号:【zhaoangxiao】            密码:【aaaaaaa1】 借款人
+                账号:【dengyuanye】             密码:【aaaaaa】 客户企业账号
+                账号:【wanghaoze】              密码:【aaaaaaa1】 投资人账号
+                账号:【linyongjin】             密码:【aaaaaa】 投资人账号
                 挂牌人:【linyongjin】
                 购买人:【yuqingdanv】
-                账号:【shinanyu】      密码:【aaaaaa】
+                账号:【shinanyu】               密码:【aaaaaa】
+                账号:【18601224625】            密码:【aaaaaa】
                 
           绑定银行卡账号
                 【houyetz7】
@@ -8385,6 +8386,20 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
         IOS ID ：1720038986@qq.com
         密码：Jinyuge1705
 ====================================================================================
+        天匣易贷
+        svn://192.168.0.102/hurong/p2p/branch/proj/gd/txyd
+        
+        测试后台地址;http://192.168.0.104:8249/hurong_proj_gd_txyd/login.jsp
+        账号：admin    密码：1
+        部署好了
+        远程的还没有 现在只有测试的
+        
+        测试Web:
+        http://192.168.0.104:8249/hurong_proj_gd_txyd/indexp2pmobile.html
+        
+        
+        
+====================================================================================
         [React Native][RN]
         
         npm install 时报错 Unexpected end of input at 1:15930
@@ -8775,10 +8790,9 @@ tion: Failed to install all
         Genymotion快捷键[Genymotion模拟器快捷键]
         【Ctrl + M】打开RN菜单
 ==============================================================
-        [react ntive][RN][RN学习]
+        [react ntive][RN][RN学习][RN代码学习]
         // 引入组件
         【TextInput】
-                【numberOfLines】文本行数限制，添加后超过限制行数文本会在末尾默认以...的形式省略。
                  【style】 样式
                         【color】 字体颜色
                         【fontSize】 字体大小
@@ -8789,9 +8803,29 @@ tion: Failed to install all
                         【textAlign】 文字对其方式（auto：自动对齐left：左对齐right：右对齐 center：居中对齐）
                         【textDecorationLine】 下划线和删除线样式（none：无线underline：下划线line-through：删除线 underline line-through：下划线和删除线）
                         
-                        // Android需要设置下划线为透明才能去掉下划线
-                        【underlineColorAndroid={'transparent'}】
-                         【textAlignVertical="bottom"】  // 设置垂直位置 top或bottom
+                  【underlineColorAndroid={'transparent'}】Android需要设置下划线为透明才能去掉下划线
+                  【textAlignVertical="bottom"】  // 设置垂直位置 top或bottom
+                  
+                  【numberOfLines】文本行数限制，添加后超过限制行数文本会在末尾默认以...的形式省略。
+                        numberOfLines={1}
+                  【secureTextEntry={true}】
+
+
+                RN引入网络图片
+                 // 声明变量,保存网络图片路径(本地不能直接声明,必须导入)
+                let img = {
+                    uri: 'http://123.56.107.148/htmobile/resources/images/login-logo.png'
+                };
+                        <Image source = {img} style={styles.logo} />
+                RN引入本地图片
+                方案一: 【require('../images/logo.png')】直接在source引入
+                        <Image source={require('../images/logo.png')} style={styles.logo}/>
+                方案二: 提前声明【import logo from '../images/logo.png';】
+                        然后再引入
+                        <Image source = {logo} style={styles.logo} />
+                        
+        【ImageBackground】背景图片组件
+                    <ImageBackground source={img} style={styles.logo}></ImageBackground>    
                         
 ==============================================================
         WebStorm2017.1.1 EAP
@@ -8823,6 +8857,13 @@ tion: Failed to install all
                 【Ctrl + R】 替换内容
                 【Ctrl + R】 跳到变量声明处
                 【Ctrl + Shift + I】显示当前CSS选择器或者JS函数的详细信息
+                【Ctrl + Shift + R】 搜索文件内容,全局
+                
+                【Shift + Alt + ↑】移动到上一行
+                【Shift + Alt + ↓】移动到下一行
+                
+                【F3】和【Ctrl + L】查找下一个,必须【Ctrl + F】输入关键词才能使用
+                【Shift + F3】查找下一个,必须【Ctrl + F】输入关键词才能使用
                 
                 console.log$('$PARAM$');
                 看到里面的$PARAM$了吗？那个是光标所在位置！
@@ -8836,7 +8877,7 @@ tion: Failed to install all
                 
                 1.【文件(F) -- 导入设置...(I)】选择【ReactNative.jar】路径
                 2.WebStorm安装目录新建【templates】文件夹,将【ReactNative.xml】放进去
-                3.重启打开,每次输入时【Ctrl + J】再输入首字母就有代码提示
+                3.重启打开,每次输入【<】时,按【Ctrl + J】再输入首字母就有代码提示
 ==============================================================
                 WebStorm配置RN
                 1.在Command(命令)选择【run】
@@ -8869,7 +8910,7 @@ tion: Failed to install all
                 【WeixinCommonActionjava】
                 【WeixinCoreAction.java】
 ==============================================================
-        RN布局
+        RN布局[rn样式]
         
         row
         【flexDirection: 'row'】
