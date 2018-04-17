@@ -8495,7 +8495,8 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
         @powershell -NoProfile -ExecutionPolicy Bypass -Command "iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))" && SET PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin
         
         
-        【必须安装Android 6.0(API 23) -- SDK Platform API 23】
+        PS:【必须安装Android 6.0(API 23) -- SDK Platform API 23】
+            安卓模拟器使用【Custom Phone 5.1.0 API22 - 768x1280】
         
         当出现chocolatey is now ready时，表示安装完毕。
         
@@ -8826,7 +8827,15 @@ tion: Failed to install all
                         
         【ImageBackground】背景图片组件
                     <ImageBackground source={img} style={styles.logo}></ImageBackground>    
-                        
+         
+         
+         
+         【Dimensions】 本模块用于获取设备屏幕的宽高
+         // 获取设备屏幕的宽高
+        var Dimensions = require('Dimensions');
+
+        // 获取宽和高
+        var {width, height} = Dimensions.get('window');   
 ==============================================================
         WebStorm2017.1.1 EAP
         webstorm 2017 激活破解
@@ -8864,6 +8873,8 @@ tion: Failed to install all
                 
                 【F3】和【Ctrl + L】查找下一个,必须【Ctrl + F】输入关键词才能使用
                 【Shift + F3】查找下一个,必须【Ctrl + F】输入关键词才能使用
+                
+                【Shift + F6】重命名
                 
                 console.log$('$PARAM$');
                 看到里面的$PARAM$了吗？那个是光标所在位置！
