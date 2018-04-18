@@ -8854,6 +8854,7 @@ tion: Failed to install all
 ==============================================================
        【WebStorm快捷键】
                 【Ctrl + Shift + N】 搜索文件,或 【导航(N) -- 文件...(F)】中文会乱码
+                【Ctrl + Shift + Alt + N】 通过一个字符快速查找位置
                 【Ctrl + Shift + R】 搜索文件内容,全局
                 【Ctrl + E】 最近打开文件
                 【Ctrl + Alt + S】 设置
@@ -8890,6 +8891,30 @@ tion: Failed to install all
                 1.【文件(F) -- 导入设置...(I)】选择【ReactNative.jar】路径
                 2.WebStorm安装目录新建【templates】文件夹,将【ReactNative.xml】放进去
                 3.重启打开,每次输入【<】时,按【Ctrl + J】再输入首字母就有代码提示
+==============================================================
+                WebStorm展开左侧菜单[WebStorm左侧项目 目录定位当前编辑的文件]
+                英文版:
+                        齿轮下拉菜单里选中
+                【Autoscroll form Source】从源/自动滚动到源代码
+
+                汉化版
+                汉化后的webstorm如果选择 从源代码处滚动 不出现左侧定位的按钮的话，可以在工具的根目录的lib文件夹下找到resources-cn.jar
+                1.解压打开汉化版的【resources-cn.jar】
+                        PS:不是解压出来
+                2.打开【messages】文件夹，找到【UIBundle.properties】文件删除
+                3.打开英文版的【resources-en.jar】
+                4.把【messages\resources_en\UIBundle.properties】复制出来
+                5.拖到汉化版的【messages\resources_en】文件夹
+                        PS:IntelliJ IDEA同理
+                6.重启webstorm即可
+==============================================================
+                WebStorm添加多个项目[WebStorm添加多个项目到当前工程目录]
+                
+                英文版:
+                        File－> Settings －> Directories －> Add Content Root，选择你要加入的Project 点击OK －> Apply －> OK 搞定。
+                        
+                汉化版:
+                        文件(F) -- 设置(T) -- Directories -- 添加内容根(C) -- 选择项目目录 -- 确定
 ==============================================================
                 WebStorm配置RN
                 1.在Command(命令)选择【run】
@@ -9092,7 +9117,24 @@ tion: Failed to install all
         属性矩阵
 
         transformMatrix TransformMatrixPropType 
-
-                
+==============================================================
+        RN更改端口[更改RN端口]
+        【react-native start --port=端口号】
+                ;例如:react-native start --port=8082 <= 指定8082端口服务启动项目    
+        
+        1.打开项目下【package.json】文件
+        2.在【scripts -- start】下更改
+                【node node_modules/react-native/local-cli/cli.js start --port=8083】
+        3.这样用WebStorm启动的服务就是指定服务
+        
+        
+        永久修改RN端口号:
+             1.打开【项目主目录/node_modules/react-native/local-cli/server/server.js】66行
+             2.在【default】后修改端口保存
+             3.保存
+==============================================================
+        启动RN项目
+        1.在项目目录运行
+                【npm install react-native】
                 
                 

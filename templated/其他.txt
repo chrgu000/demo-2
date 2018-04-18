@@ -4,6 +4,8 @@ select * from bp_cust_member where loginname = '18601224625';
 select * from bp_cust_member where telphoone = '18810745322';
 
         houye111
+        【react-native start】或【npm start】启动服务
+        react-native start --port=8082 指定端口
         react-native run-android
 
         172.16.10.242
