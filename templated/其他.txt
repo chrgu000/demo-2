@@ -5,9 +5,11 @@ select * from bp_cust_member where telphoone = '18810745322';
 
         houye111
         【react-native start】或【npm start】启动服务
-        react-native start --port=8082 指定端口
+        npm start --port=8083 指定端口
         react-native run-android
 
+
+        cd /d D:\project\RN project\demo\sampleNavigator
         172.16.10.242
 交易密码：111111Jk
 校验码 9999

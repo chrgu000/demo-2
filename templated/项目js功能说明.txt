@@ -682,7 +682,8 @@ JDK 6参数换成:
         layout-wap.css
   //☛首页 右上角按钮 .viewbutton
 	→【mobile.css】
-  //☛首页banner广告, 640 x 390
+  //☛首页banner广告[banner图大小][焦点图大小][轮播图大小][banner图尺寸][焦点图尺寸][轮播图尺寸],
+           【640 x 390】
 	→【index.css】
 	文件路径:hrmobile\ec\resources\imagesP2p\index
   //☛首页banner内"立即申请"按钮 .wirite
@@ -6183,6 +6184,14 @@ em表示元素的font-size属性的计算值，如果用于font-size属性本身
                 
         EmEditor保存书签
         【工具(T) -- 自定义(C) -- 文件 -- 保存光标位置与书签(S)】√
+        
+        
+        选中【Alt + 鼠标左键】选择
+        
+        
+        【Ctrl + Shift + Z】移动到上次编辑的位置.也可以右键【高级(N) -- 移动到上次编辑的位置(M)】
+        【Ctrl + Shift + F8】开始进入垂直选择模式。
+        
 ====================================================================================
 　　    封装重复调用获取ajax属性值
 	/*
@@ -8318,6 +8327,8 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
                 API:
                         http://www.sopss.com/swagger-ui.html#/
                 
+                正式地址;
+                        http://manage.zhangleoption.com/app/sops.html
         账号:13011111112
              13011111113
              13011111114
@@ -8398,6 +8409,30 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
         http://192.168.0.104:8249/hurong_proj_gd_txyd/indexp2pmobile.html
         
         
+        修改轮播图小圆点
+                【sencha-touch.css】
+        默认未选中样式:
+                【.x-carousel-indicator-dark span】6123行
+            width: 14px;
+            height: 14px;
+            display: inline-block;
+            border-radius: 100%;
+            background: transparent;
+            background: transparent;
+            border: 2px solid #fedf4a;
+            
+        选中样式:
+                【.x-carousel-indicator-dark span.x-carousel-indicator-active】6128行
+            width: 14px;
+            height: 14px;
+            display: inline-block;
+            border-radius: 100%;
+            background: #fedf4a;
+            border: 0;
+
+
+
+
         
 ====================================================================================
         [React Native][RN]
@@ -8746,7 +8781,7 @@ tion: Failed to install all
        解决办法：
         是由于未安装 Android Surpport Responsitory，运行 sdk manager 找到 Extra 下的 android surpport responsitory 选中并安装即可
 ==============================================================
-        RN创建指定版本[RN创建版本][RN添加版本]
+        RN创建指定版本[RN创建版本][RN添加版本][RN指定版本]
         react-native init test --source react-native@0.49.5
         
         react-native init MyApp --version 0.49.5
@@ -8895,7 +8930,8 @@ tion: Failed to install all
                 WebStorm展开左侧菜单[WebStorm左侧项目 目录定位当前编辑的文件]
                 英文版:
                         齿轮下拉菜单里选中
-                【Autoscroll form Source】从源/自动滚动到源代码
+                【Autoscroll to Source】
+                【Autoscroll form Source】从/自动滚动到源代码
 
                 汉化版
                 汉化后的webstorm如果选择 从源代码处滚动 不出现左侧定位的按钮的话，可以在工具的根目录的lib文件夹下找到resources-cn.jar
@@ -8907,6 +8943,8 @@ tion: Failed to install all
                 5.拖到汉化版的【messages\resources_en】文件夹
                         PS:IntelliJ IDEA同理
                 6.重启webstorm即可
+                
+                
 ==============================================================
                 WebStorm添加多个项目[WebStorm添加多个项目到当前工程目录]
                 
@@ -8915,6 +8953,20 @@ tion: Failed to install all
                         
                 汉化版:
                         文件(F) -- 设置(T) -- Directories -- 添加内容根(C) -- 选择项目目录 -- 确定
+                        
+                        
+              修改项目端口号:
+             1.打开【项目主目录/node_modules/react-native/local-cli/server/server.js】66行
+             2.在【default】后修改端口保存
+             3.保存
+             
+             
+         1.摇一摇或【Ctr + M】
+         2.选择菜单：【Dev settings】开发环境
+         3.选择【Debug server host & port for device】调试服务器主机和设备端口
+         4.填写ipconfig的以太网适配器 本地连接 - IPv4地址
+             比如:【172.16.10.242:8082】
+         5.重新【react-native run-android】启动项目
 ==============================================================
                 WebStorm配置RN
                 1.在Command(命令)选择【run】
