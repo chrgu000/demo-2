@@ -3785,7 +3785,7 @@ Sencha Docs - Ext JS
                 2.Ctrl+Shift+L （待操作状态）
                 3.方向键←   （操作这步骤后，可以添加想要添加的字符）
 ===============================================================
-        submile删除当前行快捷键[submile快捷键]
+        submile删除当前行快捷键[sublime快捷键]
                【Ctrl + Shift + K】
          选择相同文本
                 【Alt + F3】      
@@ -3922,7 +3922,7 @@ Sencha Docs - Ext JS
             // 打开上次打开的文件，需配合 hot_exit 使用
             "remember_open_files":false
 ===============================================================         
-        Sublime代码快捷键?
+        sublime代码快捷键?[sublime快捷键]
       1【工具 -- 新代码块】
       2.保存在【\Data\Packages\User\文件名.sublime-snippet】
       3.填写代码块,但一个代码块只能写在一个文件内.       
@@ -4832,6 +4832,24 @@ Sencha Docs - Ext JS
                 });
             };
         })(jQuery);
+===============================================================
+        jquery清除选中样式[jquery清除样式][jq清除样式][jquery清除input焦点样式][jq清除input焦点样式]
+        // 用事件委托清除input获取焦点样式
+        $(document).on('focus', 'input', function () {
+            // 失去焦点事件
+            // $(this).trigger('blur');
+            
+            // 清除阴影
+            $('input').css({
+                '-webkit-box-shadow': 'none',
+                '-moz-box-shadow': 'none',
+                'box-shadow': 'none',
+                'outline': 'none'
+            })
+            
+            // 去除光标
+            $('input').attr('readonlyunselectable', 'on');
+        });             
 ===============================================================
         Java方法?
         【getParameter()】获取客户端的数据
@@ -6150,7 +6168,7 @@ em表示元素的font-size属性的计算值，如果用于font-size属性本身
         $('.x-button-normal.x-button.x-sized').eq(1).addClass('wdzh_select');
 
 ====================================================================================
-        【ST隐藏滚动条】
+        【ST隐藏滚动条】[st设置滚动][st设置滚动方式]
         
         → 第一种(CSS代码)
         /* 隐藏x方向滚动条 */  
@@ -6164,11 +6182,47 @@ em表示元素的font-size属性的计算值，如果用于font-size属性本身
         
         → 第二种(js方式):
         scrollable: {  
-           // 注意横向竖向模式的配置，不能配错  
+           // 注意横向竖向模式的配置，不能配错(horizontal横向)
             direction: 'vertical',  
            // 隐藏滚动条样式  
            indicators: false  
         }
+====================================================================================
+        st滚动事件
+        {
+            xtype:'dataview',
+            fullscreen: true,
+            scrollable: {
+                direction:'vertical',
+                scroller: {
+                    listeners:{
+                        scroll:function(){
+                            console.log('[scrollable][on scroll]');
+                        },
+                        scrollend:function( scroller, x, y, eOpts ){
+                            console.log('[scrollable][on scrollend]x='+x+', y='+y);
+                        }
+                    }
+                }
+            },
+            
+            
+            第二种:
+            var panel = Ext.getCmp('workInfo1'); 
+            panel.getScrollable().getScroller().on('scroll', function(scroller, x, y){
+                if (!isScroll) {
+                    console.log(1);
+                    isScroll = true;
+                     if (!flag) {
+                        scroller.scrollTo(0, 100)
+                        flag = true;
+                     } else {
+                        scroller.scrollTo(0, 0);
+                        flag = false;
+                     }
+                isScroll = false;
+                }
+            });
 ====================================================================================
        【EmEditor快捷键】
         禁止点击
@@ -8291,6 +8345,9 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
         密码:
                 111111
         
+         账号【p760704087】
+         密码【peng760704087a】
+        
         公众号：zzzhugeliang@126.com
         密码：jin66766701
         
@@ -8431,10 +8488,9 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
             background: #fedf4a;
             border: 0;
 
-
-
-
-        
+====================================================================================
+        px转vw
+        iphone6宽度375计算，37.5/375=0.1，0.1 * 100=10,也就是10vw
 ====================================================================================
         [React Native][RN]
         
