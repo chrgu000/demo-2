@@ -3863,6 +3863,11 @@ Sencha Docs - Ext JS
                 【Alt + Shift + W】
      移除与你的光标相关的父标签。对清除标记很有帮助。
                 【Alt + Shift + ;】
+        放大字体
+                【Ctrl + Shift + [+]】
+        缩小字体
+                【Ctrl + Shift + [-]】
+                
 ===============================================================    
                sublime括号高亮插件?
             1、打开【package Control】(Ctrl + Shift + P)，选择【install Package】
