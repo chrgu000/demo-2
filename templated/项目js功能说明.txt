@@ -8460,8 +8460,8 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
         IOS ID ：1720038986@qq.com
         密码：Jinyuge1705
 ====================================================================================
-        天匣易贷
-        svn://192.168.0.102/hurong/p2p/branch/proj/gd/txyd
+        天匣易贷二期
+        svn://192.168.0.103/hurong/proj/gd/txyd
         
         测试后台地址;http://192.168.0.104:8249/hurong_proj_gd_txyd/login.jsp
         账号：admin    密码：1
@@ -8470,6 +8470,12 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
         
         测试Web:
         http://192.168.0.104:8249/hurong_proj_gd_txyd/indexp2pmobile.html
+        
+        
+        SVN:
+                dengzhikai
+                dengzhikai@20180423
+        
         
         
         修改轮播图小圆点
@@ -8492,6 +8498,8 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
             border-radius: 100%;
             background: #fedf4a;
             border: 0;
+
+
 
 ====================================================================================
         px转vw
