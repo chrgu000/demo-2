@@ -373,6 +373,7 @@ JDK v1.7参数
 
 JDK 6参数换成:
 	-Xms512m -Xmx512m -XX:MaxNewSize=512m -XX:MaxPermSize=512m
+        -Xms256m -Xmx512m -XX:PermSize=256m -XX:MaxPermSize=600m
 ==========================================================================
 	服务延迟事件,一般【500ms】就好,500ms跑不起来项目,那么就是报错
 	p2p的项目【200ms】就好,推荐用【500ms】
