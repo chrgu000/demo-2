@@ -92,6 +92,133 @@
         
         【Shift + Alt + A】 进入多行选择状态,再点击一遍恢复
         【Ctrl + Shift + E】打开MyEclipse的菜单选项“Edit/编辑”，可以看到当前程序的保存路径，并且可以在你打开的所有程序中选择你想编辑的程序
+        
+//===============================================
+         方便看java方法
+                1.打开【包资源管理器】
+                        【窗口(W) - 显示视图(V) - 包资源管理器】
+                        快捷键:
+	                【Alt + Shift + Q】 + 【P】
+                2.【项目资源管理器 -- 右上角▽ - 包表示法(P)】 把【平面(F)】改成【分层的(H)】
+//===============================================
+         MyEclipse启动不了项目【MyEclipse启动不了erp】
+         1.查看Tomcat目录下是否编译文件
+                【项目\WEB-INF\classes\com\zhiwei\credit\core\creditAssignment】
+                没文件说明没编译成功
+                
+         2.打开【问题】查找原因       
+               【窗口(W) - 显示视图(V) - 问题】Problems
+                快捷键:
+                	【Alt + Shift + Q】 + 【X】
+                        
+        ① 同步SVN
+        ② 选中左侧项目,右键项目属性(R)或快捷键【Alt + Enter】打开属性
+                【Java构建路径 - 库(L)】-选择【添加 JRE...】引入【项目目录\WebRoot\WEB-INF\lib】所有jar包
+        ③ 清理项目
+                【项目(P) - 清理(N)】勾选【自动构建(M)】
+                        选择【清理(N)】,选择第二个【清理下面所选择项目(S)】,选择对应项目【OK】
+        ④ 选中左侧项目,F5刷新项目
+        
+        其他方法
+                1.打开【窗口(W) - 首选项(P) - Java - 编译器】
+                2.Java一致下 - 编译器一致性级别(I): 选择【1.6】
+                3.【应用(A)】
+                4.OK
+//===============================================
+         MyEclipse添加JRE
+         ① 选中左侧项目,右键项目属性(R)或快捷键【Alt + Enter】打开属性
+         ② 【Java构建路径 - 库(L)】-选择【添加 JRE...】引入【项目目录\WebRoot\WEB-INF\lib】所有jar包
+//===============================================
+                解决Cannot change version of project facet Dynamic web module to 2.5
+                        src;https://blog.csdn.net/steveguoshao/article/details/38414145
+                
+                1.把Servlet改成2.5，打开项目的web.xml，改之前：
+                <!DOCTYPE web-app PUBLIC  
+                 "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"  
+                 "http://java.sun.com/dtd/web-app_2_3.dtd" >  
+                  
+                <web-app>  
+                  <display-name>Archetype Created Web Application</display-name>  
+                </web-app>  
+                改后
+                <?xml version="1.0" encoding="UTF-8"?>  
+                        <web-app version="2.5"  
+                            xmlns="http://java.sun.com/xml/ns/javaee"  
+                            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+                            xsi:schemaLocation="http://java.sun.com/xml/ns/javaee  
+                            http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">  
+                              
+                          <display-name>Archetype Created Web Application</display-name>  
+                        </web-app> 
+                        
+                2.修改项目的设置，在Navigator下打开项目.settings目录下的org.eclipse.jdt.core.prefs
+                eclipse.preferences.version=1  
+                org.eclipse.jdt.core.compiler.codegen.inlineJsrBytecode=enabled  
+                org.eclipse.jdt.core.compiler.codegen.targetPlatform=1.5  
+                org.eclipse.jdt.core.compiler.compliance=1.5  
+                org.eclipse.jdt.core.compiler.problem.assertIdentifier=error  
+                org.eclipse.jdt.core.compiler.problem.enumIdentifier=error  
+                org.eclipse.jdt.core.compiler.problem.forbiddenReference=warning  
+                org.eclipse.jdt.core.compiler.source=1.5  
+                
+                把1.5改成1.6
+                eclipse.preferences.version=1  
+                org.eclipse.jdt.core.compiler.codegen.inlineJsrBytecode=enabled  
+                org.eclipse.jdt.core.compiler.codegen.targetPlatform=1.6  
+                org.eclipse.jdt.core.compiler.compliance=1.6  
+                org.eclipse.jdt.core.compiler.problem.assertIdentifier=error  
+                org.eclipse.jdt.core.compiler.problem.enumIdentifier=error  
+                org.eclipse.jdt.core.compiler.problem.forbiddenReference=warning  
+                org.eclipse.jdt.core.compiler.source=1.6  
+                
+                打开org.eclipse.wst.common.component
+                <?xml version="1.0" encoding="UTF-8"?>  
+                <project-modules id="moduleCoreId" project-version="1.5.0">  
+                    <wb-module deploy-name="test">  
+                        <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>  
+                        <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>  
+                        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>  
+                        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>  
+                        <property name="context-root" value="test"/>  
+                        <property name="java-output-path" value="/test/target/classes"/>  
+                    </wb-module>  
+                </project-modules>  
+
+                把project-version="1.5.0"改成project-version="1.6.0"
+                <?xml version="1.0" encoding="UTF-8"?>  
+                <project-modules id="moduleCoreId" project-version="1.6.0">  
+                    <wb-module deploy-name="test">  
+                        <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>  
+                        <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>  
+                        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>  
+                        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>  
+                        <property name="context-root" value="test"/>  
+                        <property name="java-output-path" value="/test/target/classes"/>  
+                    </wb-module>  
+                </project-modules> 
+                
+                
+                打开org.eclipse.wst.common.project.facet.core.xml
+                
+                <?xml version="1.0" encoding="UTF-8"?>  
+                <faceted-project>  
+                  <fixed facet="wst.jsdt.web"/>  
+                  <installed facet="java" version="1.5"/>  
+                  <installed facet="jst.web" version="2.3"/>  
+                  <installed facet="wst.jsdt.web" version="1.0"/>  
+                </faceted-project>  
+                把<installed facet="java" version="1.5"/>改成<installed facet="java" version="1.6"/>，把  <installed facet="jst.web" version="2.3"/>改成  <installed facet="jst.web" version="2.5"/>
+                <?xml version="1.0" encoding="UTF-8"?>  
+                <faceted-project>  
+                  <fixed facet="wst.jsdt.web"/>  
+                  <installed facet="java" version="1.6"/>  
+                  <installed facet="jst.web" version="2.5"/>  
+                  <installed facet="wst.jsdt.web" version="1.0"/>  
+                </faceted-project>  
+
+                都改好之后在打开看看，已经把【Dynamic web module】改成了2.5
+                1.选中左侧项目,右键项目属性(R)或快捷键【Alt + Enter】打开属性
+                2.【MyEclipse - Project Facets(项目方面)】查看
 //===============================================
 	Java快捷键
 	选中函数方法
