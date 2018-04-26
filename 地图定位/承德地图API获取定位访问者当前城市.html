@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>承德地图获取定位</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.1&key=a852e2127d48a6f1474a193b0a03e8d2"></script>
+<script type="text/javascript" src="../js/jquery-1.10.2.js"></script>
+</head>
+<body>
+    <div id="city"></div>
+</body>
+</html>
+<script type="text/javascript">
+    function getCurrentPosition() {
+      alert("进入定位方法");
+      //定位数据获取成功响应
+      var onSuccess = function(position) {
+          alert('纬度: ' + position.coords.latitude + '\n' + '经度: ' + position.coords.longitude + '\n' + '海拔: ' + position.coords.altitude + '\n' + '水平精度: ' + position.coords.accuracy + '\n' + '垂直精度: ' + position.coords.altitudeAccuracy + '\n' + '方向: ' + position.coords.heading + '\n' + '速度: ' + position.coords.speed + '\n' + '时间戳: ' + position.timestamp + '\n');
+      };
+      //定位数据获取失败响应
+      function onError(error) {
+          alert('code: ' + error.code + '\n' + 'message: ' + error.message + '\n');
+      }
+      alert("开始定位");
+      //开始获取定位数据
+      navigator.geolocation.getCurrentPosition(onSuccess, onError);
+  }
+  var longitude = '';
+  var latitude = '';
+  mapObj = new AMap.Map('iCenter');
+  mapObj.plugin('AMap.Geolocation', function() {
+      geolocation = new AMap.Geolocation({
+          enableHighAccuracy: true, //是否使用高精度定位，默认:true
+          timeout: 10000, //超过10秒后停止定位，默认：无穷大
+          maximumAge: 0, //定位结果缓存0毫秒，默认：0
+          convert: true, //自动偏移坐标，偏移后的坐标为高德坐标，默认：true
+          showButton: false, //显示定位按钮，默认：true
+          buttonPosition: 'LB', //定位按钮停靠位置，默认：'LB'，左下角
+          buttonOffset: new AMap.Pixel(10, 20), //定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
+          showMarker: false, //定位成功后在定位到的位置显示点标记，默认：true
+          showCircle: false, //定位成功后用圆圈表示定位精度范围，默认：true
+          panToLocation: false, //定位成功后将定位到的位置作为地图中心点，默认：true
+          zoomToAccuracy: false //定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
+      });
+      mapObj.addControl(geolocation);
+      geolocation.getCurrentPosition();
+      AMap.event.addListener(geolocation, 'complete', onComplete); //返回定位信息
+      AMap.event.addListener(geolocation, 'error', onError); //返回定位出错信息
+  });
+  //解析定位结果
+  function onComplete(data) {
+      longitude = JSON.stringify(data.position.lng); //经度
+      latitude = JSON.stringify(data.position.lat); //纬度
+      console.log(data);
+      console.log(longitude, latitude);
+      var url = 'http://restapi.amap.com/v3/geocode/regeo?key=a852e2127d48a6f1474a193b0a03e8d2&location=' +
+              longitude + ',' +
+              latitude +
+              '';
+
+      // jquery获取Ajax get请求
+        $.ajax({
+            url : url,
+            params : {
+                isMobile : 1
+            },
+            type : 'get',
+            dataType : 'json',
+            async : false,
+            success : function (data) {
+                // 省级
+                 var city = data.regeocode.addressComponent.province;
+
+                 // 市、区
+                 var district = data.regeocode.addressComponent.district;
+
+                 // 镇
+                var township = data.regeocode.addressComponent.township;
+
+                   if (data.status == "1") {
+                           city = city;
+                           district = district;
+                           township = township;
+                           document.getElementById("city").innerHTML = city;
+                   } else {
+                       alert('','定位失败');
+                   }
+            }
+        })
+
+          /*Ext.Ajax.request({
+             url:url,
+             //method: 'POST',
+               success : function(response) {
+                 var responseText = Ext.util.JSON.decode(response.responseText);
+                 var city = responseText.regeocode.addressComponent.province;//省级
+                       var district = responseText.regeocode.addressComponent.district;//市、区
+                       var township = responseText.regeocode.addressComponent.township;
+                       if (responseText.status == "1") {
+                               city= city;
+                               district= district;
+                               township= township;
+                               document.getElementById("city").innerHTML=city;
+                       } else {
+                           Ext.Msg.alert('','定位失败');
+                       }
+               }
+            });*/
+        }
+    //解析定位错误信息
+    function onError(data) {
+        //alert(data.message);
+        alert('获取定位失败');
+    }
+
+
+</script>

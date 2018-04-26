@@ -39,6 +39,25 @@
 //=======================================================================
         ctx是什么词的缩写
         【context】上下文。
+//==============================================
+        MyEclipse8.5汉化说明[MyEclipse v8.5汉化说明]
+       1.把下载好的汉化包里的language的文件夹全覆盖到你安装的MyEclipse 8.5文件夹下
+        2.用myeclipse创建一个JAVA项目，将CreatePluginsConfig.java复制这个项目中src中。
+        3.更改【main】方法路径为当前MyEclipse 8.5路径
+        4.右键【Run As - Java Application】或【Alt + Shift + X】 ,再按【J】
+        5.在控制台里将代码复制出来
+        6.打开【MyEclipse 8.5主目录\configuration\org.eclipse.equinox.simpleconfigurator】
+        	用记事本把bundles.info 打开，在最后一行回车一下。把刚才在控制台里面的内容都粘贴进去保存
+        7.找到MyEclipse 8.5的目录下找到myeclipse.ini文件，用记事本打开在最后一行加多一条语句
+        【-Duser.language=zh】
+        
+        JRE优化内存;
+                1.【窗口(W) - 首选项 - Jva - 已安装的 JRE - 编辑(E) - 缺省 VM 参数】
+                2.输入【-Xms1024M -Xmx1024M -XX:MaxPermSize=400M】
+        
+        Tomcat优化内存:
+                1.【窗口(W) - 首选项 - MyEclipse - Servers - Tomcat - Tomcat 6.x】 - 【Optional program arguments(可选程序参数)】
+                2.输入【-Xms256m -Xmx512m -XX:MaxNewSize=256m -XX:MaxPermSize=256m】
 //=====================【MyEclipse快捷键】=========================
         MyEclipse 买 一棵力普斯
         sencha touch 赛驰 塔尺
@@ -101,7 +120,7 @@
 	                【Alt + Shift + Q】 + 【P】
                 2.【项目资源管理器 -- 右上角▽ - 包表示法(P)】 把【平面(F)】改成【分层的(H)】
 //===============================================
-         MyEclipse启动不了项目【MyEclipse启动不了erp】
+         MyEclipse启动不了项目[MyEclipse启动不了erp][MyEclipse启动不了项目][启动不了项目]
          1.查看Tomcat目录下是否编译文件
                 【项目\WEB-INF\classes\com\zhiwei\credit\core\creditAssignment】
                 没文件说明没编译成功
@@ -128,6 +147,15 @@
          MyEclipse添加JRE
          ① 选中左侧项目,右键项目属性(R)或快捷键【Alt + Enter】打开属性
          ② 【Java构建路径 - 库(L)】-选择【添加 JRE...】引入【项目目录\WebRoot\WEB-INF\lib】所有jar包
+//===============================================
+        Archive for required library
+        1.打开【导航器】
+                        【窗口(W) - 显示视图(V) - 其他(O)】
+                         快捷键:
+                	【Alt + Shift + Q】 + 【O】
+        2.选择【常规 - 导航器】- OK
+        3.用记事本打开项目根目录的【.classpath】文件，找到“<classpathentry kind="lib" path="WebContent/WEB-INF/lib/readme.txt【报错文件】"/>”这一行，删掉
+        PS:将引入的不是【*.jar】后缀的都删掉
 //===============================================
                 解决Cannot change version of project facet Dynamic web module to 2.5
                         src;https://blog.csdn.net/steveguoshao/article/details/38414145
@@ -389,6 +417,11 @@ JDK v1.6参数
         -Xms1024m -Xmx1024m -XX:PermSize=128M -XX:MaxNewSize=512m -XX:MaxPermSize=256m -Djava.awt.headless=true
         
         
+        erp
+        -Xmx1024M -Xms512M -XX:MaxPermSize=512m
+        项目无法编译:
+        项目右键属性【构造器 - 插件验证】关闭
+        
 JDK v1.7参数
 	-Xms256m -Xmx1024m -XX:PermSize=256m -XX:MaxPermSize=600m
 	-Drebel.spring_plugin=true   
@@ -501,6 +534,14 @@ JDK v1.7参数
 JDK 6参数换成:
 	-Xms512m -Xmx512m -XX:MaxNewSize=512m -XX:MaxPermSize=512m
         -Xms256m -Xmx512m -XX:PermSize=256m -XX:MaxPermSize=600m
+        
+        
+        •修改jdk内存大小
+        -Xms100m -Xmx512m -XX:PermSize=256m -XX:MaxPermSize=600m
+        -Drebel.spring_plugin=true   
+        -Drebel.aspectj_plugin=true   
+        -Drebel.struts2_plugin=true
+
 ==========================================================================
 	服务延迟事件,一般【500ms】就好,500ms跑不起来项目,那么就是报错
 	p2p的项目【200ms】就好,推荐用【500ms】
@@ -1694,7 +1735,7 @@ Ext.define 实现扩展
         ins1.callback()  //output: balabala
         ins2.callback()  //output: an overriding method.
 =============================================================
-        对象转字符串[Object转String][Object转字符串]
+        对象转字符串[Object转String][Object转字符串][字符串转对象][json转对象][对象转json]
        var obj = JSON.parse(str); // 由JSON字符串转换为JSON对象
        
        第一种:
@@ -6574,7 +6615,7 @@ em表示元素的font-size属性的计算值，如果用于font-size属性本身
         3.sava保存
 
         二:
-        【 窗口(W) -- 首选项(P) -- MyEclipse -- 验证】执行验证时将运行指定的验证程序,将【构建】的√都去掉.
+        【 窗口(W) -- 首选项(P) -- MyEclipse -- 验证(Validation)】执行验证时将运行指定的验证程序,将【构建】的√都去掉.
 ====================================================================================
         【MyEclipse设置主题】[MyEclipse主题][MyEclipse更换主题]
         http://www.eclipsecolorthemes.org/
@@ -8186,7 +8227,11 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
                 购买人:【yuqingdanv】
                 账号:【shinanyu】               密码:【aaaaaa】
                 账号:【18601224625】            密码:【aaaaaa】
-                
+         
+                企业开户qiyekaihuapp01  aaaaaa
+                债权交易zuohexian  aaaaaa
+                hanmeng  
+         
           绑定银行卡账号
                 【houyetz7】
                短信验证码:
@@ -8237,9 +8282,10 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
                 
             公司介绍PC页面[信息披露PC页面]
             
-            
-            
-            
+             债权交易PC页面
+                【allSaleTemplate.ftl】
+             结算清单PC页面[交易信息PC页面]
+                【orStartTransfer_form.ftl】
             
             
             
@@ -8591,6 +8637,10 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
         天匣易贷二期
         svn://192.168.0.103/hurong/proj/gd/txyd
         
+        【JavaEE 5.0 Genneric Library】
+        【JRE 系统库[jdk1.6.0_43]】
+        【引入lib包】
+        
         测试后台地址;http://192.168.0.104:8249/hurong_proj_gd_txyd/login.jsp
         账号：admin    密码：1
         部署好了
@@ -8599,12 +8649,9 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
         测试Web:
         http://192.168.0.104:8249/hurong_proj_gd_txyd/indexp2pmobile.html
         
-        
         SVN:
                 dengzhikai
                 dengzhikai@20180423
-        
-        
         
         修改轮播图小圆点
                 【sencha-touch.css】
@@ -8628,6 +8675,19 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
             border: 0;
 
 
+        ajax请求返回login.jsp页面
+        解决:后台加了拦截器,不登录后台没法获取,改下拦截器就好
+        
+        
+        ST弹框样式[ST弹框字体样式]
+        CSS:
+            【sencha-touch.css】
+        CSS类:
+           【.x-msgbox-dark .x-msgbox-text】5519行
+           注释
+           【text-shadow: rgba(0, 0, 0, 0.5) 0 -0.08em 0;】
+                
+        
 
 ====================================================================================
         px转vw
