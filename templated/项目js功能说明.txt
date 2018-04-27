@@ -1374,9 +1374,17 @@ Ext.define 实现扩展
          jQuery:
 	→方法1: 推荐,能选中下拉框的值
                【$('#kaihushi1 option:eq(1)').prop('selected',true);】
+         增强版:
+               $('#cityList option[innerContent="' + GPSCity + '"]').prop('selected', true);
+               需要创建标签自定义属性:
+               option.setAttribute('innerContent', city[i].text);
+               
         →方法2: 不会选中下拉框的值
                【$('#kaihushi1 option:eq(1)').attr('selected','selected');】
                【$('#kaihushi1').find('option:eq(1)').attr('selected','selected');】
+               
+               
+               
 ================================================================================                
         原生js判断事件处于第几阶段?
         【e.eventPhase】

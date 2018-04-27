@@ -417,7 +417,7 @@ Ext.Ajax.request({&#13;
             &#13;
     }&#13;
 });</template><template autoinsert="true" context="JavaScript" deleted="false" description="ST ajax获取市" enabled="true" name="stajaxhqs">// 选择省份,选择城市&#13;
-changeCity1 = function(){&#13;
+changeCity1 = function () {&#13;
 	// 获取省份id&#13;
 	var bankId = document.getElementById("kaihusheng1").value;&#13;
 	&#13;
