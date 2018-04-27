@@ -1,0 +1,2760 @@
+[
+    {
+        "id": 6591,
+        "cls": "folder",
+        "leaf": false,
+        "checked": false,
+        "text": "中国",
+        "children": [
+            {
+                "id": 7588,
+                "cls": "file",
+                "leaf": false,
+                "checked": false,
+                "text": "浙江省",
+                "children": [
+                    {
+                        "id": 7639,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "湖州市"
+                    },
+                    {
+                        "id": 7604,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "宁波市"
+                    },
+                    {
+                        "id": 7673,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "舟山市"
+                    },
+                    {
+                        "id": 7617,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "温州市"
+                    },
+                    {
+                        "id": 7690,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "丽水市"
+                    },
+                    {
+                        "id": 7679,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "台州市"
+                    },
+                    {
+                        "id": 7646,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "绍兴市"
+                    },
+                    {
+                        "id": 7665,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "衢州市"
+                    },
+                    {
+                        "id": 7589,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "杭州市"
+                    },
+                    {
+                        "id": 7654,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "金华市"
+                    },
+                    {
+                        "id": 7630,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "嘉兴市"
+                    }
+                ]
+            },
+            {
+                "id": 9044,
+                "cls": "file",
+                "leaf": false,
+                "checked": false,
+                "text": "重庆市",
+                "children": [
+                    {
+                        "id": 9061,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "县"
+                    },
+                    {
+                        "id": 9045,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "市辖区"
+                    },
+                    {
+                        "id": 9083,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "市"
+                    }
+                ]
+            },
+            {
+                "id": 7433,
+                "cls": "file",
+                "leaf": false,
+                "checked": false,
+                "text": "上海市",
+                "children": [
+                    {
+                        "id": 7434,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "市辖区"
+                    },
+                    {
+                        "id": 7453,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "县"
+                    },
+                    {
+                        "id": 7454,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "崇明县"
+                    }
+                ]
+            },
+            {
+                "id": 10090,
+                "cls": "file",
+                "leaf": false,
+                "checked": false,
+                "text": "香 港",
+                "children": [
+                    {
+                        "id": 10183,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "香港"
+                    }
+                ]
+            },
+            {
+                "id": 9887,
+                "cls": "file",
+                "leaf": false,
+                "checked": false,
+                "text": "青海省",
+                "children": [
+                    {
+                        "id": 9897,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "海东地区"
+                    },
+                    {
+                        "id": 9934,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "海西蒙古族藏族自治州"
+                    },
+                    {
+                        "id": 9914,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "海南藏族自治州"
+                    },
+                    {
+                        "id": 9888,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "西宁市"
+                    },
+                    {
+                        "id": 9904,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "海北藏族自治州"
+                    },
+                    {
+                        "id": 9909,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "黄南藏族自治州"
+                    },
+                    {
+                        "id": 9927,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "玉树藏族自治州"
+                    },
+                    {
+                        "id": 9920,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "果洛藏族自治州"
+                    }
+                ]
+            },
+            {
+                "id": 8877,
+                "cls": "file",
+                "leaf": false,
+                "checked": false,
+                "text": "广 西",
+                "children": [
+                    {
+                        "id": 8904,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "桂林市"
+                    },
+                    {
+                        "id": 8965,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "百色市"
+                    },
+                    {
+                        "id": 8938,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "防城港市"
+                    },
+                    {
+                        "id": 8979,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "贺州市"
+                    },
+                    {
+                        "id": 8932,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "北海市"
+                    },
+                    {
+                        "id": 8957,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "玉林市"
+                    },
+                    {
+                        "id": 8998,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "来宾市"
+                    },
+                    {
+                        "id": 8878,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "南宁市"
+                    },
+                    {
+                        "id": 8923,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "梧州市"
+                    },
+                    {
+                        "id": 9006,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "崇左市"
+                    },
+                    {
+                        "id": 8892,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "柳州市"
+                    },
+                    {
+                        "id": 8985,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "河池市"
+                    },
+                    {
+                        "id": 8950,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "贵港市"
+                    },
+                    {
+                        "id": 8944,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "钦州市"
+                    }
+                ]
+            },
+            {
+                "id": 6806,
+                "cls": "file",
+                "leaf": false,
+                "checked": false,
+                "text": "山西省",
+                "children": [
+                    {
+                        "id": 6839,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "长治市"
+                    },
+                    {
+                        "id": 6832,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "阳泉市"
+                    },
+                    {
+                        "id": 6870,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "晋中市"
+                    },
+                    {
+                        "id": 6854,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "晋城市"
+                    },
+                    {
+                        "id": 6914,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "临汾市"
+                    },
+                    {
+                        "id": 6883,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "运城市"
+                    },
+                    {
+                        "id": 6819,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "大同市"
+                    },
+                    {
+                        "id": 6862,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "朔州市"
+                    },
+                    {
+                        "id": 6898,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "忻州市"
+                    },
+                    {
+                        "id": 6807,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "太原市"
+                    },
+                    {
+                        "id": 6933,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "吕梁市"
+                    }
+                ]
+            },
+            {
+                "id": 10089,
+                "cls": "file",
+                "leaf": false,
+                "checked": false,
+                "text": "台湾省",
+                "children": [
+                    {
+                        "id": 10184,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "市辖区"
+                    },
+                    {
+                        "id": 10185,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "县"
+                    }
+                ]
+            },
+            {
+                "id": 8715,
+                "cls": "file",
+                "leaf": false,
+                "checked": false,
+                "text": "广东省",
+                "children": [
+                    {
+                        "id": 8856,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "东莞市"
+                    },
+                    {
+                        "id": 8832,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "河源市"
+                    },
+                    {
+                        "id": 8755,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "汕头市"
+                    },
+                    {
+                        "id": 8816,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "梅州市"
+                    },
+                    {
+                        "id": 8742,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "深圳市"
+                    },
+                    {
+                        "id": 8809,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "惠州市"
+                    },
+                    {
+                        "id": 8716,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "广州市"
+                    },
+                    {
+                        "id": 8771,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "江门市"
+                    },
+                    {
+                        "id": 8791,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "茂名市"
+                    },
+                    {
+                        "id": 8826,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "汕尾市"
+                    },
+                    {
+                        "id": 8840,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "阳江市"
+                    },
+                    {
+                        "id": 8730,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "韶关市"
+                    },
+                    {
+                        "id": 8846,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "清远市"
+                    },
+                    {
+                        "id": 8780,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "湛江市"
+                    },
+                    {
+                        "id": 8870,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "云浮市"
+                    },
+                    {
+                        "id": 8750,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "珠海市"
+                    },
+                    {
+                        "id": 8857,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "中山市"
+                    },
+                    {
+                        "id": 8799,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "肇庆市"
+                    },
+                    {
+                        "id": 8858,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "潮州市"
+                    },
+                    {
+                        "id": 8863,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "揭阳市"
+                    },
+                    {
+                        "id": 8764,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "佛山市"
+                    }
+                ]
+            },
+            {
+                "id": 9410,
+                "cls": "file",
+                "leaf": false,
+                "checked": false,
+                "text": "云南省",
+                "children": [
+                    {
+                        "id": 9498,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "楚雄彝族自治州"
+                    },
+                    {
+                        "id": 9411,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "昆明市"
+                    },
+                    {
+                        "id": 9549,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "德宏傣族景颇族自治州"
+                    },
+                    {
+                        "id": 9438,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "玉溪市"
+                    },
+                    {
+                        "id": 9476,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "思茅市"
+                    },
+                    {
+                        "id": 9532,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "西双版纳傣族自治州"
+                    },
+                    {
+                        "id": 9555,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "怒江傈僳族自治州"
+                    },
+                    {
+                        "id": 9449,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "保山市"
+                    },
+                    {
+                        "id": 9509,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "红河哈尼族彝族自治州"
+                    },
+                    {
+                        "id": 9523,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "文山壮族苗族自治州"
+                    },
+                    {
+                        "id": 9469,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "丽江市"
+                    },
+                    {
+                        "id": 9560,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "迪庆藏族自治州"
+                    },
+                    {
+                        "id": 9536,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "大理白族自治州"
+                    },
+                    {
+                        "id": 9456,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "昭通市"
+                    },
+                    {
+                        "id": 9427,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "曲靖市"
+                    },
+                    {
+                        "id": 9488,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "临沧市"
+                    }
+                ]
+            },
+            {
+                "id": 8436,
+                "cls": "file",
+                "leaf": false,
+                "checked": false,
+                "text": "湖北省",
+                "children": [
+                    {
+                        "id": 8547,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "随州市"
+                    },
+                    {
+                        "id": 8496,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "鄂州市"
+                    },
+                    {
+                        "id": 8560,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "省直辖行政单位"
+                    },
+                    {
+                        "id": 8437,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "武汉市"
+                    },
+                    {
+                        "id": 8460,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "十堰市"
+                    },
+                    {
+                        "id": 8527,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "黄冈市"
+                    },
+                    {
+                        "id": 8551,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "恩施土家族苗族自治州"
+                    },
+                    {
+                        "id": 8501,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "荆门市"
+                    },
+                    {
+                        "id": 8452,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "黄石市"
+                    },
+                    {
+                        "id": 8485,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "襄樊市"
+                    },
+                    {
+                        "id": 8470,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "宜昌市"
+                    },
+                    {
+                        "id": 8508,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "孝感市"
+                    },
+                    {
+                        "id": 8517,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "荆州市"
+                    },
+                    {
+                        "id": 8539,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "咸宁市"
+                    }
+                ]
+            },
+            {
+                "id": 6611,
+                "cls": "file",
+                "leaf": false,
+                "checked": false,
+                "text": "河北省",
+                "children": [
+                    {
+                        "id": 6763,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "沧州市"
+                    },
+                    {
+                        "id": 6704,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "保定市"
+                    },
+                    {
+                        "id": 6653,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "秦皇岛市"
+                    },
+                    {
+                        "id": 6662,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "邯郸市"
+                    },
+                    {
+                        "id": 6750,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "承德市"
+                    },
+                    {
+                        "id": 6683,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "邢台市"
+                    },
+                    {
+                        "id": 6731,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "张家口市"
+                    },
+                    {
+                        "id": 6637,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "唐山市"
+                    },
+                    {
+                        "id": 6612,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "石家庄市"
+                    },
+                    {
+                        "id": 6781,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "廊坊市"
+                    },
+                    {
+                        "id": 6793,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "衡水市"
+                    }
+                ]
+            },
+            {
+                "id": 7199,
+                "cls": "file",
+                "leaf": false,
+                "checked": false,
+                "text": "吉林省",
+                "children": [
+                    {
+                        "id": 7200,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "长春市"
+                    },
+                    {
+                        "id": 7237,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "通化市"
+                    },
+                    {
+                        "id": 7268,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "延边朝鲜族自治州"
+                    },
+                    {
+                        "id": 7231,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "辽源市"
+                    },
+                    {
+                        "id": 7254,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "松原市"
+                    },
+                    {
+                        "id": 7261,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "白城市"
+                    },
+                    {
+                        "id": 7223,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "四平市"
+                    },
+                    {
+                        "id": 7212,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "吉林市"
+                    },
+                    {
+                        "id": 7246,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "白山市"
+                    }
+                ]
+            },
+            {
+                "id": 9774,
+                "cls": "file",
+                "leaf": false,
+                "checked": false,
+                "text": "甘肃省",
+                "children": [
+                    {
+                        "id": 9849,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "定西市"
+                    },
+                    {
+                        "id": 9775,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "兰州市"
+                    },
+                    {
+                        "id": 9791,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "白银市"
+                    },
+                    {
+                        "id": 9869,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "临夏回族自治州"
+                    },
+                    {
+                        "id": 9858,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "陇南市"
+                    },
+                    {
+                        "id": 9821,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "平凉市"
+                    },
+                    {
+                        "id": 9807,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "武威市"
+                    },
+                    {
+                        "id": 9787,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "金昌市"
+                    },
+                    {
+                        "id": 9813,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "张掖市"
+                    },
+                    {
+                        "id": 9830,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "酒泉市"
+                    },
+                    {
+                        "id": 9839,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "庆阳市"
+                    },
+                    {
+                        "id": 9785,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "嘉峪关市"
+                    },
+                    {
+                        "id": 9878,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "甘南藏族自治州"
+                    },
+                    {
+                        "id": 9798,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "天水市"
+                    }
+                ]
+            },
+            {
+                "id": 9088,
+                "cls": "file",
+                "leaf": false,
+                "checked": false,
+                "text": "四川省",
+                "children": [
+                    {
+                        "id": 9200,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "眉山市"
+                    },
+                    {
+                        "id": 9220,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "广安市"
+                    },
+                    {
+                        "id": 9125,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "泸州市"
+                    },
+                    {
+                        "id": 9134,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "德阳市"
+                    },
+                    {
+                        "id": 9189,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "南充市"
+                    },
+                    {
+                        "id": 9169,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "内江市"
+                    },
+                    {
+                        "id": 9208,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "宜宾市"
+                    },
+                    {
+                        "id": 9252,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "资阳市"
+                    },
+                    {
+                        "id": 9162,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "遂宁市"
+                    },
+                    {
+                        "id": 9291,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "凉山彝族自治州"
+                    },
+                    {
+                        "id": 9089,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "成都市"
+                    },
+                    {
+                        "id": 9153,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "广元市"
+                    },
+                    {
+                        "id": 9246,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "巴中市"
+                    },
+                    {
+                        "id": 9118,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "攀枝花市"
+                    },
+                    {
+                        "id": 9176,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "乐山市"
+                    },
+                    {
+                        "id": 9258,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "阿坝藏族羌族自治州"
+                    },
+                    {
+                        "id": 9142,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "绵阳市"
+                    },
+                    {
+                        "id": 9227,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "达州市"
+                    },
+                    {
+                        "id": 9236,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "雅安市"
+                    },
+                    {
+                        "id": 9272,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "甘孜藏族自治州"
+                    },
+                    {
+                        "id": 9110,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "自贡市"
+                    }
+                ]
+            },
+            {
+                "id": 8242,
+                "cls": "file",
+                "leaf": false,
+                "checked": false,
+                "text": "河南省",
+                "children": [
+                    {
+                        "id": 8269,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "洛阳市"
+                    },
+                    {
+                        "id": 8316,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "新乡市"
+                    },
+                    {
+                        "id": 8243,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "郑州市"
+                    },
+                    {
+                        "id": 8389,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "商丘市"
+                    },
+                    {
+                        "id": 8298,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "安阳市"
+                    },
+                    {
+                        "id": 8412,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "周口市"
+                    },
+                    {
+                        "id": 8309,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "鹤壁市"
+                    },
+                    {
+                        "id": 8351,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "许昌市"
+                    },
+                    {
+                        "id": 8374,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "南阳市"
+                    },
+                    {
+                        "id": 8400,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "信阳市"
+                    },
+                    {
+                        "id": 8330,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "焦作市"
+                    },
+                    {
+                        "id": 8343,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "濮阳市"
+                    },
+                    {
+                        "id": 8424,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "驻马店市"
+                    },
+                    {
+                        "id": 8257,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "开封市"
+                    },
+                    {
+                        "id": 8359,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "漯河市"
+                    },
+                    {
+                        "id": 8286,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "平顶山市"
+                    },
+                    {
+                        "id": 8366,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "三门峡市"
+                    }
+                ]
+            },
+            {
+                "id": 6948,
+                "cls": "file",
+                "leaf": false,
+                "checked": false,
+                "text": "内蒙古",
+                "children": [
+                    {
+                        "id": 7024,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "巴彦淖尔市"
+                    },
+                    {
+                        "id": 7066,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "阿拉善盟"
+                    },
+                    {
+                        "id": 6949,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "呼和浩特市"
+                    },
+                    {
+                        "id": 7053,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "锡林郭勒盟"
+                    },
+                    {
+                        "id": 7000,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "鄂尔多斯市"
+                    },
+                    {
+                        "id": 6990,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "通辽市"
+                    },
+                    {
+                        "id": 7009,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "呼伦贝尔市"
+                    },
+                    {
+                        "id": 6971,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "乌海市"
+                    },
+                    {
+                        "id": 7033,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "乌兰察布市"
+                    },
+                    {
+                        "id": 6976,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "赤峰市"
+                    },
+                    {
+                        "id": 6960,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "包头市"
+                    },
+                    {
+                        "id": 7046,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "兴安盟"
+                    }
+                ]
+            },
+            {
+                "id": 6592,
+                "cls": "file",
+                "leaf": false,
+                "checked": false,
+                "text": "北京市",
+                "children": [
+                    {
+                        "id": 6593,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "北京市"
+                    }
+                ]
+            },
+            {
+                "id": 10091,
+                "cls": "file",
+                "leaf": false,
+                "checked": false,
+                "text": "澳 门",
+                "children": [
+                    {
+                        "id": 10182,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "澳门"
+                    }
+                ]
+            },
+            {
+                "id": 7841,
+                "cls": "file",
+                "leaf": false,
+                "checked": false,
+                "text": "福建省",
+                "children": [
+                    {
+                        "id": 7913,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "南平市"
+                    },
+                    {
+                        "id": 7900,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "漳州市"
+                    },
+                    {
+                        "id": 7925,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "龙岩市"
+                    },
+                    {
+                        "id": 7934,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "宁德市"
+                    },
+                    {
+                        "id": 7842,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "福州市"
+                    },
+                    {
+                        "id": 7857,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "厦门市"
+                    },
+                    {
+                        "id": 7886,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "泉州市"
+                    },
+                    {
+                        "id": 7872,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "三明市"
+                    },
+                    {
+                        "id": 7865,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "莆田市"
+                    }
+                ]
+            },
+            {
+                "id": 9972,
+                "cls": "file",
+                "leaf": false,
+                "checked": false,
+                "text": "新 疆",
+                "children": [
+                    {
+                        "id": 10048,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "和田地区"
+                    },
+                    {
+                        "id": 9973,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "乌鲁木齐市"
+                    },
+                    {
+                        "id": 9989,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "吐鲁番地区"
+                    },
+                    {
+                        "id": 9997,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "昌吉回族自治州"
+                    },
+                    {
+                        "id": 10068,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "塔城地区"
+                    },
+                    {
+                        "id": 10084,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "省直辖行政单位"
+                    },
+                    {
+                        "id": 9983,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "克拉玛依市"
+                    },
+                    {
+                        "id": 10030,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "克孜勒苏柯尔克孜自治州"
+                    },
+                    {
+                        "id": 10006,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "博尔塔拉蒙古自治州"
+                    },
+                    {
+                        "id": 10076,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "阿勒泰地区"
+                    },
+                    {
+                        "id": 10020,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "阿克苏地区"
+                    },
+                    {
+                        "id": 10010,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "巴音郭楞蒙古自治州"
+                    },
+                    {
+                        "id": 10035,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "喀什地区"
+                    },
+                    {
+                        "id": 9993,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "哈密地区"
+                    },
+                    {
+                        "id": 10057,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "伊犁哈萨克自治州"
+                    }
+                ]
+            },
+            {
+                "id": 8067,
+                "cls": "file",
+                "leaf": false,
+                "checked": false,
+                "text": "山东省",
+                "children": [
+                    {
+                        "id": 8181,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "莱芜市"
+                    },
+                    {
+                        "id": 8104,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "枣庄市"
+                    },
+                    {
+                        "id": 8185,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "临沂市"
+                    },
+                    {
+                        "id": 8147,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "济宁市"
+                    },
+                    {
+                        "id": 8080,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "青岛市"
+                    },
+                    {
+                        "id": 8094,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "淄博市"
+                    },
+                    {
+                        "id": 8133,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "潍坊市"
+                    },
+                    {
+                        "id": 8068,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "济南市"
+                    },
+                    {
+                        "id": 8169,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "威海市"
+                    },
+                    {
+                        "id": 8175,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "日照市"
+                    },
+                    {
+                        "id": 8222,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "滨州市"
+                    },
+                    {
+                        "id": 8231,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "荷泽市"
+                    },
+                    {
+                        "id": 8161,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "泰安市"
+                    },
+                    {
+                        "id": 8119,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "烟台市"
+                    },
+                    {
+                        "id": 8199,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "德州市"
+                    },
+                    {
+                        "id": 8112,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "东营市"
+                    },
+                    {
+                        "id": 8212,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "聊城市"
+                    }
+                ]
+            },
+            {
+                "id": 6610,
+                "cls": "file",
+                "leaf": false,
+                "checked": false,
+                "text": "天津市",
+                "children": [
+                    {
+                        "id": 10165,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "县"
+                    },
+                    {
+                        "id": 10164,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "市辖区"
+                    }
+                ]
+            },
+            {
+                "id": 9309,
+                "cls": "file",
+                "leaf": false,
+                "checked": false,
+                "text": "贵州省",
+                "children": [
+                    {
+                        "id": 9322,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "六盘水市"
+                    },
+                    {
+                        "id": 9397,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "黔南布依族苗族自治州"
+                    },
+                    {
+                        "id": 9371,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "毕节地区"
+                    },
+                    {
+                        "id": 9362,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "黔西南布依族苗族自治州"
+                    },
+                    {
+                        "id": 9380,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "黔东南苗族侗族自治州"
+                    },
+                    {
+                        "id": 9351,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "铜仁地区"
+                    },
+                    {
+                        "id": 9343,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "安顺市"
+                    },
+                    {
+                        "id": 9327,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "遵义市"
+                    },
+                    {
+                        "id": 9310,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "贵阳市"
+                    }
+                ]
+            },
+            {
+                "id": 7277,
+                "cls": "file",
+                "leaf": false,
+                "checked": false,
+                "text": "黑龙江",
+                "children": [
+                    {
+                        "id": 7409,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "黑河市"
+                    },
+                    {
+                        "id": 7328,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "鹤岗市"
+                    },
+                    {
+                        "id": 7338,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "双鸭山市"
+                    },
+                    {
+                        "id": 7299,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "齐齐哈尔市"
+                    },
+                    {
+                        "id": 7359,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "伊春市"
+                    },
+                    {
+                        "id": 7429,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "大兴安岭地区"
+                    },
+                    {
+                        "id": 7391,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "七台河市"
+                    },
+                    {
+                        "id": 7397,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "牡丹江市"
+                    },
+                    {
+                        "id": 7348,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "大庆市"
+                    },
+                    {
+                        "id": 7417,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "绥化市"
+                    },
+                    {
+                        "id": 7317,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "鸡西市"
+                    },
+                    {
+                        "id": 7278,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "哈尔滨市"
+                    },
+                    {
+                        "id": 7378,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "佳木斯市"
+                    }
+                ]
+            },
+            {
+                "id": 8565,
+                "cls": "file",
+                "leaf": false,
+                "checked": false,
+                "text": "湖南省",
+                "children": [
+                    {
+                        "id": 8659,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "郴州市"
+                    },
+                    {
+                        "id": 8672,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "永州市"
+                    },
+                    {
+                        "id": 8685,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "怀化市"
+                    },
+                    {
+                        "id": 8706,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "湘西土家族苗族自治州"
+                    },
+                    {
+                        "id": 8645,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "张家界市"
+                    },
+                    {
+                        "id": 8609,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "邵阳市"
+                    },
+                    {
+                        "id": 8699,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "娄底市"
+                    },
+                    {
+                        "id": 8623,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "岳阳市"
+                    },
+                    {
+                        "id": 8577,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "株洲市"
+                    },
+                    {
+                        "id": 8634,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "常德市"
+                    },
+                    {
+                        "id": 8566,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "长沙市"
+                    },
+                    {
+                        "id": 8651,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "益阳市"
+                    },
+                    {
+                        "id": 8588,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "湘潭市"
+                    },
+                    {
+                        "id": 8595,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "衡阳市"
+                    }
+                ]
+            },
+            {
+                "id": 7070,
+                "cls": "file",
+                "leaf": false,
+                "checked": false,
+                "text": "辽宁省",
+                "children": [
+                    {
+                        "id": 7086,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "大连市"
+                    },
+                    {
+                        "id": 7141,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "营口市"
+                    },
+                    {
+                        "id": 7191,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "葫芦岛市"
+                    },
+                    {
+                        "id": 7132,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "锦州市"
+                    },
+                    {
+                        "id": 7173,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "铁岭市"
+                    },
+                    {
+                        "id": 7107,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "抚顺市"
+                    },
+                    {
+                        "id": 7149,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "阜新市"
+                    },
+                    {
+                        "id": 7071,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "沈阳市"
+                    },
+                    {
+                        "id": 7116,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "本溪市"
+                    },
+                    {
+                        "id": 7124,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "丹东市"
+                    },
+                    {
+                        "id": 7182,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "朝阳市"
+                    },
+                    {
+                        "id": 7098,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "鞍山市"
+                    },
+                    {
+                        "id": 7167,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "盘锦市"
+                    },
+                    {
+                        "id": 7158,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "辽阳市"
+                    }
+                ]
+            },
+            {
+                "id": 9940,
+                "cls": "file",
+                "leaf": false,
+                "checked": false,
+                "text": "宁 夏",
+                "children": [
+                    {
+                        "id": 9941,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "银川市"
+                    },
+                    {
+                        "id": 9967,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "中卫市"
+                    },
+                    {
+                        "id": 9960,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "固原市"
+                    },
+                    {
+                        "id": 9949,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "石嘴山市"
+                    },
+                    {
+                        "id": 9954,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "吴忠市"
+                    }
+                ]
+            },
+            {
+                "id": 7455,
+                "cls": "file",
+                "leaf": false,
+                "checked": false,
+                "text": "江苏省",
+                "children": [
+                    {
+                        "id": 7516,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "南通市"
+                    },
+                    {
+                        "id": 7556,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "扬州市"
+                    },
+                    {
+                        "id": 7456,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "南京市"
+                    },
+                    {
+                        "id": 7573,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "泰州市"
+                    },
+                    {
+                        "id": 7581,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "宿迁市"
+                    },
+                    {
+                        "id": 7535,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "淮安市"
+                    },
+                    {
+                        "id": 7545,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "盐城市"
+                    },
+                    {
+                        "id": 7471,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "无锡市"
+                    },
+                    {
+                        "id": 7565,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "镇江市"
+                    },
+                    {
+                        "id": 7494,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "常州市"
+                    },
+                    {
+                        "id": 7481,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "徐州市"
+                    },
+                    {
+                        "id": 7526,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "连云港市"
+                    },
+                    {
+                        "id": 7503,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "苏州市"
+                    }
+                ]
+            },
+            {
+                "id": 9015,
+                "cls": "file",
+                "leaf": false,
+                "checked": false,
+                "text": "海南省",
+                "children": [
+                    {
+                        "id": 9024,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "省直辖县级行政单位"
+                    },
+                    {
+                        "id": 9016,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "海口市"
+                    },
+                    {
+                        "id": 9022,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "三亚市"
+                    }
+                ]
+            },
+            {
+                "id": 9564,
+                "cls": "file",
+                "leaf": false,
+                "checked": false,
+                "text": "西 藏",
+                "children": [
+                    {
+                        "id": 9575,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "昌都地区"
+                    },
+                    {
+                        "id": 9600,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "日喀则地区"
+                    },
+                    {
+                        "id": 9619,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "那曲地区"
+                    },
+                    {
+                        "id": 9565,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "拉萨市"
+                    },
+                    {
+                        "id": 9630,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "阿里地区"
+                    },
+                    {
+                        "id": 9587,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "山南地区"
+                    },
+                    {
+                        "id": 9638,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "林芝地区"
+                    }
+                ]
+            },
+            {
+                "id": 7945,
+                "cls": "file",
+                "leaf": false,
+                "checked": false,
+                "text": "江西省",
+                "children": [
+                    {
+                        "id": 7993,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "赣州市"
+                    },
+                    {
+                        "id": 7963,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "萍乡市"
+                    },
+                    {
+                        "id": 7946,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "南昌市"
+                    },
+                    {
+                        "id": 7988,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "鹰潭市"
+                    },
+                    {
+                        "id": 8040,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "抚州市"
+                    },
+                    {
+                        "id": 7957,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "景德镇市"
+                    },
+                    {
+                        "id": 7984,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "新余市"
+                    },
+                    {
+                        "id": 8053,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "上饶市"
+                    },
+                    {
+                        "id": 8028,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "宜春市"
+                    },
+                    {
+                        "id": 8013,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "吉安市"
+                    },
+                    {
+                        "id": 7970,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "九江市"
+                    }
+                ]
+            },
+            {
+                "id": 7701,
+                "cls": "file",
+                "leaf": false,
+                "checked": false,
+                "text": "安徽省",
+                "children": [
+                    {
+                        "id": 7811,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "六安市"
+                    },
+                    {
+                        "id": 7797,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "宿州市"
+                    },
+                    {
+                        "id": 7832,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "宣城市"
+                    },
+                    {
+                        "id": 7711,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "芜湖市"
+                    },
+                    {
+                        "id": 7826,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "池州市"
+                    },
+                    {
+                        "id": 7720,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "蚌埠市"
+                    },
+                    {
+                        "id": 7768,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "黄山市"
+                    },
+                    {
+                        "id": 7777,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "滁州市"
+                    },
+                    {
+                        "id": 7729,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "淮南市"
+                    },
+                    {
+                        "id": 7743,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "淮北市"
+                    },
+                    {
+                        "id": 7702,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "合肥市"
+                    },
+                    {
+                        "id": 7804,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "巢湖市"
+                    },
+                    {
+                        "id": 7749,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "铜陵市"
+                    },
+                    {
+                        "id": 7820,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "亳州市"
+                    },
+                    {
+                        "id": 7737,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "马鞍山市"
+                    },
+                    {
+                        "id": 7755,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "安庆市"
+                    },
+                    {
+                        "id": 7787,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "阜阳市"
+                    }
+                ]
+            },
+            {
+                "id": 9646,
+                "cls": "file",
+                "leaf": false,
+                "checked": false,
+                "text": "陕西省",
+                "children": [
+                    {
+                        "id": 9739,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "榆林市"
+                    },
+                    {
+                        "id": 9711,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "延安市"
+                    },
+                    {
+                        "id": 9647,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "西安市"
+                    },
+                    {
+                        "id": 9668,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "宝鸡市"
+                    },
+                    {
+                        "id": 9765,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "商洛市"
+                    },
+                    {
+                        "id": 9698,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "渭南市"
+                    },
+                    {
+                        "id": 9662,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "铜川市"
+                    },
+                    {
+                        "id": 9753,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "安康市"
+                    },
+                    {
+                        "id": 9682,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "咸阳市"
+                    },
+                    {
+                        "id": 9726,
+                        "cls": "file",
+                        "leaf": true,
+                        "checked": false,
+                        "text": "汉中市"
+                    }
+                ]
+            }
+        ]
+    }
+]

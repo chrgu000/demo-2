@@ -1346,7 +1346,7 @@ Ext.define 实现扩展
         【this1.refresh();】
 	【this1.store.loadPage(1);】
 ==============================================================================
-	获取select下的option的值[获取下拉选项的值][select获取下拉的值]
+	获取select下的option的值[获取下拉选项的值][select获取下拉的值][获取下拉值][jq获取select][jquery获取select]
 	原生js:
 	→方法1:
  		【ID.options[这是ID.selectedIndex].text】
@@ -1358,7 +1358,7 @@ Ext.define 实现扩展
 	→方法2:
 		【$("#这是select的ID").val()】
 ==============================================================================
-         选择第二个select下的option的值
+         选择第二个select下的option的值[jq获取option]
          原生js: 推荐,能选中下拉框的值
          →方法1:
                 【ID.children[1].selected = true;】
