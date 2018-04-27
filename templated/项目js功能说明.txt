@@ -1381,10 +1381,7 @@ Ext.define 实现扩展
                
         →方法2: 不会选中下拉框的值
                【$('#kaihushi1 option:eq(1)').attr('selected','selected');】
-               【$('#kaihushi1').find('option:eq(1)').attr('selected','selected');】
-               
-               
-               
+               【$('#kaihushi1').find('option:eq(1)').attr('selected','selected');】 
 ================================================================================                
         原生js判断事件处于第几阶段?
         【e.eventPhase】
