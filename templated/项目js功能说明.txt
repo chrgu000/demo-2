@@ -58,6 +58,13 @@
         Tomcat优化内存:
                 1.【窗口(W) - 首选项 - MyEclipse - Servers - Tomcat - Tomcat 6.x】 - 【Optional program arguments(可选程序参数)】
                 2.输入【-Xms256m -Xmx512m -XX:MaxNewSize=256m -XX:MaxPermSize=256m】
+                
+                
+          MyEclipse无法自动构建
+          【窗口(W) - 首选项 - 常规 - 工作空间】
+              √【自动构建】
+              ×【自动刷新】
+              √【再构建之前自动保存】      
 //=====================【MyEclipse快捷键】=========================
         MyEclipse 买 一棵力普斯
         sencha touch 赛驰 塔尺
