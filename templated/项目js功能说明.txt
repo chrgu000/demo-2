@@ -274,6 +274,7 @@
 	【Ctrl + Q】          打开查询窗口
         【Ctrl + Shift + Q】 新窗口打开查询窗口
 	【Ctrl + R】		运行查询 
+        【Ctrl + Shift + R】	选中单条语句进行查询 
 	【Ctrl + /】           注释sql语句
 	【Ctrl + Shift +/】  解除注释
 	【Ctrl + R】         运行查询窗口的sql语句
@@ -8698,9 +8699,9 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
            【.x-msgbox-dark .x-msgbox-text】5519行
            注释
            【text-shadow: rgba(0, 0, 0, 0.5) 0 -0.08em 0;】
-                
-        
-
+==================================================================================== 
+        Java保存不上字段
+        修改类型为【varchar】
 ====================================================================================
         px转vw
         iphone6宽度375计算，37.5/375=0.1，0.1 * 100=10,也就是10vw
