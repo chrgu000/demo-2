@@ -5143,7 +5143,7 @@ SELECT bpCustMemberId FROM `cs_person` WHERE bpCustMemberId=127;
 
 192.168.0.107
 ===============================================================
-        数据库查询用户号[数据库查询登录名][数据库查询name][mysql查询用户名][mysql查询登录名][mysql查询name]
+        数据库查询用户号[Navicat查询][数据库查询][数据库查询登录名][数据库查询name][mysql查询用户名][mysql查询登录名][mysql查询name][mysql查询][sql查询]
         select * from bp_cust_member where loginname = 'yiyi123';
         
         数据库查询手机号[mysql查询手机号]
@@ -5157,6 +5157,22 @@ SELECT bpCustMemberId FROM `cs_person` WHERE bpCustMemberId=127;
         SELECT * from pl_managemoneyplan_buyinfo where mmplanId = 1173;
 
         select * from pl_managemoney_plan where mmplanId = 1173;
+        
+        [数据库批量查询][mysql批量查询][sql批量查询][Navicat批量查询]
+SELECT
+	houseofsheng,
+	houseofshi,
+	mortgageTime,
+	yuehuankuan,
+	houseHaveBig,
+	providentfundCompany,
+	providentFundDepositBase,
+	socialSecurityDepositBase
+FROM
+	cs_person
+WHERE
+	bpCustMemberId = 17
+        
 ===============================================================
         数据库查询理财计划   
         select * from pl_managemoneyplan_buyinfo where investPersonId = 805 and state IN(2,7) and keystr IN('mmplan','UPlan');
