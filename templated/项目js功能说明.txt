@@ -8776,6 +8776,41 @@ https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx0db
            var reg = /[\u4E00-\u9FA5\uF900-\uFA2D]/;
            return reg.test(str);
         }
+        
+   //--------------检查是否合法手机号码------------------
+  function isMobile (mobile) {
+ 		if (mobile == null || mobile.length != 11) {
+	        return false;
+	    }
+	    if (checkNUM(mobile) == 0) {
+	        return false;
+	    }
+	    // 验证规则
+	    var reg = /^1[3|4|5|7|8|9][0-9]{9}$/;
+	    var reg2 = /^1[0-9]{10}$/; 
+	    return reg2.test(mobile);
+	  /*  var s = mobile.substring(0, 2);
+	    if (s != "13" && s != "14" && s != "15" && s != "16" && s != "17" && s != "18" && s != "19") {
+	        return false;
+	    }
+	    return true;*/
+	 }
+	 
+	/*
+	  	校验数字 
+	  */
+	 function checkNUM (NUM) {
+		 var i, j, strTemp;
+		 strTemp = "0123456789";
+		 if (NUM.length == 0) return 0
+		 for (i = 0; i < NUM.length; i++) {
+		     j = strTemp.indexOf(NUM.charAt(i));
+		     if (j == -1) {
+		         return 0;
+		     }
+		 }
+		 return 1;
+	 }
 ==================================================================================== 
         Java保存不上字段
         修改类型为【varchar】
