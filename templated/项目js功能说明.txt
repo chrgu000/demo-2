@@ -8712,6 +8712,8 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
         
         GET请求:
         https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=【输入自己的】&secret=【输入自己的】
+        示范:
+https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx0db382a912420879&secret=irisdudtjf2015
         
         
         【JavaEE 5.0 Genneric Library】
@@ -8767,8 +8769,13 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
            【.x-msgbox-dark .x-msgbox-text】5519行
            注释
            【text-shadow: rgba(0, 0, 0, 0.5) 0 -0.08em 0;】
-           
-
+         
+         
+        // JS校验是否含有中文（也包含日文和韩文）
+        function isChineseChar(str){   
+           var reg = /[\u4E00-\u9FA5\uF900-\uFA2D]/;
+           return reg.test(str);
+        }
 ==================================================================================== 
         Java保存不上字段
         修改类型为【varchar】
