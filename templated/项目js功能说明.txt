@@ -3107,6 +3107,12 @@ if (this._disabled == null || this._disabled == false) {
         2.点击【添加(D)...】选择【Spket JavaScript Editor】
         3.选中【Spket JavaScript Editor】,点右侧【缺省值(F)】
         4.确定
+        
+         【常规 -- 编辑器  -- 文件关联】
+        1.选择【*.html】,下面【相关联的编辑器(E)】
+        2.点击【添加(D)...】选择【MyEclipse Visual HTML Designer (缺省值) (由"HTML"内容类型锁定)】
+        3.选中【MyEclipse Visual HTML Designer (缺省值) (由"HTML"内容类型锁定)】,点右侧【缺省值(F)】
+        4.确定
 =============================================================
         Eclipse MyEclipse 代码格式化 换行处理
         
@@ -5112,7 +5118,8 @@ Sencha Docs - Ext JS
 加密:
         a4ayc/80/OGda4BO/1o/V0etpOqiLx1JwB5S3beHW0s=
 解密:   1
-
+        解密:
+                b64_sha256(password) + "="
 加密:
         a4ayc/80/OGda4BO/1o/V0etpOqiLx1JwB5S3beHW0s=
 解密:   2
@@ -5121,6 +5128,9 @@ Sencha Docs - Ext JS
 加密:
         c4ca4238a0b923820dcc509a6f75849b
 解密:   1
+        
+        加密;
+                hex_md5()
 
 加密:
         e10adc3949ba59abbe56e057f20f883e
@@ -6706,9 +6716,18 @@ em表示元素的font-size属性的计算值，如果用于font-size属性本身
       ST更改点击更改效果[淡入弹出效果][ST更改效果][ST更改点击效果][ST滑动效果][ST切换效果][ST谈入谈出效果]
           1.打开【sencha-touch-all-debug.js】
           2.【Ctrl + L】 打开 【88501】
-          3.把【duration】改成【350】
-          4.把【type】改ade】
-          
+          3.把【duration】改成【350】 
+                gaomimi降低切换的速度
+          4.把【type】改【slide】
+                gaomimi视图切换的方式
+                        【cover】
+                        【cube】
+                        【fade】
+                        【flip】
+                        【pop】
+                        【reveal】
+                        【scroll】
+                        【slide】
 ====================================================================================
        ST修改input获取焦点样式[ST修改input样式][input边框][修改input边框]
         把【mobile.css】的样式
@@ -8660,11 +8679,40 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
             【saveBusiness】506行
        
        
-        IOS ID ：1720038986@qq.com
+        IOS ID :1720038986@qq.com
         密码：Jinyuge1705
 ====================================================================================
         天匣易贷二期
         svn://192.168.0.103/hurong/proj/gd/txyd
+        
+        天匣易贷	erp服务器	120.76.247.237		administrator	Ht-88txyd.com	
+	天匣易贷	p2p服务器	120.76.202.166		administrator	Gw-txyd88.com
+        
+       公众号:
+                【2748679398@qq.com】
+       密码:
+                【irisdudtjf2015】
+                
+       微信公众号绑定管理员[微信公众号]                                https://mp.weixin.qq.com/cgi-bin/safecenterstatus?action=admins&t=setting/safe-admins&token=519197396&lang=zh_CN
+       1.登录https://mp.weixin.qq.com/
+       2.左侧【设置 - 安全中心】
+       3.点击右侧【运营者关管理】下的【绑定运营者微信号】
+        
+        查看access_token[获取access_token]
+        https://mp.weixin.qq.com/debug/cgi-bin/apiinfo?t=index&type=基础支持&form=获取access_token接口 /token
+        
+        【appid】
+        1.左侧【开发 - 基本配置】
+        2.开发者ID(AppID)下
+        
+        【secret】
+        1.左侧【开发 - 基本配置】
+        2.【开发者密码(AppSecret)】下
+         也就是登录密码
+        
+        GET请求:
+        https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=【输入自己的】&secret=【输入自己的】
+        
         
         【JavaEE 5.0 Genneric Library】
         【JRE 系统库[jdk1.6.0_43]】
@@ -8677,6 +8725,10 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
         
         测试Web:
         http://192.168.0.104:8249/hurong_proj_gd_txyd/indexp2pmobile.html
+        
+        
+        正式Web:
+        http://120.76.247.237/hurong_proj_gd_txyd/indexp2pmobile.html
         
         SVN:
                 dengzhikai
@@ -8715,6 +8767,8 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
            【.x-msgbox-dark .x-msgbox-text】5519行
            注释
            【text-shadow: rgba(0, 0, 0, 0.5) 0 -0.08em 0;】
+           
+
 ==================================================================================== 
         Java保存不上字段
         修改类型为【varchar】
