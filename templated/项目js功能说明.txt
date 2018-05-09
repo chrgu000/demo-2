@@ -4208,7 +4208,7 @@ Sencha Docs - Ext JS
          不每次打开,记录上次打开文件
           【设置 - 参数 - MISC -  下次启动记住当前会话】 
 ===============================================================
-        Chrome浏览器快捷键
+        Chrome浏览器快捷键[chrome快捷键]
         长按Alt
         Alt + Enter回车
         Shift + S打开设置
@@ -4262,6 +4262,9 @@ Sencha Docs - Ext JS
        【Ctrl + Shift + D】 将所有打开的网页以书签的形式保存在新文件夹中。 
         书签狂用。
         【Ctrl + Shift + O】打开书签管理器
+        
+        长按【Ctrl】选中标签可以一块移动
+        长按【Shift】选中终点标签可以连着一块选中,并移动
 ===============================================================
         电脑快捷键[window快捷键][window系统快捷键]
         【Ctrl + Shift + Esc】 直接打开任务管理器,不用向【Ctrl + Alt + Delete】+【Alt + T】打开
@@ -8693,11 +8696,44 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
        密码:
                 【irisdudtjf2015】
                 
-       微信公众号绑定管理员[微信公众号]                                
+       【微信公众号绑定管理员】[微信公众号][微信绑定公众号]
+       
+       【第一步骤】:                            
        1.登录https://mp.weixin.qq.com/
-       2.左侧【设置 - 安全中心】
-       3.点击右侧【运营者关管理】下的【绑定运营者微信号】
+       2.点击左侧【设置 - 安全中心】
+       3.点击右侧【管理员和运营者设置】的【详情】
+       4.进【绑定运营者微信号】,点击【运营者管理】下的【绑定运营者微信号】
+       5.请选择要绑定的时长选中【长期】,输入自己微信号
+        ※:必须自己的微信号先关注公众号
+       6.点击【邀请绑定】
+       7.让客户的公众号管理员扫码同意 ←必须
         
+        【第二步骤】:
+        1.点击左侧【设置 - 基本配置】
+        2,右侧【公众号开发信息】下【IP白名单】点击【查看】
+        3.打开【https://ip.cn/】复制ip
+        4.打开查看IP白名单,点击【修改】
+        5.把复制的ip粘贴,点击【确认修改】
+        6.管理员或长期运营者微信号扫描
+        7.添加白名单ip成功
+
+        【第三步骤】:
+        将正式地址服务器域名,绑定一级域名 ←必须
+        
+        【第四步骤】:
+        1.点击左侧【设置 - 公众号设置】
+        2.点击右侧【功能设置】
+        3.点击【业务域名】和【JS接口安全域名】和【网页授权域名】后的【设置】
+        4.把备案的域名添加进去
+        5.点【保存】或【确定】
+        6.打开【业务域名 - 设置】注意事项的3的【点击下载】,放在服务器项目的根目录
+                比如放在【tomcat\项目文件夹\】
+        
+        【第五步骤】:
+        
+        【第六步骤】:
+        
+        【第?步骤】:   
         查看access_token[获取access_token]
         https://mp.weixin.qq.com/debug/cgi-bin/apiinfo?t=index&type=基础支持&form=获取access_token接口 /token
         
@@ -8712,8 +8748,9 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
         GET请求:
         https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=【输入自己的】&secret=【输入自己的】
         示范:
-https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx14eb5d8be4fb9442&secret=f9b37c6c4ae424390151db83d853a2bb
+ https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx14eb5d8be4fb9442&secret=f9b37c6c4ae424390151db83d853a2bb
         
+        编辑器运行环境:
         【JavaEE 5.0 Genneric Library】
         【JRE 系统库[jdk1.6.0_43]】
         【引入lib包】
