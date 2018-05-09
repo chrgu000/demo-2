@@ -8693,7 +8693,7 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
        密码:
                 【irisdudtjf2015】
                 
-       微信公众号绑定管理员[微信公众号]                                https://mp.weixin.qq.com/cgi-bin/safecenterstatus?action=admins&t=setting/safe-admins&token=519197396&lang=zh_CN
+       微信公众号绑定管理员[微信公众号]                                
        1.登录https://mp.weixin.qq.com/
        2.左侧【设置 - 安全中心】
        3.点击右侧【运营者关管理】下的【绑定运营者微信号】
@@ -8701,20 +8701,18 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
         查看access_token[获取access_token]
         https://mp.weixin.qq.com/debug/cgi-bin/apiinfo?t=index&type=基础支持&form=获取access_token接口 /token
         
-        【appid】
-        1.左侧【开发 - 基本配置】
-        2.开发者ID(AppID)下
-        
-        【secret】
-        1.左侧【开发 - 基本配置】
-        2.【开发者密码(AppSecret)】下
-         也就是登录密码
+        查看【appid】和【secret】
+        url:
+                https://mp.weixin.qq.com/debug/cgi-bin/sandboxinfo?action=showinfo&t=sandbox/index
+        1.左侧【开发 - 公众平台测试账号】
+        3.扫描登录
+        3.复制【测试号信息】下的
+                【appID】和【appsecret】
         
         GET请求:
         https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=【输入自己的】&secret=【输入自己的】
         示范:
-https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx0db382a912420879&secret=irisdudtjf2015
-        
+https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx14eb5d8be4fb9442&secret=f9b37c6c4ae424390151db83d853a2bb
         
         【JavaEE 5.0 Genneric Library】
         【JRE 系统库[jdk1.6.0_43]】
