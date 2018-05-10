@@ -1765,6 +1765,15 @@ Ext.define 实现扩展
             ss += b + ":" + o[b] + "," 
         };
          ss = ss.replace(/,$/, "}");
+         
+         
+         
+         ※:拼接html,传对象为参数[对象传参][传参对象]
+                1.一定要以【""】双引号拼接,属性以单引号 ←必须
+                2.onclick之类的事件必须以【''】单引号拼接  ←必须
+                        注:【\"】不能用转义字符(否则事件会失效)  ←必须
+                3. 用【JSON.stringify(data[i])】转化json
+                4.直接从事件的实参获取对象就好,自动转换为对象
 =============================================================
         怎样在后台拼接json字符串?[JSON拼接][java拼接json][java拼json]
         
@@ -8691,6 +8700,12 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
         天匣易贷	erp服务器	120.76.247.237		administrator	Ht-88txyd.com	
 	天匣易贷	p2p服务器	120.76.202.166		administrator	Gw-txyd88.com
         
+        正式;
+        http://www.txyd88.com/hurong_proj_gd_txyd/indexp2pmobile.html
+        前台
+        http://weixin.txyd88.com/
+        weixin.txyd88.com
+
        公众号:
                 【2748679398@qq.com】
        密码:
@@ -8730,6 +8745,12 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
                 比如放在【tomcat\项目文件夹\】
         
         【第五步骤】:
+        1.点击左侧【设置 - 基本配置】
+        2.服务器配置(未启用) 右侧点击【修改配置】
+        3.【URL】输入备案的域名
+          【Token】输入项目名拼音(必须为英文或数字，长度为3-32字符。)
+          【EncodingAESKey】点随机生成
+        填写服务器配置
         
         【第六步骤】:
         
