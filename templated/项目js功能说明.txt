@@ -733,8 +733,13 @@ JDK 6参数换成:
 	【帮助(H) -- Install from Site...】
 	http://download.emmet.io/eclipse/updates/
 ==========================================================================
-	svn: 文件” 已经过时
-	解决方法:先更新,再提交
+	svn: 文件” 已经过时[SVN无法提交][SVN提交]
+	解决方法一:
+                先更新,再提交
+        解决方案二:
+                先右键【小组(E) -- 清理】,再更新
+        解决方案三:
+                删除无法提交目录文件夹的【.svn】文件夹,再次提交
 ==========================================================================
         关闭SVN[关闭项目SVN][myEclipse关闭SVN][eclipse关闭SVN]
         右键项目【小组(E) -- 断开连接(D)】
@@ -8701,12 +8706,15 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
 	天匣易贷	p2p服务器	120.76.202.166		administrator	Gw-txyd88.com
         
         正式;
-        http://www.txyd88.com/hurong_proj_gd_txyd/indexp2pmobile.html
+                http://www.txyd88.com/hurong_proj_gd_txyd/indexp2pmobile.html
+        旧版:
+                http://weixin.txyd88.com/indexp2pmobile.html
         前台
         http://weixin.txyd88.com/
         weixin.txyd88.com
         
         // 微信正式地址
+        http://www.txyd88.com/indexp2pmobile.html
         http://weixin.txyd88.com/hurong_proj_gd_txyd/indexp2pmobile.html
         
        公众号:
@@ -8742,7 +8750,8 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
         1.点击左侧【设置 - 公众号设置】
         2.点击右侧【功能设置】
         3.点击【业务域名】和【JS接口安全域名】和【网页授权域名】后的【设置】
-        4.把备案的域名添加进去
+        4.把备案的域名添加进去(不能加http://)
+                例如:www.txyd88.com
         5.点【保存】或【确定】
         6.打开【业务域名 - 设置】注意事项的3的【点击下载】,放在服务器项目的根目录
                 比如放在【tomcat\项目文件夹\】
@@ -8750,7 +8759,8 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
         【第五步骤】:
         1.点击左侧【设置 - 基本配置】
         2.服务器配置(未启用) 右侧点击【修改配置】
-        3.【URL】输入备案的域名
+        3.【URL】输入备案的域名,后面加回调的方法名
+                例如:http://www.txyd88.com/WeixinCoreAction
           【Token】输入项目名拼音(必须为英文或数字，长度为3-32字符。)
           【EncodingAESKey】点随机生成
         填写服务器配置
