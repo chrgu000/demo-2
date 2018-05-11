@@ -8705,7 +8705,10 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
         前台
         http://weixin.txyd88.com/
         weixin.txyd88.com
-
+        
+        // 微信正式地址
+        http://weixin.txyd88.com/hurong_proj_gd_txyd/indexp2pmobile.html
+        
        公众号:
                 【2748679398@qq.com】
        密码:
@@ -8866,6 +8869,42 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
 		     }
 		 }
 		 return 1;
+	 }
+         
+	 /*
+	  	============================== 获取小数2位  =======================================
+	  */
+	 function getFloatTwo (value, isType, Floatlength) {
+	 	// 正则判断传入参数是否为数字
+	 	 var patrn = /^\d+(\.\d+)?$/;
+	 	 
+	 	// 校验是否传入的是数字,和字符串数字
+ 		if (!patrn.test(value)) {
+ 			return false;
+ 		}
+	 	
+	 	// 判断是否需要返回指定类型小数
+	 	var isType  = typeof isType == "undefined" ? 0 : isType;
+	 	
+	 	// 获取value,转化String类型进行操作
+	 	var value = typeof value == "number" ? String(value) : value;
+	 	
+	 	// 判断是否指定类型
+	 	var Floatlength = typeof Floatlength == "undefined" ? 2 : Floatlength;
+	 	
+	 	// 保存两位
+	 	var RegStr = '^[\\+\\-]?\\d+\\.?\\d{0,' + Floatlength + '}';
+	 	
+	 	// 得到返回值
+	 	var val = value.match(new RegExp(RegStr, 'g'));
+	 	
+	 	// 如果是0,返回字符串
+	 	if (isType == 0) {
+	 		// 返回
+	 		return val.join('');
+	 	} else if (isType == 1) { // 如果是1返回数字类型
+	 		return Number(val);
+	 	}
 	 }
 ==================================================================================== 
         Java保存不上字段
@@ -9043,8 +9082,6 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
                 【react-native init AwesomeProject】
                 【cd AwesomeProject】
                 【react-native run-android】
-          
-          
           
         1、打开夜神安卓模拟器
         2、在run-android前先执行【adb connect 127.0.0.1:62001】,执行此命令是连接到夜神模拟器（端口默认是52001,如果你的是62001就改成62001,根据实际情况来改）
