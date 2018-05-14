@@ -8757,6 +8757,92 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
                 比如放在【tomcat\项目文件夹\】
         
         【第五步骤】:
+        1.把【weChat】文件夹复制到【src\com】内
+        2.从其他项目把【项目目录\WebRoot\WEB-INF\lib】以下文件复制到【当前项目\WebRoot\WEB-INF\lib】里
+                【httpclient-4.3.6.jar】
+                【xmlpull-1.1.3.1.jar】
+                【xstream-1.4.1.jar】
+        3.打开【项目目录\WebRoot\WEB-INF\web.xml】文件,复制以下到【</web-app>】内,确保【servlet-class】内的路径正确
+                选中后【Ctrl】键,看是否能打开相应java
+        <!-- 微信start  -->
+        <servlet>
+            <servlet-name>
+                WeixinMainServlet
+            </servlet-name>
+            <servlet-class>
+                com.weChat.action.mobile.weixin.WeixinMainServlet
+            </servlet-class>
+        </servlet>
+        <servlet>
+            <servlet-name>
+                WeixinGetOpenIdServlet
+            </servlet-name>
+            <servlet-class>
+                com.weChat.action.mobile.weixin.WeixinGetOpenIdServlet
+            </servlet-class>
+        </servlet>
+        <servlet>
+            <servlet-name>
+                WeixinNotifyServlet
+            </servlet-name>
+            <servlet-class>
+                com.weChat.action.mobile.weixin.WeixinNotifyServlet
+            </servlet-class>
+        </servlet>
+        <servlet>
+            <servlet-name>
+                WeixinCoreAction
+            </servlet-name>
+            <servlet-class>
+                com.weChat.action.mobile.weixin.WeixinCoreAction
+            </servlet-class>
+        </servlet>
+        <servlet-mapping>
+            <servlet-name>
+                WeixinCoreAction
+            </servlet-name>
+            <url-pattern>
+                /WeixinCoreAction
+            </url-pattern>
+        </servlet-mapping>
+        <servlet-mapping>
+            <servlet-name>
+                WeixinMainServlet
+            </servlet-name>
+            <url-pattern>
+                /WeixinMainServlet
+            </url-pattern>
+        </servlet-mapping>
+        <servlet-mapping>
+            <servlet-name>
+                WeixinGetOpenIdServlet
+            </servlet-name>
+            <url-pattern>
+                /WeixinGetOpenIdServlet
+            </url-pattern>
+        </servlet-mapping>
+        <servlet-mapping>
+            <servlet-name>
+                WeixinNotifyServlet
+            </servlet-name>
+            <url-pattern>
+                /WeixinNotifyServlet
+            </url-pattern>
+        </servlet-mapping>
+        <!-- 微信end -->
+        
+        4.打开【项目目录\src\struts.xml】文件,复制以下到【</struts>】内,确保【file】内的路径正确
+        <!-- 微信配置 start-->
+	<include file="com/weChat/xml/weChat.xml"></include>
+	<!-- 微信配置 end-->
+        
+        5.打开【项目目录\src\conf\app-action.xml】文件,复制以下到【</beans>】内,确保【class】内的路径正确
+        <!-- 微信 start-->
+         <bean id="WeixinCommonAction" class="com.weChat.action.mobile.weixin.WeixinCommonAction" scope="prototype"/>
+         <bean id="WeixinCoreAction" class="com.weChat.action.mobile.weixin.WeixinCoreAction" scope="prototype"/>
+        <!-- 微信 end-->
+        
+        【第六步骤】:
         1.点击左侧【设置 - 基本配置】
         2.服务器配置(未启用) 右侧点击【修改配置】
         3.【URL】输入备案的域名,后面加回调的方法名
@@ -8765,7 +8851,6 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
           【EncodingAESKey】点随机生成
         填写服务器配置
         
-        【第六步骤】:
         
         【第?步骤】:   
         查看access_token[获取access_token]
