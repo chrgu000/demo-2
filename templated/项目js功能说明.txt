@@ -8906,6 +8906,26 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
           <bean id="WeixinCoreAction" class="com.weixin.credit.action.mobile.weixin.WeixinCoreAction" scope="prototype"/>
          <!-- 微信 end-->
         
+        注:【weChat.xml】文件直接复制可能报错,无法启动项目
+                把【extends="publicInterceptor"】改成默认【extends="struts-default"】
+        <!DOCTYPE struts PUBLIC
+            "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+            "http://struts.apache.org/dtds/struts-2.5.dtd">
+        <struts>
+        	<!--微信-->
+        	 <!-- <package name="weixin" extends="publicInterceptor" strict-method-invocation="false" namespace="/weixin"> -->
+        	  <package name="weixin" extends="struts-default" namespace="/weixin">
+        			<action name="*WeixinCore" class="WeixinCoreAction" method="{1}">
+        	             <result>${successResultValue}</result>
+        	             <result name="freemarker" type="freemarker">${successResultValue}</result>
+        	        </action>
+        	        <action name="*WeixinCommon" class="WeixinCommonAction" method="{1}">
+        	             <result>${successResultValue}</result>
+        	             <result name="freemarker" type="freemarker">${successResultValue}</result>
+        	        </action>
+               </package>
+        </struts>	
+
         【第六步骤】:
         1.点击左侧【设置 - 基本配置】
         2.服务器配置(未启用) 右侧点击【修改配置】
@@ -8914,8 +8934,19 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
           【Token】输入项目名拼音(必须为英文或数字，长度为3-32字符。)
           【EncodingAESKey】点随机生成
         填写服务器配置
-        
-        
+        4.【提交】
+        5.点击下面【服务器配置(未启动)】右上角的【启用】
+        6.确定
+        7.直接访问下微信方法,看能否访问到
+                例如:
+                        http://www.txyd88.com/weixin/jssdkSignWeixinCommon.do
+               若无法直接访问,跳转到后台
+                ① 打开【app-security.xml】
+                ② 在【</b:set>】内添加方法路径
+                例如:
+                <!-- 微信  -->
+	        <b:value>/weixin/jssdkSignWeixinCommon.do</b:value>
+                
         【第?步骤】:   
         查看access_token[获取access_token]
         https://mp.weixin.qq.com/debug/cgi-bin/apiinfo?t=index&type=基础支持&form=获取access_token接口 /token
@@ -8932,6 +8963,11 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
         https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=【输入自己的】&secret=【输入自己的】
         示范:
  https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx14eb5d8be4fb9442&secret=f9b37c6c4ae424390151db83d853a2bb
+        
+        
+        
+        
+        
         
         编辑器运行环境:
         【JavaEE 5.0 Genneric Library】
