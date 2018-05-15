@@ -7677,6 +7677,9 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
         苹果客服热线	400-670-1855
         苹果开发者中心
          
+         苹果qq讨论组:
+                苹果审核被拒讨论【567612859】苹果qq群[苹果讨论群]
+                
          解决方案中心
                 https://itunesconnect.apple.com/WebObjects/iTunesConnect.woa/ra/ng/app/1315570438/platform/ios/resolutioncenter
          
