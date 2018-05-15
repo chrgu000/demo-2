@@ -498,6 +498,15 @@ JDK v1.7参数
 	添加项目到新建的服务器,却无法自动发布?
 	右键新建服务器的项目名-------【Publish】发表
 ==========================================================================
+        MyEclipse无法添加项目[MyEclipse v8.5无法添加项目][无法提交项目][Deploy Location]
+        从别的项目复制过来【.settinge】和【.myeclipse】,还有【.mymetadata】文件复制过来,若无法添加到
+        1.选中项目右键【properties -- Myeclipse -- web】修改访问路径
+          汉化版:
+                1.选中项目右键【属性 -- MyEclipse - Web】
+                2.选中【Content Root(内容根)】下的【Web Content-root(网页内容根)】右侧【/】
+                3.输入【/当前项目名】
+                4.确定
+==========================================================================
         MyEclipse破解失败
          com.jniwrapper.util.ProcessorInfo
          
@@ -8768,6 +8777,7 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
                 【xstream-1.4.1.jar】
         3.打开【项目目录\WebRoot\WEB-INF\web.xml】文件,复制以下到【</web-app>】内,确保【servlet-class】内的路径正确
                 选中后【Ctrl】键,看是否能打开相应java
+         示范一(在com里有weChat文件夹):
         <!-- 微信start  -->
         <servlet>
             <servlet-name>
@@ -8835,16 +8845,66 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
         </servlet-mapping>
         <!-- 微信end -->
         
+        示范二(在com里有weixin文件夹):
+        <!-- 微信start -->
+        	<servlet> 
+           	    <servlet-name>WeixinMainServlet</servlet-name>  
+          	    <servlet-class>com.weixin.credit.action.mobile.weixin.WeixinMainServlet</servlet-class> 
+          	</servlet>  
+        	<servlet> 
+        	    <servlet-name>WeixinGetOpenIdServlet</servlet-name>  
+        	    <servlet-class>com.weixin.credit.action.mobile.weixin.WeixinGetOpenIdServlet</servlet-class> 
+            </servlet> 
+        	<servlet> 
+        	    <servlet-name>WeixinNotifyServlet</servlet-name>  
+        	    <servlet-class>com.weixin.credit.action.mobile.weixin.WeixinNotifyServlet</servlet-class> 
+            </servlet> 
+            <servlet>
+                <servlet-name>WeixinCoreAction</servlet-name>
+                <servlet-class>com.weixin.credit.action.mobile.weixin.WeixinCoreAction</servlet-class>
+           </servlet>
+           
+           <servlet-mapping>
+                 <servlet-name>WeixinCoreAction</servlet-name>
+                 <url-pattern>/WeixinCoreAction</url-pattern>
+           </servlet-mapping>
+            <servlet-mapping> 
+                <servlet-name>WeixinMainServlet</servlet-name>  
+                <url-pattern>/WeixinMainServlet</url-pattern> 
+            </servlet-mapping> 
+        	<servlet-mapping> 
+            	<servlet-name>WeixinGetOpenIdServlet</servlet-name>  
+            	<url-pattern>/WeixinGetOpenIdServlet</url-pattern> 
+            </servlet-mapping>  
+        	<servlet-mapping> 
+            	<servlet-name>WeixinNotifyServlet</servlet-name>  
+            	<url-pattern>/WeixinNotifyServlet</url-pattern> 
+            </servlet-mapping>  
+	<!-- 微信end -->
+        
         4.打开【项目目录\src\struts.xml】文件,复制以下到【</struts>】内,确保【file】内的路径正确
+        示范一(在com里有weChat文件夹):
         <!-- 微信配置 start-->
 	<include file="com/weChat/xml/weChat.xml"></include>
 	<!-- 微信配置 end-->
         
+        示范二(在com里有weixin文件夹):
+        <!-- 微信配置 start-->
+	<include file="com/weixin/credit/xml/weChat.xml"></include>
+	<!-- 微信配置 end-->
+        
         5.打开【项目目录\src\conf\app-action.xml】文件,复制以下到【</beans>】内,确保【class】内的路径正确
+        示范一(在com里有weChat文件夹):
         <!-- 微信 start-->
          <bean id="WeixinCommonAction" class="com.weChat.action.mobile.weixin.WeixinCommonAction" scope="prototype"/>
          <bean id="WeixinCoreAction" class="com.weChat.action.mobile.weixin.WeixinCoreAction" scope="prototype"/>
         <!-- 微信 end-->
+        
+        示范二(在com里有weixin文件夹):
+         <!-- 微信 start-->
+          <bean id="WeixinCommonAction" class="com.weixin.credit.action.mobile.weixin.WeixinCommonAction" scope="prototype"/>
+          <bean id="WeixinCoreAction" class="com.weixin.credit.action.mobile.weixin.WeixinCoreAction" scope="prototype"/>
+         <!-- 微信 end-->
         
         【第六步骤】:
         1.点击左侧【设置 - 基本配置】
