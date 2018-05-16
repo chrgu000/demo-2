@@ -8741,6 +8741,10 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
                 【2748679398@qq.com】
        密码:
                 【irisdudtjf2015】
+       开发者ID
+                【wx0db382a912420879】
+       开发者密码
+                【f52dd57d4d9c361890d46bc843f28005】
                 
        【微信公众号绑定管理员】[微信公众号][微信绑定公众号]
        
@@ -8932,13 +8936,29 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
         	        </action>
                </package>
         </struts>	
-
-        【第六步骤】:
+        
+        【第六步骤】: 
+         1.点击左侧【设置 - 基本配置】
+         2.在【公众号开发信息】下
+                复制【开发者ID(AppID)】右侧的AppID
+                复制【开发者密码(AppSecret)】右侧的开发者密码
+                ※:AppSecret必须要管理员才能看,不是自己的让客户提供
+         3.打开【weixin.java】,修改以下4个配置信息
+        // 与接口配置信息中的Token要一致  商户平台随便填的
+	public static String token = "tianxiayidai";
+        // 项目名,随便填,最后和token保持一致
+	public static String describe = "天匣易贷"; 
+        // 开发者ID
+        public static String appId = "wx0db382a912420879";  
+        // 开发者密码(第三方用户唯一凭证密钥)
+	public static String appId = "wx0db382a912420879";  
+        
+        【第七步骤】:
         1.点击左侧【设置 - 基本配置】
         2.服务器配置(未启用) 右侧点击【修改配置】
         3.【URL】输入备案的域名,后面加回调的方法名
                 例如:http://www.txyd88.com/WeixinCoreAction
-          【Token】输入项目名拼音(必须为英文或数字，长度为3-32字符。)
+          【Token】和第六步骤的token必须保持一致(输入项目名拼音[必须为英文或数字，长度为3-32字符])
           【EncodingAESKey】点随机生成
         填写服务器配置
         4.【提交】
@@ -8963,9 +8983,8 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
                     "http://struts.apache.org/dtds/struts-2.0.dtd">
                 <struts>
                 
-                
-                
-        【第?步骤】:   
+         
+          
         查看access_token[获取access_token]
         https://mp.weixin.qq.com/debug/cgi-bin/apiinfo?t=index&type=基础支持&form=获取access_token接口 /token
         
@@ -9141,6 +9160,15 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
          操作员：admin 密码：1111111！（七个一，一个感叹号） 通联提现查询交易，
           用户名为：20019100000438601 密码：Nmyl0987 
           登录地址：https://tlt.allinpay.
+==================================================================================== 
+          黄金钱包-金智投
+          svn://192.168.0.102/hurong_product/web/gold_wallet_web
+          
+          【wallet.html】首页
+          【share.js】分享页面
+          正式地址:
+                原:https://www.jinzhitou.com/indexp2pmobile.html
+                现:https://www.jinzhitou.com/wallet.html
 ==================================================================================== 
          安卓8.0白屏[Android 8.0白屏]
                 打开【sencha-touch-all-debug.js】10650行
