@@ -14,8 +14,11 @@
   SVN密码:姓名  
   SVN密码 姓名@2017
   
+  
         【tomcat】汤姆凯特
         【BIOS】白殴死
+        【localStorage】楼口 是捣儿吃
+        【sessionStorage】赛升 是捣儿吃
 =======================================================================
         SSH框架优势
 
@@ -4300,6 +4303,8 @@ Sencha Docs - Ext JS
         【Ctrl + Shift + Tab】上一个标签页
         【Ctrl +  W】关闭当前标签页
         【Ctrl + Shift + W】关闭全部标签页
+        【Ctrl + Home】txt跳转开头
+        【Ctrl + End】txt跳转末尾
         【Shift + F3】查找上一页
         【Ctrl+ F3】查找下一个
         【Shift + 左键】选择对应文本
@@ -4317,7 +4322,6 @@ Sencha Docs - Ext JS
         
         F1-F12键失效[功能键失效]
         【Fn + Esc】恢复F1-F12点一下启动功能
-        
         
         【Shift + 符号键】将小写字符转换大写
 ===============================================================
@@ -8949,6 +8953,10 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
                 例如:
                 <!-- 微信  -->
 	        <b:value>/weixin/jssdkSignWeixinCommon.do</b:value>
+                
+                或在【</http>】内添加
+                 <intercept-url pattern="/weixin/*WeixinCommon.do" filters="none"/>
+                
                 
         【第?步骤】:   
         查看access_token[获取access_token]
