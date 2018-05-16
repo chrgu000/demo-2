@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>javaScript链式调用原理以及加法实现</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+
+</body>
+</html>
+<script type="text/javascript">
+  function add (num) {
+      var count = num;
+      var _b = function (l) {
+          count += l;
+          return _b;
+      }
+      _b.valueOf = function(){
+          return count
+      }
+      return _b
+  }
+  var c = add(1)(2)(3);
+  console.log(c)    // 6
+
+</script>

@@ -8957,6 +8957,13 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
                 或在【</http>】内添加
                  <intercept-url pattern="/weixin/*WeixinCommon.do" filters="none"/>
                 
+                报404,把表头换一下【2.0】是java 1.6,【2.5】是java 1.7
+                <!DOCTYPE struts PUBLIC
+                    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+                    "http://struts.apache.org/dtds/struts-2.0.dtd">
+                <struts>
+                
+                
                 
         【第?步骤】:   
         查看access_token[获取access_token]
@@ -8975,11 +8982,9 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
         示范:
  https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx14eb5d8be4fb9442&secret=f9b37c6c4ae424390151db83d853a2bb
         
-        
-        
-        
-        
-        
+        正式账号:
+            账号:【15010905134】        密码【1】
+                
         编辑器运行环境:
         【JavaEE 5.0 Genneric Library】
         【JRE 系统库[jdk1.6.0_43]】
@@ -9112,6 +9117,30 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
 	 		return Number(val);
 	 	}
 	 }
+         
+==================================================================================== 
+        项目部--内蒙义利-义贷网p2p+erp
+        
+         前台svn在客户服务器： 
+         svn地址：https://101.201.75.171/svn/web_svn/nmyl_web_svn 
+         svn账号：hurong_deploy svn密码：hurong_deploy 
+         后台svn://192.168.0.102/hurong/erp/branch/proj/nmg/ yljr2 
+         远程 P2p：101.201.75.73 administrator yirendai888. 
+         Erp： 101.201.75.171 administrator yirendai888. 
+         前台正式地址：http://101.201.75.73/ 
+         houyee 111111 houye1 
+         后台正式地址：http://101.201.75.171:8212/hurong_proj_nmg_yljr/index.jsp 
+         admin 5188abc 
+         前台测试地址：http://101.201.75.73:8080/p2p_test/ 
+         后台测试地址：http://101.201.75.171:8181/hurong_proj_nmg_yljr/login.jsp 
+         admin yuseen 
+         
+         您的商户服务平台登录信息如下： 
+         通联充值记录查询： https://service.allinpay.com/member/merchant/login/index.do 
+         商户号：109374710615004 
+         操作员：admin 密码：1111111！（七个一，一个感叹号） 通联提现查询交易，
+          用户名为：20019100000438601 密码：Nmyl0987 
+          登录地址：https://tlt.allinpay.
 ==================================================================================== 
          安卓8.0白屏[Android 8.0白屏]
                 打开【sencha-touch-all-debug.js】10650行
