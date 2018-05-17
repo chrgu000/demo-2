@@ -8757,6 +8757,10 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
        开发者密码
                 【f52dd57d4d9c361890d46bc843f28005】
                 
+       正式账号:
+            账号:【15010905134】        密码【1】
+                
+                
        【微信公众号绑定管理员】[微信公众号][微信绑定公众号]
        
        【第一步骤】:                            
@@ -9012,8 +9016,7 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
         示范:
  https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx14eb5d8be4fb9442&secret=f9b37c6c4ae424390151db83d853a2bb
         
-        正式账号:
-            账号:【15010905134】        密码【1】
+
                 
         编辑器运行环境:
         【JavaEE 5.0 Genneric Library】
