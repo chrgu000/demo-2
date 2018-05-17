@@ -754,7 +754,11 @@ JDK 6参数换成:
                 先右键项目文件夹【小组(E) -- 清理】,再同步更新
        解决方案四:
                 先右键整个项目【小组(E) -- 清理】,再同步更新
-        解决方案五:
+       解决方案五: 
+                1.先右键项目文件夹【小组(E) -- 清理】
+                2.菜单栏【项目(P) - 清理(N)】
+                3.同步SVN资源库,全部更新
+        解决方案五(不推荐):
                 删除无法提交目录文件夹的【.svn】文件夹,再次提交
 ==========================================================================
         关闭SVN[关闭项目SVN][myEclipse关闭SVN][eclipse关闭SVN]
@@ -6685,6 +6689,11 @@ em表示元素的font-size属性的计算值，如果用于font-size属性本身
         一;
         1.打开【.project】文件
         2,删除<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
+        还有
+        <buildCommand>
+		<name>org.eclipse.wst.jsdt.core.javascriptValidator</name>
+		<arguments></arguments>
+	</buildCommand>
         3.sava保存
 
         二:
@@ -8735,6 +8744,8 @@ http://localhost:8049/p2p_heb_hbxt/codecreate.do?sms_code_type=bind_telphone&tel
         
         // 微信正式地址
         http://www.txyd88.com/indexp2pmobile.html
+        http://120.76.247.237/indexp2pmobile.html
+        
         http://weixin.txyd88.com/hurong_proj_gd_txyd/indexp2pmobile.html
         
        公众号:
